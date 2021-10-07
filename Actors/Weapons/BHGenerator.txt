@@ -1,0 +1,1480 @@
+Actor "Blackhole Generator" : Weapon
+{
+Weapon.SelectionOrder 2900
+Weapon.AmmoUse1 150
+Weapon.AmmoGive1 200
+Weapon.AmmoType1 "DemonAmmo"
+Weapon.PreferredSkin "Devastator-Marine"
+Weapon.Upsound "devastator/up"
++WEAPON.NOAUTOAIM
++INVENTORY.UNDROPPABLE
+Inventory.PickupMessage "You got the Black Hole Generator!"
+Obituary "%o got disintegrated by %k's Black Hole Generator."
+States
+{
+Spawn:
+	DCAN A -1
+	Stop
+Select:
+	DMAT A 1 A_Raise
+	Loop
+Deselect:
+	DMAT A 1 A_Lower
+	Loop
+Ready:
+ 	TNT1 A 0 A_JumpIfInventory("HandGrenadeAction",1,"GrenadeCheck")
+	TNT1 A 0 A_JumpIfInventory("MineAction",1,"MineCheck")
+	DMAT A 1 A_WeaponReady
+	Loop
+Fire:
+	DMAT A 30 A_PlayWeaponSound("BH/Charge")
+	DMAT A 10 Bright
+	TNT1 A 0 A_PlayWeaponSound("BH/Fire")
+	TNT1 A 0 A_GunFlash
+	DMAT B 4 Bright A_FireCustomMissile("PBlackHoleProjectile",0,1,0,0)
+	DMAT CD 4 Bright
+	DMAT A 10
+	Goto Ready
+GrenadeCheck:
+	TNT1 A 0 A_JumpIfInventory("HandGrenadeAmmo",1,"GrenadeToss")
+	TNT1 A 0 A_TakeInventory("HandGrenadeAction",1)
+	Goto Ready
+GrenadeToss:
+  	TNT1 A 0 A_PlayWeaponSound("weapons/weapondown")
+	TNT1 A 4
+	HGRN ABC 1
+	HGRN D 2
+	HGRN EFG 1
+	HGRN HI 2
+	TNT1 A 15 A_PlayWeaponSound("weapons/hgrenadepin")
+	TNT1 A 0 A_PlayWeaponSound("weapons/hgrenadethrow")
+	TNT1 A 0 A_TakeInventory("HandGrenadeAmmo",1)
+	HGNE A 1 A_FireCustomMissile("ThrownGrenade",0,0,0,0)
+	HGRN J 1
+	HGRN KLM 2
+	HGRN NO 1
+	TNT1 A 6
+	TNT1 A 0 A_JumpIfInventory("HandGrenadeAmmo",1,2)
+    TNT1 A 0 A_TakeInventory("Hand Grenade",1)
+	TNT1 A 0 A_TakeInventory("HandGrenadeAction",1)
+	TNT1 A 0
+	Goto Ready
+MineCheck:
+	TNT1 A 0 A_JumpIfInventory("MineAmmo",1,"MineToss")
+	TNT1 A 0 A_TakeInventory("MineAction",1)
+	Goto Ready
+MineToss:
+  	TNT1 A 0 A_PlayWeaponSound("weapons/weapondown")
+	TNT1 A 8
+	TNT1 A 0 A_PlayWeaponSound("weapons/hgrenadethrow")
+	MINE ABCDEF 1		
+	TNT1 A 0 A_TakeInventory("MineAmmo",1)	  
+	MINE G 1 A_FireCustomMissile("ThrownMine",0,0,0,0)
+	MINE HI 1
+	MINE JK 2
+	TNT1 A 0 A_JumpIfInventory("MineAmmo",1,2)
+    TNT1 A 0 A_TakeInventory("Land Mine",1)
+	TNT1 A 0 A_TakeInventory("MineAction",1)
+	TNT1 A 0
+	TNT1 A 5
+	Goto Ready
+Flash:
+	TNT1 A 4 A_Light2
+	TNT1 A 3 A_Light1
+	TNT1 A 0 A_Light0
+	Stop
+}
+}
+
+ACTOR BlackSpawnerInheritance
+{
++NOCLIP
++NOGRAVITY
++NOBLOCKMAP
++NOINTERACTION
+States
+	{
+	Toaster:
+		TNT1 A 1 Bright
+		Stop
+	}
+}
+
+ACTOR PBlackSmokeInheritance
+{
+Renderstyle Add
++NOGRAVITY
++NOBLOCKMAP
++NOINTERACTION
++FORCERADIUSDMG
+States
+	{
+	Spawn:
+		TNT1 A 1 Bright A_Jump(96,"Spawn2")
+		Loop
+	Spawn2:
+		TNT1 A 1 Bright A_Jump(256,"SpawnA","SpawnB","SpawnC","SpawnD","SpawnE","SpawnF","SpawnG","SpawnH","SpawnI","SpawnJ","SpawnK")
+		Stop
+	SpawnA:
+		VSMK A 1
+		Goto HNNNG
+	SpawnB:
+		VSMK B 1
+		Goto HNNNG
+	SpawnC:
+		VSMK C 1
+		Goto HNNNG
+	SpawnD:
+		VSMK D 1
+		Goto HNNNG
+	SpawnE:
+		VSMK E 1
+		Goto HNNNG
+	SpawnF:
+		VSMK G 1
+		Goto HNNNG
+	SpawnG:
+		VSMK G 1
+		Goto HNNNG
+	SpawnH:
+		VSMK H 1
+		Goto HNNNG
+	SpawnI:
+		VSMK I 1
+		Goto HNNNG
+	SpawnJ:
+		VSMK J 1
+		Goto HNNNG
+	SpawnK:
+		VSMK K 1
+		Goto HNNNG
+	HNNNG:
+		VSMK A 0 A_Jump(256,"GTFO Plus","GTFO Minus")
+	"GTFO Plus":
+		"####" "#" 0 A_SetScale(ScaleX +0.01, ScaleY +0.01)
+		"####" "#" 1 A_FadeOut(0.01+random(-0.01,0.02),1)
+		Loop
+	"GTFO Minus":
+		"####" "#" 0 A_SetScale(ScaleX -0.01, ScaleY -0.01)
+		"####" "#" 1 A_FadeOut(0.01+random(-0.01,0.02),1)
+		Loop
+	}
+}
+
+ACTOR PBlackSmokeTrailNormal : PBlackSmokeInheritance
+{
+Scale 0.65
+Alpha 0.6
++CLIENTSIDEONLY
+}
+
+ACTOR PBlackSmokeTrailDark : PBlackSmokeTrailNormal
+{
+Scale 0.5
+Renderstyle Stencil
+StencilColor Black
+Alpha 0.3
++CLIENTSIDEONLY
+States
+	{
+	"GTFO Plus":
+		"####" "#" 0 A_SetScale(ScaleX +0.01, ScaleY +0.01)
+		"####" "#" 1 A_FadeOut(0.005+random(-0.005,0.01),1)
+		Loop
+	"GTFO Minus":
+		"####" "#" 0 A_SetScale(ScaleX -0.01, ScaleY -0.01)
+		"####" "#" 1 A_FadeOut(0.005-random(-0.005,0.01),1)
+		Loop
+	}
+}
+
+ACTOR PBlackHoleProjectile
+{
+Projectile
+Height 6
+Radius 11
+Speed 30
+FastSpeed 40
+Scale 1.0
+Renderstyle Translucent
+Alpha 0.8
+Damage (0)
++RIPPER
++DONTBLAST
++CANNOTPUSH
++NODAMAGETHRUST
++FORCERADIUSDMG
++BLOODLESSIMPACT
++THRUSPECIES
++DONTHURTSPECIES
++DONTHARMSPECIES
+Species "Player"
+DamageType "PlayerBHole"
+ReactionTime 20
+States
+	{
+	Spawn:
+		TNT1 A 0 Bright
+		TNT1 A 0 Bright A_PlaySound("PBlack/Suck",5,1.0,1,ATTN_NORM)
+		Goto Looplet
+	Looplet:
+	    TNT1 A 0 A_CountDown
+		"VOIP" A 2 Bright A_GiveInventory("PBlackHoleTrailer",1)
+		"VOIP" E 2 Bright A_GiveInventory("PBlackHoleSmoker",1)
+		TNT1 A 0 Bright A_Explode(200,64,0,1)
+		"VOIP" B 2 Bright A_GiveInventory("PBlackHoleSmoker",1)
+		TNT1 A 0 Bright A_Explode(200,64,0,1)
+		"VOIP" C 2 Bright A_GiveInventory("PBlackHoleSmoker",1)
+		TNT1 A 0 Bright A_Explode(200,64,0,1)
+		"VOIP" D 2 Bright A_GiveInventory("PBlackHoleSmoker",1)
+		TNT1 A 0 Bright A_Explode(200,64,0,1)
+		"VOIP" E 2 Bright A_GiveInventory("PBlackHoleTrailer",1)
+		"VOIP" I 2 Bright A_GiveInventory("PBlackHoleSmoker",1)
+		TNT1 A 0 Bright A_Explode(200,64,0,1)
+		"VOIP" F 2 Bright A_GiveInventory("PBlackHoleSmoker",1)
+		TNT1 A 0 Bright A_Explode(200,64,0,1)
+		"VOIP" G 2 Bright A_GiveInventory("PBlackHoleSmoker",1)
+		TNT1 A 0 Bright A_Explode(200,64,0,1)
+		"VOIP" H 2 Bright A_GiveInventory("PBlackHoleSmoker",1)
+		TNT1 A 0 Bright A_Explode(200,64,0,1)
+		"VOIP" I 2 Bright A_GiveInventory("PBlackHoleTrailer",1)
+		"VOIP" A 2 Bright A_GiveInventory("PBlackHoleSmoker",1)
+		TNT1 A 0 Bright A_Explode(200,64,0,1)
+		"VOIP" J 2 Bright A_GiveInventory("PBlackHoleSmoker",1)
+		TNT1 A 0 Bright A_Explode(200,64,0,1)
+		"VOIP" K 2 Bright A_GiveInventory("PBlackHoleSmoker",1)
+		TNT1 A 0 Bright A_Explode(200,64,0,1)
+		"VOIP" L 2 Bright A_GiveInventory("PBlackHoleSmoker",1)
+		TNT1 A 0 Bright A_Explode(200,64,0,1)
+		Loop
+	Death:
+		TNT1 AAA 0 Bright A_StopSound(5)
+		TNT1 A 0 Bright A_PlaySound("PBlack/Blast",5,1.0,0)
+		TNT1 A 0 Bright A_SpawnItemEx("PBlackHoleSpawn",0,0,0,0,0,0,0,SXF_TRANSFERPOINTERS|SXF_SETMASTER,0)
+		TNT1 A 1 Bright A_SpawnItemEx("PBlackHoleSpawnDark",0,0,0,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,0)
+		Stop
+	}
+}
+
+Actor PBlackRingTrailer : CustomInventory
+{
+-COUNTITEM
++INVENTORY.QUIET
++INVENTORY.UNDROPPABLE
++INVENTORY.ALWAYSPICKUP
++INVENTORY.AUTOACTIVATE
+Inventory.Amount 1
+Inventory.MaxAmount 0
+States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+		TNT1 A 0 A_SpawnItemEx("PBlackRingNormalTrail",0,0,0,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,0)
+		TNT1 A 1 A_SpawnItemEx("PBlackRingDarkTrail",0,0,0,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,0)
+		Stop 
+	Toaster:
+		TNT1 A 1
+		Stop
+	}
+}
+
+Actor PBlackHoleTrailer : CustomInventory 
+{
+-COUNTITEM
++INVENTORY.QUIET
++INVENTORY.UNDROPPABLE
++INVENTORY.ALWAYSPICKUP
++INVENTORY.AUTOACTIVATE
+Inventory.Amount 1
+Inventory.MaxAmount 0
+States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+		TNT1 A 1 A_SpawnItemEx("PBlackHoleTrailNormal",0,0,0,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,0)
+		TNT1 A 1 A_SpawnItemEx("PBlackHoleTrailDark",0,0,0,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,0)
+		Stop
+	Toaster:
+		TNT1 A 1
+		Stop
+	}
+}
+
+Actor PBlackHoleSmoker : CustomInventory
+{
+-COUNTITEM
++INVENTORY.QUIET
++INVENTORY.UNDROPPABLE
++INVENTORY.ALWAYSPICKUP
++INVENTORY.AUTOACTIVATE
+Inventory.Amount 1
+Inventory.MaxAmount 0
+States 
+	{ 
+	Pickup: 
+		TNT1 A 0
+		TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+		TNT1 A 0 A_SpawnItemEx("PBlackSmokeTrailNormal",random(28,-28),random(28,-28),random(28,-28),frandom(0.1,1.0),frandom(0.1,1.0),frandom(-1.0,1.0),random(0,359),SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,0)
+		TNT1 A 1 A_SpawnItemEx("PBlackSmokeTrailDark",random(14,-14),random(14,-14),random(14,-14),frandom(0.1,1.0),frandom(0.1,1.0),frandom(-1.0,1.0),random(0,359),SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,0)
+		Stop
+	Toaster:
+		TNT1 A 1
+		Stop
+	}
+}
+
+ACTOR PBlackHoleTrailNormal : BlackSpawnerInheritance
+{
+Scale 1.0
+Renderstyle Add
+Alpha 0.99
++CLIENTSIDEONLY
+States
+	{
+	Spawn:
+		TNT1 A 0 Bright
+		TNT1 A 0 Bright A_JumpIf(ACS_ExecuteWithResult(304) == 1,"Toaster")
+		VOIP ABCDEFGHIJKL 2 Bright A_GiveInventory("PBlackHoleEffectizer",1)
+		Loop
+	}
+}
+
+ACTOR PBlackHoleTrailDark : BlackSpawnerInheritance
+{
+Scale 1.0
+Renderstyle Stencil
+StencilColor Black
+Alpha 0.8
+States
+	{
+	Spawn:
+		TNT1 A 0 Bright
+		TNT1 A 0 Bright A_JumpIf(ACS_ExecuteWithResult(304) == 1,"Toaster")
+		VOIP FGHIJKLABCDE 2 Bright A_GiveInventory("PBlackHoleEffectizer",1)
+		Loop
+	}
+}
+
+Actor PBlackHoleEffectizer : CustomInventory 
+{
+-COUNTITEM
++INVENTORY.QUIET
++INVENTORY.UNDROPPABLE
++INVENTORY.ALWAYSPICKUP
++INVENTORY.AUTOACTIVATE
+Inventory.Amount 1
+Inventory.MaxAmount 0
+States 
+	{ 
+	Pickup: 
+		TNT1 A 0
+		TNT1 A 0 A_SetScale(ScaleX -0.01, ScaleY -0.01)
+		TNT1 A 1 A_FadeOut(0.05+frandom(0.00,0.02),1)
+		Stop 
+	}
+}
+
+/*Actor PBlackHoleEffectizer2 : CustomInventory
+{ 
+-COUNTITEM
++INVENTORY.QUIET
++INVENTORY.UNDROPPABLE
++INVENTORY.ALWAYSPICKUP
++INVENTORY.AUTOACTIVATE
+Inventory.Amount 1
+Inventory.MaxAmount 0
+States 
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_SetScale(ScaleX +0.05, ScaleY +0.05)
+		TNT1 A 1 A_FadeOut(0.05+frandom(0.00,0.02),1)
+		Stop
+	}
+}*/
+
+ACTOR PBlackRingNormalTrail : BlackSpawnerInheritance
+{
+Scale 0.125
+Renderstyle Add
+Alpha 0.99
++CLIENTSIDEONLY
+States
+	{
+	Spawn:
+		TNT1 A 0 Bright
+		TNT1 A 0 Bright A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+		TNT1 A 0 Bright A_SetScale(ScaleX +0.02, ScaleY +0.02)
+		TNT1 A 0 Bright A_FadeOut(0.02,1)
+		VSHK A 1 Bright
+		Goto Spawn+2
+	}
+}
+
+ACTOR PBlackRingDarkTrail : PBlackRingNormalTrail
+{
+Renderstyle Stencil
+StencilColor Black
++CLIENTSIDEONLY
+}
+
+ACTOR PBlackHoleSpawn : BlackSpawnerInheritance
+{
+Scale 1.0
+Renderstyle Add
+Alpha 0.99
++THRUSPECIES
++DONTHURTSPECIES
++DONTHARMSPECIES
++FORCEXYBILLBOARD
+Species "Player"
+DamageType "PlayerBHole"
+States
+	{
+	Spawn:
+		TNT1 A 0 Bright
+		TNT1 A 0 Bright A_SpawnItemEx("PBlackHoleSound",0,0,0,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,0)
+		TNT1 A 0 Bright A_Quake(7,24,0,4096,"none")
+		TNT1 A 0 Bright A_SpawnItemEx("PBlackStruck",0,0,0,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,0)
+		VOIP AABBCCDDEEFFGGHHIIJJKKLL 1// A_SetScale(ScaleX +0.8, ScaleY +0.8) //19.2 in total
+		TNT1 AAA 0 Bright A_StopSound(5)
+		TNT1 A 0 Bright A_SpawnItemEx("PBlackHoleDamager",0,0,0,0,0,0,0,SXF_TRANSFERPOINTERS|SXF_SETMASTER,0)
+		TNT1 A 0 Bright A_SpawnItemEx("PBlackHoleSucker",0,0,1,0,0,0,0,SXF_TRANSFERPOINTERS|SXF_SETMASTER,0)
+		//Effects
+		TNT1 A 0 A_SpawnItemEx("PBlackHoleNormal",0,0,0,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,0)
+		TNT1 A 0 A_SpawnItemEx("PBlackHoleDark",0,0,0,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,0)
+		TNT1 A 0 A_SpawnItemEx("PBlackHoleRingSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,0)
+		TNT1 A 0 A_SpawnItemEx("PBlackFadeSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,0)
+		TNT1 A 0 A_SpawnItemEx("PBlackBlackFadeSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,0)
+		TNT1 A 0 A_SpawnItemEx("PBlackLightningSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,0)
+		TNT1 A 0 A_SpawnItemEx("PBlackSmokeSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,0)
+		VOIP A 1 Bright
+		Stop
+	}
+}
+
+ACTOR PBlackHoleSpawnDark : PBlackHoleSpawn
+{
+Renderstyle Stencil
+StencilColor Black
+Alpha 0.7
++CLIENTSIDEONLY
+States
+	{
+	Spawn:
+		TNT1 A 0 Bright
+		VOIP FFGGHHIIJJKKLLAABBCCDDEE 1// A_SetScale(ScaleX +0.8, ScaleY +0.8) //19.2 in total
+		Stop
+	}
+}
+
+ACTOR PBlackHoleSound : BlackSpawnerInheritance
+{
++CLIENTSIDEONLY
+States
+	{
+	Spawn:
+		TNT1 A 0 Bright
+		TNT1 A 0 Bright A_PlaySound("PBlack/SuperSuck",5,1.0,1,ATTN_IDLE)
+		TNT1 A 384 Bright
+		TNT1 A 0 Bright A_PlaySound("PBlack/Explode",5,1.0,0,ATTN_IDLE)
+		TNT1 A 1 Bright A_PlaySound("PBlack/Blast",6,1.0,0,ATTN_IDLE)
+		Stop
+	}
+}
+
+ACTOR PBlackStruck : BlackSpawnerInheritance
+{
+Scale 1.0
+Renderstyle Add
+Alpha 0.5
++FORCEXYBILLBOARD
++CLIENTSIDEONLY
+States
+	{
+	Spawn:
+		TNT1 A 0 Bright
+		TNT1 A 0 Bright A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+		TNT1 A 0 Bright A_SetScale(ScaleX +0.1, ScaleY +0.1)
+		PBUM A 1 Bright A_FadeOut(0.01,1)
+		Goto Spawn+2
+	}
+}
+
+ACTOR PBlackHoleNormal : BlackSpawnerInheritance
+{
+Scale 5.65
+//Scale 20.2
+Renderstyle Add
+Alpha 0.99
++FORCEXYBILLBOARD
++CLIENTSIDEONLY
+var int user_counter;
+States
+	{
+	Spawn:
+		TNT1 A 0 Bright
+		Goto Looplet
+	Looplet:
+		TNT1 A 0 Bright A_JumpIf(user_counter > 14,"Death")
+		TNT1 A 0 Bright A_SetUserVar("user_counter",user_counter+1)
+		VOIP ABCDEFGHIJKL 2// A_SetScale(ScaleX -0.087, ScaleY -0.087)
+		Loop
+	Death:
+		TNT1 AAA 0 Bright A_StopSound(5)
+		TNT1 A 1 Bright
+		Stop
+	}
+}
+
+ACTOR PBlackHoleDark : PBlackHoleNormal
+{
+Renderstyle Stencil
+StencilColor Black
+Alpha 0.5
+States
+	{
+	Spawn:
+		TNT1 A 0 Bright
+		Goto Looplet
+	Looplet:
+		TNT1 A 0 Bright A_JumpIf(user_counter > 9,"Death")
+		TNT1 A 0 Bright A_SetUserVar("user_counter",user_counter+1)
+		VOIP ABCDEFGHIJKL 3// A_SetScale(ScaleX -0.087, ScaleY -0.087)
+		Loop
+	Death:
+		TNT1 A 1 Bright
+		Stop
+	}
+}
+
+Actor PBlackHoleDamager : BlackSpawnerInheritance
+{ 
+ReactionTime 360
++NODAMAGETHRUST
++FORCERADIUSDMG
++THRUSPECIES
++DONTHURTSPECIES
++DONTHARMSPECIES
+Species "Player"
+DamageType "PlayerBHole"
+States 
+	{ 
+	Spawn: 
+		TNT1 A 0 Bright
+		TNT1 A 0 Bright A_SetAngle(Angle+15)
+		TNT1 A 1 Bright A_Explode(25,512,0,0,256)
+		TNT1 A 0 Bright A_Countdown
+		Loop
+	Death:
+		TNT1 A 0 Bright
+		TNT1 A 1 Bright A_SpawnItemEx("PBlackDeathSequence",0,0,0,0,0,0,0,SXF_TRANSFERPOINTERS|SXF_SETMASTER,0)
+		Stop
+	}
+}
+
+Actor PBlackHoleSucker : BlackSpawnerInheritance
+{ 
+ReactionTime 180
++FORCERADIUSDMG
++THRUSPECIES
++DONTHURTSPECIES
++DONTHARMSPECIES
+Species "Player"
+DamageType "PlayerBHole"
+States 
+	{ 
+	Spawn: 
+		TNT1 A 0 Bright
+		TNT1 A 0 Bright A_SetAngle(Angle+10)
+		TNT1 A 2 Bright A_RadiusThrust(-10000,1000,RTF_NOIMPACTDAMAGE)
+		TNT1 A 0 Bright A_Countdown
+		Loop
+	Death:
+		TNT1 A 0 Bright
+		Stop
+	} 
+}
+
+Actor PBlackFadeSpawner : BlackSpawnerInheritance
+{ 
+ReactionTime 72
++CLIENTSIDEONLY
+States 
+	{ 
+	Spawn: 
+		TNT1 A 0 Bright
+		TNT1 A 5 Bright A_SpawnItemEx("PBlackHoleMain",0,0,0,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,0)
+		TNT1 A 0 Bright A_Countdown
+		Loop
+	Death:
+		TNT1 A 1 Bright
+		Stop
+	}
+}
+
+ACTOR PBlackHoleMain : BlackSpawnerInheritance
+{
+Scale 5.75
+//Scale 20.2
+Renderstyle Add
+Alpha 0.7
++FORCEXYBILLBOARD
++CLIENTSIDEONLY
+States
+	{
+	Spawn:
+		TNT1 A 0 Bright
+		TNT1 A 0 Bright A_Quake(9,360,0,1024,"none")
+		TNT1 A 0 Bright A_Quake(6,360,0,2048,"none")
+		TNT1 A 0 Bright A_Quake(2,360,0,4086,"none")
+		TNT1 A 0 Bright A_Quake(1,360,0,12258,"none")
+		Goto Looplet
+	Looplet:
+		VOIP A 1 Bright A_FadeOut(0.05+frandom(0.00,0.02),1)
+		//TNT1 A 0 Bright A_SetScale(ScaleX-1.03,ScaleY-1.03)
+		VOIP B 1 Bright A_FadeOut(0.05+frandom(0.00,0.02),1)
+		//TNT1 A 0 Bright A_SetScale(ScaleX-1.03,ScaleY-1.03)
+		VOIP C 1 Bright A_FadeOut(0.05+frandom(0.00,0.02),1)
+		//TNT1 A 0 Bright A_SetScale(ScaleX-1.03,ScaleY-1.03)
+		VOIP D 1 Bright A_FadeOut(0.05+frandom(0.00,0.02),1)
+		//TNT1 A 0 Bright A_SetScale(ScaleX-1.03,ScaleY-1.03)
+		VOIP E 1 Bright A_FadeOut(0.05+frandom(0.00,0.02),1)
+		//TNT1 A 0 Bright A_SetScale(ScaleX-1.03,ScaleY-1.03)
+		VOIP F 1 Bright A_FadeOut(0.05+frandom(0.00,0.02),1)
+		//TNT1 A 0 Bright A_SetScale(ScaleX-1.03,ScaleY-1.03)
+		VOIP G 1 Bright A_FadeOut(0.05+frandom(0.00,0.02),1)
+		//TNT1 A 0 Bright A_SetScale(ScaleX-1.03,ScaleY-1.03)
+		VOIP H 1 Bright A_FadeOut(0.05+frandom(0.00,0.02),1)
+		//TNT1 A 0 Bright A_SetScale(ScaleX-1.03,ScaleY-1.03)
+		VOIP I 1 Bright A_FadeOut(0.05+frandom(0.00,0.02),1)
+		//TNT1 A 0 Bright A_SetScale(ScaleX-1.03,ScaleY-1.03)
+		VOIP J 1 Bright A_FadeOut(0.05+frandom(0.00,0.02),1)
+		//TNT1 A 0 Bright A_SetScale(ScaleX-1.03,ScaleY-1.03)
+		VOIP K 1 Bright A_FadeOut(0.05+frandom(0.00,0.02),1)
+		//TNT1 A 0 Bright A_SetScale(ScaleX-1.03,ScaleY-1.03)
+		VOIP L 1 Bright A_FadeOut(0.05+frandom(0.00,0.02),1)
+		//TNT1 A 0 Bright A_SetScale(ScaleX-1.03,ScaleY-1.03)
+		Loop
+	}
+}
+
+Actor PBlackBlackFadeSpawner : BlackSpawnerInheritance
+{ 
+ReactionTime 60
++CLIENTSIDEONLY
+States
+	{
+	Spawn:
+		TNT1 A 0 Bright
+		TNT1 A 6 Bright A_SpawnItemEx("PBlackHoleMainBlack",0,0,0,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,0)
+		TNT1 A 0 Bright A_Countdown
+		Loop
+	Death:
+		TNT1 A 1 Bright
+		Stop
+	} 
+}
+
+ACTOR PBlackHoleMainBlack : BlackSpawnerInheritance
+{
+Scale 5.75
+//Scale 20.2
+Renderstyle Stencil
+StencilColor Black
+Alpha 0.7
++FORCEXYBILLBOARD
++CLIENTSIDEONLY
+States
+	{
+	Spawn:
+		TNT1 A 0 Bright
+		VOIP A 1 Bright A_FadeOut(0.05+frandom(0.00,0.02),1)
+		//TNT1 A 0 Bright A_SetScale(ScaleX-1.03,ScaleY-1.03)
+		VOIP B 1 Bright A_FadeOut(0.05+frandom(0.00,0.02),1)
+		//TNT1 A 0 Bright A_SetScale(ScaleX-1.03,ScaleY-1.03)
+		VOIP C 1 Bright A_FadeOut(0.05+frandom(0.00,0.02),1)
+		//TNT1 A 0 Bright A_SetScale(ScaleX-1.03,ScaleY-1.03)
+		VOIP D 1 Bright A_FadeOut(0.05+frandom(0.00,0.02),1)
+		//TNT1 A 0 Bright A_SetScale(ScaleX-1.03,ScaleY-1.03)
+		VOIP E 1 Bright A_FadeOut(0.05+frandom(0.00,0.02),1)
+		//TNT1 A 0 Bright A_SetScale(ScaleX-1.03,ScaleY-1.03)
+		VOIP F 1 Bright A_FadeOut(0.05+frandom(0.00,0.02),1)
+		//TNT1 A 0 Bright A_SetScale(ScaleX-1.03,ScaleY-1.03)
+		VOIP G 1 Bright A_FadeOut(0.05+frandom(0.00,0.02),1)
+		//TNT1 A 0 Bright A_SetScale(ScaleX-1.03,ScaleY-1.03)
+		VOIP H 1 Bright A_FadeOut(0.05+frandom(0.00,0.02),1)
+		//TNT1 A 0 Bright A_SetScale(ScaleX-1.03,ScaleY-1.03)
+		VOIP I 1 Bright A_FadeOut(0.05+frandom(0.00,0.02),1)
+		//TNT1 A 0 Bright A_SetScale(ScaleX-1.03,ScaleY-1.03)
+		VOIP J 1 Bright A_FadeOut(0.05+frandom(0.00,0.02),1)
+		//TNT1 A 0 Bright A_SetScale(ScaleX-1.03,ScaleY-1.03)
+		VOIP K 1 Bright A_FadeOut(0.05+frandom(0.00,0.02),1)
+		//TNT1 A 0 Bright A_SetScale(ScaleX-1.03,ScaleY-1.03)
+		VOIP L 1 Bright A_FadeOut(0.05+frandom(0.00,0.02),1)
+		//TNT1 A 0 Bright A_SetScale(ScaleX-1.03,ScaleY-1.03)
+		Loop
+	}
+}
+
+Actor PBlackDeathSequence : BlackSpawnerInheritance
+{ 
+Scale 5.75
+Renderstyle Add
+Alpha 0.99
++THRUSPECIES
++DONTHURTSPECIES
++DONTHARMSPECIES
++FORCEXYBILLBOARD
+Species "Player"
+DamageType "PlayerBHole"
+States 
+	{ 
+	Spawn:
+		TNT1 A 1 Bright
+		TNT1 A 0 Bright A_Die
+		Goto Death
+	Death:
+		TNT1 A 0 Bright
+		TNT1 A 0 Bright A_Quake(7,70,0,12258,"none")
+		TNT1 AAAAA 0 Bright A_SpawnItemEx("PBlackHoleChunkSpawner",0,0,0,0,0,0,0,SXF_TRANSFERPOINTERS|SXF_SETMASTER,0)
+		TNT1 AAAAA 0 Bright A_SpawnItemEx("PBlackHoleChunkSpawner",0,0,0,0,0,0,0,SXF_TRANSFERPOINTERS|SXF_SETMASTER,0)
+		TNT1 AAAAA 0 Bright A_SpawnItemEx("PBlackHoleChunkSpawner",0,0,0,0,0,0,0,SXF_TRANSFERPOINTERS|SXF_SETMASTER,0)
+		TNT1 AAAAA 0 Bright A_SpawnItemEx("PBlackHoleChunkSpawner",0,0,0,0,0,0,0,SXF_TRANSFERPOINTERS|SXF_SETMASTER,0)
+		TNT1 AAAAA 0 Bright A_SpawnItemEx("PBlackHoleChunkSpawner",0,0,0,0,0,0,0,SXF_TRANSFERPOINTERS|SXF_SETMASTER,0)
+	 	TNT1 AAAAAAAAAA 0 Bright A_SpawnItemEx("PBlackHoleExplode",0,0,0,0,0,0,0,SXF_TRANSFERPOINTERS|SXF_SETMASTER,0)
+		TNT1 AAAAAAAAAA 0 Bright A_SpawnItemEx("PBlackHoleExplode",0,0,0,0,0,0,0,SXF_TRANSFERPOINTERS|SXF_SETMASTER,0)
+		TNT1 AAAAAAAAAA 0 Bright A_SpawnItemEx("PBlackHoleExplode",0,0,0,0,0,0,0,SXF_TRANSFERPOINTERS|SXF_SETMASTER,0)
+		TNT1 AAAAAAAAAA 0 Bright A_SpawnItemEx("PBlackHoleExplode",0,0,0,0,0,0,0,SXF_TRANSFERPOINTERS|SXF_SETMASTER,0)
+		TNT1 AAAAAAAAAA 0 Bright A_SpawnItemEx("PBlackHoleExplode",0,0,0,0,0,0,0,SXF_TRANSFERPOINTERS|SXF_SETMASTER,0)
+		TNT1 A 0 Bright A_SpawnItemEx("PBlackHoleShockwave",0,0,0,0,0,0,0,SXF_TRANSFERPOINTERS|SXF_SETMASTER,0)
+		//Effects
+		TNT1 A 0 Bright A_SpawnItemEx("PBlackHoleGiantRingSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,0)
+		VORX ABCDEFGHIJKL 1
+		TNT1 A 0 Bright A_SpawnItemEx("PBlackHoleAfterShockwave",0,0,0,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,0)
+		TNT1 A 0 Bright A_SpawnItemEx("PBlackHoleExploFlare",0,0,0,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,0)
+		TNT1 A 60 Bright A_SpawnItemEx("PBlackHoleAfterExplode",0,0,0,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,0)
+		Stop
+     } 
+}
+
+ACTOR PBlackHoleRingSpawner : BlackSpawnerInheritance
+{
+ReactionTime 30
++CLIENTSIDEONLY
+States
+	{
+	Spawn:
+		TNT1 A 0 Bright
+		TNT1 A 6 Bright A_SpawnItemEx("PBlackRingNormal",0,0,0,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,0)
+		TNT1 A 6 Bright A_SpawnItemEx("PBlackRingDark",0,0,0,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,0)
+		TNT1 A 0 Bright A_Countdown
+		Loop
+	Death:
+		TNT1 A 1 Bright
+		Stop
+	}
+}
+
+ACTOR PBlackRingNormal : BlackSpawnerInheritance
+{
+Renderstyle Add
+Alpha 0.99
++FORCEXYBILLBOARD
++CLIENTSIDEONLY
+States
+	{
+	Spawn:
+		TNT1 A 0 Bright A_SetScale(ScaleX +0.1, ScaleY +0.1)
+		TNT1 A 0 Bright A_FadeOut(0.06,1)
+		VSHK A 1 Bright
+		Loop
+	}
+}
+
+ACTOR PBlackRingDark : PBlackRingNormal
+{
+Renderstyle Stencil
+StencilColor Black
+States
+	{
+	Spawn:
+		TNT1 A 0 Bright A_SetScale(ScaleX +0.1, ScaleY +0.1)
+		TNT1 A 0 Bright A_FadeOut(0.06,1)
+		VSHK A 1 Bright
+		Loop
+	}
+}
+
+Actor PBlackLightningSpawner : BlackSpawnerInheritance
+{ 
+ReactionTime 40
++CLIENTSIDEONLY
+States 
+	{
+	Spawn:
+		TNT1 A 0 Bright
+		TNT1 A 9 A_SpawnItemEx("PBlackHoleLightning",random(320,-320),random(320,-320),random(320,-320),0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,64)
+		TNT1 A 0 Bright A_Countdown
+		Loop
+	Death:
+		TNT1 A 1 Bright
+		Stop
+	}
+}
+
+ACTOR PBlackHoleLightning : BlackSpawnerInheritance
+{
+Scale 1.25
+Renderstyle Add
+Alpha 0.99
++FORCEXYBILLBOARD
++CLIENTSIDEONLY
+States
+	{
+	Spawn:
+		TNT1 A 0 Bright
+		TNT1 A 0 Bright A_Jump(256,"Spawn1A","Spawn1B","Spawn1C","Spawn1D","Spawn2A","Spawn2B","Spawn2C","Spawn2D")
+	Spawn1A:
+		1LIT A 1 Bright A_FadeOut(0.02,1)
+		Wait
+	Spawn1B:
+		1LIT B 1 Bright A_FadeOut(0.02,1)
+		Wait
+	Spawn1C:
+		1LIT C 1 Bright A_FadeOut(0.02,1)
+		Wait
+	Spawn1D:
+		1LIT D 1 Bright A_FadeOut(0.02,1)
+		Wait
+	Spawn2A:
+		2LIT A 1 Bright A_FadeOut(0.02,1)
+		Wait
+	Spawn2B:
+		2LIT B 1 Bright A_FadeOut(0.02,1)
+		Wait
+	Spawn2C:
+		2LIT C 1 Bright A_FadeOut(0.02,1)
+		Wait
+	Spawn2D:
+		2LIT D 1 Bright A_FadeOut(0.02,1)
+		Wait
+	}
+}
+
+ACTOR PBlackSmokeSpawner : BlackSpawnerInheritance
+{
+ReactionTime 180
++CLIENTSIDEONLY
+States
+	{
+	Spawn:
+		TNT1 A 0 Bright
+		TNT1 A 0 Bright A_SpawnItemEx("PBlackSmokeNormal",random(384,-384),random(384,-384),random(384,-384),frandom(0.1,1.0),frandom(0.1,1.0),frandom(-1.0,1.0),random(0,359),SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,0)
+		TNT1 A 2 Bright A_SpawnItemEx("PBlackSmokeDark",random(256,-256),random(256,-256),random(256,-256),frandom(0.1,1.0),frandom(0.1,1.0),frandom(-1.0,1.0),random(0,359),SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,0)
+		TNT1 A 0 Bright A_Countdown
+		Loop
+	Death:
+		TNT1 A 1 Bright
+		Stop
+	}
+}
+
+ACTOR PBlackSmokeNormal : PBlackSmokeInheritance
+{
+Scale 2.6
+Alpha 0.3
++CLIENTSIDEONLY
+States
+	{
+	"GTFO Plus":
+		"####" "#" 0 A_SetScale(ScaleX +0.01, ScaleY +0.01)
+		"####" "#" 1 A_FadeOut(0.005+random(-0.005,0.01),1)
+		Loop
+	"GTFO Minus":
+		"####" "#" 0 A_SetScale(ScaleX -0.01, ScaleY -0.01)
+		"####" "#" 1 A_FadeOut(0.005-random(-0.005,0.01),1)
+		Loop
+	}
+}
+
+ACTOR PBlackSmokeDark : PBlackSmokeTrailNormal
+{
+Scale 3.45
+Renderstyle Stencil
+StencilColor Black
+Alpha 0.2
++CLIENTSIDEONLY
+States
+	{
+	"GTFO Plus":
+		"####" "#" 0 A_SetScale(ScaleX +0.005, ScaleY +0.005)
+		"####" "#" 1 A_FadeOut(0.0025+random(-0.0025,0.005),1)
+		Loop
+	"GTFO Minus":
+		"####" "#" 0 A_SetScale(ScaleX -0.005, ScaleY -0.005)
+		"####" "#" 1 A_FadeOut(0.0025-random(-0.0025,0.005),1)
+		Loop
+	}
+}
+
+ACTOR PBlackHoleExploFlare : BlackSpawnerInheritance
+{
+Renderstyle Add
+Alpha 0.99
++FORCEXYBILLBOARD
++CLIENTSIDEONLY
+States
+	{
+	Spawn:
+		TNT1 A 0 Bright
+		TNT1 A 0 Bright A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+		TNT1 A 0 Bright A_SetScale(ScaleX +0.1, ScaleY +0.1)
+		VODF A 1 Bright A_FadeOut(0.01,1)
+		Goto Spawn+2
+	Toaster:
+		TNT1 A 1 Bright
+		Stop
+	}
+}
+
+ACTOR PBlackHoleChunkSpawner : BlackSpawnerInheritance
+{
+States
+	{
+	Spawn:
+		TNT1 A 1 Bright A_Jump(96,"Spawn2")
+		Loop
+	Spawn2:
+		TNT1 A 1 Bright A_SpawnItemEx("PBlackHoleChunk",random(256,-256),random(256,-256),random(128,0),frandom(3.0,10.0),0,frandom(15.0,20.0),frandom(0.0,359.0),SXF_TRANSFERPOINTERS|SXF_SETMASTER,0)
+		Stop
+	}
+}
+
+ACTOR PBlackHoleChunk : PBlackHoleProjectile
+{
+Gravity 0.15
+-NOGRAVITY
+ReactionTime 20
+States
+	{
+	Spawn:
+		TNT1 A 0 Bright
+		TNT1 A 0 Bright A_PlaySound("PBlack/Suck",5,1.0,1,ATTN_NORM)
+		Goto Looplet
+	Looplet:
+	    TNT1 A 0 A_CountDown
+		"VOIP" A 2 Bright A_GiveInventory("PBlackHoleTrailer",1)
+		"VOIP" E 2 Bright A_GiveInventory("PBlackHoleSmoker",1)
+		TNT1 A 0 Bright A_Explode(50,64,0,1)
+		"VOIP" B 2 Bright A_GiveInventory("PBlackHoleSmoker",1)
+		TNT1 A 0 Bright A_Explode(50,64,0,1)
+		"VOIP" C 2 Bright A_GiveInventory("PBlackHoleSmoker",1)
+		TNT1 A 0 Bright A_Explode(50,64,0,1)
+		"VOIP" D 2 Bright A_GiveInventory("PBlackHoleSmoker",1)
+		TNT1 A 0 Bright A_Explode(50,64,0,1)
+		"VOIP" E 2 Bright A_GiveInventory("PBlackHoleTrailer",1)
+		"VOIP" I 2 Bright A_GiveInventory("PBlackHoleSmoker",1)
+		TNT1 A 0 Bright A_Explode(50,64,0,1)
+		"VOIP" F 2 Bright A_GiveInventory("PBlackHoleSmoker",1)
+		TNT1 A 0 Bright A_Explode(50,64,0,1)
+		"VOIP" G 2 Bright A_GiveInventory("PBlackHoleSmoker",1)
+		TNT1 A 0 Bright A_Explode(50,64,0,1)
+		"VOIP" H 2 Bright A_GiveInventory("PBlackHoleSmoker",1)
+		TNT1 A 0 Bright A_Explode(50,64,0,1)
+		"VOIP" I 2 Bright A_GiveInventory("PBlackHoleTrailer",1)
+		"VOIP" A 2 Bright A_GiveInventory("PBlackHoleSmoker",1)
+		TNT1 A 0 Bright A_Explode(50,64,0,1)
+		"VOIP" J 2 Bright A_GiveInventory("PBlackHoleSmoker",1)
+		TNT1 A 0 Bright A_Explode(50,64,0,1)
+		"VOIP" K 2 Bright A_GiveInventory("PBlackHoleSmoker",1)
+		TNT1 A 0 Bright A_Explode(50,64,0,1)
+		"VOIP" L 2 Bright A_GiveInventory("PBlackHoleSmoker",1)
+		TNT1 A 0 Bright A_Explode(50,64,0,1)
+		Loop
+	Death:
+		TNT1 A 0 Bright
+		TNT1 A 0 Bright A_PlaySound("Weapons/MinibeliskDead",5)
+		TNT1 A 0 Bright A_Explode(1000,64,0,1)
+		TNT1 A 0 Bright A_Quake(4,27,0,256,"none")
+		TNT1 A 0 Bright A_Quake(1,27,0,384,"none")
+		TNT1 A 0 Bright A_GiveInventory("PBlackChunkWaver")
+		TNT1 AAAAAAAAAAAAAAA 0 A_SpawnItemEx("PBlackSmokeTrailNormal",random(6,-6),random(6,-6),random(6,-6),frandom(1.0,0.05),frandom(1.0,0.05),frandom(1.0,0.05),random(0,359),SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,0)
+		TNT1 AAAAAAAAAAAAAAA 0 A_SpawnItemEx("PBlackSmokeTrailDark",random(6,-6),random(6,-6),random(6,-6),frandom(1.0,0.05),frandom(1.0,0.05),frandom(1.0,0.05),random(0,359),SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,0)
+		TNT1 A 0 Bright A_GiveInventory("PBlackChunkWaver")
+		VORX ABCD 1
+		TNT1 AAAAAAAAAAAA 0 A_SpawnItemEx("PBlackSmokeTrailNormal",random(6,-6),random(6,-6),random(6,-6),frandom(1.0,0.05),frandom(1.0,0.05),frandom(1.0,0.05),random(0,359),SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,0)
+		TNT1 AAAAAAAAAAAA 0 A_SpawnItemEx("PBlackSmokeTrailDark",random(6,-6),random(6,-6),random(6,-6),frandom(1.0,0.05),frandom(1.0,0.05),frandom(1.0,0.05),random(0,359),SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,0)
+		TNT1 A 0 Bright A_GiveInventory("PBlackChunkWaver")
+		VORX EFGH 1
+		TNT1 AAAAAAAAA 0 A_SpawnItemEx("PBlackSmokeTrailNormal",random(6,-6),random(6,-6),random(6,-6),frandom(1.0,0.05),frandom(1.0,0.05),frandom(1.0,0.05),random(0,359),SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,0)
+		TNT1 AAAAAAAAA 0 A_SpawnItemEx("PBlackSmokeTrailDark",random(6,-6),random(6,-6),random(6,-6),frandom(1.0,0.05),frandom(1.0,0.05),frandom(1.0,0.05),random(0,359),SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,0)
+		TNT1 A 0 Bright A_GiveInventory("PBlackChunkWaver")
+		VORX IJKL 1
+		TNT1 AAAAAA 0 A_SpawnItemEx("PBlackSmokeTrailNormal",random(6,-6),random(6,-6),random(6,-6),frandom(1.0,0.05),frandom(1.0,0.05),frandom(1.0,0.05),random(0,359),SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,0)
+		TNT1 AAAAAA 0 A_SpawnItemEx("PBlackSmokeTrailDark",random(6,-6),random(6,-6),random(6,-6),frandom(1.0,0.05),frandom(1.0,0.05),frandom(1.0,0.05),random(0,359),SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,0)
+		TNT1 A 0 A_GiveInventory("PBlackChunkWaver")
+		TNT1 A 30 Bright
+		Stop
+	}
+}
+
+ACTOR PBlackChunkWaveNormal : BlackSpawnerInheritance
+{
+Scale 0.175
+Renderstyle Add
+Alpha 0.99
++FORCEXYBILLBOARD
++CLIENTSIDEONLY
+States
+	{
+	Spawn:
+		TNT1 A 0 Bright A_SetScale(ScaleX +0.03, ScaleY +0.03)
+		TNT1 A 0 Bright A_FadeOut(0.04,1)
+		VSHK A 1 Bright
+		Loop
+	}
+}
+
+ACTOR PBlackChunkWaveDark : PBlackChunkWaveNormal
+{
+Renderstyle Stencil
+StencilColor Black
+}
+
+Actor PBlackChunkWaver : CustomInventory
+{
+-COUNTITEM
++INVENTORY.QUIET
++INVENTORY.UNDROPPABLE
++INVENTORY.ALWAYSPICKUP
++INVENTORY.AUTOACTIVATE
+Inventory.Amount 1
+Inventory.MaxAmount 0
+States 
+	{ 
+	Pickup: 
+		TNT1 A 0
+		TNT1 A 0 A_SpawnItemEx("PBlackChunkWaveNormal",0,0,0,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,0)
+		TNT1 A 1 A_SpawnItemEx("PBlackChunkWaveDark",0,0,0,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,0)
+		Stop 
+	}
+}
+
+ACTOR PBlackHoleRingSpawnerShort : PBlackHoleRingSpawner
+{
+ReactionTime 3
++CLIENTSIDEONLY
+}
+
+ACTOR PBlackHoleExplode : BlackSpawnerInheritance
+{
++THRUSPECIES
++DONTHURTSPECIES
++DONTHARMSPECIES
+Species "Player"
+DamageType "PlayerBHole"
+States
+	{
+	Spawn:
+		TNT1 A 1 Bright A_Jump(96,"Spawn2")
+		Loop
+	Spawn2:
+		TNT1 A 1 Bright A_SpawnItemEx("PBlackHoleFlame",random(32,-32),random(32,-32),random(32,32),frandom(10.0,2.0),frandom(10.0,2.0),frandom(10.0,-10.0),frandom(0.0,359.0),SXF_TRANSFERPOINTERS|SXF_SETMASTER,0)
+		Stop
+	}
+}
+
+ACTOR PBlackHoleFlame : BlackSpawnerInheritance
+{
+Scale 0.1
+Renderstyle Add
+Alpha 0.5
++FORCERADIUSDMG
++THRUSPECIES
++DONTHURTSPECIES
++DONTHARMSPECIES
+Species "Player"
+DamageType "PlayerBHole"
+States
+	{
+	Spawn:
+		TNT1 A 1 Bright A_Jump(96,"Spawn2")
+		Loop
+	Spawn2:
+		TNT1 A 1 Bright A_Jump(256,"SpawnA","SpawnB","SpawnC","SpawnD")
+		Stop
+	SpawnA:
+		TNT1 A 0 Bright A_JumpIf(Alpha<0.18,2)
+		TNT1 A 0 Bright A_Explode(5,90,1)
+		TNT1 A 0 Bright A_SetScale(ScaleX +0.01, ScaleY +0.01)
+		VODB A 1 A_FadeOut(0.01,1)
+		Loop
+	SpawnB:
+		TNT1 A 0 Bright A_JumpIf(Alpha<0.18,2)
+		TNT1 A 0 Bright A_Explode(5,90,1)
+		TNT1 A 0 Bright A_SetScale(ScaleX +0.01, ScaleY +0.01)
+		VODB B 1 A_FadeOut(0.01,1)
+		Loop
+	SpawnC:
+		TNT1 A 0 Bright A_JumpIf(Alpha<0.18,2)
+		TNT1 A 0 Bright A_Explode(5,90,1)
+		TNT1 A 0 Bright A_SetScale(ScaleX +0.01, ScaleY +0.01)
+		VODB C 1 A_FadeOut(0.01,1)
+		Loop
+	SpawnD:
+		TNT1 A 0 Bright A_JumpIf(Alpha<0.18,2)
+		TNT1 A 0 Bright A_Explode(5,90,1)
+		TNT1 A 0 Bright A_SetScale(ScaleX +0.01, ScaleY +0.01)
+		VODB D 1 A_FadeOut(0.01,1)
+		Loop
+	}
+}
+
+ACTOR PBlackHoleAfterExplode : BlackSpawnerInheritance
+{
+ReactionTime 50
++CLIENTSIDEONLY
+States
+	{
+	Spawn:
+		TNT1 A 0 Bright
+		TNT1 AAAAAAAAAA 0 Bright A_SpawnItemEx("PBlackHoleAfterFlame",random(32,-32),random(32,-32),random(32,32),frandom(10.0,2.0),frandom(10.0,2.0),frandom(10.0,-10.0),frandom(0.0,359.0),SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,64)
+		TNT1 AAAAAAAAAA 0 Bright A_SpawnItemEx("PBlackHoleAfterFlame",random(32,-32),random(32,-32),random(32,32),frandom(10.0,2.0),frandom(10.0,2.0),frandom(10.0,-10.0),frandom(0.0,359.0),SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,64)
+		TNT1 A 1 Bright
+		TNT1 AAAAAAAAAA 0 Bright A_SpawnItemEx("PBlackHoleAfterFlame",random(32,-32),random(32,-32),random(32,32),frandom(10.0,2.0),frandom(10.0,2.0),frandom(10.0,-10.0),frandom(0.0,359.0),SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,64)
+		TNT1 AAAAAAAAAA 0 Bright A_SpawnItemEx("PBlackHoleAfterFlame",random(32,-32),random(32,-32),random(32,32),frandom(10.0,2.0),frandom(10.0,2.0),frandom(10.0,-10.0),frandom(0.0,359.0),SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,64)
+		TNT1 A 1 Bright
+		TNT1 AAAAAAAAAA 0 Bright A_SpawnItemEx("PBlackHoleAfterFlame",random(32,-32),random(32,-32),random(32,32),frandom(10.0,2.0),frandom(10.0,2.0),frandom(10.0,-10.0),frandom(0.0,359.0),SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,64)
+		Goto Death
+	Death:
+		TNT1 A 1 Bright
+		Stop
+	}
+}
+
+ACTOR PBlackHoleAfterFlame : BlackSpawnerInheritance
+{
+Renderstyle Stencil
+StencilColor Black
+Alpha 0.5
+ReactionTime 70
++CLIENTSIDEONLY
+States
+	{
+	Spawn:
+		TNT1 A 1 Bright A_Jump(96,"Spawn2")
+		Loop
+	Spawn2:
+		TNT1 A 0 Bright A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+		TNT1 A 1 Bright A_Jump(256,"SpawnA","SpawnB","SpawnC")
+		Stop
+	SpawnA:
+		TNT1 A 0 Bright A_SetScale(ScaleX +0.01, ScaleY +0.01)
+		VODS A 1 A_FadeOut(0.0005+random(-0.0005,0.0005),0)
+		TNT1 A 0 Bright A_Countdown
+		Loop
+	SpawnB:
+		TNT1 A 0 Bright A_SetScale(ScaleX +0.01, ScaleY +0.01)
+		VODS B 1 A_FadeOut(0.0005+random(-0.0005,0.0005),0)
+		TNT1 A 0 Bright A_Countdown
+		Loop
+	SpawnC:
+		TNT1 A 0 Bright A_SetScale(ScaleX +0.01, ScaleY +0.01)
+		VODS C 1 A_FadeOut(0.0005+random(-0.0005,0.0005),0)
+		TNT1 A 0 Bright A_Countdown
+		Loop
+	Death:
+		TNT1 A 0 Bright
+		TNT1 A 1 Bright A_SpawnItemEx("PBlackHoleAfterFlame2",0,0,0,frandom(0.1,0.05),frandom(0.1,0.05),frandom(0.1,0.05),random(0,359),SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,0)
+		Stop
+	}
+}
+
+ACTOR PBlackHoleAfterFlame2 : PBlackHoleAfterFlame
+{
+Renderstyle Stencil
+StencilColor Black
+Alpha 0.5
+States
+	{
+	Spawn:
+		TNT1 A 1 Bright A_Jump(96,"Spawn2")
+		Loop
+	Spawn2:
+		TNT1 A 0 Bright A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+		TNT1 A 1 Bright A_Jump(256,"SpawnA","SpawnB","SpawnC")
+		Stop
+	SpawnA:
+		TNT1 A 0 Bright A_SetScale(ScaleX +0.01, ScaleY +0.01)
+		VODS A 1 A_FadeOut(0.0025+random(-0.0025,0.0025),1)
+		Loop
+	SpawnB:
+		TNT1 A 0 Bright A_SetScale(ScaleX +0.01, ScaleY +0.01)
+		VODS B 1 A_FadeOut(0.0025+random(-0.0025,0.0025),1)
+		Loop
+	SpawnC:
+		TNT1 A 0 Bright A_SetScale(ScaleX +0.01, ScaleY +0.01)
+		VODS C 1 A_FadeOut(0.0025+random(-0.0025,0.0025),1)
+		Loop
+	}
+}
+
+ACTOR PBlackHoleShockwave : BlackSpawnerInheritance
+{
+ReactionTime 100
++THRUSPECIES
++DONTHURTSPECIES
++DONTHARMSPECIES
+Species "Player"
+DamageType "PlayerBHole"
+States
+	{
+	Spawn:
+		TNT1 A 0 Bright
+		TNT1 AAAAAAAAAA 0 Bright A_SpawnItemEx("PBlackHoleFlame",random(32,-32),random(32,-32),random(32,32),frandom(9.0,8.0),frandom(9.0,8.0),frandom(0.1,-0.1),frandom(0.0,359.0),SXF_TRANSFERPOINTERS|SXF_SETMASTER,64)
+		TNT1 AAAAAAAAAA 0 Bright A_SpawnItemEx("PBlackHoleFlame",random(32,-32),random(32,-32),random(32,32),frandom(9.0,8.0),frandom(9.0,8.0),frandom(0.1,-0.1),frandom(0.0,359.0),SXF_TRANSFERPOINTERS|SXF_SETMASTER,64)
+		TNT1 A 1 Bright
+		TNT1 AAAAAAAAAA 0 Bright A_SpawnItemEx("PBlackHoleFlame",random(32,-32),random(32,-32),random(32,32),frandom(9.0,8.0),frandom(9.0,8.0),frandom(0.1,-0.1),frandom(0.0,359.0),SXF_TRANSFERPOINTERS|SXF_SETMASTER,64)
+		TNT1 AAAAAAAAAA 0 Bright A_SpawnItemEx("PBlackHoleFlame",random(32,-32),random(32,-32),random(32,32),frandom(9.0,8.0),frandom(9.0,8.0),frandom(0.1,-0.1),frandom(0.0,359.0),SXF_TRANSFERPOINTERS|SXF_SETMASTER,64)
+		TNT1 A 1 Bright
+		TNT1 AAAAAAAAAA 0 Bright A_SpawnItemEx("PBlackHoleFlame",random(32,-32),random(32,-32),random(32,32),frandom(9.0,8.0),frandom(9.0,8.0),frandom(0.1,-0.1),frandom(0.0,359.0),SXF_TRANSFERPOINTERS|SXF_SETMASTER,64)
+		TNT1 AAAAAAAAAA 0 Bright A_SpawnItemEx("PBlackHoleFlame",random(32,-32),random(32,-32),random(32,32),frandom(9.0,8.0),frandom(9.0,8.0),frandom(0.1,-0.1),frandom(0.0,359.0),SXF_TRANSFERPOINTERS|SXF_SETMASTER,64)
+		TNT1 A 1 Bright
+		TNT1 AAAAAAAAAA 0 Bright A_SpawnItemEx("PBlackHoleFlame",random(32,-32),random(32,-32),random(32,32),frandom(9.0,8.0),frandom(9.0,8.0),frandom(0.1,-0.1),frandom(0.0,359.0),SXF_TRANSFERPOINTERS|SXF_SETMASTER,64)
+		TNT1 AAAAAAAAAA 0 Bright A_SpawnItemEx("PBlackHoleFlame",random(32,-32),random(32,-32),random(32,32),frandom(9.0,8.0),frandom(9.0,8.0),frandom(0.1,-0.1),frandom(0.0,359.0),SXF_TRANSFERPOINTERS|SXF_SETMASTER,64)
+		TNT1 A 1 Bright
+		TNT1 AAAAAAAAAA 0 Bright A_SpawnItemEx("PBlackHoleFlame",random(32,-32),random(32,-32),random(32,32),frandom(9.0,8.0),frandom(9.0,8.0),frandom(0.1,-0.1),frandom(0.0,359.0),SXF_TRANSFERPOINTERS|SXF_SETMASTER,64)
+		TNT1 AAAAAAAAAA 0 Bright A_SpawnItemEx("PBlackHoleFlame",random(32,-32),random(32,-32),random(32,32),frandom(9.0,8.0),frandom(9.0,8.0),frandom(0.1,-0.1),frandom(0.0,359.0),SXF_TRANSFERPOINTERS|SXF_SETMASTER,64)
+		Goto Death
+	Death:
+		TNT1 A 1 Bright
+		Stop
+	}
+}
+
+ACTOR PBlackHoleAfterShockwave : BlackSpawnerInheritance
+{
+ReactionTime 100
++CLIENTSIDEONLY
+States
+	{
+	Spawn:
+		TNT1 A 0 Bright
+		TNT1 AAAAAAAAAA 0 A_SpawnItemEx("PBlackHoleAfterFlame2",random(32,-32),random(32,-32),random(32,32),frandom(7.0,6.0),frandom(7.0,6.0),frandom(0.1,-0.1),frandom(0.0,359.0),SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,64)
+		TNT1 AAAAAAAAAA 0 A_SpawnItemEx("PBlackHoleAfterFlame2",random(32,-32),random(32,-32),random(32,32),frandom(7.0,6.0),frandom(7.0,6.0),frandom(0.1,-0.1),frandom(0.0,359.0),SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,64)
+		TNT1 A 1 Bright
+		TNT1 AAAAAAAAAA 0 A_SpawnItemEx("PBlackHoleAfterFlame2",random(32,-32),random(32,-32),random(32,32),frandom(7.0,6.0),frandom(7.0,6.0),frandom(0.1,-0.1),frandom(0.0,359.0),SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,64)
+		TNT1 AAAAAAAAAA 0 A_SpawnItemEx("PBlackHoleAfterFlame2",random(32,-32),random(32,-32),random(32,32),frandom(7.0,6.0),frandom(7.0,6.0),frandom(0.1,-0.1),frandom(0.0,359.0),SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,64)
+		TNT1 A 1 Bright
+		TNT1 AAAAAAAAAA 0 A_SpawnItemEx("PBlackHoleAfterFlame2",random(32,-32),random(32,-32),random(32,32),frandom(7.0,6.0),frandom(7.0,6.0),frandom(0.1,-0.1),frandom(0.0,359.0),SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,64)
+		TNT1 AAAAAAAAAA 0 A_SpawnItemEx("PBlackHoleAfterFlame2",random(32,-32),random(32,-32),random(32,32),frandom(7.0,6.0),frandom(7.0,6.0),frandom(0.1,-0.1),frandom(0.0,359.0),SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,64)
+		TNT1 A 1 Bright
+		TNT1 AAAAAAAAAA 0 A_SpawnItemEx("PBlackHoleAfterFlame2",random(32,-32),random(32,-32),random(32,32),frandom(7.0,6.0),frandom(7.0,6.0),frandom(0.1,-0.1),frandom(0.0,359.0),SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,64)
+		TNT1 AAAAAAAAAA 0 A_SpawnItemEx("PBlackHoleAfterFlame2",random(32,-32),random(32,-32),random(32,32),frandom(7.0,6.0),frandom(7.0,6.0),frandom(0.1,-0.1),frandom(0.0,359.0),SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,64)
+		TNT1 A 1 Bright
+		TNT1 AAAAAAAAAA 0 A_SpawnItemEx("PBlackHoleAfterFlame2",random(32,-32),random(32,-32),random(32,32),frandom(7.0,6.0),frandom(7.0,6.0),frandom(0.1,-0.1),frandom(0.0,359.0),SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,64)
+		TNT1 AAAAAAAAAA 0 A_SpawnItemEx("PBlackHoleAfterFlame2",random(32,-32),random(32,-32),random(32,32),frandom(7.0,6.0),frandom(7.0,6.0),frandom(0.1,-0.1),frandom(0.0,359.0),SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,64)
+		Goto Death
+	Death:
+		TNT1 A 1 Bright
+		Stop
+	}
+}
+
+ACTOR PBlackHoleGiantRingSpawner : BlackSpawnerInheritance
+{
+ReactionTime 6
++CLIENTSIDEONLY
+States
+	{
+	Spawn:
+		TNT1 A 0 Bright
+		TNT1 A 6 A_SpawnItemEx("PBlackGiantRingNormal",0,0,0,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,0)
+		TNT1 A 6 A_SpawnItemEx("PBlackGiantRingDark",0,0,0,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,0)
+		TNT1 A 0 Bright A_Countdown
+		Loop
+	Death:
+		TNT1 A 1 Bright
+		Stop
+	}
+}
+
+ACTOR PBlackGiantRingNormal : BlackSpawnerInheritance
+{
+Scale 2
+Renderstyle Add
+Alpha 0.99
++FORCEXYBILLBOARD
++CLIENTSIDEONLY
+States
+	{
+	Spawn:
+		TNT1 A 0 Bright A_SetScale(ScaleX +0.2, ScaleY +0.2)
+		TNT1 A 0 Bright A_FadeOut(0.04,1)
+		VSHK A 1 Bright
+		Loop
+	}
+}
+
+ACTOR PBlackGiantRingDark : PBlackRingNormal
+{
+Renderstyle Stencil
+StencilColor Black
++CLIENTSIDEONLY
+States
+	{
+	Spawn:
+		TNT1 A 0 Bright A_SetScale(ScaleX +0.2, ScaleY +0.2)
+		TNT1 A 0 Bright A_FadeOut(0.04,1)
+		VSHK A 1 Bright
+		Loop
+	}
+}
+
+Actor PBlackParticleNormal : BlackSpawnerInheritance
+{
+Scale 0.1
+Renderstyle Add
++CLIENTSIDEONLY
+States
+	{
+	Spawn:
+		TNT1 A 0 Bright
+		TNT1 A 0 Bright A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+		TNT1 A 0 Bright A_SetScale(ScaleX-0.0025,ScaleY-0.0025)
+		VODM A 1 Bright A_FadeOut(0.025,1)
+		Goto Spawn+2
+	}
+}	
+
+Actor PBlackParticleDark : BlackSpawnerInheritance
+{
+Scale 0.1
+Renderstyle Shaded
++CLIENTSIDEONLY
+States
+	{
+	Spawn:
+		TNT1 A 0 Bright
+		TNT1 A 0 Bright A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+		VODM B 1 A_FadeOut(0.025,1)
+		Goto Spawn+2
+	}
+}
+//======================================================
+//Commander weapon
+ACTOR BlackHoleProjectile : PBlackHoleProjectile
+{
++EXTREMEDEATH
+Species "Masterminds"
+DamageType "Comm4nder"
+States
+	{
+	Death:
+		TNT1 AAA 0 Bright A_StopSound(5)
+		TNT1 A 0 Bright A_PlaySound("Black/Blast",5,1.0,0)
+		TNT1 A 0 Bright A_SpawnItemEx("BlackHoleSpawn",0,0,0,0,0,0,0,SXF_TRANSFERPOINTERS|SXF_SETMASTER,0)
+		TNT1 A 1 Bright A_SpawnItemEx("PBlackHoleSpawnDark",0,0,0,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,0)
+		Stop
+	}
+}
+
+ACTOR BlackHoleSpawn : PBlackHoleSpawn
+{
+Species "Masterminds"
+DamageType "Comm4nder"
+}
+
+Actor BlackHoleDamager : PBlackHoleDamager
+{ 
+Species "Masterminds"
+DamageType "Comm4nder"
+States
+	{
+	Death:
+		TNT1 A 0 Bright
+		TNT1 A 1 Bright A_SpawnItemEx("BlackDeathSequence",0,0,0,0,0,0,0,SXF_TRANSFERPOINTERS|SXF_SETMASTER,0)
+		Stop
+	}
+}
+
+Actor BlackHoleSucker : PBlackHoleSucker
+{ 
+Species "Masterminds"
+DamageType "Comm4nder"
+}
+
+Actor BlackDeathSequence : PBlackDeathSequence
+{
+Species "Masterminds"
+DamageType "Comm4nder"
+}
+
+ACTOR BlackHoleChunkSpawner : PBlackHoleChunkSpawner
+{
+Species "Masterminds"
+DamageType "Comm4nder"
+States
+	{
+	Spawn:
+		TNT1 A 1 Bright A_Jump(96,1)
+		Loop
+		TNT1 A 1 Bright A_SpawnItemEx("BlackHoleChunk",random(256,-256),random(256,-256),random(128,0),frandom(3.0,10.0),0,frandom(15.0,20.0),frandom(0.0,359.0),SXF_TRANSFERPOINTERS|SXF_SETMASTER,0)
+		Stop
+	}
+}
+
+ACTOR BlackHoleChunk : PBlackHoleChunk
+{
+Species "Masterminds"
+DamageType "Comm4nder"
+}
+
+ACTOR BlackHoleExplode : PBlackHoleExplode
+{
+Species "Masterminds"
+DamageType "Comm4nder"
+States
+	{
+	Spawn:
+		TNT1 A 1 Bright A_Jump(96,1)
+		Loop
+		TNT1 A 1 Bright A_SpawnItemEx("BlackHoleFlame",random(32,-32),random(32,-32),random(32,32),frandom(10.0,2.0),frandom(10.0,2.0),frandom(10.0,-10.0),frandom(0.0,359.0),SXF_TRANSFERPOINTERS|SXF_SETMASTER,0)
+		Stop
+	}
+}
+
+ACTOR BlackHoleFlame : PBlackHoleFlame
+{
+Species "Masterminds"
+DamageType "Comm4nder"
+}
+
+ACTOR BlackHoleShockwave : PBlackHoleShockwave
+{
+Species "Masterminds"
+DamageType "Comm4nder"
+States
+	{
+	Spawn:
+		TNT1 A 0 Bright
+		TNT1 AAAAAAAAAA 0 Bright A_SpawnItemEx("BlackHoleFlame",random(32,-32),random(32,-32),random(32,32),frandom(9.0,8.0),frandom(9.0,8.0),frandom(0.1,-0.1),frandom(0.0,359.0),SXF_TRANSFERPOINTERS|SXF_SETMASTER,64)
+		TNT1 AAAAAAAAAA 0 Bright A_SpawnItemEx("BlackHoleFlame",random(32,-32),random(32,-32),random(32,32),frandom(9.0,8.0),frandom(9.0,8.0),frandom(0.1,-0.1),frandom(0.0,359.0),SXF_TRANSFERPOINTERS|SXF_SETMASTER,64)
+		TNT1 A 1 Bright
+		TNT1 AAAAAAAAAA 0 Bright A_SpawnItemEx("BlackHoleFlame",random(32,-32),random(32,-32),random(32,32),frandom(9.0,8.0),frandom(9.0,8.0),frandom(0.1,-0.1),frandom(0.0,359.0),SXF_TRANSFERPOINTERS|SXF_SETMASTER,64)
+		TNT1 AAAAAAAAAA 0 Bright A_SpawnItemEx("BlackHoleFlame",random(32,-32),random(32,-32),random(32,32),frandom(9.0,8.0),frandom(9.0,8.0),frandom(0.1,-0.1),frandom(0.0,359.0),SXF_TRANSFERPOINTERS|SXF_SETMASTER,64)
+		TNT1 A 1 Bright
+		TNT1 AAAAAAAAAA 0 Bright A_SpawnItemEx("BlackHoleFlame",random(32,-32),random(32,-32),random(32,32),frandom(9.0,8.0),frandom(9.0,8.0),frandom(0.1,-0.1),frandom(0.0,359.0),SXF_TRANSFERPOINTERS|SXF_SETMASTER,64)
+		TNT1 AAAAAAAAAA 0 Bright A_SpawnItemEx("BlackHoleFlame",random(32,-32),random(32,-32),random(32,32),frandom(9.0,8.0),frandom(9.0,8.0),frandom(0.1,-0.1),frandom(0.0,359.0),SXF_TRANSFERPOINTERS|SXF_SETMASTER,64)
+		TNT1 A 1 Bright
+		TNT1 AAAAAAAAAA 0 Bright A_SpawnItemEx("BlackHoleFlame",random(32,-32),random(32,-32),random(32,32),frandom(9.0,8.0),frandom(9.0,8.0),frandom(0.1,-0.1),frandom(0.0,359.0),SXF_TRANSFERPOINTERS|SXF_SETMASTER,64)
+		TNT1 AAAAAAAAAA 0 Bright A_SpawnItemEx("BlackHoleFlame",random(32,-32),random(32,-32),random(32,32),frandom(9.0,8.0),frandom(9.0,8.0),frandom(0.1,-0.1),frandom(0.0,359.0),SXF_TRANSFERPOINTERS|SXF_SETMASTER,64)
+		TNT1 A 1 Bright
+		TNT1 AAAAAAAAAA 0 Bright A_SpawnItemEx("BlackHoleFlame",random(32,-32),random(32,-32),random(32,32),frandom(9.0,8.0),frandom(9.0,8.0),frandom(0.1,-0.1),frandom(0.0,359.0),SXF_TRANSFERPOINTERS|SXF_SETMASTER,64)
+		TNT1 AAAAAAAAAA 0 Bright A_SpawnItemEx("BlackHoleFlame",random(32,-32),random(32,-32),random(32,32),frandom(9.0,8.0),frandom(9.0,8.0),frandom(0.1,-0.1),frandom(0.0,359.0),SXF_TRANSFERPOINTERS|SXF_SETMASTER,64)
+		Goto Death
+	}
+}

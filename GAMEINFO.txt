@@ -1,0 +1,4 @@
+STARTUPTYPE = "Hexen"
+STARTUPTITLE = "Complex Clusterfuck Nexus (UCCFN-GZ)"
+STARTUPCOLORS = "6a2dca", "000000"
+STARTUPSONG = "STARTUP"

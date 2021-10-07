@@ -1,0 +1,201 @@
+ACTOR TurretBox3 : CustomInventory
+{
+  +COUNTITEM
+  +FLOORCLIP
+  +INVENTORY.INVBAR
+  +INVENTORY.HUBPOWER
+  +INVENTORY.PERSISTENTPOWER
+  +INVENTORY.BIGPOWERUP
+  Inventory.Amount 1
+  Inventory.MaxAmount 1
+  Inventory.InterHubAmount 1
+  Inventory.Icon "DXBXE0"
+  Inventory.PickupMessage "Death Turret"
+  Inventory.PickupSound "turret/pickup"
+  Inventory.UseSound "turret/use"
+  Tag "Death Turret"
+  States
+  {
+  Spawn:
+	DXBX AAABBBCCCDDD 1
+    Loop
+  Use:
+	TNT1 A 0
+	TNT1 A 0 A_SpawnItemEx("DeathTurret",56,0,8,0,0,0,0,1)
+	Stop
+	TNT1 A 1
+	Fail	
+  }
+}
+
+Actor DeathTurret : RocketTurret
+ {
+  Obituary "%o was blown to pieces by a Death Turret"
+  Health 1500
+  Radius 24
+  Height 56
+  Mass 100000
+  Speed 0
+  Scale 2.0
+  Monster
+  +FRIENDLY
+  +DONTHARMSPECIES
+  +THRUSPECIES
+  +FLOORCLIP
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  +NOTARGET
+  +QUICKTORETALIATE
+  +NOBLOOD
+  +LOOKALLAROUND
+  +DROPOFF
+  +STANDSTILL
+  Species "Player"
+  DamageFactor 0.4
+  DeathSound "sentry/die"
+  Tag "\c[i8]Death \c[i7]Turret\c-"
+  States
+   {
+  Spawn:
+  See:
+	TNT1 A 0 A_SetUserVar(user_TurretLoop,0)
+    DTUR AAAAAAAAAAAAAAAA 1 A_Chase
+	DTUR AAAAAAAAAAAAAAAA 1 A_Chase
+	DTUR AAAAAAAAAAAAAAAA 1 A_Chase
+	DTUR AAAAAAAAAAAAAAAA 1 A_Chase
+    DTUR A 0 A_PlaySound("turret/beep")
+	TNT1 A 0 A_ClearTarget
+    Loop
+  Missile:	
+	DTUR A 1 A_FaceTarget
+	DTUR A 3 A_PlaySound("turret/see",7)
+	DTUR A 5 A_FaceTarget
+  TurretLoop:
+	DTUR A 6 A_FaceTarget 
+	TNT1 A 0 A_AlertMonsters
+    DTUR B 6 Bright A_CustomMissile("TurretHomRocket", 30, 0, 0)
+    DTUR A 2 A_CPosRefire  
+    Loop
+  Death:
+	TNT1 A 0 A_SpawnItemEx("OrangeParticleSpawner", 0, 0, 0, 0, 0, 0, 0, 128) 
+    TNT1 AAA 0 A_CustomMissile("Kaboom3", 0, 0, random(0,360), 2, random(0,360))
+	TNT1 AAA 0 A_CustomMissile("SmokeFX2", 0, 0, random(0,360), 2, random(0,360))
+    TNT1 AAAA 0 A_SpawnItemEx("Debris",0,0,0,Random(4,-4),Random(4,-4),Random(4,8),0,128)
+    TNT1 A 0 A_PlaySound("weapons/rocklx")
+    TNT1 A 1 A_SpawnItem("RocketEx",0,32)
+	DTUR C 0 A_NoBlocking
+	DTUR C 0 A_Scream
+    DTUR C 250
+    Stop
+  }
+ }
+
+Actor EnemyDeathTurret
+{
+  Obituary "%o was found and destroyed by the Death Turret"
+  Health 1500
+  Radius 16
+  Height 56
+  Mass 100000
+  Speed 0
+  Scale 2.0
+  Monster
+  +BOSSDEATH
+  +NOTARGET
+  +NOBLOOD
+  +NOSPLASHALERT
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  +QUICKTORETALIATE
+  +LOOKALLAROUND
+  +DONTHARMSPECIES
+  +DONTHARMCLASS
+  +STANDSTILL
+  +NOPAIN
+  Species "Nobles"
+  DamageFactor 0.4
+DamageFactor "SatanGuard", 0.0
+DamageFactor "AbyssalSatyr", 0.0
+Damagefactor "Moloch", 0.0
+Damagefactor "Exos", 0.0
+Damagefactor "ZombieDev", 0.0
+DamageFactor "Terminator", 0.0
+Damagefactor "AdvancedImp", 0.0
+DamageFactor "Legendary1", 0.0
+DamageFactor "LegendaryGuru", 0.0
+Damagefactor "UltimateLegendary", 0.0
+Damagefactor "Nobles", 0.0
+Damagefactor "VileFires", 0.0
+Damagefactor "Shadow", 0.0
+Damagefactor "DarkBruiserBFG10K", 0.0
+DamageFactor "Cybers", 0.0
+DamageFactor "Hell", 0.0
+DamageFactor "Commander", 0.0
+DamageFactor "Baby15K", 0.0
+DamageFactor "Cyber10K", 0.0
+DamageFactor "DemolisherEx", 0.0
+DamageFactor "DarkDemoEx", 0.0
+DamageFactor "CerChainguns", 0.0
+DamageFactor "CerEnergyBall", 0.0
+DamageFactor "LegMind", 0.0
+DamageFactor "BeheComet", 0.0
+DamageFactor "UBDTR", 0.0
+DamageFactor "NobleComet", 0.0
+DamageFactor "CacoComet", 0.0
+DamageFactor "SoulToxic", 0.0
+DamageFactor "Cacolich", 0.0
+DamageFactor "CadaverRocket", 0.0
+DamageFactor "HellComet", 0.0
+DamageFactor "HFCyber", 0.0
+DamageFactor "DBFG2", 0.0
+DamageFactor "DBFG10K2", 0.0
+DamageFactor "DBFGSplash2", 0.0
+  DeathSound "sentry/die"
+  var int user_TurretLoop;
+  Tag "\c[i8]Death \c[i7]Turret\c-"
+  States
+  {
+  Spawn:
+  See:
+	TNT1 A 0 A_SetUserVar(user_TurretLoop,0)
+    DTUR AAAAAAAAAAAAAAAA 1 A_Chase
+	DTUR AAAAAAAAAAAAAAAA 1 A_Chase
+	DTUR AAAAAAAAAAAAAAAA 1 A_Chase
+	DTUR AAAAAAAAAAAAAAAA 1 A_Chase
+    DTUR A 0 A_PlaySound("turret/beep")
+	TNT1 A 0 A_ClearTarget
+    Loop
+  Missile:	
+	DTUR A 1 A_FaceTarget
+	DTUR A 3 A_PlaySound("turret/see",7)
+	DTUR A 5 A_FaceTarget
+  TurretLoop:
+	DTUR A 6 A_FaceTarget 
+	TNT1 A 0 A_AlertMonsters
+    DTUR B 6 Bright A_CustomMissile("EnemyTurretHomRocket", 30, 0, 0)
+    DTUR A 2 A_CPosRefire 
+    Loop
+  Death:
+	TNT1 A 0 A_SpawnItemEx("OrangeParticleSpawner", 0, 0, 0, 0, 0, 0, 0, 128) 
+    TNT1 AAA 0 A_CustomMissile("Kaboom3", 0, 0, random(0,360), 2, random(0,360))
+	TNT1 AAA 0 A_CustomMissile("SmokeFX2", 0, 0, random(0,360), 2, random(0,360))
+    TNT1 AAAA 0 A_SpawnItemEx("Debris",0,0,0,Random(4,-4),Random(4,-4),Random(4,8),0,128)
+    TNT1 A 0 A_PlaySound("weapons/rocklx")
+    TNT1 A 1 A_SpawnItem("RocketEx",0,32)
+	DTUR C 0 A_NoBlocking
+	DTUR C 0 A_Scream
+    DTUR C 250
+    Stop
+  }
+}
+
+ACTOR TurretHomRocket : PlayerHomRocket
+{
+DamageType "Player"
+}
+
+ACTOR EnemyTurretHomRocket : PlayerHomRocket
+{
+DamageType "NobleComet"
+-THRUSPECIES
+}

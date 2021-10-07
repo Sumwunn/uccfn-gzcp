@@ -1,0 +1,474 @@
+ACTOR NuclearMissileLauncherSpawner 30326
+{
+-SERVERSIDEONLY
++NOBLOCKMAP
++NOSECTOR
++NOGRAVITY
++THRUACTORS
+-BOSSDEATH
++SHOOTABLE
++ISMONSTER
++NORADIUSDMG
++NOINTERACTION
++RANDOMIZE
+HEALTH 0x7FFFFFFF
+Height 64
+Radius 24
+Mass 0x7FFFFFFF
+States
+	{
+	Spawn:
+		TNT1 A 10
+		TNT1 A 1 A_SpawnItemEx("ArmageddonCannon",0,0,0,0,0,0,0,SXF_SETMASTER|SXF_TRANSFERAMBUSHFLAG)
+		Goto Nothing
+	Nothing:
+		TNT1 A 10
+		TNT1 A 0 A_Die
+		Goto Death
+	Death:
+		TNT1 A 10
+		Stop
+	}
+}
+
+ACTOR "ArmageddonCannon" : Weapon //I am become death, the destroyer of worlds
+{
+Scale 0.75
++IGNORESKILL
++WEAPON.BFG
++WEAPON.EXPLOSIVE
++WEAPON.NOALERT
++WEAPON.NOAUTOAIM
++WEAPON.NOAUTOFIRE
++WEAPON.AMMO_OPTIONAL
+-INVENTORY.UNDROPPABLE
+Weapon.SelectionOrder 2820
+Weapon.UpSound "Armageddon/ready"
+Weapon.AmmoType "NuclearRocketCharge"
+Weapon.AmmoType2 "NuclearRocket"
+Weapon.AmmoGive 2
+Weapon.AmmoGive2 0
+Weapon.AmmoUse 1
+Weapon.Kickback 10000
+Inventory.PickupSound "Armageddon/pickup" 
+Inventory.Icon "NUKWA0"
+Inventory.PickupMessage "You got the Armageddon Cannon! The ultimate problem solver!"
+Obituary "%o was annihilated by %k's Armageddon Cannon."
+Tag "Armageddon Cannon"
+States
+	{
+	Spawn:
+		NUKW A -1
+		Loop
+	Ready:
+        //TNT1 A 0 A_PlayWeaponSound("redeemer/ready")
+	    NUKX ABCDE 2
+	Ready2:
+	    NUKG A 1 A_WeaponReady
+	    TNT1 A 0 A_JumpIfInventory("RailgunAction",1,"Zoom")
+		Loop
+	Select:
+		TNT1 A 0 A_Raise
+		wait
+	Deselect:
+		TNT1 A 0
+		TNT1 A 0 A_TakeInventory("HandGrenadeAction",1)
+		TNT1 A 0 A_TakeInventory("MineAction",1)
+		TNT1 A 0 A_TakeInventory("RailgunAction",1)
+    Deselectloop:
+		TNT1 A 0 A_PlayWeaponSound("weapons/weapondown")
+		NUKG A 1 A_Lower
+	Loop
+	Fire:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("ArmageddonCannonMode",1,"Fire2")
+		TNT1 A 0 A_JumpIfNoAmmo("Empty")
+		TNT1 A 0 A_JumpIfInventory("NuclearRocketCharge",1,1)
+		Goto Empty
+		//NUKG A 3
+		//NUKZ A 2 A_PlayWeaponSound("weapons/nuclearmissilecharge")
+		//NUKZ A 1 A_PlayWeaponSound("redeemer/fire")
+		NUKZ A 1 A_PlayWeaponSound("Armageddon/blast")
+		TNT1 A 0 A_PlaySound("Armageddon/fire",5,1.0,0,ATTN_NONE)
+		NUKZ A 0 A_GunFlash
+		TNT1 A 0 A_Recoil(5)
+		TNT1 A 0 A_AlertMonsters
+		TNT1 A 0 A_FireCustomMissile("NuclearMissileShot",0,0,4,4)
+		TNT1 A 0 A_TakeInventory("NuclearRocketCharge",1)
+		NUKZ B 3 Bright A_Recoil(-4.5)
+		NUKZ BCDEFGHI 2 Bright
+		NUKZ I 28
+		NUKZ IHG 3
+		TNT1 A 0 A_ReFire
+		Goto Ready2
+	Fire2:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfNoAmmo("Empty")
+		//TNT1 A 0 A_JumpIfInventory("RedeemerRocketCharge",2,"youfailed")
+		TNT1 A 0 A_JumpIfInventory("NuclearRocketCharge",2,1)
+		Goto NotEnoughBoom
+		//NUKG A 3
+		//NUKZ A 2 A_PlayWeaponSound("weapons/nuclearmissilecharge")
+		//NUKZ A 1 A_PlayWeaponSound("redeemer/fire")
+		NUKZ A 1 A_PlayWeaponSound("Armageddon/blast")
+		TNT1 A 0 A_PlaySound("Armageddon/fire",5,1.0,0,ATTN_NONE)
+		NUKZ A 0 A_GunFlash
+		TNT1 A 0 A_Recoil(5)
+		TNT1 A 0 A_AlertMonsters
+		TNT1 A 0 A_FireCustomMissile("Kazumi_NukeRocket",0,0,4,4)
+		TNT1 A 0 A_TakeInventory("NuclearRocketCharge",2)
+		NUKZ B 3 Bright A_Recoil(-4.5)
+		NUKZ BCDEFGHI 2 Bright
+		NUKZ I 28
+		NUKZ IHG 3
+		TNT1 A 0 A_ReFire
+		Goto Ready2
+	Hold:
+		NUKG A 1 A_WeaponReady(WRF_NOFIRE)
+		TNT1 A 0 A_ReFire
+		Goto Ready2
+	Empty:
+		NUKG A 15 A_PlayWeaponSound("weapons/click3")
+		Goto Ready2
+	AltFire:
+		TNT1 A 0 A_JumpIfInventory("NuclearRocketCharge",2,"Ready2")
+		TNT1 A 0 A_JumpIfInventory("NuclearRocket",1,"Reload")
+		Goto Ready2
+	Reload:
+		NUKX EDCB 4
+		NUKX B 10
+		//NUKX B 10 A_PlayWeaponSound("weapons/nuclearmissilereload")
+		//NUKX BCDE 4
+	ReloadLoop:
+		TNT1 A 0 A_TakeInventory("NuclearRocket",1)
+		TNT1 A 0 A_GiveInventory("NuclearRocketCharge",1)
+		TNT1 A 0 A_JumpIfInventory("NuclearRocketCharge",2,"Full")
+		TNT1 A 0 A_JumpIfInventory("NuclearRocket",1,"ReloadLoop")
+	Full:
+	    NUKX B 10 A_PlayWeaponSound("weapons/nuclearmissilereload")
+		NUKX BCDE 4
+		NUKG A 35
+		Goto AltFire
+	Zoom:
+	    TNT1 A 0 A_TakeInventory("RailgunAction",1)
+	    ChangeMode:
+	    TNT1 A 0 A_JumpIfInventory("ArmageddonCannonMode",1,"ChangeMode2")
+	    TNT1 A 0 A_Print("Big explosion",1)
+	    TNT1 A 0 A_GiveInventory("ArmageddonCannonMode")
+	    NUKG A 4 A_PlayWeaponSound("Armageddon/mode")
+	    NUKG A 2 Offset(0,34)
+	    NUKG A 2 Offset(0,37)
+		NUKG A 2 Offset(0,40)
+		NUKG A 2 Offset(0,37)
+	    NUKG A 2 Offset(0,34)
+	    NUKG A 1
+	    Goto Ready2
+	ChangeMode2:
+	    TNT1 A 0 A_Print("Basic explosion",1)
+	    TNT1 A 0 A_TakeInventory("ArmageddonCannonMode")
+	    NUKG A 4 A_PlayWeaponSound("Armageddon/mode")
+	    NUKG A 2 Offset(0,34)
+	    NUKG A 2 Offset(0,37)
+	    NUKG A 2 Offset(0,34)
+		NUKG A 1
+	    Goto Ready2
+	NotEnoughBoom:
+	    TNT1 A 0 A_Print("You need 2 missiles loaded in your gun",2)
+	    NUKG A 15 A_PlayWeaponSound("weapons/click3")
+	    goto ready2
+	}
+}
+
+ACTOR ArmageddonCannonMode : Inventory { Inventory.MaxAmount 1 }
+
+ACTOR NuclearRocketCharge : Ammo
+{
++IGNORESKILL
+Inventory.Amount 0
+Inventory.MaxAmount 2
+Ammo.BackpackAmount 0
+Ammo.BackpackMaxAmount 2
+Inventory.Icon "NUKAA0"
+}
+
+ACTOR NuclearRocket : Ammo 30327
+{
++IGNORESKILL
++INVENTORY.BIGPOWERUP
+Inventory.Amount 1
+Inventory.MaxAmount 5
+Ammo.BackpackAmount 0
+Ammo.BackpackMaxAmount 5
+Inventory.PickupMessage "Picked up a nuclear missile."
+Inventory.PickupSound "items/rocket"
+Inventory.Icon "NUKAA0"
+States
+	{
+	Spawn:
+		NUKA A -1
+		Loop
+	}
+}
+
+ACTOR NuclearMissileBox : NuclearRocket 30328
+{
+Inventory.Amount 5
+Inventory.PickupSound "items/rocketbox"
+Inventory.PickupMessage "Picked up a nuclear missile box."
+Inventory.Icon "NUKAD0"
+States
+	{
+	Spawn:
+		NUKA D -1
+		Loop
+	}
+}
+
+Actor NuclearShield : PowerProtection
+{
++IGNORESKILL
++Inventory.AutoActivate
+Inventory.Amount 1
+Inventory.MaxAmount 0
+Damagefactor "None", 0.1
+Damagefactor "Normal", 0.1
+Damagefactor "Explosion", 0.1
+Damagefactor "NuclearFire", 0.1
+Powerup.duration -5
+}
+
+Actor PlayerNuke : DarkDesNuke
+{
++DontHurtSpecies
++DontHarmSpecies
+Species "Player"
+DamageType "Explosion"
+}
+
+ACTOR NuclearMissileShot
+{
+PROJECTILE
+Height 8
+Radius 13
+Speed 3
+Renderstyle Normal
+Damage 512
++FOILINVUL
++FORCERADIUSDMG
++STRIFEDAMAGE
++EXTREMEDEATH
++DontReflect
++NOTARGET
++FULLVOLDEATH
++THRUGHOST
+-ROCKETTRAIL
++ThruSpecies
++DontHurtSpecies
++DontHarmSpecies
+Species "Player"
+Damagetype "Explosion"
+Obituary "%o was annihilated by a Nuclear Missile."
+var int user_lcounter;
+var int user_flytime;
+States
+	{
+	Spawn:
+	    TNT1 A 0 A_JumpIf(user_flytime >= 110,2) //140.2
+		TNT1 A 0 A_ScaleVelocity(1.1) //1.02
+		TNT1 A 0 A_SetUserVar("user_flytime",user_flytime+1)
+		TNT1 A 0 Bright A_CustomMissile("MissileTrail",Random(-2,2),Random(-2,2)) 
+		TNT1 A 0 Bright A_CustomMissile("ProjectileTrailParticleOrange",Random(-2,2),Random(-2,2)) 
+		NKS1 A 1 Bright A_CustomMissile("PlayerNuclearMissileTrail",0,0,0)
+		Loop
+	Death:
+		TNT1 A 0 Bright
+		TNT1 A 0 Bright A_GiveToTarget("NuclearShield",1)
+		TNT1 A 0 Bright A_GiveToTarget("VulnerabilityQuiet",1)
+		TNT1 A 1 Bright A_StopSound
+		TNT1 A 0 Bright A_CustomMissile("NuclearMissileExplosion",0,0,0,CMF_AIMDIRECTION|CMF_TRACKOWNER,0)
+		TNT1 A 1 Bright
+		Stop
+	}
+}
+
+Actor PlayerNuclearMissileTrail : NuclearMissileTrail { +NOINTERACTION }
+
+Actor NuclearMissileExplosion : NuclearMissileShot
+{
+Speed 0
+States
+	{
+	Spawn:
+		TNT1 A 0 Bright
+		TNT1 A 0 Bright A_Die
+		Goto Death
+	Death:
+		TNT1 A 0 Bright
+		TNT1 A 1 Bright A_Explode(10000,1200,true,true,666)
+		TNT1 A 1 Bright A_SpawnItemEx("PlayerNuke",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERPOINTERS|SXF_SETMASTER)
+		TNT1 A 0 Bright A_SetUserVar("user_lcounter",0)
+		TNT1 A 0 Bright A_Blast(BF_DONTWARN,225,1000,30)
+		Goto NuclearFireLoop
+	NuclearFireLoop:
+		TNT1 A 1 Bright A_CustomMissile("NuclearMissileShotEx",0,0,user_lcounter*20,CMF_AIMDIRECTION|CMF_TRACKOWNER)
+		TNT1 A 0 Bright A_CustomMissile("NuclearMissileShotEx2",0,0,user_lcounter*20,CMF_AIMDIRECTION|CMF_TRACKOWNER,45)
+		TNT1 A 0 Bright A_CustomMissile("NuclearMissileShotEx2",0,0,user_lcounter*20,CMF_AIMDIRECTION|CMF_TRACKOWNER,-45)
+		TNT1 A 0 Bright A_CustomMissile("NuclearMissileShotEx2",0,0,360-(user_lcounter*20),CMF_AIMDIRECTION|CMF_TRACKOWNER,45)
+		TNT1 A 0 Bright A_CustomMissile("NuclearMissileShotEx2",0,0,360-(user_lcounter*20),CMF_AIMDIRECTION|CMF_TRACKOWNER,-45)
+		TNT1 AAA 0 Bright A_SpawnItemEx("HemNuclearFlare",random(-150,150),random(-150,150),random(0,10),random(0,8),random(0,8),2,random(0,360),SXF_NOCHECKPOSITION|SXF_TRANSFERPOINTERS|SXF_SETMASTER,96)
+		TNT1 A 0 Bright A_SetUserVar("user_lcounter",user_lcounter+1)
+		TNT1 A 0 Bright A_JumpIf(user_lcounter < 17 ,"NuclearFireLoop")
+		TNT1 A 1 Bright
+		Stop
+	}
+}
+
+Actor NuclearMissileShotEx : NuclearMissileShot
+{
+Renderstyle None
+-FOILINVUL
++NOCLIP
++NODAMAGETHRUST
+Speed 20
+Damagetype "Explosion"
+Obituary "%o was burned by in nuclear fire."
+States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 AAAAAAAA 2 A_Explode(2500,1000,true,0,333)
+	Death:
+		TNT1 A 1
+		TNT1 A 1 A_Explode(2500,1000,true,0,166)
+		TNT1 AAA 1 A_CustomMissile("HemNuclearFlare2",0,0,random(0,360),2,random(-90,90))
+		TNT1 A 1
+		Stop
+	}
+}
+
+Actor NuclearMissileShotEx2 : NuclearMissileShot
+{
+Renderstyle None
+Speed 20
+-FOILINVUL
++NOCLIP
++NODAMAGETHRUST
+Damagetype "Explosion"
+Obituary "%o was burned by in nuclear fire."
+States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 AAAAAAAA 2 A_Explode(2500,1000,true,0,333)
+	Death:
+		TNT1 A 1
+		TNT1 A 1 A_Explode(2500,1000,true,0,166)
+		TNT1 A 1
+		Stop
+	}
+}
+
+actor Kazumi_NukeRocket : NuclearMissileShot
+{
+	damage 0
+	speed 3
+	obituary "%o was absolutely rekt and sent into oblivion by %k's nuke!!!"
+	deathsound ""
+	+FORCERADIUSDMG
+	States
+	{
+	Spawn:
+		TNT1 A 0 A_JumpIf(user_flytime >= 110,2) //140.2
+		TNT1 A 0 A_ScaleVelocity(1.1) //1.02
+		TNT1 A 0 A_SetUserVar("user_flytime",user_flytime+1)
+		TNT1 A 0 Bright A_CustomMissile("MissileTrail",Random(-2,2),Random(-2,2)) 
+		TNT1 A 0 Bright A_CustomMissile("ProjectileTrailParticleOrange",Random(-2,2),Random(-2,2)) 
+		NKS1 A 1 Bright A_CustomMissile("PlayerNuclearMissileTrail",0,0,0)
+		loop
+	Death:
+		TNT1 A 0 A_JumpIf(user_flytime >= 110,"BOOM") //140
+		NKS1 A 28 A_PlaySound("kazumi/nuke/WTFBOOM",5,1.0,0,ATTN_NONE)
+		goto Nuke
+	BOOM:
+		TNT1 A 0 A_PlaySound("kazumi/nuke/instanuke",5,1.0,0,ATTN_NONE)
+		goto Nuke
+	Nuke:
+		TNT1 A 0 A_CustomBulletAttack(0,0,1,7000,"BulletPuff",64,CBAF_AIMFACING) //DAAAAAAAAAAAAAMN.
+		//Range is 64 units to do 7k damage to the actor it hits.
+		TNT1 A 0 Bright A_CustomMissile("NuclearMissileExplosion",0,0,0,CMF_AIMDIRECTION|CMF_TRACKOWNER,0)
+		TNT1 A 0 Bright A_GiveToTarget("NuclearShield",1)
+		TNT1 A 0 Bright A_GiveToTarget("VulnerabilityQuiet",1)
+		TNT1 A 0 A_Explode(10000,2048,0)
+		//TNT1 A 0 A_Explode(10000000,1000,0,1)
+		TNT1 A 0 A_SpawnItemEX("DOOKNOOKMsilent",0,0,0,0,0,0,0)
+		stop
+	}
+}
+
+Actor DOOKNOOKMsilent
+{
+ +NoBlockmap
+ +NoGravity
+ +NoInteraction
+ +ForceRadiusDmg
+ DamageType "TouhouNOOK"
+	obituary "%o was absolutely rekt and sent into oblivion by %k's nuke!!!"
+ States
+ {
+  Spawn:
+   TNT1 A 0
+   TNT1 A 0 A_Quake(9, 210, 0, 1048576, "None")
+   TNT1 AAAA 0 A_Explode(1000, 2048, 1)
+   TNT1 A 0 A_SpawnItemEx("MegaNukeFlare", 0, 0, 0, 0, 0, 0, 0, SXF_TRANSFERPOINTERS)
+   TNT1 AAAAA 0 A_SpawnItemEx("MegaNukeSmokeFloor", 0, 0, 0, 0, 0, 0, 0, SXF_CLIENTSIDE)
+   TNT1 A 0 A_SpawnItemEx("MegaNukeFloor", 0, 0, 0, 0, 0, 0, 0, SXF_TRANSFERPOINTERS)
+   TNT1 A 0 A_SpawnItemEx("MegaNukeMushroom", 0, 0, 0, 0, 0, 10, 0, SXF_TRANSFERPOINTERS, 0)
+   TNT1 A 0 A_SpawnItemEx("MegaNukeFlareMushroom", 0, 0, 0, 0, 0, 10, 0, SXF_CLIENTSIDE, 0)
+   TNT1 AA 0 A_SpawnItemEx("MegaNukeSmokeMushroom", 0, 0, 0, 0, 0, 10, 0, SXF_CLIENTSIDE, 0)
+   TNT1 A 0 A_SpawnItemEx("MegaNukePillar", 0, 0, 0, 0, 0, 0, 12, SXF_TRANSFERPOINTERS, 0)
+   TNT1 AA 0 A_SpawnItemEx("MegaNukeSmokePillar", 0, 0, 0, 0, 0, 12, 0, SXF_CLIENTSIDE, 0)
+   Stop
+ }
+}
+
+/*Actor HemNuclearFlare : BaseFireFlare
+{
+-FOILINVUL
++FORCERADIUSDMG
++EXTREMEDEATH
+Species "Player"
+Damagetype "Explosion"
+Obituary "%o was burned by in nuclear fire."
+States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_SetUserVar("user_firedamage",10000)
+		TNT1 A 0 A_Die
+		Goto Death
+	}
+}
+
+Actor HemNuclearFlare : BaseFireFlareNoFX
+{
+Renderstyle None
++DONTSPLASH
++NOGRAVITY
+-FOILINVUL
++FORCERADIUSDMG
++EXTREMEDEATH
+Species "Player"
+Damagetype "Explosion"
+Obituary "%o was burned in radioactive rays."
+States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_SetUserVar("user_firedamage",10000)
+		TNT1 A 0 A_Die
+		Goto Death
+	}
+}
+*/
+
+

@@ -1,0 +1,1056 @@
+ACTOR SacrosanctOverseer2 : SacrosanctOverseer replaces SacrosanctOverseer
+{
+  Health 8000
+  PainChance 15
+  DropItem "BossLifeEssence" 256 25
+  DropItem "BossArmorBonusMax" 256 1
+  DropItem "DemonAmmoBox" 128 200
+  DropItem "SkullOfPower" 128
+  DropItem "DemonicChalice" 128
+  DropItem "PlasmaRepeater" 256
+  DropItem "Demon Tech BFG10K" 256
+  DropItem "ChaosEssence" 256
+  DamageFactor 0.5
+  DamageFactor "Cyber10K", 0.0
+  DamageFactor "Baby15K", 0.0
+  DamageFactor "Legendary", 0.01
+  DamageFactor "LegendaryGuru", 0.01
+  DamageFactor "LegendaryGuruPlayer", 0.01
+  DamageFactor "BFGSplash", 0.1
+  DamageFactor "BFGSpray", 0.1
+  DamageFactor "PDTBFG", 0.1
+  DamageFactor "PDTBFGTracer", 0.1
+  DamageFactor "PlayerDevBall", 0.020
+  DamageFactor "PlayerDevBall2", 0.020
+  DamageFactor "PlayerDTBFGRailgunSlug", 0.020
+  DamageFactor "PlayerDevTracer", 0.020
+  DamageFactor "PlayerNemesisPlasma", 0.1
+  DamageFactor "Railg", 0.5
+  DamageFactor "PyroShot", 0.0
+  DamageFactor "PlayerPyro", 0.0
+  SeeSound "SOverseer/sight"
+  PainSound "SOverseer/pain"
+  DeathSound "SOverseer/death"
+  ActiveSound "SOverseer/active"
+  Obituary "%o was shown that the Sacrosanct Overseer was not to be interfered with."
+  +NOTIMEFREEZE
+  +BRIGHT
+  +SEEINVISIBLE
+  +DONTRIP
+  +CANTSEEK
+  +NOTARGET
+  +NOICEDEATH
+  Tag "\c[n4]Sacrosanct Overseer\c-"
+  var int user_summons;
+  States
+  {
+  Spawn:
+	TNT1 A 0 A_JumpIf(user_script == 1,3)
+	TNT1 A 0 ACS_NamedExecuteAlways("SacrosanctOverseerFire",0)
+	TNT1 A 0 A_SetUserVar("user_script",1)
+	TNT1 A 0 A_Playsound("SOverseer/Loop",7,1,1)
+	AOVR AB 2 A_Look
+	Loop
+  See:
+	TNT1 A 0 A_JumpIf(user_script == 1,3)
+	TNT1 A 0 ACS_NamedExecuteAlways("SacrosanctOverseerFire",0)
+	TNT1 A 0 A_SetUserVar("user_script",1)
+	TNT1 A 0 A_JumpIf(user_music == 1,3)
+	TNT1 A 0 ACS_NamedExecuteAlways("StartMonsterMusic",0,305)
+	TNT1 A 0 A_SetUserVar("user_music",1)
+	TNT1 A 0 A_ChangeFlag("NOPAIN",0)
+	TNT1 A 0 A_UnsetInvulnerable
+	AOVR AB 2 A_Chase
+	TNT1 A 0 A_Jump(50,"Evade","Teleport")	
+	Loop
+  Teleport:
+    AOVR A 1 A_UnSetShootable
+    TNT1 AA 0 A_CustomRailgun(0,0,NONE,NONE,RGF_SILENT|RGF_FULLBRIGHT,0,30,"OverseerRailPuff",frandom(-70,70),frandom(-70,70),random(160,360),0,2.0,0,"OverseerRailParticle2",24)
+	AOVR A 1 A_FadeOut(0.2,0)
+    TNT1 AA 0 A_CustomRailgun(0,0,NONE,NONE,RGF_SILENT|RGF_FULLBRIGHT,0,30,"OverseerRailPuff",frandom(-70,70),frandom(-70,70),random(160,360),0,2.0,0,"OverseerRailParticle2",24)
+	AOVR A 1 A_FadeOut(0.2,0)
+    TNT1 AA 0 A_CustomRailgun(0,0,NONE,NONE,RGF_SILENT|RGF_FULLBRIGHT,0,30,"OverseerRailPuff",frandom(-70,70),frandom(-70,70),random(160,360),0,2.0,0,"OverseerRailParticle2",24)
+	AOVR A 1 A_FadeOut(0.2,0)
+    TNT1 AA 0 A_CustomRailgun(0,0,NONE,NONE,RGF_SILENT|RGF_FULLBRIGHT,0,30,"OverseerRailPuff",frandom(-70,70),frandom(-70,70),random(160,360),0,2.0,0,"OverseerRailParticle2",24)
+	AOVR A 1 A_FadeOut(0.2,0)
+    TNT1 AA 0 A_CustomRailgun(0,0,NONE,NONE,RGF_SILENT|RGF_FULLBRIGHT,0,30,"OverseerRailPuff",frandom(-70,70),frandom(-70,70),random(160,360),0,2.0,0,"OverseerRailParticle2",24)
+	AOVR A 1 A_FadeOut(0.2,0)
+    TNT1 AA 0 A_CustomRailgun(0,0,NONE,NONE,RGF_SILENT|RGF_FULLBRIGHT,0,30,"OverseerRailPuff",frandom(-70,70),frandom(-70,70),random(160,360),0,2.0,0,"OverseerRailParticle2",24)
+	AOVR A 1 A_FadeOut(0.2,0)
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Wander
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Wander
+    TNT1 A 0 A_PlayWeaponSound("boss/teleport")
+    TNT1 AA 0 A_CustomRailgun(0,0,NONE,NONE,RGF_SILENT|RGF_FULLBRIGHT,0,30,"OverseerRailPuff",frandom(-70,70),frandom(-70,70),random(160,360),0,2.0,0,"OverseerRailParticle2",24)
+	AOVR A 1 A_FadeIn(0.2)
+    TNT1 AA 0 A_CustomRailgun(0,0,NONE,NONE,RGF_SILENT|RGF_FULLBRIGHT,0,30,"OverseerRailPuff",frandom(-70,70),frandom(-70,70),random(160,360),0,2.0,0,"OverseerRailParticle2",24)
+	AOVR A 1 A_FadeIn(0.2)
+    TNT1 AA 0 A_CustomRailgun(0,0,NONE,NONE,RGF_SILENT|RGF_FULLBRIGHT,0,30,"OverseerRailPuff",frandom(-70,70),frandom(-70,70),random(160,360),0,2.0,0,"OverseerRailParticle2",24)
+	AOVR A 1 A_FadeIn(0.2)
+    TNT1 AA 0 A_CustomRailgun(0,0,NONE,NONE,RGF_SILENT|RGF_FULLBRIGHT,0,30,"OverseerRailPuff",frandom(-70,70),frandom(-70,70),random(160,360),0,2.0,0,"OverseerRailParticle2",24)
+	AOVR A 1 A_FadeIn(0.2)
+    TNT1 AA 0 A_CustomRailgun(0,0,NONE,NONE,RGF_SILENT|RGF_FULLBRIGHT,0,30,"OverseerRailPuff",frandom(-70,70),frandom(-70,70),random(160,360),0,2.0,0,"OverseerRailParticle2",24)
+	AOVR A 1 A_FadeIn(0.2)
+    TNT1 AA 0 A_CustomRailgun(0,0,NONE,NONE,RGF_SILENT|RGF_FULLBRIGHT,0,30,"OverseerRailPuff",frandom(-70,70),frandom(-70,70),random(160,360),0,2.0,0,"OverseerRailParticle2",24)
+	AOVR A 1 A_FadeIn(0.2)
+    AOVR A 1 A_SetShootable
+    Goto See
+  Evade:
+ 	TNT1 A 0 A_Jump(128,"Evade2")
+	TNT1 A 0 ThrustThing(Angle*256/360+64,20,0,0)
+	AOVR ABABABAB 2 A_Chase
+	TNT1 A 0 A_Stop
+	Goto See
+  Evade2:
+	TNT1 A 0 ThrustThing(Angle*256/360+192,20,0,0)
+	AOVR ABABABAB 2 A_Chase
+	TNT1 A 0 A_Stop
+	Goto See
+  Missile:
+	TNT1 A 0 A_JumpIf(user_summons == 1,2)
+	TNT1 A 0 A_JumpIfHealthLower(4000,"ObserverSummon")
+	TNT1 A 0 A_Jump(128,"BFG9K","BFG10K","DTBFG10K","Railgun","ThunderCannon","GaussAnnihilator")
+	TNT1 A 0 A_Jump(64,"Laser","LightningBalls","GuruCannon","DoomsdayCannon")
+	TNT1 A 0 A_Jump(16,"PainSummon")
+  Normal:
+    TNT1 A 0 A_JumpIfCloser(1500,1)
+	Goto BFG9K
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR A 2 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR A 2 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR A 2 A_FaceTarget
+	TNT1 A 0 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	TNT1 A 0 A_CustomMissile("OverseerPlasma",21,0,frandom(-10,10),CMF_OFFSETPITCH,frandom(-2,2))
+	TNT1 A 0 A_CustomMissile("OverseerPlasma",21,-20,frandom(-10,10),CMF_OFFSETPITCH,frandom(-2,2))
+	AOVR E 2 A_CustomMissile("OverseerPlasma",21,20,frandom(-10,10),CMF_OFFSETPITCH,frandom(-2,2))
+	TNT1 A 0 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	TNT1 A 0 A_CustomMissile("OverseerPlasma",21,0,frandom(-10,10),CMF_OFFSETPITCH,frandom(-2,2))
+	TNT1 A 0 A_CustomMissile("OverseerPlasma",21,-20,frandom(-10,10),CMF_OFFSETPITCH,frandom(-2,2))
+	AOVR F 2 A_CustomMissile("OverseerPlasma",21,20,frandom(-10,10),CMF_OFFSETPITCH,frandom(-2,2))
+	TNT1 A 0 A_Jump(3,"See","BFG9K","BFG10K","DTBFG10K","ThunderCannon","GuruCannon")
+    TNT1 A 0 A_SpidRefire
+	Goto Normal+7
+  BFG9K:
+	TNT1 A 0 A_SetUserVar("user_missile",0)
+	TNT1 A 0 A_JumpIf(user_missile >= 5,"BFG9KEnd")	 
+	TNT1 A 0 A_SetUserVar("user_missile",user_missile+1)
+	TNT1 A 0 A_PlaySound("weapons/bfgf")
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR NN 2 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR NN 2 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR NN 2 A_FaceTarget	
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR NN 2 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR NN 2 A_FaceTarget	
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR NN 2 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR OO 2 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR OO 2 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR O 2 A_CustomMissile("SpiderBFG9500Ball",34)
+	AOVR NNN 2 A_FaceTarget
+	Goto BFG9K+1
+  BFG9KEnd:
+	TNT1 A 0 A_PlaySound("weapons/bfgf")
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR NN 2 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR NN 2 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR NN 2 A_FaceTarget	
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR NN 2 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR NN 2 A_FaceTarget	
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR NN 2 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR OO 2 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR OO 2 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	TNT1 A 0 A_CustomMissile("SpiderBFG9500Ball",34,0,-15)
+	TNT1 A 0 A_CustomMissile("SpiderBFG9500Ball",34,0,015)
+	AOVR O 2 A_CustomMissile("SpiderBFG9500Ball",34)
+	AOVR NNNNNNN 2 A_FaceTarget
+	TNT1 A 0 A_Jump(128,"BFG10K","DTBFG10K","ThunderCannon","GaussAnnihilator","LightningBalls")
+	Goto See
+  BFG10K:
+	TNT1 A 0 A_PlaySound("weapons/charge15k")
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR N 3 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR N 3 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR N 3 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR N 3 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR N 3 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR N 3 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR N 3 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR N 3 A_FaceTarget
+	TNT1 A 0 A_SetUserVar("user_missile",0)
+  BFG10KLoop:
+	TNT1 A 0 A_JumpIf(user_missile >= 20,"BFG10KEnd")	 
+	TNT1 A 0 A_SetUserVar("user_missile",user_missile+1)
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	TNT1 A 0 A_PlaySound("weapons/bfg15kfire")
+	AOVR O 3 A_CustomMissile("DarkDemo10K",42,0,random(-4,4))
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR N 3 A_FaceTarget
+	Loop
+  BFG10KEnd:
+	AOVR N 3 A_PlaySound("weapons/bfg15kcooldown",CHAN_AUTO)
+	AOVR NNNNN 3
+	TNT1 A 0 A_Jump(128,"DTBFG10K","ThunderCannon","GaussAnnihilator")
+	Goto See
+  DTBFG10K:
+	TNT1 A 0 A_SetUserVar("user_missile",0)
+	TNT1 A 0 A_JumpIf(user_missile >= 4,"DTBFG10KEnd")	 
+	TNT1 A 0 A_SetUserVar("user_missile",user_missile+1)
+	TNT1 A 0 A_PlaySound("Cardinal/9k")
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR N 4 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR N 4 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR N 4 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR N 4 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR N 4 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR O 4 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR O 4 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR O 4 A_CustomMissile("OverseerDTBFG10KBall", 34, 0, 0)
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR N 4 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR N 4 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR N 4 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR N 4 A_FaceTarget
+	Goto DTBFG10k+1
+  DTBFG10KEnd:
+	AOVR NNNNNN 3
+	TNT1 A 0 A_Jump(128,"BFG9K","ThunderCannon","GaussAnnihilator","DoomsdayCannon","GuruCannon","LightningBalls")
+	Goto See
+  Railgun:
+	TNT1 A 0 A_PlaySound("weapons/rgcharge")
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR N 4 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR N 4 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR N 4 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR N 4 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR N 4 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR O 4 A_CustomMissile("OverseerRail",34,0,0)
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR N 4 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	TNT1 A 0 A_CustomMissile("OverseerRail",34,0,-8)
+	TNT1 A 0 A_CustomMissile("OverseerRail",34,0,8)
+	AOVR O 4 A_CustomMissile("OverseerRail",34,0,0)
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR N 4 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	TNT1 A 0 A_CustomMissile("OverseerRail",34,0,-16)
+	TNT1 A 0 A_CustomMissile("OverseerRail",34,0,16)
+	TNT1 A 0 A_CustomMissile("OverseerRail",34,0,-8)
+	TNT1 A 0 A_CustomMissile("OverseerRail",34,0,8)
+	AOVR O 4 A_CustomMissile("OverseerRail",34,0,0)
+	Goto See
+  ThunderCannon:
+	TNT1 A 0 A_PlaySound("weapons/rgcharge")
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR N 4 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR N 4 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR N 4 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR N 4 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR N 4 A_FaceTarget
+	TNT1 A 0 A_SetUserVar("user_missile",0)
+  ThunderCannonLoop:
+	TNT1 A 0 A_JumpIf(user_missile >= 4,"ThunderCannonEnd")	 
+	TNT1 A 0 A_SetUserVar("user_missile",user_missile+1)
+	TNT1 A 0 A_PlaySound("ThunderCannon/Fire",1)
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR OOOO 1 A_CustomRailgun(random(2,4)*5,0,NONE,NONE,RGF_SILENT|RGF_NOPIERCING,1,30,"OverseerRailPuff",0,0,0,0,2.0,0,"OverseerRailParticle",-10)
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR OOOO 1 A_CustomRailgun(random(2,4)*5,0,NONE,NONE,RGF_SILENT|RGF_NOPIERCING,1,30,"OverseerRailPuff",0,0,0,0,2.0,0,"OverseerRailParticle",-10)
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR N 4 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR N 4 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR N 4 A_FaceTarget
+	Loop
+  ThunderCannonEnd:
+	AOVR NNNNNN 3
+	TNT1 A 0 A_Jump(128,"BFG10K","GaussAnnihilator","Laser")
+	Goto See
+  GaussAnnihilator:
+	TNT1 A 0 A_PlaySound("GaussAnnihilator/Charge",5,1.0,0,0.3)
+	TNT1 A 0 A_PlaySound("SOverseer/attack",2)
+	TNT1 A 0 A_FaceTarget
+	AOVR NNNNN 4 A_SpawnItemEx("OverseerBrainSFX")
+	TNT1 A 0 A_FaceTarget
+	AOVR NNNNN 4 A_SpawnItemEx("OverseerBrainSFX")
+	TNT1 A 0 A_FaceTarget
+	AOVR NNNNN 4 A_SpawnItemEx("OverseerBrainSFX")
+	TNT1 A 0 A_SetUserVar("user_missile",0)
+  GaussAnnihilatorLoop:
+	TNT1 A 0 A_JumpIf(user_missile >= 3,"GaussAnnihilatorEnd")	 
+	TNT1 A 0 A_SetUserVar("user_missile",user_missile+1)
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR OOOO 1 A_CustomRailgun(0,0,NONE,NONE,RGF_SILENT|RGF_NOPIERCING,1,0,"OverseerRailPuff",0,0,0,0,2.0,0,"OverseerRailParticle",-10)
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR OOOO 1 A_CustomRailgun(0,0,NONE,NONE,RGF_SILENT|RGF_NOPIERCING,1,0,"OverseerRailPuff",0,0,0,0,2.0,0,"OverseerRailParticle",-10)
+	TNT1 A 0 A_PlaySound("ThunderCannon/Fire",1)
+	TNT1 A 0 A_CustomMissile("SOverseerGaussAnnihilator",34)
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR OOOO 1 A_CustomRailgun(0,0,NONE,NONE,RGF_SILENT|RGF_NOPIERCING,1,100,"OverseerRailPuff",0,0,0,0,3.0,0,"OverseerRailParticle2",-10)
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR OOOO 1 A_CustomRailgun(0,0,NONE,NONE,RGF_SILENT|RGF_NOPIERCING,1,0,"OverseerRailPuff",0,0,0,0,2.0,0,"OverseerRailParticle",-10)
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR N 4 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR N 4 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR N 4 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR N 4 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR N 4 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR N 4 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR N 4 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR N 4 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR N 4 A_FaceTarget
+	Loop
+  GaussAnnihilatorEnd:
+	AOVR NNNNNN 3
+	TNT1 A 0 A_Jump(128,"DTBFG10K","DoomsdayCannon","Laser","GuruCannon","LightningBalls")
+	Goto See
+  Laser:
+	TNT1 A 0 A_SetUserVar("user_missile",0)
+    TNT1 A 0 A_Playsound("MasterSparkCharge")
+	TNT1 A 0 A_ChangeFlag("NOPAIN",1)
+	TNT1 A 0 A_JumpIf(user_missile >= 30,"LaserFire")	 
+	TNT1 A 0 A_SetUserVar("user_missile",user_missile+1)
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR N 4 A_FaceTarget
+	Goto Laser+3
+  LaserFire:
+	TNT1 A 0 A_SetUserVar("user_missile",0)
+	TNT1 A 0 A_Playsound("MasterSpark",0,1,0,ATTN_NONE)
+	TNT1 A 0 A_JumpIf(user_missile >= 90,"LaserEnd")	 
+	TNT1 A 0 A_SetUserVar("user_missile",user_missile+1)
+	TNT1 A 0 A_FaceTarget
+	AOVR O 1 A_CustomMissile("SpiderMasterLaserGreen", 34, 0, 0)
+	Goto LaserFire+2
+  LaserEnd:
+	AOVR NNNNNN 3
+	TNT1 A 0 A_Jump(128,"DTBFG10K","DoomsdayCannon","BFG9K","GuruCannon","LightningBalls")
+	Goto See
+  DoomsdayCannon:
+	AOVR AAAA 3
+	TNT1 A 0 A_ChangeFlag("NOPAIN",1)
+	TNT1 A 0 A_FaceTarget
+	TNT1 A 0 A_PlaySound("DoomsdayCannon/Fire",5,1.0,0,0.3)
+	AOVR P 20 A_PlaySound("SOverseer/attack",2)
+	TNT1 A 0 A_SetUserVar("user_missile",0)
+  DoomsdayCannonChargeLoop:
+	TNT1 A 0 A_JumpIf(user_missile >= 11,"DoomsdayCannonFire")	 
+	TNT1 A 0 A_SetUserVar("user_missile",user_missile+1)
+	TNT1 A 0 A_FaceTarget
+	TNT1 A 0 A_SpawnItemEx("GreenLightning2",frandom(-5,5),frandom(-30,30),frandom(100,110))
+	AOVR N 4 A_SpawnItemEx("OverseerBrainSFX")
+	Loop
+  DoomsdayCannonFire:
+	TNT1 A 0 A_FaceTarget
+	TNT1 A 0 A_CustomMissile("SacrosanctDoomsdayFaky1",34)
+	TNT1 A 0 A_CustomMissile("SacrosanctDoomsdayFaky2",34)
+	TNT1 A 0 A_CustomMissile("SacrosanctDoomsdayFakeFade",34)
+	TNT1 A 0 A_CustomMissile("SacrosanctDoomsdayCannon",34)
+	AOVR OOOONNNNNNNNPPPP 3 A_SpawnItemEx("OverseerBrainSFX")
+	TNT1 A 0 A_ChangeFlag("NOPAIN",0)
+	TNT1 A 0 A_UnSetInvulnerable
+	Goto See
+  LightningBalls:
+	AOVR AAAA 3
+	TNT1 A 0 A_ChangeFlag("NOPAIN",1)
+	TNT1 A 0 A_SetInvulnerable
+	TNT1 A 0 Radius_Quake(10,80,0,24,0)
+	TNT1 A 0 A_SetUserVar("user_missile",0)
+	TNT1 A 0 A_Stop
+	TNT1 A 0 A_FaceTarget
+	AOVR P 20 A_PlaySound("SOverseer/attack20")
+	TNT1 A 0 A_Stop
+	TNT1 A 0 A_FaceTarget
+	AOVR QQQQ 4 A_SpawnItemEx("OverseerBrainSFX")
+	TNT1 A 0 A_FaceTarget
+	AOVR QQQQ 4 A_SpawnItemEx("OverseerBrainSFX")
+  LightningBallChargeLoop:
+	TNT1 A 0 A_JumpIf(user_missile >= 10,"LightningBallLoop")	 
+	TNT1 A 0 A_SetUserVar("user_missile",user_missile+1)
+	TNT1 A 0 A_FaceTarget
+	TNT1 A 0 A_SpawnItemEx("GreenLightning2",frandom(-5,5),frandom(-30,30),frandom(100,110))
+	TNT1 A 0 A_SpawnItem("ChaosSuperLightningFX",40,100,0,0)
+	AOVR R 4 A_SpawnItemEx("OverseerBrainSFX")
+	Loop
+  LightningBallLoop:
+	TNT1 A 0 A_SetUserVar("user_missile",0)
+	TNT1 A 0 A_Stop
+	TNT1 A 0 A_JumpIf(user_missile >= 20,"LightningBallEnd")	 
+	TNT1 A 0 A_SetUserVar("user_missile",user_missile+1)
+	TNT1 A 0 A_FaceTarget
+	TNT1 A 0 A_SpawnItem("ChaosSuperLightningFX",40,100,0,0)
+	AOVR R 4 A_CustomMissile("SacroOverseerLightningBall",100,0,random(-15,15),CMF_OFFSETPITCH,random(-5,5))
+	Goto LightningBallLoop+1
+  LightningBallEnd:
+	AOVR RRRQQQQPPPP 3 A_SpawnItemEx("OverseerBrainSFX")
+	TNT1 A 0 A_ChangeFlag("NOPAIN",0)
+	TNT1 A 0 A_UnSetInvulnerable
+	Goto See
+  GuruCannon:
+	TNT1 A 0 A_SetUserVar("user_missile",0)
+	TNT1 A 0 A_PlaySound("EnragedDTech/Charge",0,1,0,ATTN_NONE)
+	TNT1 A 0 A_ChangeFlag("NOPAIN",1)
+	TNT1 A 0 A_JumpIf(user_missile >= 8,"GuruCannonFire")	 
+	TNT1 A 0 A_SetUserVar("user_missile",user_missile+1)
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR N 4 A_FaceTarget
+	Goto GuruCannon+3
+  GuruCannonFire:
+	TNT1 A 0 A_SetUserVar("user_missile",0)
+	TNT1 A 0 A_JumpIf(user_missile >= 4,"See")	 
+	TNT1 A 0 A_SetUserVar("user_missile",user_missile+1)
+	TNT1 A 0 A_FaceTarget
+    TNT1 A 0 A_PlaySound("EnragedDTech/Fire",0,1,0,ATTN_NONE)
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR O 4 A_CustomMissile("SacrosanctGuruBall",34)
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR O 4 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR N 4 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR N 4 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR N 4 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR N 4 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR N 4 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("SacroOverseerStrafe",1)
+	AOVR N 4 A_FaceTarget
+	Goto GuruCannonFire+1
+  Portal:
+	TNT1 A 0 A_SetUserVar("user_summons",1)
+	TNT1 A 0 A_FaceTarget
+	TNT1 A 0 A_SetInvulnerable
+	TNT1 A 0 A_SpawnItemEx("ThunderSpawner", Random(64,-64), Random(64,-64), Random(48,96), 0, 0, 0, Random(0,359))
+	ARCR H 152 Bright A_SpawnItemEx("PortalParticleSpawner", 64, 0, 120)
+	ARCR HH 15 Bright A_SpawnItemEx("ThunderSpawner", Random(96,-96), Random(96,-96), Random(48,96), 0, 0, 0, Random(0,359))
+	ARCR H 45 Bright A_SpawnItemEx("GatewaytoHellSpawner", 128, 0, 120)
+	TNT1 A 0 A_SpawnItemEx("ThunderSpawner", Random(128,-128), Random(128,-128), Random(48,96), 0, 0, 0, Random(0,359))
+	ARCR H 52 Bright A_SpawnItemEx("PortalParticleSpawner", 64, 0, 120)
+	ARCR HHHH 25 Bright A_SpawnItemEx("ThunderSpawner", Random(144,-144), Random(144,-144), Random(48,96), 0, 0, 0, Random(0,359))
+	ARCR H 47 Bright A_SpawnItemEx("PortalParticleSpawner2", 64, 0, 120)
+	ARCR HHHHH 20 Bright A_SpawnItemEx("ThunderSpawner", Random(192,-192), Random(192,-192), Random(48,96), 0, 0, 0, Random(0,359))
+	ARCR H 30 Bright A_SpawnItemEx("PortalParticleSpawner3", 64, 0, 120)
+	ARCR HHHH 15 Bright A_SpawnItemEx("ThunderSpawner", Random(192,192), Random(192,-192), Random(48,96), 0, 0, 0, Random(0,359))
+	ARCR H 47 Bright A_SpawnItemEx("PortalParticleSpawner2", 64, 0, 120)
+	ARCR HHHH 25 Bright A_SpawnItemEx("ThunderSpawner", Random(144,-144), Random(144,-144), Random(48,96), 0, 0, 0, Random(0,359))
+	ARCR H 52 Bright A_SpawnItemEx("PortalParticleSpawner", 64, 0, 120)
+	TNT1 A 0 A_SpawnItemEx("ThunderSpawner", Random(128,-128), Random(128,-128), Random(48,96), 0, 0, 0, Random(0,359))
+	TNT1 A 0 A_UnsetInvulnerable
+	TNT1 A 0 A_Jump(5,"BFG")
+	Goto See
+  Pain:
+	AOVR A 3
+	AOVR A 3 A_Pain	
+	TNT1 A 0 A_Jump(32,"PainSummon")
+	TNT1 A 0 A_Jump(128,"Missile")
+	Goto See
+  PainSummon:
+	AOVR PP 3
+	TNT1 A 0  A_PlaySound("SOverseer/attack20")
+	AOVR PPQQ 3
+	TNT1 A 0 A_Stop
+	TNT1 A 0 A_SetInvulnerable
+	TNT1 A 0 Radius_Quake(10,80,0,24,0)
+	TNT1 A 0 HealThing(400)
+	TNT1 A 0 A_SetUserVar("user_missile",0)
+	AOVR Q 3
+	TNT1 A 0 A_PlaySound("brain/spit",7)
+  SummonLoop:
+	TNT1 A 0 A_Stop
+	TNT1 A 0 A_JumpIf(user_missile >= 5,"SummonEnd")	 
+	TNT1 A 0 A_SetUserVar("user_missile",user_missile+1)
+	AOVR RRRRRRRRRRRRRRRRRRRRR 3 A_SpawnItemEx("OverseerSummonSmokeSpawner",128)
+	TNT1 A 0 A_SpawnItemEx("BabyOverseerMinion",128,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+	Loop
+  SummonEnd:
+	AOVR PPPPPP 3 A_SpawnItemEx("OverseerSummonSmokeSpawner",128)
+	TNT1 A 0 A_UnSetInvulnerable
+	Goto See
+  ObserverSummon:
+	TNT1 A 0 A_SetUserVar("user_summons",1)
+	TNT1 A 0 A_ChangeFlag("NOPAIN",1)
+	AOVR PP 3
+	TNT1 A 0  A_PlaySound("SOverseer/attack20")
+	AOVR PPQQ 3
+	TNT1 A 0 A_Stop
+	TNT1 A 0 A_SetInvulnerable
+	TNT1 A 0 Radius_Quake(10,80,0,24,0)
+	TNT1 A 0 HealThing(750)
+	TNT1 A 0 A_SetUserVar("user_missile",0)
+	AOVR Q 3 A_SpawnItemEx("OverseerBrainSFX")
+	TNT1 A 0 A_PlaySound("brain/spit",7)
+	TNT1 A 0 A_Spawnitemex("SacrosanctPortal",128)
+  ObserverSummonLoop:
+	TNT1 A 0 A_Stop
+	TNT1 A 0 A_JumpIf(user_missile >= 2,"ObserverSummonEnd")	 
+	TNT1 A 0 A_SetUserVar("user_missile",user_missile+1)
+	AOVR RRRRRRRRRRRRRRRRRRRRR 3 A_SpawnItemEx("OverseerBrainSFX")
+	TNT1 A 0 A_SpawnItemEx("SacrosanctObserver",128,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+	Loop
+  ObserverSummonEnd:
+	AOVR PPPPPP 3 A_SpawnItemEx("OverseerBrainSFX")
+	TNT1 A 0 A_ChangeFlag("NOPAIN",0)
+	TNT1 A 0 A_UnSetInvulnerable
+	Goto See	
+  Death:
+	TNT1 A 0
+	TNT1 A 0 A_Stopsound(7)
+	AOVR H 20 A_NoBlocking
+	TNT1 A 0 A_Scream
+	TNT1 AA 0 A_SpawnItemEx("GreenGibbedGenerator",Random(10,-10),Random(10,-10),Random(20,60),0,0,0,0,128,0)	
+	TNT1 AAA 0 A_CustomMissile("BigGreenBloodCloud", random(10,80), 0, random(0,360), 2, random(0,360))	
+	AOVR IIIII 2 A_CustomMissile("Kaboom5", random(10,60), random(30,-30), random(0,360), 2, random(0,360))
+	TNT1 AA 0 A_SpawnItemEx("GreenGibbedGenerator",Random(10,-10),Random(10,-10),Random(20,60),0,0,0,0,128,0)	
+	TNT1 AAA 0 A_CustomMissile("BigGreenBloodCloud", random(10,80), 0, random(0,360), 2, random(0,360))	
+	AOVR IIIII 2 A_CustomMissile("Kaboom5", random(10,60), random(30,-30), random(0,360), 2, random(0,360))
+	TNT1 AA 0 A_SpawnItemEx("GreenGibbedGenerator",Random(10,-10),Random(10,-10),Random(20,60),0,0,0,0,128,0)	
+	TNT1 AAA 0 A_CustomMissile("BigGreenBloodCloud", random(10,80), 0, random(0,360), 2, random(0,360))	
+	AOVR JJJJJ 2 A_CustomMissile("Kaboom5", random(10,60), random(30,-30), random(0,360), 2, random(0,360))
+	TNT1 AA 0 A_SpawnItemEx("GreenGibbedGenerator",Random(10,-10),Random(10,-10),Random(20,60),0,0,0,0,128,0)	
+	TNT1 AAA 0 A_CustomMissile("BigGreenBloodCloud", random(10,80), 0, random(0,360), 2, random(0,360))	
+	TNT1 A 0 A_SpawnItemEx("SacrosanctDeathBall")
+	TNT1 A 0 A_PlaySound("DoomsdayCannon/Hiss",6)
+	AOVR JJJJJ 2 A_CustomMissile("Kaboom5", random(10,60), random(30,-30), random(0,360), 2, random(0,360))
+	TNT1 AA 0 A_SpawnItemEx("GreenGibbedGenerator",Random(10,-10),Random(10,-10),Random(20,60),0,0,0,0,128,0)	
+	TNT1 AAA 0 A_CustomMissile("BigGreenBloodCloud", random(10,80), 0, random(0,360), 2, random(0,360))
+	AOVR KKKKK 2 A_CustomMissile("Kaboom5", random(10,60), random(30,-30), random(0,360), 2, random(0,360))
+	TNT1 AA 0 A_SpawnItemEx("GreenGibbedGenerator",Random(10,-10),Random(10,-10),Random(20,60),0,0,0,0,128,0)	
+	TNT1 AAA 0 A_CustomMissile("BigGreenBloodCloud", random(10,80), 0, random(0,360), 2, random(0,360))
+	AOVR KKKKK 2 A_CustomMissile("Kaboom5", random(10,60), random(30,-30), random(0,360), 2, random(0,360))
+	TNT1 AA 0 A_SpawnItemEx("GreenGibbedGenerator",Random(10,-10),Random(10,-10),Random(20,60),0,0,0,0,128,0)	
+	TNT1 AAA 0 A_CustomMissile("BigGreenBloodCloud", random(10,80), 0, random(0,360), 2, random(0,360))
+	AOVR LLLLL 2 A_CustomMissile("Kaboom5", random(10,60), random(30,-30), random(0,360), 2, random(0,360))
+	TNT1 A 0 A_PlaySound("DoomsdayCannon/Boom",1)
+	TNT1 A 0 A_SpawnItemEx("SacrosanctDoomsdayExploder",0,0,0,0,0,0,0,SXF_TRANSFERPOINTERS,0)
+	TNT1 AA 0 A_SpawnItemEx("GreenGibbedGenerator",Random(10,-10),Random(10,-10),Random(20,60),0,0,0,0,128,0)	
+	TNT1 AAA 0 A_CustomMissile("BigGreenBloodCloud", random(10,80), 0, random(0,360), 2, random(0,360))
+	AOVR LLLLL 2 A_CustomMissile("Kaboom5", random(10,60), random(30,-30), random(0,360), 2, random(0,360))
+	TNT1 AAAA 0 A_SpawnItemEx("GreenGibbedGenerator",Random(10,-10),Random(10,-10),Random(20,60),0,0,0,0,128,0)
+	TNT1 AAAAAA 0 A_CustomMissile("BigGreenBloodCloud", random(10,80), 0, random(0,360), 2, random(0,360))
+	TNT1 AAAAAAAA 0 A_CustomMissile("SmokeFX3", random(10,60), random(30,-30), random(0,360), 2, random(0,360))	
+	AOVR M 5
+	TNT1 A -1 A_KillMaster
+	Stop	
+	}
+}
+
+Actor GreenLightning2 : RedLightning
+{
++NOTIMEFREEZE
+States
+{
+  Spawn:
+	TNT1 A 0 NoDelay A_Jump(128,2)
+	TNT1 A 0 A_SetScale(-2.0,2.0)
+	DV07 ABCBCAB 1 Bright
+	Stop
+    }     
+}
+
+ACTOR OverseerRailParticle : BFG9500Trail
+{
+Scale 0.08
+Alpha 0.95
++NOTIMEFREEZE
+States
+{
+Spawn:
+	SPKG A 2 Bright
+	Stop
+	}
+}
+
+ACTOR OverseerRailParticle2 : OverseerRailParticle
+{
+Scale 0.35
+Alpha 1.0
+}
+
+Actor OverseerRailPuff : BulletPuff
+{
++THRUSPECIES
++MTHRUSPECIES
++PUFFGETSOWNER
++DONTHARMSPECIES
++BLOODLESSIMPACT
+Species "Masterminds"
+DamageType "DarkDemoEx"
+}
+
+ACTOR SOverseerGaussAnnihilator : FastProjectile
+{
+  Radius 2
+  Height 4
+  Speed 400
+  DeathSound "GaussAnnihilator/Fire"
+  +FORCERADIUSDMG
+  +NOTIMEFREEZE
+  Damagetype "DarkDemoEx"
+  States
+  {
+  Spawn:
+    TNT1 A 1
+    Loop
+  Death:
+	TNT1 A 0 A_PlaySound("GaussAnnihilator/Fire",1)
+	TNT1 AAAAAAAAAAA 0 A_SpawnItemEx("SacrosanctGuruSphereSmoke",random(126,-126),random(126,-126),random(66,-66),frandom(-2,2),frandom(-2,2),frandom(0,7),random(0,359),SXF_SETMASTER,0)
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_SpawnItemEx("GreenLightningSpark",random(-50,50),random(-50,50),random(0,10),frandom(-3,3),frandom(-3,3),frandom(4,12))
+	TNT1 A 0 A_Explode(100,300)
+	TNT1 A 0 Radius_Quake(10,35,0,12,0)
+	TNT1 AA 4 A_Explode(260,300)
+	TNT1 A 30
+    Stop
+	}
+}
+
+ACTOR SacrosanctDoomsdayCannon : FastProjectile
+{
+  Radius 12
+  Height 8
+  Speed 100
+  Damage 0
+  PROJECTILE
+  +EXPLODEONWATER
+  +NOTIMEFREEZE
+  +FORCERADIUSDMG
+  Renderstyle Add
+  Scale 2.5
+  Alpha 0.9
+  DamageType "DarkDemoEx"
+  States
+  {
+  Spawn:
+	GAS3 ABCD 2 bright A_Explode(100,128,0)
+	Loop
+  Death:
+	GAS3 AB 2 Bright
+	TNT1 A 0 A_PlaySound("DoomsdayCannon/Hiss",6)
+	GAS3 CD 2 Bright
+	GAS3 ABCDAB 2 bright A_FadeOut(0.1)
+	TNT1 A 0 A_PlaySound("DoomsdayCannon/Boom",1)
+	TNT1 A 0 A_Explode(2000,1000)
+	TNT1 A 1 A_SpawnItemEx("SacrosanctDoomsdayExploder",0,0,0,0,0,0,0,SXF_TRANSFERPOINTERS,0)
+	Stop
+	}
+}
+
+ACTOR SacrosanctDoomsdayExploder
+{
+  +NOGRAVITY
+  +NOINTERACTION
+  +NOTIMEFREEZE
+  Renderstyle Add
+  ReactionTime 60
+  States
+  {
+  Spawn:
+	TNT1 A 0
+	TNT1 AA 0 A_SpawnItemEx("SacrosanctGuruSphereSmoke",random(-700,700),random(-700,700),15+random(-150,150),frandom(-2,2),frandom(-2,2),frandom(-2,2),0,SXF_TRANSFERPOINTERS,0)
+	TNT1 A 2 A_SpawnItemEx("SacrosanctDoomsdayExplosion",random(-700,700),random(-700,700),15+random(-150,150),frandom(-20,20),frandom(-20,20),2+random(-2,2),0,SXF_TRANSFERPOINTERS,0)
+	TNT1 A 0 A_Countdown
+	Loop
+  Death:
+	TNT1 A 1
+	Stop
+	}
+}
+
+ACTOR SacrosanctDoomsdayExplosion
+{
+  +NOGRAVITY
+  +NOINTERACTION
+  +NOTIMEFREEZE
+  Renderstyle Add
+  Scale 2
+  States
+  {
+  Spawn:
+	GAE2 A 0
+	GAE2 A 0 A_PlaySound("DoomsdayCannon/Explode")
+	GAE2 ACEGIKMO 2 Bright A_SpawnItemEx("SacrosanctDoomsdayExplosionFade",random(-65,65),random(-65,65),random(-65,65),0,0,2+random(-1,0),0,SXF_TRANSFERPOINTERS,0)
+	GAE2 QSU 2
+	Stop
+	}
+}
+
+ACTOR SacrosanctDoomsdayExplosionFade
+{
+  +NOGRAVITY
+  +NOINTERACTION
+  +FORCERADIUSDMG
+  +NOTIMEFREEZE
+  DamageType "DarkDemoEx"
+  Renderstyle Add
+  Alpha 0.75
+  Scale 2
+  States
+  {
+  Spawn:
+	GAE2 A 0
+	GAE2 A 0 A_Explode(150,192,0)
+	GAE2 ABCDEFGHIJKLMNO 1 Bright
+	GAE2 PQRSTU 2
+	Stop
+	}
+}
+
+ACTOR SacrosanctDoomsdayFakeFade : FastProjectile
+{
+  Radius 12
+  Height 8
+  PROJECTILE
+  Renderstyle Add
+  +EXPLODEONWATER
+  +CLIENTSIDEONLY
+  +NOTIMEFREEZE
+  Scale 1
+  Speed 100
+  States
+  {
+  Spawn:
+	TNT1 A 0 A_SpawnItemEx("SacrosanctDoomsdayTrail2",random(-4,4),random(-4,4),random(-4,4),0,0,0,0,SXF_CLIENTSIDE,0)
+	TNT1 A 1 A_SpawnItemEx("SacrosanctDoomsdayTrail",random(-4,4),random(-4,4),random(-4,4),0,0,0,0,SXF_CLIENTSIDE,0)
+	Loop
+  Death:
+	TNT1 A 1
+	Stop
+	}
+}
+
+ACTOR SacrosanctDoomsdayFaky1 : SacrosanctDoomsdayFakeFade
+{
+  Scale 3
+  Alpha 0.3
+  States
+  {
+  Spawn:
+	GAS3 ABCD 3 Bright
+	Loop
+  Death:
+	GAS3 ABCD 3 Bright A_FadeOut(0.025)
+	Wait
+	}
+}
+
+ACTOR SacrosanctDoomsdayFaky2 : SacrosanctDoomsdayFakeFade
+{
+  Scale 4
+  Alpha 0.25
+  States
+  {
+  Spawn:
+	GAS3 DCBA 4 Bright
+	Loop
+  Death:
+	GAS3 DCBA 4 Bright A_FadeOut(0.015)
+	Wait
+	}
+}
+
+ACTOR SacrosanctDoomsdayTrail : SacrosanctDoomsdayFakeFade
+{
+  Speed 0
+  Scale 3
+  Alpha 0.15
+  States
+  {
+  Spawn:
+	BFS3 AB 1 Bright A_FadeOut(0.02)
+	Loop
+	}
+}
+
+ACTOR SacrosanctDoomsdayTrail2 : SacrosanctDoomsdayFakeFade
+{
+  Speed 0
+  Scale 1.5
+  Alpha 0.35
+  States
+  {
+  Spawn:
+	BFE3 ABCBA 1 Bright
+	GAS2 ABCDEF 1 Bright
+	Stop
+	}
+}
+
+ACTOR SacrosanctGuruBall : GuruBall
+{
+  Speed 40
+  DamageType "DarkDemoEx"
+  Damage 125
+  Projectile
+  Renderstyle Add
+  +FORCERADIUSDMG
+  +RIPPER
+  +BLOODLESSIMPACT
+  +DONTBLAST
+  +THRUSPECIES
+  +SKYEXPLODE
+  Scale 0.08
+  States
+  {
+  Spawn:
+	TNT1 A 0 NoDelay A_PlaySound("Weapons/GuruFly",5,1.0,1)
+	TNT1 A 0 A_Explode(600,64,0,1)
+	TNT1 A 0 A_SpawnItemEx("SacrosanctGuruChunkSpark",random(28,-28),random(28,-28),random(28,-28),0,0,0,0,0,0)
+	TNT1 A 0 A_SpawnItemEx("SacrosanctGuruTrail",-3,0,0,0,0,0,0,0,0)
+	SOVB A 1 Bright
+	loop
+  Death:
+	TNT1 A 1 A_SpawnItemEx("SacrosanctDeathBall")
+	Stop
+  }
+}
+
+ACTOR SacrosanctGuruTrail : GuruEffectInheritance
+{
+	Alpha 0.65
+	Renderstyle Add
+	+CLIENTSIDEONLY
+	Scale 0.25
+	States
+	{
+	Spawn:
+      TNT1 A 0
+      TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+    Fade:
+	  TNT1 A 0 A_SetScale(ScaleX -0.01, ScaleY -0.01)
+	  SOVB A 1 Bright A_FadeOut(0.1)
+	  Loop
+    Toaster:
+      TNT1 A 0
+      Stop
+	}
+}
+
+Actor SacrosanctDeathBall : CyberGuruBall
+{
+DamageType "DarkDemoEx"
+Obituary "%o payed the ultimate price for his greed."
+States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_PlaySound("Weapons/GuruBlast3",6)
+		TNT1 A 0 Radius_Quake(15,20,0,20,0)
+		TNT1 A 0 A_Explode(1024,500,0,1)
+		TNT1 A 0 A_SpawnItemEx("SacrosanctGuruStruckGlowX",0,0,10,0,0,0,0,SXF_CLIENTSIDE,0)
+		TNT1 A 0 A_SpawnItemEx("SacrosanctGuruStruckGlowY",0,0,10,0,0,0,0,SXF_CLIENTSIDE,0)
+		TNT1 AAAAAAAAAAA 0 A_SpawnItemEx("SacrosanctGuruSphereSmoke",random(126,-126),random(126,-126),random(66,-66),0.00001*random(100000,-100000),0.00001*random(100000,-100000),0.00001*random(100000,-100000),random(0,359),SXF_SETMASTER,0)
+		TNT1 AAAAAAAAAAA 0 A_SpawnItemEx("SacrosanctGuruChunkSpark",random(126,-126),random(126,-126),random(66,-66),0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,0)
+		TNT1 AAAAAAAAAAAAAAAAAAA 2 A_SpawnItemEx("SacrosanctGuruChunkSpark",random(126,-126),random(126,-126),random(66,-66),0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,0)
+		Stop
+		}
+}
+
+Actor SacrosanctGuruStruckGlowX : GuruStruckGlowX 
+{ 
+Scale 0.1 
+States
+	{
+	Spawn:
+		TNT1 A 0 Bright
+		TNT1 A 0 Bright A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+		Goto Fade
+	Fade:
+		TNT1 A 0 Bright A_SetScale(ScaleX +0.1, ScaleY +0.025)
+		GBUM A 1 Bright A_FadeOut(0.01,1)
+		Loop
+	}
+}
+
+Actor SacrosanctGuruStruckGlowY : GuruStruckGlowY 
+{
+Scale 0.1 
+States
+	{
+	Spawn:
+		TNT1 A 0 Bright
+		TNT1 A 0 Bright A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+		Goto Fade
+	Fade:
+		TNT1 A 0 Bright A_SetScale(ScaleX +0.025, ScaleY +0.1)
+		GBUM A 1 Bright A_FadeOut(0.01,1)
+		Loop
+	}
+}
+
+Actor SacrosanctGuruSpraySpark : GuruSpraySpark 
+{ 
+Scale 0.15 
+States
+	{
+	Spawn:
+		TNT1 A 0 Bright
+		TNT1 A 0 Bright A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+		GRXL ABCDEF 2 Bright A_FadeOut(0.1,1)
+		Stop
+	}
+}
+
+Actor SacrosanctGuruSphereSmoke : CyberGuruSphereSmoke 
+{ 
+Damagetype "DarkDemoEx"
+Scale 1.4 
+States
+	{
+	Spawn1:
+		TNT1 A 0 A_SetScale(ScaleX -0.002, ScaleY -0.002)
+		TNT1 A 0 A_JumpIf(Alpha<0.3,2)
+		TNT1 A 0 A_Explode(10,164)
+		GHD1 A 4 Bright A_FadeOut(0.0065,1)
+		Loop
+	Spawn2:
+		TNT1 A 0 A_SetScale(ScaleX -0.002, ScaleY -0.002)
+		TNT1 A 0 A_JumpIf(Alpha<0.3,2)
+		TNT1 A 0 A_Explode(10,164)
+		GHD2 A 4 Bright A_FadeOut(0.0065,1)
+		Loop
+	Spawn3:
+		TNT1 A 0 A_SetScale(ScaleX -0.002, ScaleY -0.002)
+		TNT1 A 0 A_JumpIf(Alpha<0.3,2)
+		TNT1 A 0 A_Explode(10,164)
+		GHD3 A 4 Bright A_FadeOut(0.0065,1)
+		Loop
+	Spawn4:
+		TNT1 A 0 A_SetScale(ScaleX -0.002, ScaleY -0.002)
+		TNT1 A 0 A_JumpIf(Alpha<0.3,2)
+		TNT1 A 0 A_Explode(10,164)
+		GHD1 A 4 Bright A_FadeOut(0.0065,1)
+		Loop
+	Spawn5:
+		TNT1 A 0 A_SetScale(ScaleX -0.002, ScaleY -0.002)
+		TNT1 A 0 A_JumpIf(Alpha<0.3,2)
+		TNT1 A 0 A_Explode(10,164)
+		GHD2 A 4 Bright A_FadeOut(0.0065,1)
+		Loop
+	Spawn6:
+		TNT1 A 0 A_SetScale(ScaleX -0.002, ScaleY -0.002)
+		TNT1 A 0 A_JumpIf(Alpha<0.3,2)
+		TNT1 A 0 A_Explode(10,164)
+		GHD3 A 4 Bright A_FadeOut(0.0065,1)
+		Loop
+	}
+}
+
+ACTOR SacrosanctGuruChunkSpark : GuruChunkSpark 
+{ 
+Scale 0.75 
+States
+	{
+	Spawn:
+		TNT1 A 0 Bright
+		TNT1 A 0 Bright A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+		GRXL ABCDEF 2 Bright A_FadeOut(0.1,1)
+		Stop
+	}
+}
+
+Actor SacrosanctPortal
+{
+  +NOINTERACTION
+  +CLIENTSIDEONLY
+  Scale 0.4
+  Renderstyle Add
+  var int user_loop;
+  States
+  {
+  Spawn:
+	PRTG ABCDEFGHIJKLMNOP 1 A_SetScale(ScaleX+0.05)
+  SpawnLoop:
+	TNT1 A 0 A_JumpIf(user_loop >= 8,"Death")
+	TNT1 A 0 A_SetUserVar("user_loop",user_loop+1)
+	PRTG ABCDEFGHIJKLMNOP 1 A_SpawnItemEx("OverSeerFire2",random(-4,4),random(-4,4),random(0,4),random(-4,4),random(-4,4),random(3,10),random(0,359),SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,0)
+	Loop
+  Death:
+	PRTG ABCDEFGHIJKLMNOP 1 A_SetScale(ScaleX-0.05)
+	Stop
+	}
+}
+
+//ok Complex, I've had enough of your infighting bullshittery
+//time to commit a sin against GZDoom
+ACTOR SpiderBFG9500Ball : BFG9500Ball
+{ //honestly I still doubt this works, Zandronum is so janky
+FastSpeed 30
+-THRUSPECIES
+States
+{
+Death:
+	TNT1 A 0
+	TNT1 A 0 A_SpawnItemEx("BFGShockwave2", 0, 0, 0, 0, 0, 0, 0, 128)
+    TNT1 AAAAAA 0 A_CustomMissile("Kaboom11", 0, 0, random(0,360), 2, random(0,360))
+    BFE3 AB 8 Bright A_SpawnItemEx("GreenParticleSpawner", 0, 0, 0, 0, 0, 0, 0, 128)
+    BFE3 C 8 Bright A_BFGSpray("SpiderCustomSpray")
+    BFE3 DEF 8 Bright
+    Stop    
+    }
+}
+
+ACTOR SpiderCustomSpray : CustomSpray
+{
+Damagetype "DarkDemoEx"
+States
+{
+Spawn:
+   TNT1 A 0
+   BFE2 A 6 Bright A_SpawnItemEx("GreenParticleSpawnerDT", 0, 0, 0, 0, 0, 0, 0, 128)
+   BFE2 BCD 6 Bright 
+   Stop
+   }
+}

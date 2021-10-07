@@ -1,0 +1,277 @@
+ACTOR VexedNemesisSoul : NemesisSoul 28024
+{
+  Health 1500
+  Mass 100
+  Damage 0
+  Speed 30
+  PainChance 120
+  BloodColor "Black"
+  Renderstyle Translucent
+  Alpha 0.7
+  Scale 1.1
+  DamageFactor 0.5
+  DamageFactor "Explosion", 0.0001
+  DamageFactor "PlayerDTRG", 0.0001
+  DamageFactor "DTRailgun", 0.0001
+  DamageFactor "PDTPuff", 0.0001
+  DamageFactor "RailG", 0.0001
+  DamageFactor "PyroShot", 0.0001
+  DamageFactor "PlayerPyro", 0.0001
+  DamageFactor "PlayerBHole", 0.025
+  DamageFactor "PlayerDBFG", 0.015
+  DamageFactor "PlayerDBFG2", 0.015
+  +NOCLIP
+  +VISIBILITYPULSE
+  +NOPAIN
+  +BRIGHT
+  SeeSound "VexedSoul/Sight"
+  ActiveSound "VexedSoul/Active"
+  PainSound "VexedSoul/Pain"
+  DeathSound "VexedSoul/Death"
+  AttackSound " "
+  Obituary "%o was haunted by the Vexed Nemesis Soul."
+  Tag "\c[w2]Vexed Nemesis Soul\c-"
+  var int user_missile;
+  var int user_disappear;
+  var int user_possession;
+  States
+  {
+  Spawn:
+	TNT1 A 0 A_JumpIfInventory("MarineKilled",1,"Possession")
+    VSOL ABCD 4 A_Look
+    Loop
+  See:
+    TNT1 A 0 A_JumpIf(user_music == 1,3)
+    TNT1 A 0 ACS_NamedExecuteAlways("StartMonsterMusic",0,746)
+	TNT1 A 0 A_SetUserVar("user_music",1)
+	TNT1 A 0 A_SetTranslucent(0.8)
+	TNT1 A 0 A_ChangeFlag("NOPAIN",1)
+	TNT1 A 0 A_ChangeFlag("NOCLIP",1)
+    VSOL AABBCCDD 2 A_Chase
+	TNT1 A 0 A_Jump(68,"Teleport")
+    Loop	
+  Teleport:
+    VSOL A 1
+	VSOL AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Wander
+    VSOL A 1 A_PlayWeaponSound("boss/teleport")
+    Goto See
+  Disappear:
+	TNT1 A 0 A_ChangeFlag("NOCLIP",0)
+	TNT1 A 0 A_PlaySound("boss/teleport")
+	TNT1 A 0 A_SetUserVar(user_disappear,random(0,30))
+    TNT1 A 0 A_JumpIf(user_disappear >= 80,"Appear")
+	TNT1 A 0 A_SetUserVar("user_disappear",user_ragewait+1)
+	TNT1 AAA 0 A_Wander
+	TNT1 A 1 A_Wander
+	Goto Disappear+2
+  Appear:
+	TNT1 A 0 A_ChangeFlag("NOCLIP",1)
+	TNT1 A 0 A_ChangeFlag("NOPAIN",1)
+	VSOL G 10 A_PlaySound("boss/teleport")
+	Goto See
+  Missile:
+    TNT1 A 0 A_Jump(48,"BigBall")
+  Normal:
+	TNT1 A 0 A_ChangeFlag("NOPAIN",0)
+	TNT1 A 0 A_Playsound("VexedSoul/Attack2",2)
+	VSOL A 4
+	TNT1 A 0 A_SetUserVar("user_missile",0)
+  NormalLoop:
+	TNT1 A 0 A_SkullAttack(30)
+	TNT1 A 0 A_JumpIfCloser(100,"NormalAttack")
+	VSOL A 1 A_FaceTarget
+	Loop
+  NormalAttack:
+	TNT1 A 0 A_RadiusGive("VexedSoulBlindness",120,RGF_PLAYERS|RGF_CORPSES)
+	TNT1 A 0 A_CustomBulletAttack(0,0,1,random(80,140),"BulletPuff",140,CBAF_NORANDOM)
+	VSOL FG 5
+	TNT1 A 0 A_JumpIfInventory("MarineKilled",1,"Possession")
+	Goto Disappear
+  BigBall:
+	TNT1 A 0 A_Playsound("VexedSoul/Attack1",2)
+	TNT1 A 0 A_FaceTarget
+	VSOL EE 4 A_SpawnItemEx("NemesisSoulFlameSpawner")
+	TNT1 A 0 A_FaceTarget
+	VSOL EE 4 A_SpawnItemEx("NemesisSoulFlameSpawner")
+	TNT1 A 0 A_FaceTarget
+	VSOL FF 4 A_SpawnItemEx("NemesisSoulFlameSpawner")
+	TNT1 A 0 A_FaceTarget
+	VSOL G 10 A_CustomMissile("NemesisSoulBigBall",20,0,0)
+	Goto See
+  Possession:
+	TNT1 A 0 A_GiveInventory("MarineKilled",1,AAPTR_MASTER)
+	TNT1 A 0 A_TakeInventory("MarineKilled")
+	TNT1 A 0 A_SetUserVar(user_possession,1)
+	TNT1 A 0 A_Die
+	Goto Death
+  PossessionDeath:
+	VSOL H 4 A_ChangeFlag("NOCLIP",0)
+	VSOL I 4 A_Scream
+	VSOL J 4
+	TNT1 A 0 A_UnSetShootable
+	VSOL K 4 A_UnSetSolid
+	TNT1 AA 0 A_SpawnItemEx("NemesisWhiteParticleSpawner")
+	TNT1 AAAA 0 A_CustomMissile("SmokeFX2",0,0,random(0,360),2,random(0,360))
+	VSOL LMNOPQ 4
+	VSOL R 5 A_SpawnItemEx("VexedZombieSummoner",0,0,0,0,0,0,0,SXF_TELEFRAG,0)
+	VSOL R 1 A_FadeOut(1.0)
+	Wait
+  Pain:
+    VSOL H 2 Bright A_Jump(64,"Teleport")
+    VSOL H 2 Bright A_Pain
+    Goto See
+  XDeath:
+  Death:
+    VSOL I 2 Bright A_JumpIf(user_possession == 1,"PossessionDeath")
+	TNT1 A 0 A_Scream
+    VSOL IIIIJJJJKKKKLLLL 2 Bright A_SpawnItemEx("NemesisSoulFlameSpawner")
+    VSOL L 3 Bright A_NoBlocking
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_SpawnItem("NemesisZombieItemRandomizer")
+	TNT1 A 0 A_SpawnItem("NemesisZombieSuperItemRandomizer")
+	TNT1 A 0 A_StopSound(2)
+	TNT1 A 0 A_SpawnItem("MiniNemesisDeathBall")
+    VSOL MMNNOOPPQQRR 3 Bright A_SpawnItemEx("NemesisWhiteParticleSpawner", 0, 0, 0, 0, 0, 0, 0, 128) 
+	TNT1 A 100
+	TNT1 A 0 A_JumpIfInTargetInventory("NemesisFragmentToken",1,3)
+	TNT1 A 0 A_JumpIf(ACS_NamedExecuteWithResult("NemesisFragment") == 0,2)
+	TNT1 A 0 A_SpawnItemEx("NemesisFragmentSpawner",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,192)
+	TNT1 A 1
+	Stop
+	}
+}
+
+Actor VexedZombieSummoner : LegendaryDoomguySummoner
+{
+  States
+  {
+  Spawn:
+	TNT1 A 175 Bright
+  Death:
+	TNT1 A 0 Bright
+	TNT1 A 0 A_CustomMissile("NemesisPentaLine1",0,0,-72,2)
+    TNT1 A 0 A_CustomMissile("NemesisPentaLine1",0,0,-144,2)
+    TNT1 A 0 A_CustomMissile("NemesisPentaLine1",0,0,-216,2)
+    TNT1 A 0 A_CustomMissile("NemesisPentaLine1",0,0,-288,2)
+    TNT1 A 0 A_CustomMissile("NemesisPentaLine1",0,0,0,2)
+	TNT1 A 0 A_SpawnItemEx("NemesisLightning")
+	TNT1 A 1 A_SpawnItemEx("TrueNemesisHellionSmokeSpawner")
+	TNT1 A 5 A_SpawnItemEx("TrueNemesisHellionSmokeSpawner")
+	TNT1 A 5 A_SpawnItemEx("TrueNemesisHellionSmokeSpawner")
+	TNT1 A 5 A_SpawnItemEx("TrueNemesisHellionSmokeSpawner")
+	TNT1 A 0 A_SpawnItemEx ("VexedZombieSummonEffect")
+	TNT1 A 0 A_Jump(100,"AssaultCaptain")
+	VNZO LLLLLLLLL 5 A_SpawnItemEx("TrueNemesisHellionSmokeSpawner")
+	TNT1 A 0 A_SpawnItemEx ("VexedZombieSummonEffect")
+	VNZO KKKKKKKKK 5 A_SpawnItemEx("TrueNemesisHellionSmokeSpawner")
+	TNT1 A 0 A_SpawnItemEx("VexedZombieSummonEffect")
+	VNZO JJJJJJJJJ 5 A_SpawnItemEx("TrueNemesisHellionSmokeSpawner")
+	TNT1 A 0 A_SpawnItemEx("VexedZombieSummonEffect")
+	VNZO IIIIIIIII 5 A_SpawnItemEx("TrueNemesisHellionSmokeSpawner")
+	TNT1 A 0 A_SpawnItemEx("VexedZombieSummonEffect")
+	VNZO HHHHHHHHH 5 A_SpawnItemEx("TrueNemesisHellionSmokeSpawner")
+	TNT1 A 0 A_SpawnItemEx("VexedZombieSummonEffect")
+	TNT1 A 0 A_SpawnItemEx("NemesisLightning")
+	VNZO GGGGGGGGGGGG 2 Bright A_SpawnItemEx("VexedNemesisFlameSpawner")
+	TNT1 A 1 A_SpawnItemEx("VexedNemesisZombie",0,0,1,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TELEFRAG)
+	Stop
+  AssaultCaptain:
+	VNAS LLLLLLLLL 5 A_SpawnItemEx("TrueNemesisHellionSmokeSpawner")
+	TNT1 A 0 A_SpawnItemEx ("VexedZombieSummonEffect")
+	VNAS KKKKKKKKK 5 A_SpawnItemEx("TrueNemesisHellionSmokeSpawner")
+	TNT1 A 0 A_SpawnItemEx("VexedZombieSummonEffect")
+	VNAS JJJJJJJJJ 5 A_SpawnItemEx("TrueNemesisHellionSmokeSpawner")
+	TNT1 A 0 A_SpawnItemEx("VexedZombieSummonEffect")
+	VNAS IIIIIIIII 5 A_SpawnItemEx("TrueNemesisHellionSmokeSpawner")
+	TNT1 A 0 A_SpawnItemEx("VexedZombieSummonEffect")
+	VNAS HHHHHHHHH 5 A_SpawnItemEx("TrueNemesisHellionSmokeSpawner")
+	TNT1 A 0 A_SpawnItemEx("VexedZombieSummonEffect")
+	TNT1 A 0 A_SpawnItemEx("NemesisLightning")
+	VNAS GGGGGGGGGGGG 2 Bright A_SpawnItemEx("VexedNemesisFlameSpawner")
+	TNT1 A 1 A_SpawnItemEx("VexedNemesisAssaultCaptain",0,0,1,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TELEFRAG)
+	Stop
+	}
+}
+
+ACTOR VexedZombieSummonEffect : LegDoomguySummonEffect
+{
+  States
+  {
+  Spawn:
+	TNT1 A 0 Bright
+	NSPR FEDCBA 3 Bright
+	Stop
+	}
+}
+
+ACTOR NemesisPentaLine1
+{
+  Radius 0
+  Height 32
+  Speed 200
+  Alpha 0.85
+  Projectile
+  +FLOORHUGGER
+  +NOCLIP
+  SeeSound "weapons/diasht"
+  States
+  {
+  Spawn:
+	TNT1 A 1
+	TNT1 A 0 A_CustomMissile("NemesisPentaLine2",0,0,-198,2)
+	TNT1 A 0 A_CustomMissile("NemesisPentaLine2",0,0,198,2)
+	Stop
+	}
+}
+
+ACTOR NemesisPentaLine2 : NemesisPentaLine1
+{
+  Speed 16
+  States
+  {
+  Spawn:
+	TNT1 AAAAAAAAAAAAAAAA 1 A_SpawnItem("NemesisPentaFire",0,0)
+	Stop
+	}
+}
+
+ACTOR NemesisPentaFire
+{
+  Radius 0
+  Height 32
+  Speed 0
+  DamageType "Legendary"
+  RenderStyle Add
+  Alpha 0.85
+  ReactionTime 5
+  Projectile
+  +FLOORHUGGER
+  +DONTSPLASH
+  +FORCERADIUSDMG
+  -NOGRAVITY
+  States
+  {
+  Spawn:
+	WFCF A 1 Bright A_Explode(1,32,1)
+	WFCF A 2 Bright A_PlaySound("weapons/onfire")
+	WFCF BCDEFGHIJKLM 3 Bright A_Explode(1,32,1)
+	WFCF A 0 Bright A_CountDown
+	Loop
+  Death:
+	WFCF NOP 3 Bright A_Explode(2,32,1)
+	Stop
+	}
+}
+
+ACTOR VexedSoulBlindness : CustomInventory
+{  
+  +INVENTORY.ALWAYSPICKUP
+  +INVENTORY.AUTOACTIVATE
+  inventory.maxamount 0
+  States
+  {
+  Pickup:
+	TNT1 A 1 A_SetBlend("Black",1.0,80)
+	TNT1 A 0 A_PlaySound("BFlan/Slash",7,1.0,0,0.5)
+	Stop
+	}
+}

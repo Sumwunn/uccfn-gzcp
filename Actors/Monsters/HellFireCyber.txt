@@ -1,0 +1,3637 @@
+ACTOR HellFireCyberdemon : Cyberdemon
+{
+  BloodColor "ff 50 00"
+  +BRIGHT
+  MaxStepHeight 32
+  MaxDropOffHeight 32
+  +DONTHARMSPECIES
+  +MISSILEMORE
+  +FLOORCLIP
+  +FireResist
+  +NORADIUSDMG
+  +NOEXTREMEDEATH
+  +NOICEDEATH
+  +BOSS
+  +NOTIMEFREEZE
+  +MISSILEEVENMORE
+  +CANTSEEK
+  +TELESTOMP
+  +NOFEAR
+  +DONTSPLASH
+  +LOOKALLAROUND
+  +BOSSDEATH
+  +NOTELEFRAG
+  +DONTGIB
+  +DONTMORPH
+  +QUICKTORETALIATE
+  +NoDropOff
+  +DONTRIP
+  SeeSound "HfCyber/See"
+  PainSound "HFCyber/Pain"
+  ActiveSound "HFCyber/Active"
+  DeathSound "HFCyb/Laugh"
+  Health 17000
+  Scale 1.1
+  Mass 0x7FFFFFFF
+  Radius 40
+  Height 100
+  Speed 23
+  Obituary "The HellFire Cyberdemon converted %o's head into another one of his trophies, now it is a decoration in his home."
+  PainChance 8
+  Species "Cybers"
+  DamageFactor "PlayerFireSword", 0.0
+  DamageFactor "PlayerDTRG", 0.0001
+  DamageFactor "DTRailgun", 0.0001
+  DamageFactor "PDTPuff", 0.0001
+  DamageFactor "RailG", 0.0001
+  DamageFactor "PlayerBHole", 0.25
+  DamageFactor "PDTBFG", 0.03
+  DamageFactor "PDTBFGTracer", 0.03
+  DamageFactor "Cyber10K", 0.0
+  DamageFactor "Legendary", 0.0
+  DamageFactor "LegendaryPlayer", 0.0
+  DamageFactor "LegendaryGuru", 0.0
+  DamageFactor "LegendaryGuruPlayer", 0.0
+  DamageFactor "LegendaryPlayer", 0.0
+  DamageFactor "BFGSplash", 0.0
+  DamageFactor "BFGSpray", 0.0
+  DamageFactor "PlayerDevBall", 0.020
+  DamageFactor "PlayerDevBall2", 0.020
+  DamageFactor "PlayerDTBFGRailgunSlug", 0.0
+  DamageFactor "PlayerDevTracer", 0.0
+  DamageFactor "UltimateLegendary", 0.0
+  DamageFactor "Extreme", 0.0
+  DamageFactor "PyroShot", 0.0
+  DamageFactor "PlayerPyro", 0.0
+  DamageFactor "PDTPuff", 0.0
+  DamageFactor "FreezerBurn", 0.0
+  DamageFactor "SuperWeapon", 0.0
+  DamageFactor "Fire", 0.0
+  DamageFactor "Crush", 0.0
+  DamageFactor "Suicide", 0.0
+  DamageFactor "Telefrag", 0.0
+  DamageFactor "Massacre", 0.0
+  DamageFactor "Ice", 0.0
+  // no infight 4 u
+  DamageFactor "DemolisherEx", 0.0
+  DamageFactor "FlamingBatshitBurglers", 0.0
+  DamageFactor "DarkDemoEx", 0.0
+  DamageFactor "CerChainguns", 0.0
+  DamageFactor "CerEnergyBall", 0.0
+  DamageFactor "LegMind", 0.0
+  DamageFactor "BeheComet", 0.0
+  DamageFactor "NobleCOmet", 0.0
+  DamageFactor "CacoComet", 0.0
+  DamageFactor "CadaverRocket", 0.0
+  DamageFactor "HellComet", 0.0
+  DamageFactor "Legendary1", 0.0
+  DamageFactor "T3rm", 0.0
+  DamageFactor "Terminator", 0.0
+  DamageFactor "", 0.0
+  DamageFactor "Ice", 0.0
+  DamageFactor "Moloch", 0.0
+  DamageFactor "AbyssalSatyr", 0.0
+  DamageFactor "SatanGuard", 0.0
+  DamageFactor "Hell", 0.0
+  DamageFactor "C0mm4nder", 0.0
+  DamageFactor "UpBFGSplash", 0.3
+  DamageFactor "Baby15K", 0.0
+  DamageFactor "RST", 0.0
+  MinMissileChance 50
+  DamageFactor 0.3
+  
+  PainChance "BFG9500Ball", 256
+  PainChance "PlayerDevBall", 100
+  PainChance "BFG10K", 100
+  PainChance "PDTBFG", 100
+  PainChance "Legendary", 100 // 100
+  PainChance "LegendaryPlayer", 100 // 100
+  PainChance "LegendaryGuru", 256
+  PainChance "LegendaryGuruPlayer", 256
+  PainChance "PlayerDBFG2", 256
+  PainChance "PlayerDBFG210K", 256
+  PainChance "PlayerDBFG10K2", 256
+  PainChance "DBFG210K", 256
+  PainChance "DBFG2Splash", 256
+  PainChance "DBFG2", 256
+  PainChance "DBFG", 256
+  PainChance "PlayerDBFG", 256
+  PainChance "DBFG10K2", 256
+  DamageFactor "Melee", 0.0
+
+  DamageFactor "DBFG10K", 0.5
+  DamageFactor "PlayerDBFG10K", 0.5
+  DamageFactor "PlayerDBFG2", 0.5
+  DamageFactor "PlayerDBFG210K", 0.5
+  DamageFactor "PlayerDBFG", 0.5
+  DamageFactor "DBFG", 0.5
+  DamageFactor "DBFG2", 0.0
+  DamageFactor "DBFG10K2", 0.0
+  DamageFactor "DBFGSplash2", 0.0
+  var int user_music;
+  var int user_hellfiredevastation;
+  var int user_painrage;
+  var int user_script;
+  var int user_pain;
+  var int user_servants;
+  var int user_invasion;
+  var int user_missile;
+  var int user_soulstorm;
+  Tag "\c[z4]Hellfire \c[v9]Cyberdemon\c-"
+  DamageFactor "Normal", 0.9
+  DamageFactor "PlayerNemesisPlasma", 0.2
+  DamageFactor "Explosion", 0.1
+  States
+  {
+  Spawn:
+    TNT1 A 0 A_JumpIf(user_script == 1,3)
+	TNT1 A 0 ACS_NamedExecuteAlways("HFCDFireSpawner",0)
+	TNT1 A 0 A_SetUserVar("user_script",1)
+    HFCY A 10 Bright A_Look
+	HFCY A 10 Bright A_Look
+	HFCY Z 10 Bright A_Look
+	HFCY Z 10 Bright A_Look
+	TNT1 A 0 A_AlertMonsters(0,AMF_EMITFROMTARGET)
+    Loop
+  See:
+    TNT1 A 0 A_JumpIf(user_script == 1,3)
+	TNT1 A 0 ACS_NamedExecuteAlways("HFCDFireSpawner",0)
+	TNT1 A 0 A_SetUserVar("user_script",1)
+    TNT1 A 0 A_SetTranslucent(1)
+    TNT1 A 0 A_UnSetInvulnerable
+    TNT1 A 0 A_JumpIf(user_music == 1,4)
+    TNT1 A 0 ACS_NamedExecuteAlways("StartMonsterMusic",0,666)
+    TNT1 A 0 ACS_ExecuteAlways(667)
+	TNT1 A 0 A_SetUserVar("user_music",1)
+    HFCY A 3 Bright A_Hoof
+    HFCY ABBCC 3 Bright A_Chase
+    HFCY D 3 Bright A_Metal
+    HFCY D 3 Bright A_Chase
+	TNT1 A 0 A_Jump(100,"Rush","Teleport")
+    Loop
+  Rush:
+    TNT1 A 0 A_SetTranslucent(1)
+    TNT1 A 0 A_Hoof
+	HFCY A 2 Bright A_Chase
+	TNT1 A 0 A_SpawnItemEx("HellFireCyberGhostA",0,0,0,0,0,0,0,128)
+	HFCY A 2 Bright A_Chase
+	TNT1 A 0 A_SpawnItemEx("HellFireCyberGhostA",0,0,0,0,0,0,0,128)
+	HFCY A 2 Bright A_Chase
+	TNT1 A 0 A_SpawnItemEx("HellFireCyberGhostB",0,0,0,0,0,0,0,128)
+	HFCY B 2 Bright A_Chase
+	TNT1 A 0 A_SpawnItemEx("HellFireCyberGhostB",0,0,0,0,0,0,0,128)
+	HFCY C 2 Bright A_Chase
+	TNT1 A 0 A_SpawnItemEx("HellFireCyberGhostC",0,0,0,0,0,0,0,128)
+	HFCY C 2 Bright A_Chase
+	TNT1 A 0 A_Metal
+	TNT1 A 0 A_SpawnItemEx("HellFireCyberGhostC",0,0,0,0,0,0,0,128)
+	HFCY D 2 Bright A_Chase
+	TNT1 A 0 A_SpawnItemEx("HellFireCyberGhostD",0,0,0,0,0,0,0,128)
+	HFCY D 2 Bright A_Chase
+	TNT1 A 0 A_SpawnItemEx("HellFireCyberGhostD",0,0,0,0,0,0,0,128)
+	TNT1 A 0 HealThing(1)
+	TNT1 A 0 A_Jump(75,"See","HFTeleport")	
+	goto see
+HFTeleport:
+    TNT1 A 0 A_UnSetShootable
+    TNT1 AAAAAAAAAAAA 0 A_SpawnItemEx("HFireSpawner",random(-64,64),random(-64,64),random(0,64),0,0,0,0,32)
+    HFCY EEEEEEEEEEE 1 Bright A_FadeOut(0.1,0)
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Wander
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Wander
+    TNT1 A 1 A_PlayWeaponSound("boss/teleport")
+    TNT1 AAAAAAAAAAAA 0 A_SpawnItemEx("HFireSpawner",random(-64,64),random(-64,64),random(0,64),0,0,0,0,32)
+	HFCY EEEEEEEEEEE 1 Bright A_FadeIn(0.1)
+    TNT1 A 0 A_FaceTarget
+    TNT1 A 0 A_SetShootable
+	TNT1 A 0 A_SetTranslucent(1)
+	TNT1 A 0 HealThing(2)
+	Goto see
+Teleport:
+    TNT1 A 0
+	TNT1 A 0 A_SetInvulnerable
+	TNT1 A 0 A_ChangeFlag("NODAMAGE",1)
+    TNT1 A 0 A_UnSetShootable
+    TNT1 AAAAAAAAAAAA 0 A_SpawnItemEx("HFFireSpawned2",random(-64,64),random(-64,64),random(0,64),0,0,0,0,32)
+    HFCY GGGGGGGGGGG 1 Bright A_FadeOut(0.1,0)
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Wander
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Wander
+    TNT1 A 1 A_PlayWeaponSound("boss/teleport")
+    TNT1 AAAAAAAAAAAA 0 A_SpawnItemEx("HFFireSpawned2",random(-64,64),random(-64,64),random(0,64),0,0,0,0,32)
+    TNT1 A 0 A_FaceTarget
+    TNT1 A 0 A_Recoil(-100)
+    HFCY GGGGGGGGGGG 1 Bright A_FadeIn(0.1)
+    TNT1 A 0 A_SetShootable
+	TNT1 A 0 A_UnSetInvulnerable
+	TNT1 A 0 A_ChangeFlag("NODAMAGE",0)
+	TNT1 A 0 HealThing(2)
+    Goto see
+Idle:
+	TNT1 A 0 A_SetTranslucent(1)
+	HFCY AA 3 A_Wander
+	TNT1 A 0 A_Look
+	HFCY BB 3 A_Wander
+	TNT1 A 0 A_Look
+	HFCY CC 3 A_Wander
+	TNT1 A 0 A_Look
+	HFCY DD 3 A_Wander
+	TNT1 A 0 A_Look
+	TNT1 A 0 HealThing(20)
+	Loop
+  Missile:
+    TNT1 A 0 A_SetTranslucent(1)
+    TNT1 A 0 A_JumpIfCloser(200, "Stomp")
+	TNT1 A 0 A_JumpIfCloser(450, "DTShotgun")
+    TNT1 A 0 A_Jump(130,"Seekers","FloorStomp","SeekerTracers","RandomTrap","Railgun","HFGauss","FuelRockets","FireBalls","HF10K","FlameRockets","FireBallsCombo")
+	TNT1 A 0 A_Jump(90,"PyroBombs","PyroShot","UndeadWave","SoulsStorm")
+	TNT1 A 0 A_Jump(50,"Burnnn","HellishAmbient","Army")
+	TNT1 A 0 A_Jump(45,"Invasion","TheCall")
+	TNT1 A 0 A_Jump(35,"Servants","HellfireCombo")
+	TNT1 A 0 A_Jump(20,"HellfireDevastation")
+Rockets:
+	TNT1 A 0 A_SetUserVar("user_missile",0)
+RocketsLoop:
+	TNT1 A 0 A_JumpIf(user_missile >= 5,"RocketsEnd")	 
+	TNT1 A 0 A_SetUserVar("user_missile",user_missile+1)
+    HFCY E 1 A_FaceTarget
+    HFCY F 1 Bright A_CustomMissile ("HFCyberRocket",56,-26,random(-6,6))
+    HFCY E 1 A_FaceTarget
+    HFCY F 1 Bright A_CustomMissile ("HFCyberRocket",56,-26,random(-6,6))
+    HFCY E 1 A_FaceTarget
+    HFCY F 1 Bright A_CustomMissile ("HFCyberRocket",56,-26,random(-6,6))
+    HFCY E 1 A_FaceTarget
+    HFCY F 1 Bright A_CustomMissile ("HFCyberRocket",56,-26,random(-6,6))
+    HFCY E 1 A_FaceTarget
+    HFCY F 1 Bright A_CustomMissile ("HFCyberRocket",56,-26,random(-6,6))
+    HFCY E 1 A_FaceTarget
+    HFCY F 4 Bright A_CustomMissile ("HFCyberRocket",56,-26,random(-6,6))
+    Loop
+RocketsEnd:
+    TNT1 A 0 A_Jump(128,"FuelRockets","Seekers","FloorStomp","SeekerTracers","RandomTrap","HFGauss","HF10K","Railgun","FireBalls","FlameRockets","FireBallsCombo","UndeadWave","PyroShot")
+	Goto FuelRockets
+FlameRockets:
+    HFCY E 3 A_FaceTarget
+    HFCY F 4 Bright A_CustomMissile ("HFCyberFlameRocket",56,-26,random(-6,6))
+    HFCY E 3 A_FaceTarget
+    HFCY F 4 Bright A_CustomMissile ("HFCyberFlameRocket",56,-26,random(-6,6))
+    HFCY E 3 A_FaceTarget
+    HFCY F 4 Bright A_CustomMissile ("HFCyberFlameRocket",56,-26,random(-6,6))
+    HFCY E 3 A_FaceTarget
+    HFCY F 4 Bright A_CustomMissile ("HFCyberFlameRocket",56,-26,random(-6,6))
+    HFCY E 3 A_FaceTarget
+    HFCY F 4 Bright A_CustomMissile ("HFCyberFlameRocket",56,-26,random(-6,6))
+    HFCY E 3 A_FaceTarget
+    HFCY F 4 Bright A_CustomMissile ("HFCyberFlameRocket",56,-26,random(-6,6))
+	HFCY E 3 A_FaceTarget
+    HFCY F 4 Bright A_CustomMissile ("HFCyberFlameRocket",56,-26,random(-6,6))
+    HFCY E 3 A_FaceTarget
+    HFCY F 4 Bright A_CustomMissile ("HFCyberFlameRocket",56,-26,random(-6,6))
+    HFCY E 3 A_FaceTarget
+    HFCY F 4 Bright A_CustomMissile ("HFCyberFlameRocket",56,-26,random(-6,6))
+    HFCY E 3 A_FaceTarget
+    HFCY F 4 Bright A_CustomMissile ("HFCyberFlameRocket",56,-26,random(-6,6))
+	TNT1 A 0 A_Jump(90,"PyroShot","Burnnn","UndeadWave")
+	Goto See
+DTShotgun:
+	HFCY E 4 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItemEx("DTShellCasing",26,26,58,Random(2, 6),0,Random(1, 3),Random(80,90),128)
+	TNT1 AAAAAAAA 0 Bright A_CustomMissile("RedDemonTechTracer",56,-26,Random(6,-6),0)
+	TNT1 A 0 Bright A_PlaySoundEx("Weapons/ErasusFire","Weapon")
+	HFCY F 2 Bright A_CustomBulletAttack(20,18,8,Random(10,20)*6,"HFCyberDTShotgunPuff",0,CBAF_NORANDOM)
+	HFCY E 2 Bright A_FaceTarget
+	TNT1 A 0 A_PlaySound("Weapons/ErasusPump",6)
+	TNT1 A 0 Bright A_CPosRefire
+	TNT1 A 0 A_Jump(20,"BurstShot")
+	TNT1 A 0 A_JumpIfCloser(450, "DTShotgun")
+	Goto RocketsEnd
+BurstShot:
+    HFCY E 4 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItemEx("DTShellCasing",26,26,58,Random(2, 6),0,Random(1, 3),Random(80,90),128)
+	TNT1 A 0 Bright A_PlaySoundEx("Weapons/ErasusFire","Weapon")
+	TNT1 A 0 A_PlaySound("Weapons/ErasusAmbient",5)
+    TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("HFCyberRedDemonTechProjectile",56,-26,random(-20,20))
+	TNT1 A 0 A_PlaySound("Weapons/ErasusPump",6)
+	HFCY E 15 Bright A_FaceTarget
+	Goto RocketsEnd
+AntiAerial: //in case some pepega mobs annoys him
+    TNT1 A 0 A_SetTranslucent(1)
+    TNT1 A 0 A_Jump(256,"SpecialBurn","Rockets","Seekers","HFGauss","HF10K","Railgun","FireBalls","FuelRockets","FlameRockets","FireBallsCombo","Burnnn")
+	Goto FuelRockets
+PyroBombs:
+	TNT1 A 0 A_SetUserVar("user_missile",0)
+BombsLoop:
+	TNT1 A 0 A_JumpIf(user_missile >= 5,"BombEnd")	 
+	TNT1 A 0 A_SetUserVar("user_missile",user_missile+1)
+    HFCY E 2 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItemEx("BombPreparationFX5",40,-26,56)
+	HFCY E 2 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItemEx("BombPreparationFX5",40,-26,56)
+	HFCY E 2 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItemEx("BombPreparationFX4",40,-26,56)
+	HFCY E 2 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItemEx("BombPreparationFX4",40,-26,56)
+	HFCY E 2 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItemEx("BombPreparationFX3",40,-26,56)
+	HFCY E 2 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItemEx("BombPreparationFX3",40,-26,56)
+	HFCY E 2 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItemEx("BombPreparationFX2",40,-26,56)
+	HFCY E 2 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItemEx("BombPreparationFX2",40,-26,56)
+	HFCY E 2 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItemEx("BombPreparationFX",40,-26,56)
+	HFCY E 2 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItemEx("BombPreparationFX",40,-26,56)
+    HFCY F 6 Bright A_CustomMissile("PyroBomb",53,-26,0,0,0)
+    Loop
+BombEnd:
+    TNT1 A 0 A_Jump(128,"PyroShot","HellfireCombo")
+	Goto see
+SpecialBurn:
+    TNT1 A 0 A_SetUserVar("user_missile",0)
+    HFCY A 0 Bright A_PlaySoundEx("HFCyb/laugh","Voice")
+    TNT1 A 0 A_SetInvulnerable
+	TNT1 A 0 A_ChangeFlag(NODAMAGE,1)
+	HFCY EEE 15 Bright A_FaceTarget 
+SpecialBurnLoop:
+    TNT1 A 0 A_JumpIf(user_missile >= 30,"SpecialBurnEnd")	 
+	TNT1 A 0 A_SetUserVar("user_missile",user_missile+1)
+    HFCY E 2 Bright A_VileAttack
+	HFCY E 0 Bright A_VileTarget("FuelExplosionSpawner")
+	HFCY E 2 Bright A_VileAttack(0,500,100,269)
+	HFCY E 0 Bright A_VileTarget("FuelExplosionSpawner")
+	HFCY E 2 Bright A_VileAttack(0,500,100,269)
+	HFCY E 0 Bright A_VileTarget("FuelExplosionSpawner")
+	HFCY E 2 Bright A_VileAttack(0,500,100,269)
+	HFCY E 0 Bright A_VileTarget("FuelExplosionSpawner")
+	HFCY E 1 Bright A_VileAttack(0,500,100,269)
+	HFCY E 0 Bright A_VileTarget("FuelExplosionSpawner")
+	HFCY E 1 Bright A_VileAttack(0,500,100,269)
+	HFCY E 0 Bright A_VileTarget("FuelExplosionSpawner")
+	HFCY E 1 Bright A_VileAttack(0,500,100,269)
+	HFCY E 0 Bright A_VileTarget("FuelExplosionSpawner")
+	HFCY E 1 Bright A_VileAttack(0,500,100,269)
+	HFCY E 0 Bright A_VileTarget("FuelExplosionSpawner")
+	loop
+SpecialBurnEnd:
+	TNT1 A 0 A_ChangeFlag(NODAMAGE,0)
+   TNT1 A 0 A_UnSetInvulnerable
+   Goto See
+Stomp:
+    TNT1 A 0 A_CheckFlag("Float","AntiAerial",AAPTR_TARGET)
+	TNT1 A 0 A_CheckFlag("lookallaround","SpecialBurn",AAPTR_TARGET)
+	TNT1 A 0 A_SetInvulnerable
+    HFCY G 3 A_FaceTarget
+	TNT1 A 0 A_Recoil(-50)
+	HFCS A 5 A_FaceTarget		
+	TNT1 A 0 Radius_Quake(10,8,0,24,0)	
+	TNT1 A 0 A_PlaySound("monsters/darkcyberstomp")
+	TNT1 A 0 A_UnSetInvulnerable
+	TNT1 A 0 A_CustomMissile("HFCyberStomp",10,0,0,0)
+	HFCS B 8 A_FaceTarget
+	TNT1 A 0 A_Jump(128,"FloorStomp","SeekerTracers","UndeadWave","FireBalls")
+	Goto See
+ Servants:
+    TNT1 A 0 A_CheckFlag("Float","AntiAerial",AAPTR_TARGET)
+	TNT1 A 0 A_CheckFlag("lookallaround","SpecialBurn",AAPTR_TARGET)
+    TNT1 A 0 A_JumpIf(user_servants >= 1,"Army")	 
+    TNT1 A 0 A_SetUserVar("user_Servants",user_Servants+1)
+	HFCY G 3 A_FaceTarget
+	HFCS A 5 A_FaceTarget		
+	TNT1 A 0 Radius_Quake(10,8,0,24,0)	
+	TNT1 A 0 A_PlaySound("monsters/darkcyberstomp")
+	TNT1 A 0 A_UnSetInvulnerable
+	HFCS G 0 A_CustomMissile("PentaLine1",0,0,-72,2)
+    HFCS G 0 A_CustomMissile("PentaLine1",0,0,-144,2)
+    HFCS G 0 A_CustomMissile("PentaLine1",0,0,-216,2)
+    HFCS G 0 A_CustomMissile("PentaLine1",0,0,-288,2)
+    HFCS B 25 A_CustomMissile("PentaLine1",0,0,0,2)
+	HFCY GGGGGGG 0 Bright A_SpawnItemEx("HFire",Random(650,-650),Random(650,-650),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	HFCY GGGGGGGGGGGG 0 Bright A_SpawnItemEx("HFire",Random(650,-650),Random(650,-650),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	TNT1 AAAAAA 0 A_SpawnItemEx("HFireSpawner",0,0,20,30,0,0,90,0)
+	HFCS B 0 A_SpawnItemEx("InfernoDemon1",0,0,20,10,0,0,90,SXF_SETMASTER|SXF_NOCHECKPOSITION)
+	TNT1 AAAAAA 0 A_SpawnItemEx("HFireSpawner",0,0,20,30,0,0,270,0)
+	HFCS B 0 A_SpawnItemEx("InfernoDemon2",0,0,20,10,0,0,270,SXF_SETMASTER|SXF_NOCHECKPOSITION)
+	HFCS B 400 A_FaceTarget
+	Goto See
+  Army:
+    TNT1 A 0 A_CheckFlag("Float","AntiAerial",AAPTR_TARGET)
+	TNT1 A 0 A_CheckFlag("lookallaround","SpecialBurn",AAPTR_TARGET)
+	HFCY G 3 A_FaceTarget
+	HFCS A 5 A_FaceTarget		
+	TNT1 A 0 Radius_Quake(10,8,0,24,0)	
+	TNT1 A 0 A_PlaySound("monsters/darkcyberstomp")
+	TNT1 A 0 A_UnSetInvulnerable
+	HFCS G 0 A_CustomMissile("PentaLine1",0,0,-72,2)
+    HFCS G 0 A_CustomMissile("PentaLine1",0,0,-144,2)
+    HFCS G 0 A_CustomMissile("PentaLine1",0,0,-216,2)
+    HFCS G 0 A_CustomMissile("PentaLine1",0,0,-288,2)
+    HFCS B 25 A_CustomMissile("PentaLine1",0,0,0,2)
+	HFCY GGGGGGGGGG 0 Bright A_SpawnItemEx("HFire",Random(650,-650),Random(650,-650),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	HFCY GGGGGG 0 Bright A_SpawnItemEx("HFire",Random(650,-650),Random(650,-650),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	HFCY GGGGGGG 0 Bright A_SpawnItemEx("HFire",Random(1250,-1250),Random(1250,-1250),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	HFCY GGGGG 0 Bright A_SpawnItemEx("HFire",Random(1250,-1250),Random(1250,-1250),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	HFCS B 0 A_SpawnItemEx("Pyrodemon2",0,random(20,300),10,10,0,0,random(20,300),SXF_SETMASTER|SXF_NOCHECKPOSITION)
+	HFCS B 0 A_SpawnItemEx("Bruiserdemon2",0,random(20,300),10,10,0,0,random(20,300),SXF_SETMASTER|SXF_NOCHECKPOSITION)
+	HFCS B 0 A_SpawnItemEx("RMAfrit2",0,random(20,300),10,10,0,0,random(20,300),SXF_SETMASTER|SXF_NOCHECKPOSITION)
+	HFCS B 0 A_SpawnItemEx("RMAfrit2",0,random(20,300),10,10,0,0,random(20,300),SXF_SETMASTER|SXF_NOCHECKPOSITION)
+	HFCS B 0 A_SpawnItemEx("HellfireBaron2",0,random(20,300),10,10,0,0,random(20,300),SXF_SETMASTER|SXF_NOCHECKPOSITION)
+	HFCS B 0 A_SpawnItemEx("HellfireBaron2",0,random(20,300),10,10,0,0,random(20,300),SXF_SETMASTER|SXF_NOCHECKPOSITION)
+	HFCS B 0 A_SpawnItemEx("HellfireBaron2",0,random(20,300),10,10,0,0,random(20,300),SXF_SETMASTER|SXF_NOCHECKPOSITION)
+	HFCS B 0 A_SpawnItemEx("HellfireBaron2",0,random(20,300),10,10,0,0,random(20,300),SXF_SETMASTER|SXF_NOCHECKPOSITION)
+	HFCS B 0 A_SpawnItemEx("HellfireBaron2",0,random(20,300),10,10,0,0,random(20,300),SXF_SETMASTER|SXF_NOCHECKPOSITION)
+	HFCS B 0 A_SpawnItemEx("HellfireBaron2",0,random(20,300),10,10,0,0,random(20,300),SXF_SETMASTER|SXF_NOCHECKPOSITION)
+	HFCS B 4 A_SpawnItemEx("HellFireRevenant2",0,random(20,300),10,10,0,0,random(20,300),SXF_SETMASTER|SXF_NOCHECKPOSITION)
+	TNT1 A 0 A_AlertMonsters(0,AMF_EMITFROMTARGET)
+	HFCS B 10 A_FaceTarget
+	Goto See
+  Invasion:
+    TNT1 A 0 A_CheckFlag("Float","AntiAerial",AAPTR_TARGET)
+	TNT1 A 0 A_CheckFlag("lookallaround","SpecialBurn",AAPTR_TARGET)
+    TNT1 A 0 A_JumpIf(user_invasion >= 5,"army")	 
+    TNT1 A 0 A_SetUserVar("user_invasion",user_invasion+1)
+	HFCY G 3 A_FaceTarget
+	HFCS A 5 A_FaceTarget		
+	TNT1 A 0 Radius_Quake(10,8,0,24,0)	
+	TNT1 A 0 A_PlaySound("monsters/darkcyberstomp")
+	TNT1 A 0 A_UnSetInvulnerable
+	HFCS G 0 A_CustomMissile("PentaLine1",0,0,-72,2)
+    HFCS G 0 A_CustomMissile("PentaLine1",0,0,-144,2)
+    HFCS G 0 A_CustomMissile("PentaLine1",0,0,-216,2)
+    HFCS G 0 A_CustomMissile("PentaLine1",0,0,-288,2)
+    HFCS B 25 A_CustomMissile("PentaLine1",0,0,0,2)
+	HFCY GGGGGGG 0 Bright A_SpawnItemEx("HFire",Random(650,-650),Random(650,-650),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	HFCY GGGGGGG 0 Bright A_SpawnItemEx("HFire",Random(1250,-1250),Random(1250,-1250),0,0,0,0,SXF_NOCHECKPOSITION,0)
+    HFCS B 0 A_SpawnItemEx("Pyrodemon2",0,random(20,300),10,10,0,0,random(20,300),SXF_SETMASTER|SXF_NOCHECKPOSITION)
+	HFCS B 0 A_SpawnItemEx("Pyrodemon2",0,random(20,300),10,10,0,0,random(20,300),SXF_SETMASTER|SXF_NOCHECKPOSITION)
+	HFCS B 0 A_SpawnItemEx("Pyrodemon2",0,random(20,300),10,10,0,0,random(20,300),SXF_SETMASTER|SXF_NOCHECKPOSITION)
+	HFCS B 0 A_SpawnItemEx("Pyrodemon2",0,random(20,300),10,10,0,0,random(20,300),SXF_SETMASTER|SXF_NOCHECKPOSITION)
+	HFCS B 0 A_SpawnItemEx("Pyrodemon2",0,random(20,300),10,10,0,0,random(20,300),SXF_SETMASTER|SXF_NOCHECKPOSITION)
+	HFCS B 0 A_SpawnItemEx("Pyrodemon2",0,random(20,300),10,10,0,0,random(20,300),SXF_SETMASTER|SXF_NOCHECKPOSITION)
+	HFCS B 0 A_SpawnItemEx("Bruiserdemon2",0,random(20,300),10,10,0,0,random(20,300),SXF_SETMASTER|SXF_NOCHECKPOSITION)
+	HFCS B 0 A_SpawnItemEx("Bruiserdemon2",0,random(20,300),10,10,0,0,random(20,300),SXF_SETMASTER|SXF_NOCHECKPOSITION)
+	HFCS B 0 A_SpawnItemEx("Bruiserdemon2",0,random(20,300),10,10,0,0,random(20,300),SXF_SETMASTER|SXF_NOCHECKPOSITION)
+	HFCS B 0 A_SpawnItemEx("RMAfrit2",0,random(20,300),10,10,0,0,random(20,300),SXF_SETMASTER|SXF_NOCHECKPOSITION)
+	HFCS B 0 A_SpawnItemEx("RMAfrit2",0,random(20,300),10,10,0,0,random(20,300),SXF_SETMASTER|SXF_NOCHECKPOSITION)
+	HFCS B 0 A_SpawnItemEx("RMAfrit2",0,random(20,300),10,10,0,0,random(20,300),SXF_SETMASTER|SXF_NOCHECKPOSITION)
+	HFCS B 0 A_SpawnItemEx("RMAfrit2",0,random(20,300),10,10,0,0,random(20,300),SXF_SETMASTER|SXF_NOCHECKPOSITION)
+	HFCS B 0 A_SpawnItemEx("HellfireBaron2",0,random(20,300),10,10,0,0,random(20,300),SXF_SETMASTER|SXF_NOCHECKPOSITION)
+	HFCS B 0 A_SpawnItemEx("HellfireBaron2",0,random(20,300),10,10,0,0,random(20,300),SXF_SETMASTER|SXF_NOCHECKPOSITION)
+	HFCS B 0 A_SpawnItemEx("HellfireBaron2",0,random(20,300),10,10,0,0,random(20,300),SXF_SETMASTER|SXF_NOCHECKPOSITION)
+	HFCS B 0 A_SpawnItemEx("HellfireBaron2",0,random(20,300),10,10,0,0,random(20,300),SXF_SETMASTER|SXF_NOCHECKPOSITION)
+	HFCS B 0 A_SpawnItemEx("HellfireBaron2",0,random(20,300),10,10,0,0,random(20,300),SXF_SETMASTER|SXF_NOCHECKPOSITION)
+	HFCS B 0 A_SpawnItemEx("HellfireBaron2",0,random(20,300),10,10,0,0,random(20,300),SXF_SETMASTER|SXF_NOCHECKPOSITION)
+	HFCS B 0 A_SpawnItemEx("HellfireBaron2",0,random(20,300),10,10,0,0,random(20,300),SXF_SETMASTER|SXF_NOCHECKPOSITION)
+	HFCS B 0 A_SpawnItemEx("HellfireBaron2",0,random(20,300),10,10,0,0,random(20,300),SXF_SETMASTER|SXF_NOCHECKPOSITION)
+	HFCS B 0 A_SpawnItemEx("HellfireBaron2",0,random(20,300),10,10,0,0,random(20,300),SXF_SETMASTER|SXF_NOCHECKPOSITION)
+	HFCS B 0 A_SpawnItemEx("HellFireRevenant2",0,random(20,300),10,10,0,0,random(20,300),SXF_SETMASTER|SXF_NOCHECKPOSITION)
+	HFCS B 0 A_SpawnItemEx("HellFireRevenant2",0,random(20,300),10,10,0,0,random(20,300),SXF_SETMASTER|SXF_NOCHECKPOSITION)
+	HFCS B 4 A_SpawnItemEx("HellFireRevenant2",0,random(20,300),10,10,0,0,random(20,300),SXF_SETMASTER|SXF_NOCHECKPOSITION)
+	TNT1 A 0 A_AlertMonsters(0,AMF_EMITFROMTARGET)
+	HFCS B 10 A_FaceTarget
+	Goto See
+HellishAmbient:
+    TNT1 A 0 A_SetInvulnerable
+    TNT1 A 0 A_CheckFlag("Float","AntiAerial",AAPTR_TARGET)
+    HFCY G 10 A_FaceTarget
+    TNT1 A 0 A_SetInvulnerable
+	HFCY G 3 Bright A_PlaySoundEx("HFCyb/Laugh","Voice")
+	HFCS A 8 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	HFCS A 6 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	HFCS A 6 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	HFCS A 6 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+    HFCS A 5 A_FaceTarget
+	TNT1 A 0 Radius_Quake(10,8,0,24,0)	
+	TNT1 A 0 A_PlaySound("monsters/darkcyberstomp")
+	TNT1 A 0 A_UnSetInvulnerable
+	HFCS G 0 A_CustomMissile("PentaLine1",0,0,-72,2)
+    HFCS G 0 A_CustomMissile("PentaLine1",0,0,-144,2)
+    HFCS G 0 A_CustomMissile("PentaLine1",0,0,-216,2)
+    HFCS G 0 A_CustomMissile("PentaLine1",0,0,-288,2)
+    TNT1 A 0 A_CustomMissile("HFCyberRainCometNull",56,0,200)
+    TNT1 A 0 A_CustomMissile("HFCyberRainCometNull",56,0,90)
+    TNT1 A 0 A_CustomMissile("HFCyberRainCometNull",56,0,-90)	
+    TNT1 A 0 A_CustomMissile("HFCyberRainCometNull",56,0,0)
+	TNT1 A 0 A_CustomMissile("HFCyberRainCometNull",56,0,240)
+    TNT1 A 0 A_CustomMissile("HFCyberRainCometNull",56,0,-240)
+    TNT1 A 0 A_CustomMissile("HFCyberRainCometNull",56,0,300)	
+    TNT1 A 0 A_CustomMissile("HFCyberRainCometNull",56,0,-300)
+	HFCY GGGGGGGG 0 Bright A_SpawnItemEx("HFire",Random(650,-650),Random(650,-650),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	HFCY GGGGGGGGGGG 0 Bright A_SpawnItemEx("HFire",Random(650,-650),Random(650,-650),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	HFCY GGGGGGGGGGG 0 Bright A_SpawnItemEx("HFire",Random(1250,-1250),Random(1250,-1250),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	HFCY GGGGGGGGGG 0 Bright A_SpawnItemEx("HFire",Random(1250,-1250),Random(1250,-1250),0,0,0,0,SXF_NOCHECKPOSITION,0)
+    HFCS B 25 A_CustomMissile("PentaLine1",0,0,0,2)
+	Goto FloorStomp
+HellfireDevastation:
+    TNT1 A 0 A_CheckFlag("Float","AntiAerial",AAPTR_TARGET)
+    TNT1 A 0 A_JumpIf(user_HellfireDevastation >= 10,"HellishAmbient")	 
+	TNT1 A 0 A_GiveInventory("Health",1000)
+    TNT1 A 0 A_SetUserVar("user_HellfireDevastation",user_HellfireDevastation+1)
+    TNT1 A 0 A_SetInvulnerable
+	HFCS A 0 Bright A_PlaySoundEx("HFCyb/laugh2","Voice")
+	HFCY GGGGGGGG 5 Bright A_FaceTarget
+	HFCS A 5 A_FaceTarget		
+	TNT1 A 0 Radius_Quake(60,180,0,360,0)	
+	TNT1 A 0 A_PlaySound("monsters/darkcyberstomp")
+	HFCS B 7 
+    TNT1 A 0 A_CustomMissile("HFCyberRainCometNull",56,0,0)
+    TNT1 A 0 A_CustomMissile("HFCyberRainCometNull",56,0,30)
+    TNT1 A 0 A_CustomMissile("HFCyberRainCometNull",56,0,-30)
+	TNT1 A 0 A_CustomMissile("HFCyberRainCometNull",56,0,200)
+    TNT1 A 0 A_CustomMissile("HFCyberRainCometNull",56,0,90)
+    TNT1 A 0 A_CustomMissile("HFCyberRainCometNull",56,0,-90)
+    HFCS B 2 Bright A_GiveInventory("StompTracersAttack")
+	HFCY G 0 A_FaceTarget
+	TNT1 A 0 Radius_Quake(60,120,0,360,0)
+	HFCY GGGGGGGGGGGGGGGGGGGGG 0 Bright A_SpawnItemEx("HFire",Random(-1250, 1250),Random(-1250, 1250),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	HFCY GGGGGGGGGGGGGGGGGGGGG 0 Bright A_SpawnItemEx("HFUndeadHandProjectile",Random(-1250, 1250),Random(-1250, 1250),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	TNT1 A 0 Radius_Quake(80,120,0,460,0)
+	HFCY GGGGGGGGGGGGGGGGGGGGG 0 Bright A_SpawnItemEx("HFire",Random(-3500, 3500),Random(-3500, 3500),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	HFCY GGGGGGGGGGGGGGGGGGGGG 0 Bright A_SpawnItemEx("HFUndeadHandProjectile",Random(-3500, 3500),Random(-3500, 3500),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	TNT1 A 0 Radius_Quake(100,120,0,560,0)
+	HFCY GGGGGGGGGGGGGGGGGGGGG 0 Bright A_SpawnItemEx("HFire",Random(-5000, 5000),Random(-5000, 5000),0,0,0,0,SXF_NOCHECKPOSITION,0)
+    HFCY GGGGGGGGGGGGGGGGGGGGG 0 Bright A_SpawnItemEx("HFUndeadHandProjectile",Random(-5000, 5000),Random(-5000, 5000),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	TNT1 A 0 Radius_Quake(120,120,0,660,0)
+	HFCY GGGGGGGGGGGGGGGGGGGGG 0 Bright A_SpawnItemEx("HFire",Random(-7500, 7500),Random(-7500, 7500),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	HFCY GGGGGGGGGGGGGGGGGGGGG 0 Bright A_SpawnItemEx("HFUndeadHandProjectile",Random(-7500, 7500),Random(-7500, 7500),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	TNT1 A 0 Radius_Quake(140,120,0,760,0)
+	HFCY GGGGGGGGGGGGGGGGGGGGG 0 Bright A_SpawnItemEx("HFire",Random(-15000, 15000),Random(-15000, 15000),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	HFCY GGGGGGGGGGGGGGGGGGGGG 0 Bright A_SpawnItemEx("HFUndeadHandProjectile",Random(-15000, 15000),Random(-15000, 15000),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	TNT1 A 0 Radius_Quake(150,120,0,860,0)
+	HFCY GGGGGGGGGGGGGGGGGGGGG 0 Bright A_SpawnItemEx("HFire",Random(-20000, 20000),Random(-20000, 20000),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	HFCY GGGGGGGGGGGGGGGGGGGGG 0 Bright A_SpawnItemEx("HFUndeadHandProjectile",Random(-20000, 20000),Random(-20000, 20000),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	TNT1 A 0 A_UnSetInvulnerable
+	Goto See
+Burnnn:
+    TNT1 A 0 A_CheckFlag("lookallaround","specialburn",AAPTR_TARGET)
+    TNT1 A 0 A_CheckFlag("nofear","specialburn",AAPTR_TARGET)
+    TNT1 A 0 ACS_ExecuteAlways(670,0,0)
+    HFCY A 0 Bright A_PlaySoundEx("HFCyb/laugh","Voice")
+    TNT1 A 0 A_SetInvulnerable
+    HFCY EEE 15 Bright A_FaceTarget
+    TNT1 A 0 A_UnSetInvulnerable
+    HFCY E 7 Bright A_VileTarget("IFireHFCyberVersion")
+    HFCY E 7 Bright A_FaceTarget
+    HFCY E 14 Bright A_VileAttack
+	HFCY E 6 Bright A_VileTarget("IFireHFCyberVersion")
+    HFCY E 5 Bright A_FaceTarget
+    HFCY E 5 Bright A_VileAttack
+	HFCY E 4 Bright A_VileTarget("IFireHFCyberVersion")
+    HFCY E 4 Bright A_FaceTarget
+    HFCY E 3 Bright A_VileAttack
+	HFCY E 3 Bright A_VileTarget("IFireHFCyberVersion")
+    HFCY E 3 Bright A_FaceTarget
+    HFCY E 3 Bright A_VileAttack
+	HFCY E 3 Bright A_VileTarget("IFireHFCyberVersion")
+    HFCY E 3 Bright A_FaceTarget
+    HFCY E 3 Bright A_VileAttack
+	HFCY E 3 Bright A_VileTarget("IFireHFCyberVersion")
+    HFCY E 3 Bright A_FaceTarget
+    HFCY E 2 Bright A_VileAttack
+	HFCY E 0 Bright A_VileTarget("IFireHFCyberVersion")
+	HFCY E 2 Bright A_VileAttack
+	HFCY E 0 Bright A_VileTarget("IFireHFCyberVersion")
+	HFCY E 2 Bright A_VileAttack
+	HFCY E 0 Bright A_VileTarget("IFireHFCyberVersion")
+	HFCY E 2 Bright A_VileAttack
+	HFCY E 0 Bright A_VileTarget("IFireHFCyberVersion")
+	HFCY E 1 Bright A_VileAttack
+	HFCY E 0 Bright A_VileTarget("IFireHFCyberVersion")
+	HFCY E 1 Bright A_VileAttack
+	HFCY E 0 Bright A_VileTarget("IFireHFCyberVersion")
+	HFCY E 1 Bright A_VileAttack
+	HFCY E 0 Bright A_VileTarget("IFireHFCyberVersion")
+	HFCY E 1 Bright A_VileAttack
+	HFCY E 0 Bright A_VileTarget("IFireHFCyberVersion")
+	TNT1 A 0 A_Jump(60,"UndeadWave")
+	TNT1 A 0 A_Jump(30,"TheCall")
+	Goto see
+TheCall:
+    TNT1 A 0 A_CheckFlag("lookallaround","SpecialBurn",AAPTR_TARGET)
+    TNT1 A 0 ACS_ExecuteAlways(670,0,0)
+	HFCS A 0 Bright A_PlaySoundEx("HFCyb/laugh2","Voice")
+	TNT1 A 0 A_SetInvulnerable
+	HFCS A 8 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	HFCS A 6 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	HFCS A 6 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	HFCS A 6 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	HFCS A 6 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	HFCS A 6 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	HFCS A 6 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	HFCS A 6 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	HFCS A 6 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	HFCS A 6 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+TheCallLoop:
+    TNT1 A 0 Radius_Quake(10,8,0,24,0)	
+	HFCS A 0 Bright A_PlaySoundEx("HFCyb/Laugh","Voice")
+	HFCS A 10 Bright A_FaceTarget
+    TNT1 A 0 Radius_Quake(10,8,0,24,0)	
+	TNT1 A 0 A_PlaySound("monsters/darkcyberstomp")
+    TNT1 A 0 A_VileTarget("HFUndeadHandProjectile")
+	TNT1 A 0 A_CheckSight(2)
+    TNT1  A 0 A_Jump(256,"TheCallLoop")
+	HFCS B 10 Bright
+	TNT1 A 0 A_SetInvulnerable
+	TNT1 A 0 A_Jump(100,"FlameRockets","UndeadWave","FireBallsCombo")
+	Goto See
+RandomTrap:
+    TNT1 A 0 A_CheckFlag("Float","AntiAerial",AAPTR_TARGET)
+    HFCY G 10 A_FaceTarget
+    TNT1 A 0 A_SetInvulnerable
+	TNT1 A 0 A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	HFCY G 3 Bright A_PlaySoundEx("HFCyb/Laugh","Voice")
+	TNT1 A 0 A_FaceTarget
+	HFCY G 3 Bright
+	TNT1 A 0 A_FaceTarget
+	HFCY G 3 Bright 
+	TNT1 A 0 A_FaceTarget
+	HFCY G 3 Bright 
+	TNT1 A 0 A_FaceTarget
+	HFCY G 3 Bright 
+	TNT1 A 0 A_FaceTarget
+	HFCY G 3 Bright 
+	HFCY G 7 A_FaceTarget
+	HFCS A 5 A_FaceTarget
+	TNT1 A 0 Radius_Quake(10,8,0,24,0)	
+	HFCS B 6 A_PlaySound("monsters/darkcyberstomp")
+	TNT1 A 0 A_UnSetInvulnerable
+    TNT1 A 0 A_GiveToTarget("HFHandTrapInventory",1)
+	HFCS B 20
+	TNT1 A 0 A_Jump(128,"HF10K","Railgun","FuelRockets","FireBalls")
+    Goto See
+Seekers:
+    HFCY E 3 A_FaceTarget
+    HFCY F 3 Bright A_CustomMissile ("ForgottenOneBomb",53,-26,random(-6,6))
+    HFCY E 3 A_FaceTarget
+    HFCY F 3 Bright A_CustomMissile ("ForgottenOneBomb",53,-26,random(-6,6))
+    HFCY E 3 A_FaceTarget
+    HFCY F 3 Bright A_CustomMissile ("ForgottenOneBomb",53,-26,random(-6,6))
+    HFCY E 3 A_FaceTarget
+    HFCY F 3 Bright A_CustomMissile ("ForgottenOneBomb",53,-26,random(-6,6))
+    HFCY E 3 A_FaceTarget
+    HFCY F 3 Bright A_CustomMissile ("ForgottenOneBomb",53,-26,random(-6,6))
+    HFCY E 3 A_FaceTarget
+    HFCY F 3 Bright A_CustomMissile ("ForgottenOneBomb",53,-26,random(-6,6))
+	HFCY E 3 A_FaceTarget
+    HFCY F 3 Bright A_CustomMissile ("ForgottenOneBomb",53,-26,random(-6,6))
+    HFCY E 3 A_FaceTarget
+    HFCY F 3 Bright A_CustomMissile ("ForgottenOneBomb",53,-26,random(-6,6))
+    HFCY E 3 A_FaceTarget
+    HFCY F 3 Bright A_CustomMissile ("ForgottenOneBomb",53,-26,random(-6,6))
+    HFCY E 3 A_FaceTarget
+    HFCY F 3 Bright A_CustomMissile ("ForgottenOneBomb",53,-26,random(-6,6))
+    HFCY E 3 A_FaceTarget
+	TNT1 A 0 A_Jump(128,"HFGauss","FuelRockets","HF10K","Railgun","FloorStomp","SeekerTracers","FireBalls","PyroBombs","PyroShot")
+	Goto see
+SeekerTracers:
+    TNT1 A 0 A_CheckFlag("Float","AntiAerial",AAPTR_TARGET)
+    HFCY G 10 A_FaceTarget
+    TNT1 A 0 A_SetInvulnerable
+	TNT1 A 0 A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	HFCY G 3 Bright A_PlaySoundEx("HFCyb/Laugh","Voice")
+    HFCS A 5 A_FaceTarget
+	TNT1 A 0 Radius_Quake(10,80,0,24,0)	
+	HFCS B 6 A_PlaySound("monsters/darkcyberstomp")
+	HFCS B 2 Bright A_GiveInventory("SeekerTracersAttack")
+	HFCS B 10 A_FaceTarget
+	Goto See
+Undeadwave:
+    TNT1 A 0 A_CheckFlag("Float","AntiAerial",AAPTR_TARGET)
+    HFCY G 10 A_FaceTarget
+    TNT1 A 0 A_SetInvulnerable
+	HFCY G 3 Bright A_PlaySoundEx("HFCyb/Laugh","Voice")
+	HFCS A 8 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	HFCS A 6 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	HFCS A 6 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	HFCS A 6 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+    HFCS A 5 A_FaceTarget
+	TNT1 A 0 Radius_Quake(50,80,0,24,0)	
+	HFCS B 6 A_PlaySound("monsters/darkcyberstomp")
+	HFCS B 2 Bright A_GiveInventory("UndeadHandsWaveAttack")
+	HFCS B 15 Bright A_FaceTarget
+	Goto See
+FloorStomp:
+    TNT1 A 0 A_CheckFlag("Float","AntiAerial",AAPTR_TARGET)
+    HFCY G 10 A_FaceTarget
+    TNT1 A 0 A_SetInvulnerable
+	TNT1 A 0 A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	HFCY G 3 Bright A_PlaySoundEx("HFCyb/Laugh","Voice")
+	TNT1 A 0 A_FaceTarget
+	HFCY G 3 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	TNT1 A 0 A_FaceTarget
+	HFCY G 3 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	TNT1 A 0 A_FaceTarget
+	HFCY G 3 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	TNT1 A 0 A_FaceTarget
+	HFCY G 3 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	TNT1 A 0 A_FaceTarget
+	HFCY G 3 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	HFCY G 7 A_FaceTarget
+	HFCS A 5 A_FaceTarget
+	TNT1 A 0 Radius_Quake(10,8,0,24,0)	
+	HFCS B 6 A_PlaySound("monsters/darkcyberstomp")
+	TNT1 A 0 A_UnSetInvulnerable
+	ARCR J 0 A_Custommissile("HellCyberFireSpawner2",16,0,0)
+	ARCR J 0 A_Custommissile("InfernoDemonFireBeam",16,0,5)
+	ARCR J 0 A_Custommissile("HellCyberFireSpawner2",16,0,-5)
+	ARCR J 0 A_Custommissile("HellCyberFireSpawner2",16,0,10)
+	ARCR J 0 A_Custommissile("InfernoDemonFireBeam",16,0,-10)
+	ARCR J 0 A_Custommissile("HellCyberFireSpawner2",16,0,15)
+	ARCR J 0 A_Custommissile("InfernoDemonFireBeam",16,0,-15)
+	ARCR J 0 A_Custommissile("HellCyberFireSpawner2",16,0,20)
+	ARCR J 0 A_Custommissile("InfernoDemonFireBeam",16,0,-20)
+	ARCR J 0 A_Custommissile("InfernoDemonFireBeam",16,0,25)
+	ARCR J 0 A_Custommissile("HellCyberFireSpawner2",16,0,-25)
+	ARCR J 0 A_Custommissile("InfernoDemonFireBeam",16,0,30)
+	ARCR J 0 A_Custommissile("HellCyberFireSpawner2",16,0,-30)
+	ARCR J 0 A_Custommissile("InfernoDemonFireBeam",16,0,35)
+	ARCR J 0 A_Custommissile("HellCyberFireSpawner2",16,0,-35)
+	ARCR J 0 A_Custommissile("InfernoDemonFireBeam",16,0,40)
+	ARCR J 0 A_Custommissile("HellCyberFireSpawner2",16,0,-40)
+	ARCR J 0 A_Custommissile("InfernoDemonFireBeam",16,0,45)
+	ARCR J 0 A_Custommissile("HellCyberFireSpawner2",16,0,-45)
+	HFCS A 5 A_FaceTarget
+	TNT1 A 0 Radius_Quake(10,80,0,24,0)	
+	HFCS B 6 A_PlaySound("monsters/darkcyberstomp")
+	HFCS B 2 Bright A_GiveInventory("StompTracersAttack")
+	HFCS A 5 A_FaceTarget
+	TNT1 A 0 Radius_Quake(10,80,0,24,0)	
+	HFCS B 6 A_PlaySound("monsters/darkcyberstomp")
+	HFCS B 2 Bright A_GiveInventory("StompTracersAttack")
+	HFCS A 5 A_FaceTarget
+	TNT1 A 0 Radius_Quake(10,80,0,24,0)	
+	HFCS B 6 A_PlaySound("monsters/darkcyberstomp")
+	HFCS B 2 Bright A_GiveInventory("StompTracersAttack")
+	HFCS A 5 A_FaceTarget
+	TNT1 A 0 Radius_Quake(10,80,0,24,0)	
+	HFCS B 6 A_PlaySound("monsters/darkcyberstomp")
+	HFCS B 2 Bright A_GiveInventory("StompTracersAttack")
+	HFCS B 10
+	TNT1 A 0 A_Jump(128,"HF10K","Railgun","HFGauss","FuelRockets","FireBalls")
+    Goto See
+HFGauss:
+	HFCY E 10 Bright A_FaceTarget
+	HFCY E 4 Bright A_FaceTarget
+	HFCY E 0 A_PlaySound("Weapons/HFGaussFire")
+	HFCY F 3 Bright A_CustomMissile("HFGaussProjectile",58,-26,Random(-4, 4))	
+	HFCY E 2 Bright A_FaceTarget
+	HFCY E 0 A_PlaySound("Weapons/HFGaussFire")
+	HFCY F 3 Bright A_CustomMissile("HFGaussProjectile",58,-26,Random(-4, 4))	
+	HFCY E 2 Bright A_FaceTarget
+	HFCY E 0 A_PlaySound("Weapons/HFGaussFire")
+	HFCY F 3 Bright A_CustomMissile("HFGaussProjectile",58,-26,Random(-4, 4))
+	HFCY E 2 Bright A_FaceTarget
+	HFCY E 0 A_PlaySound("Weapons/HFGaussFire")
+	HFCY F 3 Bright A_CustomMissile("HFGaussProjectile",58,-26,Random(-4, 4))
+	HFCY E 2 Bright A_FaceTarget
+	HFCY E 0 A_PlaySound("Weapons/HFGaussFire")
+	HFCY F 3 Bright A_CustomMissile("HFGaussProjectile",58,-26,Random(-4, 4))
+	HFCY E 2 Bright A_FaceTarget
+	HFCY E 0 A_PlaySound("Weapons/HFGaussFire")
+	HFCY F 3 Bright A_CustomMissile("HFGaussProjectile",58,-26,Random(-4, 4))
+	HFCY E 2 Bright A_FaceTarget
+	HFCY E 0 A_PlaySound("Weapons/HFGaussFire")
+	TNT1 A 0 A_CustomMissile("HFGaussProjectile",58,-26,3)
+	TNT1 A 0 A_CustomMissile("HFGaussProjectile",58,-26, -3)
+	HFCY F 3 Bright A_CustomMissile("HFGaussProjectile",58,-26,Random(-4, 4))
+	HFCY E 2 Bright A_FaceTarget
+	HFCY E 0 A_PlaySound("Weapons/HFGaussFire")
+	TNT1 A 0 A_CustomMissile("HFGaussProjectile",58,-26,3)
+	TNT1 A 0 A_CustomMissile("HFGaussProjectile",58,-26, -3)
+	HFCY F 3 Bright A_CustomMissile("HFGaussProjectile",58,-26,Random(-4, 4))
+	HFCY E 2 Bright A_FaceTarget
+	HFCY E 0 A_PlaySound("Weapons/HFGaussFire")
+	TNT1 A 0 A_CustomMissile("HFGaussProjectile",58,-26,3)
+	TNT1 A 0 A_CustomMissile("HFGaussProjectile",58,-26, -3)
+	HFCY F 3 Bright A_CustomMissile("HFGaussProjectile",58,-26,Random(-4, 4))
+	HFCY E 2 Bright A_FaceTarget
+	HFCY E 0 A_PlaySound("Weapons/HFGaussFire")
+	TNT1 A 0 A_CustomMissile("HFGaussProjectile",58,-26, 6)
+	TNT1 A 0 A_CustomMissile("HFGaussProjectile",58,-26, -6)
+	TNT1 A 0 A_CustomMissile("HFGaussProjectile",58,-26,3)
+	TNT1 A 0 A_CustomMissile("HFGaussProjectile",58,-26, -3)
+	HFCY F 3 Bright A_CustomMissile("HFGaussProjectile",58,-26,Random(-4, 4))
+	HFCY E 2 A_FaceTarget	
+	goto see
+FuelRockets:
+    TNT1 A 0 A_SetUserVar("user_missile", 0)
+	HFCY E 10 Bright A_FaceTarget
+	HFCY E 4 Bright A_Facetarget
+FRocketsLooop:
+   	TNT1 A 0 A_JumpIf(user_missile >= 5, "FuelRocketsEnd")
+    TNT1 A 0 A_SetUserVar("user_missile", user_missile+1)
+	HFCY E 4 Bright A_FaceTarget
+	HFCY F 1 Bright A_CustomMissile("FuelRocket",58,-26,Random(-4, 4))	
+	HFCY E 1 Bright A_FaceTarget
+	HFCY F 1 Bright A_CustomMissile("FuelRocket",58,-26,Random(-4, 4))	
+	HFCY E 1 Bright A_FaceTarget
+	HFCY F 1 Bright A_CustomMissile("FuelRocket",58,-26,Random(-4, 4))
+	HFCY E 1 Bright A_FaceTarget
+	HFCY F 1 Bright A_CustomMissile("FuelRocket",58,-26,Random(-4, 4))
+	HFCY E 1 Bright A_FaceTarget
+	HFCY F 1 Bright A_CustomMissile("FuelRocket",58,-26,Random(-4, 4))
+	HFCY E 1 Bright A_FaceTarget
+	HFCY F 1 Bright A_CustomMissile("FuelRocket",58,-26,Random(-4, 4))
+	loop
+FuelRocketsEnd:
+    TNT1 A 0 A_Jump(100,"PyroBombs","Pyroshot","Railgun","FireBalls","HF10K")
+	Goto FlameRockets
+FireBalls:
+    TNT1 A 0 A_PlaySound("weapons/charge15k")
+    TNT1 A 0 A_SetReflective
+	TNT1 A 0 A_SetUserVar("user_missile", 0)
+	HFCY E 10 Bright A_FaceTarget
+	HFCY E 4 Bright A_Facetarget
+FireBallsLoop:
+	TNT1 A 0 A_JumpIf(user_missile >= 14, "FireBallsEnd")
+    TNT1 A 0 A_SetUserVar("user_missile", user_missile+1)
+	HFCY E 3 Bright A_FaceTarget
+	TNT1 A 0 A_PlaySound("HFCyb/rocket")
+	HFCY F 1 Bright A_CustomMissile("HFCyberFireBalls",58,-26,Random(-9, 9))
+	Loop
+FireBallsEnd:
+	HFCY E 10 Bright A_PlaySound("weapons/bfg15kcooldown",CHAN_AUTO)
+	TNT1 A 0 A_UnSetReflective
+	TNT1 A 0 A_Jump(120,"FireBallsCombo","UndeadWave","Pyrobombs","Pyroshot")
+	goto see
+HF10K:
+    TNT1 A 0 A_Changeflag(reflective,1)
+    TNT1 A 0 A_PlaySound("weapons/charge15k")
+	TNT1 A 0 A_SetUserVar("user_missile", 0)
+	HFCY E 10 Bright A_FaceTarget
+	HFCY E 4 Bright A_FaceTarget
+HF10KLoop:
+	TNT1 A 0 A_JumpIf(user_missile >= 14, "HF10KEnd")
+    TNT1 A 0 A_SetUserVar("user_missile", user_missile+1)
+	HFCY E 2 Bright A_FaceTarget
+	TNT1 A 0 A_PlaySound("weapons/bfg15kfire")
+	HFCY F 1 Bright A_CustomMissile("HFCyber10K",58,-26,Random(-8, 8))	
+	HFCY E 1 Bright A_FaceTarget
+	TNT1 A 0 A_PlaySound("weapons/bfg15kfire")
+	HFCY F 1 Bright A_CustomMissile("HFCyber10K",58,-26,Random(-8, 8))	
+	Loop
+HF10KEnd:
+	HFCY E 10 Bright A_PlaySound("weapons/bfg15kcooldown",CHAN_AUTO)
+	TNT1 A 0 A_Changeflag(reflective,0)
+	TNT1 A 0 A_Jump(100,"PyroBombs","Pyroshot","Railgun")
+	goto see
+Railgun:
+	TNT1 A 0 A_PlaySound("weapons/rgcharge")
+	TNT1 A 0 A_Changeflag(reflective,1)
+	TNT1 A 0 A_SetUserVar("user_Missile", 0)
+    HFCY EE 10 A_FaceTarget
+RailgunLoop:
+	TNT1 A 0 A_JumpIf(user_missile >= 3, "RailgunEnd")
+    TNT1 A 0 A_SetUserVar("user_Missile", user_Missile+1)
+	TNT1 AAAAAAAAAAAA 0 A_SpawnItemEx("HFireSpawner",random(-64,64),random(-64,64),random(0,64),0,0,0,0,32)
+    HFCY EEEEEEEEEEE 1 Bright A_FadeOut(0.1,0)
+    TNT1 A 0 A_ChangeVelocity(0, 0, 0, CVF_REPLACE)
+    TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Chase(0, 0, CHF_NIGHTMAREFAST)
+    TNT1 A 1 A_PlayWeaponSound("boss/teleport")
+    TNT1 AAAAAAAAAAAA 0 A_SpawnItemEx("HFireSpawner",random(-64,64),random(-64,64),random(0,64),0,0,0,0,32)
+	HFCY EEEEEEEEEEE 1 A_FadeIn(0.1)
+    HFCY E 1
+    TNT1 A 0 A_ChangeVelocity(0, 0, 0, CVF_REPLACE)
+	HFCY E 3 Bright A_FaceTarget
+    HFCY F 2 Bright A_CustomMissile("HFRail",58,-26,random(-2,3))
+	HFCY E 3 Bright A_FaceTarget
+    HFCY F 1 Bright A_CustomMissile("HFRail",58,-26,random(-2,3))
+	HFCY E 3 Bright A_FaceTarget
+    HFCY F 2 Bright A_CustomMissile("HFRail",58,-26,random(-2,3))
+	Loop
+RailgunEnd:
+	HFCY E 10 Bright
+	TNT1 A 0 A_Changeflag(reflective,0)
+	TNT1 A 0 A_Jump(128,"UndeadWave","PyroBombs","Pyroshot","SoulsStorm","HellfireCombo","TheCall")
+	Goto See
+PyroShot:
+	TNT1 A 0 A_SetInvulnerable
+	TNT1 A 0 A_PlaySoundEx("HFCyb/Laugh","Voice")
+	HFCY EEEEEE 4 Bright A_FaceTarget 
+	HFCY F 4 Bright A_FaceTarget  
+	TNT1 A 0 A_PlaySoundEX("weapons/PCNNF",CHAN_WEAPON)
+	HFCY F 0 Bright A_CustomMissile("HFCyberFireballs",58, -26, -8)
+	HFCY F 0 Bright A_CustomMissile("HFCyberFireballs",58, -26, 8)
+    HFCY F 4 Bright A_CustomMissile("PyroShot",58, -26, 0)
+	TNT1 A 0 A_UnSetInvulnerable
+	TNT1 A 0 A_PlaySound("weapons/dtech10ksteam")
+	HFCY EEEEEE 5 Bright A_SpawnItemEx("LegendaryCannonSmoke", 10, 12, 50, Random(2, 6), 0, Random(1, 3), Random(80, 90), 128)
+	TNT1 A 0 A_Jump(60,"SoulsStorm","HellFireCombo")
+    Goto See
+SoulsStorm:
+    TNT1 A 0 A_PlaySound("HFCyb/laugh2")	
+	HFCB A 3 Bright
+	HFCB A 3 Bright A_FaceTarget
+	TNT1 A 0 A_SetUserVar("user_soulstorm", 0)
+	TNT1 A 0 A_SetInvulnerable
+SoulStormLoop:
+	TNT1 A 0 A_JumpIf(user_soulstorm >= 5, "SoulStormEnd")
+    TNT1 A 0 A_SetUserVar("user_soulstorm", user_soulstorm+1)
+	HFCB A 3 Bright A_FaceTarget
+	HFCB B 0 Bright A_CustomMissile("BombBall2",78,-26,random(-2,3))
+	HFCB B 0 Bright A_CustomMissile("BombBall2",78,0,random(-2,3))
+	HFCB B 0 Bright A_CustomMissile("BombBall2",78,26,random(-2,3))
+	HFCB B 0 Bright A_CustomMissile("BombBall2",38,26,random(-2,3))
+	HFCB B 3 Bright A_CustomMissile("BombBall2",38,-26,random(-2,3))
+	HFCB A 3 Bright A_FaceTarget
+	HFCB B 0 Bright A_CustomMissile("FamineTracer2",78,-26,random(-2,3))
+	HFCB B 0 Bright A_CustomMissile("FamineTracer2",78,0,random(-2,3))
+	HFCB B 0 Bright A_CustomMissile("FamineTracer2",78,26,random(-2,3))
+	HFCB B 0 Bright A_CustomMissile("FamineTracer2",38,26,random(-2,3))
+	HFCB B 3 Bright A_CustomMissile("FamineTracer2",38,-26,random(-2,3))
+	Loop
+SoulStormEnd:
+	HFCB A 20 Bright 
+	TNT1 A 0 A_Jump(87,"FireBallsCombo")
+	TNT1 A 0 A_UnSetInvulnerable
+	goto see
+FireBallsCombo: //budget Korax
+	TNT1 A 0 A_ChangeFlag("NOPAIN",1)
+	TNT1 A 0 A_SetUserVar("user_missile", 0)
+    TNT1 A 0 A_PlaySound("HFCyb/laugh2")	
+	HFCY G 15 Bright A_FaceTarget
+	HFCY G 3 Bright A_FaceTarget
+FBComboLoop:
+    TNT1 A 0 A_JumpIf(user_missile >= 4, "FBComboEnd")
+    TNT1 A 0 A_SetUserVar("user_missile", user_missile+1)
+	HFCB A 4 Bright A_FaceTarget
+	HFCB B 0 Bright A_CustomMissile("LavaBall",78,-26,random(-2,3))
+	HFCB B 0 Bright A_CustomMissile("LavaBall",78,0,random(-2,3))
+	HFCB B 0 Bright A_CustomMissile("LavaBall",78,26,random(-2,3))
+	HFCB B 0 Bright A_CustomMissile("LavaBall",38,26,random(-2,3))
+	HFCB A 3 Bright A_CustomMissile("LavaBall",38,-26,random(-2,3))
+	HFCB A 4 Bright A_FaceTarget
+	HFCB B 0 Bright A_CustomMissile("HFCyberFireBalls",78,-26,random(-2,3))
+	HFCB B 0 Bright A_CustomMissile("HFCyberFireBalls",78,0,random(-2,3))
+	HFCB B 0 Bright A_CustomMissile("HFCyberFireBalls",78,26,random(-2,3))
+	HFCB B 0 Bright A_CustomMissile("HFCyberFireBalls",38,26,random(-2,3))
+	HFCB A 3 Bright A_CustomMissile("HFCyberFireBalls",38,-26,random(-2,3))
+	HFCB A 4 Bright A_FaceTarget
+	HFCB B 0 Bright A_CustomMissile("IComet",78,-26,random(-2,3))
+	HFCB B 0 Bright A_CustomMissile("IComet",78,0,random(-2,3))
+	HFCB B 0 Bright A_CustomMissile("IComet",78,26,random(-2,3))
+	HFCB B 0 Bright A_CustomMissile("IComet",38,26,random(-2,3))
+	HFCB A 3 Bright A_CustomMissile("IComet",38,-26,random(-2,3))
+	HFCB A 4 Bright A_FaceTarget
+	HFCB B 0 Bright A_CustomMissile("CyberSeekingComet",78,-26,random(-2,3))
+	HFCB B 0 Bright A_CustomMissile("CyberSeekingComet",78,0,random(-2,3))
+	HFCB B 0 Bright A_CustomMissile("CyberSeekingComet",78,26,random(-2,3))
+	HFCB B 0 Bright A_CustomMissile("CyberSeekingComet",38,26,random(-2,3))
+	HFCB A 3 Bright A_CustomMissile("CyberSeekingComet",38,-26,random(-2,3))
+	HFCB A 4 Bright A_FaceTarget
+	HFCB B 0 Bright A_CustomMissile("HFCyberMiniFireBall",78,-26,random(-2,3))
+	HFCB B 0 Bright A_CustomMissile("HFCyberMiniFireBall",78,0,random(-2,3))
+	HFCB B 0 Bright A_CustomMissile("HFCyberMiniFireBall",78,26,random(-2,3))
+	HFCB B 0 Bright A_CustomMissile("HFCyberMiniFireBall",38,26,random(-2,3))
+	HFCB A 3 Bright A_CustomMissile("HFCyberMiniFireBall",38,-26,random(-2,3))
+	loop
+FBComboEnd:
+	TNT1 A 0 A_ChangeFlag("NOPAIN",0)
+	HFCY G 20 Bright 
+	goto see
+HellfireCombo:
+    HFCB C 0 Bright A_PlaySoundEx("HFCyb/laugh2","Voice")
+	TNT1 A 0 A_SetInvulnerable
+	TNT1 A 0 A_ChangeFlag("NODAMAGE",1)
+    HFCB C 10 Bright A_FaceTarget
+    TNT1 A 0 A_PlaySound("lrball3/charge",CHAN_WEAPON)
+	TNT1 A 0 A_SetUserVar("user_missile", 0)
+ComboCharge:
+    TNT1 A 0 A_JumpIf(user_missile >= 3, "ComboCharged")
+    TNT1 A 0 A_SetUserVar("user_missile", user_missile+1)
+	HFCB C 20 Bright A_FaceTarget
+	Loop
+ComboCharged:
+	HFCB D 0 Bright A_CustomMissile("BombBall2",78,-26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("BombBall2",78,0,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("BombBall2",78,26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("BombBall2",38,26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("BombBall2",38,-26,random(-2,3)) 
+	HFCB D 0 Bright A_CustomMissile("ForgottenOneBomb",58, 0, 0)
+	TNT1 A 0 A_PlaySound("weapons/PCNNF",CHAN_WEAPON)
+	TNT1 A 0 A_CustomMissile("HFCyberFireBalls",58,-26, 6)
+	TNT1 A 0 A_CustomMissile("HFCyberFireBalls",58,-26, -6)
+    HFCB D 4 Bright A_CustomMissile("PyroShot",58, -26, 0)
+	HFCB C 3 Bright A_FaceTarget
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",78,-26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",78,0,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",78,26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",38,26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",38,-26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("ForgottenOneBomb",58, 0, 0)
+	HFCB D 4 Bright A_CustomMissile("HFRail",58, -26, 0)
+	HFCB C 3 Bright A_FaceTarget
+	HFCB D 0 Bright A_CustomMissile("BombBall2",78,-26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("BombBall2",78,0,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("BombBall2",78,26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("BombBall2",38,26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("BombBall2",38,-26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("ForgottenOneBomb",58, 0, 0)
+	HFCB D 4 Bright A_CustomMissile("HFCyber10K",58, -26, 0)
+	HFCB C 3 Bright A_FaceTarget
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",78,-26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",78,0,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",78,26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",38,26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",38,-26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("ForgottenOneBomb",58, 0, 0)
+	HFCB D 4 Bright A_CustomMissile("HFCyber10K",58, -26, 0)
+	HFCB C 3 Bright A_FaceTarget
+	HFCB D 0 Bright A_CustomMissile("BombBall2",78,-26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("BombBall2",78,0,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("BombBall2",78,26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("BombBall2",38,26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("BombBall2",38,-26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("ForgottenOneBomb",58, 0, 0)
+	HFCB D 4 Bright A_CustomMissile("HFCyber10K",58, -26, 0)
+	HFCB C 3 Bright A_FaceTarget
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",78,-26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",78,0,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",78,26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",38,26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",38,-26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("ForgottenOneBomb",58, 0, 0)
+	HFCB D 4 Bright A_CustomMissile("HFGaussProjectile",58, -26, 0)
+	HFCB C 3 Bright A_FaceTarget
+	HFCB D 0 Bright A_CustomMissile("BombBall2",78,-26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("BombBall2",78,0,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("BombBall2",78,26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("BombBall2",38,26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("BombBall2",38,-26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("ForgottenOneBomb",58, 0, 0)
+	HFCB D 4 Bright A_CustomMissile("HFCyberFlameRocket",58, -26, 0)
+	HFCB C 3 Bright A_FaceTarget
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",78,-26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",78,0,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",78,26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",38,26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",38,-26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("ForgottenOneBomb",58, 0, 0)
+	HFCB D 4 Bright A_CustomMissile("HFCyberFlameRocket",58, -26, 0)
+	HFCB C 3 Bright A_FaceTarget
+	HFCB D 0 Bright A_CustomMissile("BombBall2",78,-26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("BombBall2",78,0,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("BombBall2",78,26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("BombBall2",38,26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("BombBall2",38,-26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("ForgottenOneBomb",58, 0, 0)
+	HFCB D 4 Bright A_CustomMissile("FuelRocket",58, -26, 0)
+	HFCB C 3 Bright A_FaceTarget
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",78,-26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",78,0,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",78,26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",38,26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",38,-26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("ForgottenOneBomb",58, 0, 0)
+	TNT1 A 0 A_CustomMissile("HFCyberFireBalls",58,-26, 6)
+	TNT1 A 0 A_CustomMissile("HFCyberFireBalls",58,-26, -6)
+	HFCB D 4 Bright A_CustomMissile("PyroBomb",58, -26, 0)
+	HFCB C 3 Bright A_FaceTarget
+	HFCB D 0 Bright A_CustomMissile("BombBall2",78,-26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("BombBall2",78,0,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("BombBall2",78,26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("BombBall2",38,26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("BombBall2",38,-26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("ForgottenOneBomb",58, 0, 0)
+	TNT1 A 0 A_CustomMissile("HFCyberFireBalls",58,-26, 6)
+	TNT1 A 0 A_CustomMissile("HFCyberFireBalls",58,-26, -6)
+	HFCB D 4 Bright A_CustomMissile("PyroBomb",58, -26, 0)
+	HFCB C 3 Bright A_FaceTarget
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",78,-26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",78,0,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",78,26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",38,26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",38,-26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("ForgottenOneBomb",58, 0, 0)
+	TNT1 A 0 A_PlaySound("weapons/PCNNF")
+	TNT1 A 0 A_CustomMissile("HFCyberFireBalls",58,-26, 6)
+	TNT1 A 0 A_CustomMissile("HFCyberFireBalls",58,-26, -6)
+	HFCB D 4 Bright A_CustomMissile("PyroShot",58, -26, 0)
+	HFCB C 3 Bright A_FaceTarget
+	HFCB D 0 Bright A_CustomMissile("BombBall2",78,-26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("BombBall2",78,0,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("BombBall2",78,26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("BombBall2",38,26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("BombBall2",38,-26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("ForgottenOneBomb",58, 0, 0)
+	TNT1 A 0 A_PlaySound("weapons/PCNNF")
+	TNT1 A 0 A_CustomMissile("HFCyberFireBalls",58,-26, 6)
+	TNT1 A 0 A_CustomMissile("HFCyberFireBalls",58,-26, -6)
+	HFCB D 4 Bright A_CustomMissile("PyroShot",58, -26, 0)
+	HFCB C 3 Bright A_FaceTarget
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",78,-26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",78,0,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",78,26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",38,26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",38,-26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("ForgottenOneBomb",58, 0, 0)
+	TNT1 A 0 A_PlaySound("weapons/PCNNF")
+	TNT1 A 0 A_CustomMissile("HFCyberFireBalls",58,-26, 6)
+	TNT1 A 0 A_CustomMissile("HFCyberFireBalls",58,-26, -6)
+	HFCB D 4 Bright A_CustomMissile("PyroShot",58, -26, 0)
+	HFCB D 20 Bright A_SpawnItem("HFCyberFlameSpawner",0,0,0,0) 
+	TNT1 A 0 A_ChangeFlag("NODAMAGE",0)
+	TNT1 A 0 A_UnSetInvulnerable
+	TNT1 A 0 A_SetUserVar("user_pain",0)
+	goto see
+ Pain:
+    TNT1 A 0 A_Jump(30,"HellfireDevastation")
+    TNT1 A 0 A_Jump(50,"PainRage")
+    TNT1 A 0 A_Jump(70,"PainBoom")
+ 	TNT1 A 0 A_Jump(128,"PainMissile")
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_SpawnItemEx("HFLavaMist",0,0,random(0,120),(Random (-8, 8)),(Random (-8, 8)),(Random (0, 8)),(Random (0, 360)))
+    HFCY G 10 A_Pain
+    Goto See
+PainBoom:
+	HFCY G 3 Bright
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_SpawnItemEx("HFLavaMist",0,0,random(0,120),(Random (-8, 8)),(Random (-8, 8)),(Random (0, 8)),(Random (0, 360)))
+	HFCY G 3 Bright A_Pain
+	TNT1 A 0 A_SetInvulnerable
+	HFCY G 40 Bright A_PlaySound("HFCyb/Laugh")
+	TNT1 A 0 Radius_Quake(10,80,0,24,0)
+	TNT1 A 0 A_GiveInventory("Health",400)
+	TNT1 AAAAAAAAAAAA 0 A_CustomMissile("HFCyberMushroomFireballs",30,0,random(0,360),2,random(-5,30))
+	TNT1 A 0 A_SpawnItem("HFCyberPyroBoom",30,0,0,0)
+	HFCY G 20 Bright 
+	TNT1 A 0 A_UnSetInvulnerable
+	goto Missile
+PainRage:
+    TNT1 A 0 A_JumpIf(user_painrage >= 5,"painboom")	 
+    TNT1 A 0 A_SetUserVar("user_painrage",user_painrage+1)
+    HFCY G 3 Bright A_Pain
+    HFCY G 5 A_FaceTarget
+	TNT1 A 0 A_SetInvulnerable
+    TNT1 A 0 A_ChangeFlag("NODAMAGE",1)
+	TNT1 A 0 A_GiveInventory("Health",800)
+	TNT1 A 0 A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	HFCY G 5 Bright A_PlaySound("HFCyb/Laugh")
+	TNT1 A 0 A_FaceTarget
+	HFCY G 5 Bright A_SpawnItem("HFCyberFlameSpawner",0,0,0,0)
+	TNT1 A 0 A_FaceTarget
+	HFCY G 5 Bright A_SpawnItem("HFCyberFlameSpawner",0,0,0,0)
+	TNT1 A 0 A_FaceTarget
+	HFCY G 5 Bright A_SpawnItem("HFCyberFlameSpawner",0,0,0,0)
+	TNT1 A 0 A_FaceTarget
+	HFCY G 5 Bright A_SpawnItem("HFCyberFlameSpawner",0,0,0,0)
+	TNT1 A 0 A_FaceTarget
+	HFCY G 3 Bright A_SpawnItem("HFCyberFlameSpawner",0,0,0,0)
+	HFCY G 5 A_FaceTarget
+	HFCS A 5 A_FaceTarget
+	TNT1 A 0 Radius_Quake(10,80,0,24,0)	
+	HFCS B 3 A_PlaySound("monsters/darkcyberstomp")
+	HFCS B 2 Bright A_GiveInventory("StompTracersAttack")
+	HFCS A 4 A_FaceTarget
+	TNT1 A 0 Radius_Quake(10,80,0,24,0)	
+	HFCS B 3 A_PlaySound("monsters/darkcyberstomp")
+	HFCS B 2 Bright A_GiveInventory("StompTracersAttack")
+	HFCS A 4 A_FaceTarget
+	TNT1 A 0 Radius_Quake(10,80,0,24,0)	
+	HFCS B 3 A_PlaySound("monsters/darkcyberstomp")
+	HFCS B 2 Bright A_GiveInventory("StompTracersAttack")
+	HFCS A 4 A_FaceTarget
+	TNT1 A 0 Radius_Quake(10,80,0,24,0)	
+	HFCS B 3 A_PlaySound("monsters/darkcyberstomp")
+	HFCS B 2 Bright A_GiveInventory("StompTracersAttack")
+	HFCS A 4 A_FaceTarget
+	TNT1 A 0 Radius_Quake(10,80,0,24,0)	
+	HFCS B 3 A_PlaySound("monsters/darkcyberstomp")
+	HFCS B 2 Bright A_GiveInventory("StompTracersAttack")
+	HFCS A 4 A_FaceTarget
+	TNT1 A 0 Radius_Quake(10,80,0,24,0)	
+	HFCS B 3 A_PlaySound("monsters/darkcyberstomp")
+	HFCS B 2 Bright A_GiveInventory("StompTracersAttack")
+	HFCS A 4 A_FaceTarget
+	TNT1 A 0 Radius_Quake(10,80,0,24,0)	
+	HFCS B 3 A_PlaySound("monsters/darkcyberstomp")
+	HFCS B 2 Bright A_GiveInventory("StompTracersAttack")
+	HFCS A 4 A_FaceTarget
+	TNT1 A 0 Radius_Quake(10,80,0,24,0)	
+	HFCS B 3 A_PlaySound("monsters/darkcyberstomp")
+	HFCS B 2 Bright A_GiveInventory("StompTracersAttack")
+	TNT1 A 0 A_UnSetInvulnerable
+	TNT1 A 0 A_ChangeFlag("NODAMAGE",0)
+    Goto See
+ PainMissile:
+    HFCY G 10 A_Pain
+    Goto Teleport
+  Pain.Legendary:
+  Pain.LegendaryPlayer:
+  Pain.LegendaryGuruPlayer:
+  Pain.PlayerDevBall:
+  Pain.PDTBFG:
+  Pain.BFG10K:
+  Pain.BFG9500Ball:
+    TNT1 A 0 A_Jump(200, "Teleport")
+    Goto PainMissile
+  Pain.PlayerDBFG10K2:
+  Pain.DBFG10K2:
+  Pain.DBFG:
+  Pain.PlayerDBFG:
+  Pain.DBFG2:
+  Pain.PlayerDBFG210K:
+  Pain.DBFG210K:
+  Pain.DBFG2Splash:
+  Pain.PlayerDBFG2:
+	TNT1 A 0 A_ChangeFlag("NOPAIN",1)
+	Goto Insane
+Insane:
+    TNT1 A 0 A_SetInvulnerable
+    HFCB C 0 Bright A_PlaySoundEx("HFCyb/laugh2","Voice")
+	HFCB D 0 Bright A_CustomMissile("BombBall2",78,-26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("BombBall2",78,0,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("BombBall2",78,26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("BombBall2",38,26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("BombBall2",38,-26,random(-2,3)) 
+	HFCB D 0 Bright A_CustomMissile("ForgottenOneBomb",58, 0, 0)
+	TNT1 A 0 A_PlaySound("weapons/PCNNF",CHAN_WEAPON)
+	TNT1 A 0 A_CustomMissile("HFCyberFireBalls",58,-26, 6)
+	TNT1 A 0 A_CustomMissile("HFCyberFireBalls",58,-26, -6)
+    HFCB D 4 Bright A_CustomMissile("PyroShot",58, -26, 0)
+	TNT1 A 0 A_UnSetShootable
+    TNT1 AAAAAAAAAAAA 0 A_SpawnItemEx("HFireSpawner",random(-64,64),random(-64,64),random(0,64),0,0,0,0,32)
+    HFCY EEEEEEEEEEE 0 Bright A_FadeOut(0.1,0)
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Wander
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Wander
+    TNT1 A 1 A_PlayWeaponSound("boss/teleport")
+    TNT1 AAAAAAAAAAAA 0 A_SpawnItemEx("HFireSpawner",random(-64,64),random(-64,64),random(0,64),0,0,0,0,32)
+	HFCY EEEEEEEEEEE 0 Bright A_FadeIn(0.1)
+    TNT1 A 0 A_FaceTarget
+    TNT1 A 0 A_SetShootable
+	HFCB C 3 Bright A_FaceTarget
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",78,-26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",78,0,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",78,26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",38,26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",38,-26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("ForgottenOneBomb",58, 0, 0)
+    TNT1 A 0 A_CustomMissile("HFGaussProjectile",58, -26, 3)
+    TNT1 A 0 A_CustomMissile("HFGaussProjectile",58, -26, -3)
+	HFCB D 4 Bright A_CustomMissile("HFRail",58, -26, 0)
+	TNT1 A 0 A_UnSetShootable
+    TNT1 AAAAAAAAAAAA 0 A_SpawnItemEx("HFireSpawner",random(-64,64),random(-64,64),random(0,64),0,0,0,0,32)
+    HFCY EEEEEEEEEEE 0 Bright A_FadeOut(0.1,0)
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Wander
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Wander
+    TNT1 A 1 A_PlayWeaponSound("boss/teleport")
+    TNT1 AAAAAAAAAAAA 0 A_SpawnItemEx("HFireSpawner",random(-64,64),random(-64,64),random(0,64),0,0,0,0,32)
+	HFCY EEEEEEEEEEE 0 Bright A_FadeIn(0.1)
+    TNT1 A 0 A_FaceTarget
+    TNT1 A 0 A_SetShootable
+	HFCB C 3 Bright A_FaceTarget
+	HFCB D 0 Bright A_CustomMissile("BombBall2",78,-26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("BombBall2",78,0,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("BombBall2",78,26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("BombBall2",38,26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("BombBall2",38,-26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("ForgottenOneBomb",58, 0, 0)
+    TNT1 A 0 A_CustomMissile("HFGaussProjectile",58, -26, 3)
+    TNT1 A 0 A_CustomMissile("HFGaussProjectile",58, -26, -3)
+	HFCB D 4 Bright A_CustomMissile("HFCyber10K",58, -26, 0)
+	TNT1 A 0 A_UnSetShootable
+    TNT1 AAAAAAAAAAAA 0 A_SpawnItemEx("HFireSpawner",random(-64,64),random(-64,64),random(0,64),0,0,0,0,32)
+    HFCY EEEEEEEEEEE 0 Bright A_FadeOut(0.1,0)
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Wander
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Wander
+    TNT1 A 1 A_PlayWeaponSound("boss/teleport")
+    TNT1 AAAAAAAAAAAA 0 A_SpawnItemEx("HFireSpawner",random(-64,64),random(-64,64),random(0,64),0,0,0,0,32)
+	HFCY EEEEEEEEEEE 0 Bright A_FadeIn(0.1)
+    TNT1 A 0 A_FaceTarget
+    TNT1 A 0 A_SetShootable
+	HFCB C 3 Bright A_FaceTarget
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",78,-26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",78,0,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",78,26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",38,26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",38,-26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("ForgottenOneBomb",58, 0, 0)
+    TNT1 A 0 A_CustomMissile("HFGaussProjectile",58, -26, 3)
+    TNT1 A 0 A_CustomMissile("HFGaussProjectile",58, -26, -3)
+	HFCB D 4 Bright A_CustomMissile("HFCyber10K",58, -26, 0)
+	TNT1 A 0 A_UnSetShootable
+    TNT1 AAAAAAAAAAAA 0 A_SpawnItemEx("HFireSpawner",random(-64,64),random(-64,64),random(0,64),0,0,0,0,32)
+    HFCY EEEEEEEEEEE 0 Bright A_FadeOut(0.1,0)
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Wander
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Wander
+    TNT1 A 1 A_PlayWeaponSound("boss/teleport")
+    TNT1 AAAAAAAAAAAA 0 A_SpawnItemEx("HFireSpawner",random(-64,64),random(-64,64),random(0,64),0,0,0,0,32)
+	HFCY EEEEEEEEEEE 0 Bright A_FadeIn(0.1)
+    TNT1 A 0 A_FaceTarget
+    TNT1 A 0 A_SetShootable
+	HFCB C 3 Bright A_FaceTarget
+	HFCB D 0 Bright A_CustomMissile("BombBall2",78,-26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("BombBall2",78,0,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("BombBall2",78,26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("BombBall2",38,26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("BombBall2",38,-26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("ForgottenOneBomb",58, 0, 0)
+    TNT1 A 0 A_CustomMissile("HFGaussProjectile",58, -26, 3)
+    TNT1 A 0 A_CustomMissile("HFGaussProjectile",58, -26, -3)
+	HFCB D 4 Bright A_CustomMissile("HFCyber10K",58, -26, 0)
+	TNT1 A 0 A_UnSetShootable
+    TNT1 AAAAAAAAAAAA 0 A_SpawnItemEx("HFireSpawner",random(-64,64),random(-64,64),random(0,64),0,0,0,0,32)
+    HFCY EEEEEEEEEEE 0 Bright A_FadeOut(0.1,0)
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Wander
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Wander
+    TNT1 A 1 A_PlayWeaponSound("boss/teleport")
+    TNT1 AAAAAAAAAAAA 0 A_SpawnItemEx("HFireSpawner",random(-64,64),random(-64,64),random(0,64),0,0,0,0,32)
+	HFCY EEEEEEEEEEE 0 Bright A_FadeIn(0.1)
+    TNT1 A 0 A_FaceTarget
+    TNT1 A 0 A_SetShootable
+	HFCB C 3 Bright A_FaceTarget
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",78,-26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",78,0,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",78,26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",38,26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",38,-26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("ForgottenOneBomb",58, 0, 0)
+    TNT1 A 0 A_CustomMissile("LavaBall",58, -26, 3)
+    TNT1 A 0 A_CustomMissile("LavaBall",58, -26, -3)
+	HFCB D 4 Bright A_CustomMissile("HFCyberFireBalls",58, -26, 0)
+	TNT1 A 0 A_UnSetShootable
+    TNT1 AAAAAAAAAAAA 0 A_SpawnItemEx("HFireSpawner",random(-64,64),random(-64,64),random(0,64),0,0,0,0,32)
+    HFCY EEEEEEEEEEE 0 Bright A_FadeOut(0.1,0)
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Wander
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Wander
+    TNT1 A 1 A_PlayWeaponSound("boss/teleport")
+    TNT1 AAAAAAAAAAAA 0 A_SpawnItemEx("HFireSpawner",random(-64,64),random(-64,64),random(0,64),0,0,0,0,32)
+	HFCY EEEEEEEEEEE 0 Bright A_FadeIn(0.1)
+    TNT1 A 0 A_FaceTarget
+    TNT1 A 0 A_SetShootable
+	HFCB C 3 Bright A_FaceTarget
+	HFCB D 0 Bright A_CustomMissile("BombBall2",78,-26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("BombBall2",78,0,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("BombBall2",78,26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("BombBall2",38,26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("BombBall2",38,-26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("ForgottenOneBomb",58, 0, 0)
+    TNT1 A 0 A_CustomMissile("LavaBall",58, -26, 3)
+    TNT1 A 0 A_CustomMissile("LavaBall",58, -26, -3)
+	HFCB D 4 Bright A_CustomMissile("HFCyberFireBalls",58, -26, 0)
+	TNT1 A 0 A_UnSetShootable
+    TNT1 AAAAAAAAAAAA 0 A_SpawnItemEx("HFireSpawner",random(-64,64),random(-64,64),random(0,64),0,0,0,0,32)
+    HFCY EEEEEEEEEEE 0 Bright A_FadeOut(0.1,0)
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Wander
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Wander
+    TNT1 A 1 A_PlayWeaponSound("boss/teleport")
+    TNT1 AAAAAAAAAAAA 0 A_SpawnItemEx("HFireSpawner",random(-64,64),random(-64,64),random(0,64),0,0,0,0,32)
+	HFCY EEEEEEEEEEE 0 Bright A_FadeIn(0.1)
+    TNT1 A 0 A_FaceTarget
+    TNT1 A 0 A_SetShootable
+	HFCB C 3 Bright A_FaceTarget
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",78,-26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",78,0,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",78,26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",38,26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",38,-26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("ForgottenOneBomb",58, 0, 0)
+	HFCB D 4 Bright A_CustomMissile("PyroBomb",58, -26, 0)
+	TNT1 A 0 A_UnSetShootable
+    TNT1 AAAAAAAAAAAA 0 A_SpawnItemEx("HFireSpawner",random(-64,64),random(-64,64),random(0,64),0,0,0,0,32)
+    HFCY EEEEEEEEEEE 0 Bright A_FadeOut(0.1,0)
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Wander
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Wander
+    TNT1 A 1 A_PlayWeaponSound("boss/teleport")
+    TNT1 AAAAAAAAAAAA 0 A_SpawnItemEx("HFireSpawner",random(-64,64),random(-64,64),random(0,64),0,0,0,0,32)
+	HFCY EEEEEEEEEEE 0 Bright A_FadeIn(0.1)
+    TNT1 A 0 A_FaceTarget
+    TNT1 A 0 A_SetShootable
+	HFCB C 3 Bright A_FaceTarget
+	HFCB D 0 Bright A_CustomMissile("BombBall2",78,-26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("BombBall2",78,0,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("BombBall2",78,26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("BombBall2",38,26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("BombBall2",38,-26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("ForgottenOneBomb",58, 0, 0)
+	HFCB D 4 Bright A_CustomMissile("FuelRocket",58, -26, 0)
+	TNT1 A 0 A_UnSetShootable
+    TNT1 AAAAAAAAAAAA 0 A_SpawnItemEx("HFireSpawner",random(-64,64),random(-64,64),random(0,64),0,0,0,0,32)
+    HFCY EEEEEEEEEEE 0 Bright A_FadeOut(0.1,0)
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Wander
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Wander
+    TNT1 A 1 A_PlayWeaponSound("boss/teleport")
+    TNT1 AAAAAAAAAAAA 0 A_SpawnItemEx("HFireSpawner",random(-64,64),random(-64,64),random(0,64),0,0,0,0,32)
+	HFCY EEEEEEEEEEE 0 Bright A_FadeIn(0.1)
+    TNT1 A 0 A_FaceTarget
+    TNT1 A 0 A_SetShootable
+	HFCB C 3 Bright A_FaceTarget
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",78,-26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",78,0,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",78,26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",38,26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",38,-26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("ForgottenOneBomb",58, 0, 0)
+	HFCB D 4 Bright A_CustomMissile("HFCyberFlameRocket",58, -26, 0)
+	TNT1 A 0 A_UnSetShootable
+    TNT1 AAAAAAAAAAAA 0 A_SpawnItemEx("HFireSpawner",random(-64,64),random(-64,64),random(0,64),0,0,0,0,32)
+    HFCY EEEEEEEEEEE 0 Bright A_FadeOut(0.1,0)
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Wander
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Wander
+    TNT1 A 1 A_PlayWeaponSound("boss/teleport")
+    TNT1 AAAAAAAAAAAA 0 A_SpawnItemEx("HFireSpawner",random(-64,64),random(-64,64),random(0,64),0,0,0,0,32)
+	HFCY EEEEEEEEEEE 0 Bright A_FadeIn(0.1)
+    TNT1 A 0 A_FaceTarget
+    TNT1 A 0 A_SetShootable
+	HFCB C 3 Bright A_FaceTarget
+	HFCB D 0 Bright A_CustomMissile("BombBall2",78,-26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("BombBall2",78,0,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("BombBall2",78,26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("BombBall2",38,26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("BombBall2",38,-26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("ForgottenOneBomb",58, 0, 0)
+	HFCB D 4 Bright A_CustomMissile("HFCyberFlameRocket",58, -26, 0)
+	TNT1 A 0 A_UnSetShootable
+    TNT1 AAAAAAAAAAAA 0 A_SpawnItemEx("HFireSpawner",random(-64,64),random(-64,64),random(0,64),0,0,0,0,32)
+    HFCY EEEEEEEEEEE 0 Bright A_FadeOut(0.1,0)
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Wander
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Wander
+    TNT1 A 1 A_PlayWeaponSound("boss/teleport")
+    TNT1 AAAAAAAAAAAA 0 A_SpawnItemEx("HFireSpawner",random(-64,64),random(-64,64),random(0,64),0,0,0,0,32)
+	HFCY EEEEEEEEEEE 0 Bright A_FadeIn(0.1)
+    TNT1 A 0 A_FaceTarget
+    TNT1 A 0 A_SetShootable
+	HFCB C 3 Bright A_FaceTarget
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",78,-26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",78,0,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",78,26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",38,26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",38,-26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("ForgottenOneBomb",58, 0, 0)
+	TNT1 A 0 A_PlaySound("weapons/PCNNF")
+	TNT1 A 0 A_CustomMissile("HFCyberFireBalls",58,-26, 6)
+	TNT1 A 0 A_CustomMissile("HFCyberFireBalls",58,-26, -6)
+	HFCB D 4 Bright A_CustomMissile("PyroShot",58, -26, 0)
+	TNT1 A 0 A_UnSetShootable
+    TNT1 AAAAAAAAAAAA 0 A_SpawnItemEx("HFireSpawner",random(-64,64),random(-64,64),random(0,64),0,0,0,0,32)
+    HFCY EEEEEEEEEEE 0 Bright A_FadeOut(0.1,0)
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Wander
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Wander
+    TNT1 A 1 A_PlayWeaponSound("boss/teleport")
+    TNT1 AAAAAAAAAAAA 0 A_SpawnItemEx("HFireSpawner",random(-64,64),random(-64,64),random(0,64),0,0,0,0,32)
+	HFCY EEEEEEEEEEE 0 Bright A_FadeIn(0.1)
+    TNT1 A 0 A_FaceTarget
+    TNT1 A 0 A_SetShootable
+	HFCB C 3 Bright A_FaceTarget
+	HFCB D 0 Bright A_CustomMissile("BombBall2",78,-26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("BombBall2",78,0,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("BombBall2",78,26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("BombBall2",38,26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("BombBall2",38,-26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("ForgottenOneBomb",58, 0, 0)
+	TNT1 A 0 A_PlaySound("weapons/PCNNF")
+	TNT1 A 0 A_CustomMissile("HFCyberFireBalls",58,-26, 6)
+	TNT1 A 0 A_CustomMissile("HFCyberFireBalls",58,-26, -6)
+	HFCB D 4 Bright A_CustomMissile("PyroShot",58, -26, 0)
+	TNT1 A 0 A_UnSetShootable
+    TNT1 AAAAAAAAAAAA 0 A_SpawnItemEx("HFireSpawner",random(-64,64),random(-64,64),random(0,64),0,0,0,0,32)
+    HFCY EEEEEEEEEEE 0 Bright A_FadeOut(0.1,0)
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Wander
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Wander
+    TNT1 A 1 A_PlayWeaponSound("boss/teleport")
+    TNT1 AAAAAAAAAAAA 0 A_SpawnItemEx("HFireSpawner",random(-64,64),random(-64,64),random(0,64),0,0,0,0,32)
+	HFCY EEEEEEEEEEE 0 Bright A_FadeIn(0.1)
+    TNT1 A 0 A_FaceTarget
+    TNT1 A 0 A_SetShootable
+	HFCB C 3 Bright A_FaceTarget
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",78,-26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",78,0,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",78,26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",38,26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("FamineTracer2",38,-26,random(-2,3))
+	HFCB D 0 Bright A_CustomMissile("ForgottenOneBomb",58, 0, 0)
+	TNT1 A 0 A_PlaySound("weapons/PCNNF")
+	TNT1 A 0 A_CustomMissile("HFCyberFireBalls",58,-26, 6)
+	TNT1 A 0 A_CustomMissile("HFCyberFireBalls",58,-26, -6)
+	HFCB D 4 Bright A_CustomMissile("PyroShot",58, -26, 0)
+	TNT1 A 0 A_UnSetShootable
+    TNT1 AAAAAAAAAAAA 0 A_SpawnItemEx("HFireSpawner",random(-64,64),random(-64,64),random(0,64),0,0,0,0,32)
+    HFCY EEEEEEEEEEE 0 Bright A_FadeOut(0.1,0)
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Wander
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Wander
+    TNT1 A 1 A_PlayWeaponSound("boss/teleport")
+    TNT1 AAAAAAAAAAAA 0 A_SpawnItemEx("HFireSpawner",random(-64,64),random(-64,64),random(0,64),0,0,0,0,32)
+	HFCY EEEEEEEEEEE 0 Bright A_FadeIn(0.1)
+    TNT1 A 0 A_FaceTarget
+    TNT1 A 0 A_SetShootable
+	HFCB D 20 Bright 
+	TNT1 A 0 A_ChangeFlag("NOPAIN",0)
+	TNT1 A 0 A_UnSetInvulnerable
+	goto see
+  Death:
+    TNT1 A 0 A_Facetarget
+    TNT1 AAAAAAAAAAAA 0 A_SpawnItemEx("HFireSpawner",random(-64,64),random(-64,64),random(0,64),0,0,0,0,32)
+    HFCS A 80 A_Scream	
+	TNT1 A 0 Radius_Quake(10,8,0,24,0)	
+	TNT1 A 0 A_PlaySound("monsters/darkcyberstomp")
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_SpawnItemEx("HFLavaMist",0,0,random(0,120),(Random (-8, 8)),(Random (-8, 8)),(Random (0, 8)),(Random (0, 360)))
+	TNT1 A 0 A_SpawnItemEx("DemonicChalice",0,0,64,random(1,8),0,2,random(0,360),0,0)
+	TNT1 A 0 A_SpawnItemEx("ScrollOfHellfire",0,0,64,random(1,8),0,2,random(0,360),0,0)
+	TNT1 A 0 A_SpawnItemEx("Demon Tech Shotgun",0,0,64,random(0,8),0,2,random(1,360),0,0)
+	TNT1 A 0 A_SpawnItemEx("PyroCannon",0,0,64,random(1,8),0,2,random(0,360),0,0)
+	TNT1 A 0 A_SpawnItemEx("HellfireUltrasphere",0,0,64,random(1,8),0,2,random(0,360),0,64)
+	TNT1 A 0 A_SpawnItemEx("UnbelieveabilitySphere",0,0,64,random(1,8),0,2,random(0,360),0,64)
+	TNT1 A 0 A_SpawnItemEx("LegendaryRune",0,0,64,random(1,8),0,2,random(0,360),0,64)
+	HFCS B 50
+	HFCY G 10
+	TNT1 A 0 A_PlaySound("HFCyb/laugh2")
+    TNT1 A 0 Radius_Quake(10,80,0,24,0)
+	HFCY G 0 A_CustomMissile("PentaLine1",0,0,-72,2)
+    HFCY G 0 A_CustomMissile("PentaLine1",0,0,-144,2)
+    HFCY G 0 A_CustomMissile("PentaLine1",0,0,-216,2)
+    HFCY G 0 A_CustomMissile("PentaLine1",0,0,-288,2)
+    HFCY G 0 A_CustomMissile("PentaLine1",0,0,0,2)
+	HFCY GGGGGGGGGGGGGGGGGG 0 Bright A_SpawnItemEx("RainCometSpawner",Random(1250,-1250),Random(1250,-1250),0,0,0,0,SXF_NOCHECKPOSITION,0)
+    HFCY G 50 A_NoBlocking
+	TNT1 AAAAAAAAAAAAAAAAA 0 A_SpawnItemEx("HFFireSpawned2",random(-64,64),random(-64,64),random(0,64),0,0,0,0,32)
+	HFCY G 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	HFCY GGGGG 2 A_FadeOut
+	TNT1 AAAAAAAAAAAAAAAAA 0 A_SpawnItemEx("HFFireSpawned2",random(-64,64),random(-64,64),random(0,64),0,0,0,0,32)
+	TNT1 AAAAAAAAAAAAAAAAA 0 A_SpawnItemEx("HFFireSpawned2",random(-64,64),random(-64,64),random(0,64),0,0,0,0,32)
+	TNT1 A 0 ACS_ExecuteAlways(668)
+    TNT1 A -1 Bright A_KillMaster
+	stop
+}
+}
+
+ACTOR PainfulKaboom
+{
+Speed 3
+Damage 0
+Renderstyle Add
+Alpha 0.75
+PROJECTILE
++NOBLOCKMAP
++NOTELEPORT
++DONTSPLASH
++NOGRAVITY
++MISSILE
++FORCEXYBILLBOARD
++NOCLIP
+Scale 1.3
+States
+{
+Spawn:
+TNT1 A 0
+FXPO A 1 Bright A_PlaySound("weapons/rocklx")
+TNT1 A 0 A_Explode(16, 192, 0, 1, 128)
+FXPO ABBCDEFGHIJKLM 1 Bright A_FadeOut(0.05)
+Stop
+}
+}
+
+Actor ForgottenOneBomb
+{
+    Radius 12
+    Height 24
+    Speed 80
+	FastSpeed 120
+	RENDERSTYLE ADD
+	ALPHA 0.8
+	Scale 0.8
+    Damage 45
+	+ExtremeDeath
+	+SeekerMissile
+	+NOTIMEFREEZE
+	+NoGravity
+	+FoilInvul
+	Projectile
+	DamageType "HFCyb3r"
+    ExplosionDamage 60
+    ExplosionRadius 128
+    SeeSound "forgotten/attack"
+    DeathSound "forgotten/death"
+    States
+    {
+    Spawn:
+	   TNT1 A 0
+       FRGO CCCCDDDD 1 BRIGHT A_SpawnItemEx("ForgottenOneFireSpawner", 0, 0, 0, 0, 0, 0, 0, 128)
+	   TNT1 A 0 A_SeekerMissile(0,6)
+       Loop
+    Death:
+       FRGO H 4 BRIGHT A_Mushroom("RainComet", 4)
+       FRGO I 4 BRIGHT A_Explode
+       FRGO JK 4 BRIGHT
+       stop
+    }
+}
+
+Actor BombBall2 : BombBall
+{
+Damage 18
+Speed 35
++DontReflect
++NOTIMEFREEZE
++FoilInvul
+DamageType "HFCyb3r"
+Species "Cybers"
+}
+
+Actor FamineTracer2 : FamineTracer
+{
+Damage 18
+Speed 35
++DontReflect
++NOTIMEFREEZE
++FoilInvul
+DamageType "HFCyb3r"
+Species "Cybers"
+}
+
+ACTOR BigOrangeBloodCloud : OrangeBloodCloud
+{
+Speed 2
+Scale 1.5
+}
+
+ACTOR HFCyberFlame
+{
++MISSILE
++DONTSPLASH
++NOBLOCKMAP
++NOGRAVITY
++NOTELEPORT
++FORCEXYBILLBOARD
+RenderStyle Add
+Scale 0.5
+States
+{
+Spawn:
+FIR1 ABCDEFGHIJKL 2 Bright A_FadeOut
+Stop
+}
+}
+
+ACTOR HFCyberFlameSpawner : RedParticleSpawner
+{
++NOTIMEFREEZE
+  States
+  {
+  Spawn:
+    TNT1 A 0
+  	TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+	TNT1 AA 0 A_SpawnItemEx("HFCyberFlame",random(48,-48),random(48,-48),random(0,96),0,0,random(2,6),0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,0)
+    TNT1 A 1
+    Stop
+  }
+}
+
+
+Actor HFCyberRainCometNull
+{
+  Radius 10
+  Height 10
+  Speed 8
+  Projectile
+  +FloorClip
+  +Ripper
+  +CeilingHugger
+  +DONTHARMSPECIES
+  ReactionTime 80
+  States
+  {
+  Spawn:
+	TNT1 A 0 A_Countdown
+    ZAP5 A 1 Bright A_Wander
+    ZAP5 A 8 Bright A_CustomMissile("HellFireFallingComet",-24,random(0,128),random(0,360),2,random(1,89))
+    Loop
+  Death:
+    ZAP5 A 0
+    Stop
+  }
+}
+
+Actor HellFireFallingComet
+{
+  Radius 6
+  Height 6
+  Speed 5
+  Damage 20
+  Damagetype "Cyber10K"
+  ExplosionDamage 48
+  ExplosionRadius 192
+  Scale 0.55
+  Projectile
+  SeeSound "comet/launch"
+  DeathSound "comet/explosion"
+  +MTHRUSPECIES
+  -NoGravity
+  -Float
+  +FloorClip
+  +DONTHARMSPECIES 
+  +SpawnCeiling
+  MissileType HFFCometTail
+  MissileHeight 0
+  States
+  {
+  Spawn:
+    G001 AABBCC 1 Bright A_MissileAttack
+    Loop
+  Death:
+    TNT1 A 0
+	TNT1 A 0 A_Explode
+	TNT1 A 0 A_SetTranslucent(0.75,1)
+	TNT1 A 0 A_SpawnItemEx("OrangeParticleSpawner", 0, 0, 0, 0, 0, 0, 0, 128)
+	TNT1 AAA 0 A_CustomMissile("Kaboom", 0, 0, random(0,360), 2, random(0,360))	
+	TNT1 AAA 0 A_CustomMissile("SmokeFX2", 0, 0, random(0,360), 2, random(0,360))
+	GOO1 DEFGH 3 Bright
+	Stop	
+  }
+}
+
+ACTOR HFFCometTail : CometTail
+{
+Scale 1.15
+States
+{
+Spawn:
+TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+TNT1 A 2 Bright
+FRTB DEFGHI 2 Bright
+Stop
+Toaster:
+TNT1 A 0
+Stop	
+}
+}
+ACTOR PentaLine1
+{
+	Radius 0
+	Height 32
+	Speed 200
+        RenderStyle NONE
+	Alpha 0.85
+	PROJECTILE
+        +FLOORHUGGER
+        +NOCLIP
+        SeeSound "weapons/diasht"
+	states
+	{
+	Spawn:
+           TNT1 A 1
+           TNT1 A 0 A_CustomMissile("PentaLine2",0,0,-198,2)
+           TNT1 A 0 A_CustomMissile("PentaLine2",0,0,198,2)
+	   stop
+	}
+}
+
+ACTOR PentaLine2
+{
+	Radius 0
+	Height 32
+	Speed 16
+        RenderStyle NONE
+	Alpha 0.85
+	PROJECTILE
+        +FLOORHUGGER
+        +NOCLIP
+	states
+	{
+	Spawn:
+           TNT1 AAAAAAAAAAAAAAAA 1 A_SpawnItem("PentaFire",0,0)
+	   stop
+	}
+}
+
+ACTOR PentaFire
+{
+	Radius 0
+	Height 32
+	Speed 0
+        DamageType fire
+        RenderStyle Add
+	Alpha 0.85
+        ReactionTime 2
+	PROJECTILE
+        +FLOORHUGGER
+        +DONTSPLASH
+        -NOGRAVITY
+	states
+	{
+	Spawn:
+           HFHF A 1 Bright A_Explode(1,32,1)
+           HFHF A 2 Bright A_PlaySound("weapons/onfire")
+           HFHF BCDEFGHIJKLM 3 Bright A_Explode(1,32,1)
+           HFHF A 0 Bright A_CountDown
+	   loop
+        Death:
+           HFHF NOP 3 Bright A_Explode(2,32,1)
+           stop
+	}
+}
+
+
+ACTOR HellFireCyberGhostA
+{
+Scale 1.1
+RENDERSTYLE Translucent
+Alpha 0.75
++NOGRAVITY
++CLIENTSIDEONLY
++DONTSPLASH
++NOTIMEFREEZE
++NOINTERACTION
++NOCLIP
+States
+{
+Spawn:
+    TNT1 A 0 
+    TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+    HFCY A 0 A_SpawnItem("HFWalkFire")
+    HFCY A 2 A_FadeOut(0.18)
+    Loop
+    Toaster:
+    TNT1 A 0
+	Stop	
+    }
+}
+
+ACTOR HellFireCyberGhostB : HellFireCyberGhostA
+{   
+States
+{
+Spawn:
+    HFCY B 0 A_SpawnItem("HFWalkFire")
+    HFCY B 2 A_FadeOut(0.18)
+    Loop
+    }
+}
+
+ACTOR HellFireCyberGhostC : HellFireCyberGhostA
+{   
+States
+{
+Spawn:
+    HFCY C 0 A_SpawnItem("HFWalkFire")
+    HFCY C 2 A_FadeOut(0.18)
+    Loop
+    }
+}
+
+ACTOR HellFireCyberGhostD : HellFireCyberGhostA
+{   
+States
+{
+Spawn:
+    HFCY D 0 A_SpawnItem("HFWalkFire")
+    HFCY D 2 A_FadeOut(0.18)
+    Loop
+    }
+}
+
+ACTOR HFWalkFire
+{
+  Scale 1.5
+  Speed 0
+  RenderStyle Add
+  Alpha 0.75
+  Damage 1
+  DamageType "Cyber10k"
+  +NOCLIP
+  +MISSILE
+  +DROPOFF
+  +RANDOMIZE
+  +DONTSPLASH
+  +NOTIMEFREEZE
+  +NOTELEPORT
+  +DONTHARMSPECIES
+  +THRUSPECIES
+  Species "Cybers"
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+    HFWF ABC 3 Bright
+    TNT1 A 0 A_Jump(191,3)
+    TNT1 A 0 A_CustomMissile("HFWalkFire", 0, 24, 0)
+    TNT1 A 0 A_CustomMissile("HFWalkFire", 0, -24, 0)
+    HFWF DEFGHIJKLMNO 3 Bright
+    Stop
+  Toaster:
+    TNT1 A 0
+	Stop
+    }
+}
+Actor HFCyberRocket : CardinalRocket
+{
+   Speed 45
+   FastSpeed 55
+   Scale 0.9
+   Damage 23
+   SeeSound "HFCyb/rocket"
+   DeathSound "weapons/rocklx"
+   DamageType "HFCyb3r"
+   -ThruSpecies
+   +DONTREFLECT
+   +PIERCEARMOR
+   +FORCERADIUSDMG
+   +DONTHARMSPECIES
+   States
+   {
+   Spawn: 
+    TNT1 A 0 A_CustomMissile("MissileTrail",Random(4,6),Random(-2,2))
+	CROC A 2 Bright A_CustomMissile("ProjectileTrailParticleOrange",Random(4,6),Random(-2,2))
+	TNT1 A 0 A_CustomMissile("MissileTrail",Random(4,6),Random(-2,2))	
+	CROC A 2 Bright A_CustomMissile("ProjectileTrailParticleOrange",Random(4,6),Random(-2,2))
+    loop
+   Death:
+	  TNT1 A 0
+	  TNT1 A 0 A_SpawnItemEx("OrangeParticleSpawner", 0, 0, 0, 0, 0, 0, 0, 128) 
+	  TNT1 AAA 0 A_CustomMissile("Kaboom3", 0, 0, random(0,360), 2, random(0,360))
+	  TNT1 AAA 0 A_CustomMissile("SmokeFX2", 0, 0, random(0,360), 2, random(0,360))
+	  TNT1 AAAA 0 A_SpawnItemEx("Debris",0,0,0,Random(4,-4),Random(4,-4),Random(4,8),0,128)
+	  CROC B 6 Bright A_Explode
+	  CBEX B 0 Bright A_CustomMissile("FuelExplosion01",0,0,0,6)
+      CBEX B 0 Bright A_CustomMissile("FuelExplosion01",0,0,45,6)
+      CBEX B 0 Bright A_CustomMissile("FuelExplosion01",0,0,90,6)
+      CBEX B 0 Bright A_CustomMissile("FuelExplosion01",0,0,135,6)
+      CBEX B 0 Bright A_CustomMissile("FuelExplosion01",0,0,180,6)
+      CBEX B 0 Bright A_CustomMissile("FuelExplosion01",0,0,225,6)
+      CBEX B 0 Bright A_CustomMissile("FuelExplosion01",0,0,270,6)
+      CBEX B 0 Bright A_CustomMissile("FuelExplosion01",0,0,315,6)
+	  CROC CD 5 Bright A_SetTranslucent(0.75,1)
+      stop
+   }
+}
+
+ACTOR PyroShot
+{
+   PROJECTILE
+   +SeekerMissile
+   +FORCERADIUSDMG
+   +ExtremeDeath
+   +DONTHARMSPECIES
+   +DONTBLAST
+   +PIERCEARMOR
+   +NoGravity
+   +FoilInvul
+   +DONTREFLECT
+   SeeSound "weapons/firbfi"
+   DeathSound "Weapons/PCnnEx"
+   DamageType "HFCyb3r"
+   Alpha 1.0
+   Scale 1.4
+   RenderStyle Add
+   Speed 55
+   FastSpeed 70
+   PROJECTILE
+   Damage 300
+   Radius 11
+   Height 6
+   states
+   {
+   Spawn:
+    HFBA ABC 1 A_SpawnItemEx("HFExTrail",0,0,0,0,0,0,0)
+    Goto Spawn
+   Death:
+	  TNT1 A 0 Radius_Quake(15,20,0,20,0)
+	  HFBA D 0 Bright A_CustomMissile("PyroFuelExplosion01",0,0,0,30)
+      HFBA D 0 Bright A_CustomMissile("PyroFuelExplosion01",0,0,65,30)
+      HFBA D 0 Bright A_CustomMissile("PyroFuelExplosion01",0,0,120,30)
+      HFBA D 0 Bright A_CustomMissile("PyroFuelExplosion01",0,0,165,30)
+      HFBA D 0 Bright A_CustomMissile("PyroFuelExplosion01",0,0,220,30)
+      HFBA D 0 Bright A_CustomMissile("PyroFuelExplosion01",0,0,265,30)
+      HFBA D 0 Bright A_CustomMissile("PyroFuelExplosion01",0,0,330,30)
+      HFBA D 0 Bright A_CustomMissile("PyroFuelExplosion01",0,0,375,30)
+      HFBA D 0 Bright A_Mushroom("HFCyberMushroomFireballs",8)
+	  TNT1 A 0 A_Explode(4000,600,0,1)
+      HFBA DEFGHIJKLMN 1 BRIGHT 
+	  TNT1 A 0 A_SpawnItemEx("PyroShotEx",0,0,0,0,0,0,0)
+	  TNT1 A 0 A_SpawnItemEx("PyroShotEx",0,0,0,0,0,0,0)
+      Stop
+   }
+}
+
+Actor FuelExplosionSpawner : IFire
+{
+  RenderStyle Add
+  Alpha 0.85
+  Scale 1
+  +NOGRAVITY
+  +SEEKERMISSILE
+  +NOTARGET
+  +NODAMAGETHRUST
+  Obituary "The HellFire Cyberdemon converted the Head of %o in one more of their trophies, now is a decoration in his home."
+  DamageType "HFCyb3r"
+  Species "Cybers"
+States
+{
+Spawn:
+	  HFBA D 0 Bright A_CustomMissile("FuelExplosion01",0,0,0,30)
+      HFBA D 0 Bright A_CustomMissile("FuelExplosion01",0,0,65,30)
+      HFBA D 0 Bright A_CustomMissile("FuelExplosion01",0,0,120,30)
+      HFBA D 0 Bright A_CustomMissile("FuelExplosion01",0,0,165,30)
+      HFBA D 0 Bright A_CustomMissile("FuelExplosion01",0,0,220,30)
+      HFBA D 0 Bright A_CustomMissile("FuelExplosion01",0,0,265,30)
+      HFBA D 0 Bright A_CustomMissile("FuelExplosion01",0,0,330,30)
+      HFBA D 0 Bright A_CustomMissile("FuelExplosion01",0,0,375,30)
+	  Stop
+	  }}
+
+ACTOR FuelExplosion01
+{
+   Radius 8
+   Height 8
+   Speed 6
+   Damage 0
+   PROJECTILE
+   RENDERSTYLE ADD
+   DONTHURTSHOOTER
+   Damagetype "HFCyb3r"
+   +RIPPER
+   +BLOODLESSIMPACT
+   +DONTHARMSPECIES
+   +EXTREMEDEATH
+   +SPECTRAL  
+   SeeSound "weapons/firex3"
+   ALPHA 0.80
+   States
+   {
+   Spawn:
+      TNT1 AAAAA 3 A_SpawnItem("FuelExplosion02",0,0)
+      Stop
+   }
+}
+
+ACTOR FuelExplosion02
+{   
+   Radius 5
+   Height 5
+   Speed 0
+   Damage 0
+   PROJECTILE
+   Scale 0.8
+   RENDERSTYLE ADD
+   +SPECTRAL
+   +NOGRAVITY
+   +FORCERADIUSDMG
+   +DONTHARMSPECIES
+   +EXTREMEDEATH
+   Damagetype "HFCyb3r"
+   ALPHA 0.85
+   SeeSound "weapons/firex3"
+   States
+   {
+   Spawn:
+      CBEX A 2 Bright
+      CBEX B 2 Bright A_Explode(8,164)
+      CBEX CDEFGHIJ 2 Bright
+      stop
+   }
+}
+
+ACTOR PyroFuelExplosion01 : FuelExplosion01
+{
+   States
+   {
+   Spawn:
+      TNT1 AAAAA 3 A_SpawnItem("PyroFuelExplosion02",0,0)
+      Stop
+   }
+}
+
+ACTOR PyroFuelExplosion02 : FuelExplosion02
+{   
+   States
+   {
+   Spawn:
+      RPEX A 2 Bright
+      RPEX B 2 Bright A_Explode(16,164)
+      RPEX CDEFGHIJ 2 Bright
+      stop
+   }
+}
+Actor PyroShotEx
+{
+	+NOBLOCKMAP 
+	+NOGRAVITY
+	+CLIENTSIDEONLY 
+	+NOINTERACTION
+	ReactionTime 10
+	States 
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 1 A_SpawnItemEx("HFKaboom",0,0,0,random(-9,9),random(-10,10),random(-10,10),0)
+		TNT1 A 0 A_Countdown
+		Loop
+	Death:
+		TNT1 A 0
+		Stop
+	}
+}
+Actor HFExTrail
+{
+	+CLIENTSIDEONLY 
+	+NOBLOCKMAP
+	+NOGRAVITY 
+	+NOINTERACTION
+	States 
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 1 A_SpawnItemEx("HFKaboom",-8,0,0,-6, 0,random(-1,1),0)
+		Stop
+	}
+}
+
+ACTOR HFKaboom : Kaboom
+{
+Speed 2
+Scale 1.6
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+FXPO AABBCDEFGHIJKLM 1 Bright A_FadeOut(0.05)
+Stop
+Toaster:
+TNT1 A 0
+Stop
+}
+}
+
+Actor PyroCannonSteam : DTech10KSteam
+{
+Scale 2.5
+}
+
+ACTOR HellCyberFireSpawner2
+{
+    Radius 5
+    Height 5
+    Speed 20
+    FastSpeed 25
+    Damage 0
+    +RIPPER
+	+DONTHARMSPECIES
+    +FLOORHUGGER
+    +BLOODLESSIMPACT
+    +THRUSPECIES
+    Species "Cybers"
+    DamageType "HFCyb3r"
+    Obituary "The HellFire Cyberdemon converted the Head of %o into another one of his trophies, now it is a decoration in his home."
+	Projectile
+	MissileType HFCybFire
+	Missileheight 0
+	States
+	{
+	Spawn: 
+		TNT1 A 3 Bright A_MissileAttack
+  		TNT1 A 3
+  		TNT1 A 3
+		Loop
+	Death:	
+		TNT1 A 6
+		Stop
+	}
+}
+
+ACTOR HellCyberHandsSpawner
+{
+    Radius 5
+    Height 5
+    Speed 20
+    FastSpeed 25
+    Damage 0
+    +RIPPER
+	+DONTHARMSPECIES
+    +FLOORHUGGER
+    +BLOODLESSIMPACT
+    +THRUSPECIES
+    Species "Cybers"
+    DamageType "HFCyb3r"
+    Obituary "The HellFire Cyberdemon converted the Head of %o into another one of his trophies, now it is a decoration in his home."
+	Projectile
+	MissileType HFUndeadHandProjectile2
+	Missileheight 0
+	States
+	{
+	Spawn: 
+		TNT1 A 3 Bright A_MissileAttack
+  		TNT1 A 3
+  		TNT1 A 3
+		Loop
+	Death:	
+		TNT1 A 6
+		Stop
+	}
+}
+
+ACTOR HFCybFire
+{
+  Radius 1
+  Height 1
+  Speed 0
+  Damage 0
+  Projectile
+  RenderStyle Add
+  +NOCLIP
+  +FLOORHUGGER
+  +DONTHARMSPECIES
+  +FORCERADIUSDMG
+  Obituary "The HellFire Cyberdemon converted the Head of %o in one more of their trophies, now is a decoration in his home."
+  DamageType "HFCyb3r"
+  Species "Cybers"
+  SeeSound "weapons/rocklx"
+  States
+  {
+  Spawn:
+    XXBF AB 2 Bright
+    XXBF C 2 Bright A_Explode(42,106,0,0,0,0,0)
+    XXBF DEFGHIJKLMNOPQRST 2 Bright
+    Stop       
+   	}
+}
+ACTOR HFCyberTracer
+{
+  Radius 5
+  Height 5
+  Damage 16
+  RenderStyle Add
+  Alpha 0.65
+  Projectile
+  Species "Cybers"
+  Scale 2
+  +ExtremeDeath
+  +FloorHugger
+  +DONTHARMSPECIES
+  +FORCERADIUSDMG
+  +DontSplash
+  -NoGravity
+  Speed 28
+  FastSpeed 32
+  DamageType "HFCyb3r"
+  Obituary "The HellFire Cyberdemon converted the Head of %o into another one of his trophies, now it is a decoration in his home."
+  Seesound "weapons/diasht"
+  DeathSound "weapons/firex3"   
+  States
+  {
+  Spawn:
+    TNT1 A 0 A_PlaySound("monster/ambientfire2")
+    TNT1 A 1 Bright A_SpawnItemEx("ATracerPuff", 0, 0, 0, 0, 0, 0, 0, 128)
+    TNT1 A 1 Bright A_SpawnItemEx("ATracerPuff", 0, 0, 0, 0, 0, 0, 0, 128)
+    TNT1 A 1 Bright A_SpawnItemEx("ATracerPuff", 0, 0, 0, 0, 0, 0, 0, 128)
+    TNT1 A 1 Bright A_SpawnItemEx("ATracerPuff", 0, 0, 0, 0, 0, 0, 0, 128)	
+    Loop
+  Death:
+    TNT1 A 0 A_SpawnItemEx("OrangeParticleSpawner", 0, 0, 0, 0, 0, 0, 0, 128)
+    FTRA K 4 Bright
+    FTRA L 4 Bright A_Explode(42, 64)
+    FTRA MNO 3 Bright
+    Stop
+  }
+}
+ACTOR HFCyberTracer2
+{
+  Radius 5
+  Height 5
+  Damage 6
+  RenderStyle Add
+  Alpha 0.65
+  Projectile
+  Species "Cybers"
+  Scale 2
+  +ExtremeDeath
+  +FloorHugger
+  +DontSplash
+  +DONTHARMSPECIES
+  -NoGravity
+  +PIERCEARMOR
+  +DoomBounce
+  Speed 28
+  BounceCount 3
+  FastSpeed 32
+  DamageType "HFCyb3r"
+  Obituary "The HellFire Cyberdemon converted the Head of %o into another one of his trophies, now it is a decoration in his home."
+  Seesound "weapons/diasht"
+  DeathSound "weapons/firex3"   
+  States
+  {
+  Spawn:
+    TNT1 A 0 A_PlaySound("monster/ambientfire2")
+    TNT1 A 1 Bright A_SpawnItemEx("ATracerPuff", 0, 0, 0, 0, 0, 0, 0, 128)
+    TNT1 A 1 Bright A_SpawnItemEx("ATracerPuff", 0, 0, 0, 0, 0, 0, 0, 128)
+    TNT1 A 1 Bright A_SpawnItemEx("ATracerPuff", 0, 0, 0, 0, 0, 0, 0, 128)
+    TNT1 A 1 Bright A_SpawnItemEx("ATracerPuff", 0, 0, 0, 0, 0, 0, 0, 128)	
+    Loop
+  Death:
+    TNT1 A 0 A_SpawnItemEx("OrangeParticleSpawner", 0, 0, 0, 0, 0, 0, 0, 128)
+    FTRA K 4 Bright
+    FTRA L 4 Bright A_Explode(42, 64)
+    FTRA MNO 3 Bright
+    Stop
+  }
+}
+ACTOR HFCyberStomp
+{
+    Species "Cybers"
+	DamageType "HFCyb3r"
+	Obituary "uh oh stinky"
+	Speed 0
+	Height 20
+	Radius 20
+	Damage (0)
+	Projectile
+	+DONTHARMSPECIES
+	+THRUSPECIES
+	+DONTBLAST
+	+NOBLOCKMAP
+	+NOGRAVITY
+	+FORCERADIUSDMG
+	-TELESTOMP
+	States
+	{
+	Spawn:
+	TNT1 A 0
+	TNT1 A 1 A_Explode(random(300,400), 300, 0,0,random(300,400))
+	Stop
+  }
+}
+Actor CyberSeekingComet : BehemothSeekingComet
+{
+   Speed 45
+   FastSpeed 55
+   DamageType "HFCyb3r"
+   Damage 26
+   +DONTREFLECT
+   +DONTHARMSPECIES
+   +FOILINVUL
+}
+
+ACTOR HFCyberFireballs
+{
+	Radius 6
+	Height 8
+	Speed 50
+	FastSpeed 60
+	Damage 65
+	Projectile
+	+RANDOMIZE
+	+DONTHARMSPECIES
+	+DONTREFLECT
+	+SeekerMissile
+	+ExtremeDeath
+	Damagetype "HFCyb3r"
+	RenderStyle Translucent
+	Alpha 1
+	Scale 1.0
+    SeeSound "imp/attack"
+    DeathSound "comet/explosion"
+	States
+	{
+	Spawn:
+	TNT1 A 1
+	Goto Fly
+	Fly:
+		HFTB AB 1 BRIGHT A_SpawnItem("HFCybFireballTrail")
+		TNT1 A 0 A_SeekerMissile(0,2)
+		Loop
+	Death:
+		TNT1 A 0 A_Explode(190, 192)//Damage, Radius
+		TNT1 A 0 A_SpawnItemEx("LCABaseScorch", 0, 0, 0, 0, 0, 0, Random(0,359))
+        TNT1 AAAA 0 A_CustomMissile ("OrangeParticleSpawner", 0, 0, random (0, 360), 2, random (0, 180))
+	    EXPL A 0 Radius_Quake(15,20,0,20,0)
+		BEXP B 0 BRIGHT A_Scream
+		Goto EndAnimation
+		EndAnimation:
+		TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+		TNT1 A 0 A_SpawnItemEx("CyberSuperMeteor_m_Explosion", 0, 0, 0, 0, 0, 0, -1, SXF_NOCHECKPOSITION)//A_CustomMissile("Meteor_m_Explosion",0+Random(5,80),0+Random(35,-35),0+Random(0,370))
+		TNT1 A 0 A_SpawnItemEx("HFCyberSuperMeteorSmoke", 0, 0, 0, 0.01 * Random(-125, 125), 0.01 * Random(-125, 125), 0.01 * Random(25, 245), 0, 128, 0)
+		Stop
+	    Toaster:
+        TNT1 A 0
+        Stop
+	}
+}
+
+Actor HFCyberSuperMeteorSmoke : SuperMeteor_m_FX_Smoke
+{
+Scale 1.0
+}
+
+
+ACTOR HFCybFireballTrail
+{
+	+MISSILE
+	+NOGRAVITY
+	+THRUACTORS
+	+CLIENTSIDEONLY
+	RenderStyle Add
+	Alpha 0.6
+	Speed 1
+	SCALE 1.0
+	States
+	{
+	Spawn:
+	    TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+	    TNT1 A 1
+		HFTB ABCDEFGHI 1 BRIGHT
+		Stop
+Toaster:
+    TNT1 A 0
+    Stop
+	}
+}
+
+Actor HFCyberFireballs2 : HFCyberFireballs
+{
+Speed 50
+FastSpeed 60
+DamageType "HFCyb3r"
+BounceCount 2
+   -SeekerMissile
+   -NoGravity
+   +PIERCEARMOR
+   +DoomBounce
+}
+
+Actor HFCyberPyroBoom : PyroShot
+{
+States
+{
+Spawn:
+TNT1 A 0 
+Goto Death
+   Death:
+      TNT1 A 0 A_Explode(2000,500,0,1)
+	  TNT1 A 0 Radius_Quake(15,20,0,20,0)
+	  HFBA D 0 Bright A_CustomMissile("FuelExplosion01",0,0,0,6)
+      HFBA D 0 Bright A_CustomMissile("FuelExplosion01",0,0,45,6)
+      HFBA D 0 Bright A_CustomMissile("FuelExplosion01",0,0,90,6)
+      HFBA D 0 Bright A_CustomMissile("FuelExplosion01",0,0,135,6)
+      HFBA D 0 Bright A_CustomMissile("FuelExplosion01",0,0,180,6)
+      HFBA D 0 Bright A_CustomMissile("FuelExplosion01",0,0,225,6)
+      HFBA D 0 Bright A_CustomMissile("FuelExplosion01",0,0,270,6)
+      HFBA D 0 Bright A_CustomMissile("FuelExplosion01",0,0,315,6)
+      HFBA D 0 Bright A_Mushroom("HFCyberMushroomFireballs",8)
+      HFBA DEFGHIJKLMN 1 BRIGHT 
+	  TNT1 A 0 A_SpawnItemEx("PyroShotEx",0,0,0,0,0,0,0)
+      Stop
+   }
+}
+
+ACTOR HFCyberMushroomFireballs
+{
+   Radius 10
+   Height 8
+   Damage 30
+   PROJECTILE  
+   RENDERSTYLE Translucent 
+   Alpha 1
+   Scale 1.0
+   Speed 35
+   SeeSound "comet/launch"
+   DeathSound "comet/explosion"
+   DamageType "HFCyb3r"
+   Species "Cybers"
+   BounceCount 3
+   -NoGravity
+   +DONTREFLECT
+   +DoomBounce
+   +SKYEXPLODE
+   +SPECTRAL
+   +DONTHARMSPECIES
+   states
+   {
+	Spawn:
+	TNT1 A 1
+	Goto Fly
+	Fly:
+		HFTB AB 1 BRIGHT A_SpawnItem("HFCybFireballTrail")
+		Loop
+	Death:
+		TNT1 A 0 A_Explode(190, 192,XF_NOTMISSILE)//Damage, Radius
+		TNT1 A 0 A_SpawnItemEx("LCABaseScorch", 0, 0, 0, 0, 0, 0, Random(0,359))
+        TNT1 AAA 0 A_CustomMissile ("OrangeParticleSpawner", 0, 0, random (0, 360), 2, random (0, 180))
+	    EXPL A 0 Radius_Quake(15,20,0,20,0)
+		BEXP B 0 BRIGHT A_Scream
+		Goto EndAnimation
+		EndAnimation:
+		TNT1 A 0 A_SpawnItemEx("CyberSuperMeteor_m_Explosion", 0, 0, 0, 0, 0, 0, -1, SXF_NOCHECKPOSITION)//A_CustomMissile("Meteor_m_Explosion",0+Random(5,80),0+Random(35,-35),0+Random(0,370))
+		TNT1 AAAA 0 A_SpawnItemEx("HFCyberSuperMeteorSmoke", 0, 0, 0, 0.01 * Random(-125, 125), 0.01 * Random(-125, 125), 0.01 * Random(25, 245), 0, 128, 0)
+		Stop
+   }
+}
+
+
+Actor HFCyberMushroomFireballs2 : HFCyberMushroomFireballs
+{
+Obituary "%o payed the ultimate price for his greed."
+}
+
+
+Actor FuelRocket
+{
+   Radius 8
+   Height 12
+   Speed 50
+   FastSpeed 60
+   Damage 30
+   PROJECTILE
+   RENDERSTYLE ADD
+   Damagetype "Cyber10k"
+   ALPHA 0.95
+   SeeSound "HFCyb/rocket"
+   DeathSound "weapons/rocklx"
+   ExplosionDamage 128
+   ExplosionRadius 128
+   DONTHURTSHOOTER
+   +NOTIMEFREEZE
+   +EXTREMEDEATH
+   +SPECTRAL
+   +DONTREFLECT
+   +SeekerMissile
+   States
+   {
+   Spawn: 
+    TNT1 A 0
+    TNT1 A 0 A_Jump(128,"Homing")
+Normal:
+    TNT1 A 0 A_CustomMissile("MissileTrail",0,Random(-2,2))
+    MISN A 1 Bright A_CustomMissile("ProjectileTrailParticleOrange",0,Random(-2,2))
+    Loop	
+Homing:
+	TNT1 A 0 A_Tracer2
+    TNT1 A 0 A_CustomMissile("MissileTrail",0,Random(-2,2))
+    MISN A 1 Bright A_CustomMissile("ProjectileTrailParticleOrange",0,Random(-2,2))
+    TNT1 A 0 A_CustomMissile("MissileTrail",0,Random(-2,2))
+    MISN A 1 Bright A_CustomMissile("ProjectileTrailParticleOrange",0,Random(-2,2))
+    TNT1 A 0 A_CustomMissile("MissileTrail",0,Random(-2,2))
+    MISN A 1 Bright A_CustomMissile("ProjectileTrailParticleOrange",0,Random(-2,2))
+    TNT1 A 0 A_CustomMissile("MissileTrail",0,Random(-2,2))
+    MISN A 1 Bright A_CustomMissile("ProjectileTrailParticleOrange",0,Random(-2,2))
+	TNT1 A 0 A_Tracer2
+    TNT1 A 0 A_CustomMissile("MissileTrail",0,Random(-2,2))
+    MISN A 1 Bright A_CustomMissile("ProjectileTrailParticleOrange",0,Random(-2,2))
+    TNT1 A 0 A_CustomMissile("MissileTrail",0,Random(-2,2))
+    MISN A 1 Bright A_CustomMissile("ProjectileTrailParticleOrange",0,Random(-2,2))
+    TNT1 A 0 A_CustomMissile("MissileTrail",0,Random(-2,2))
+    MISN A 1 Bright A_CustomMissile("ProjectileTrailParticleOrange",0,Random(-2,2))
+    TNT1 A 0 A_CustomMissile("MissileTrail",0,Random(-2,2))
+    MISN A 1 Bright A_CustomMissile("ProjectileTrailParticleOrange",0,Random(-2,2))
+	TNT1 A 0 A_PlaySound("monster/homingrockbeep")
+    Loop
+   Death:
+      CBEX A 3 Bright
+      CBEX B 0 Bright A_CustomMissile("FuelExplosion01",0,0,0,6)
+      CBEX B 0 Bright A_CustomMissile("FuelExplosion01",0,0,45,6)
+      CBEX B 0 Bright A_CustomMissile("FuelExplosion01",0,0,90,6)
+      CBEX B 0 Bright A_CustomMissile("FuelExplosion01",0,0,135,6)
+      CBEX B 0 Bright A_CustomMissile("FuelExplosion01",0,0,180,6)
+      CBEX B 0 Bright A_CustomMissile("FuelExplosion01",0,0,225,6)
+      CBEX B 0 Bright A_CustomMissile("FuelExplosion01",0,0,270,6)
+      CBEX B 0 Bright A_CustomMissile("FuelExplosion01",0,0,315,6)
+      CBEX B 3 Bright A_Explode
+      CBEX CDEFGHIJ 2 Bright
+      stop
+   }
+}
+
+
+Actor HFUndeadHand : CustomInventory
+{
++INVENTORY.QUIET
++INVENTORY.UNDROPPABLE
++INVENTORY.ALWAYSPICKUP
++INVENTORY.AUTOACTIVATE       
++COUNTITEM
+inventory.amount 1
+inventory.maxamount 1
+RenderStyle Translucent
+Scale 2.75
+Obituary "The HellFire Cyberdemon converted the Head of %o into another one of his trophies, now it is a decoration in his home."
+DamageType "HFCyb3r"
+states
+{
+pickup:
+TNT1 A 0
+TNT1 A 0 A_SpawnItemEx("HFUndeadhandProjectile",0,0,0,0,0,0,0,0)
+TNT1 A 1  
+stop
+}
+}
+
+Actor HFUndeadhandProjectile
+{
++CANNOTPUSH
++NODAMAGETHRUST
++FLOORCLIP
++FLOORHUGGER
++ExtremeDeath
++FORCERADIUSDMG
++DONTHARMSPECIES
+RenderStyle Translucent
+Scale 3.0
+Obituary "The HellFire Cyberdemon converted the Head of %o into another one of his trophies, now it is a decoration in his home."
+DamageType "HFCyb3r"
+Species "Cybers"
+states
+{
+Spawn:
+TNT1 A 2 Radius_Quake(30,2,0,0,0)
+HFHD A 0 A_PlaySound("lrtrap/active")
+HFBA D 0 Bright A_CustomMissile("FuelExplosion01",0,0,0,6)
+HFBA D 0 Bright A_CustomMissile("FuelExplosion01",0,0,45,6)
+HFBA D 0 Bright A_CustomMissile("FuelExplosion01",0,0,90,6)
+HFBA D 0 Bright A_CustomMissile("FuelExplosion01",0,0,135,6)
+HFBA D 0 Bright A_CustomMissile("FuelExplosion01",0,0,180,6)
+HFBA D 0 Bright A_CustomMissile("FuelExplosion01",0,0,225,6)
+HFBA D 0 Bright A_CustomMissile("FuelExplosion01",0,0,270,6)
+HFBA D 0 Bright A_CustomMissile("FuelExplosion01",0,0,315,6)
+HFHD ABCDEFGHIJKL 3 Bright A_Explode(20,180,0,0,0,0,0)
+HFHD M 35 Bright
+Goto Fade
+Fade:
+HFHD M 5 Bright A_Fadeout(0.02)
+Loop
+}
+}
+
+ACTOR HFUndeadhandProjectile2
+{
+  Radius 1
+  Height 1
+  Speed 0
+  Scale 3.0
+  Damage 0
+  Projectile
+  RenderStyle Add
+  +NOCLIP
+  +FLOORHUGGER
+  +DONTHARMSPECIES
+  +FORCERADIUSDMG
+  Obituary "The HellFire Cyberdemon converted the Head of %o in one more of their trophies, now is a decoration in his home."
+  DamageType "HFCyb3r"
+  Species "Cybers"
+  SeeSound "lrtrap/active"
+  States
+  {
+  Spawn:
+    HFHD AB 2 Bright
+	HFHD D 0 Bright A_CustomMissile("FuelExplosion01",0,0,0,6)
+    HFHD D 0 Bright A_CustomMissile("FuelExplosion01",0,0,45,6)
+    HFHD D 0 Bright A_CustomMissile("FuelExplosion01",0,0,90,6)
+    HFHD D 0 Bright A_CustomMissile("FuelExplosion01",0,0,135,6)
+    HFHD D 0 Bright A_CustomMissile("FuelExplosion01",0,0,180,6)
+    HFHD D 0 Bright A_CustomMissile("FuelExplosion01",0,0,225,6)
+    HFHD D 0 Bright A_CustomMissile("FuelExplosion01",0,0,270,6)
+    HFHD D 0 Bright A_CustomMissile("FuelExplosion01",0,0,315,6)
+    HFHD C 2 Bright A_Explode(20,106,0,0,0,0,0)
+    HFHD DEFGHIJKLM 2 Bright
+    Stop       
+   	}
+}
+Actor HFFireSpawned
+{
+  Obituary "The HellFire Cyberdemon converted the Head of %o into another one of his trophies, now it is a decoration in his home."
+  Radius 0
+  Height 1
+  Damagetype "HFCyb3r"
+  Speed 0
+  RenderStyle Add
+  ALPHA 1.00
+  +NoGravity
+  +SeekerMissile
+  +FORCERADIUSDMG
+  +NoDamageThrust
+  States
+  {
+  Spawn:
+    TNT1 A 10
+	TNT1 A 0 A_SpawnItem("DiabFireSpawner",0,0,0,0)
+    DFIR A 2 A_StartFire
+    TNT1 A 0 A_Explode(15, 40)
+    DFIR B 2 Bright A_Fire
+	TNT1 A 0 A_SpawnItem("DiabFireSpawner",0,0,0,0)
+    TNT1 A 0 A_Explode(15, 40)
+    DFIR A 2 Bright A_Fire
+	TNT1 A 0 A_SpawnItem("DiabFireSpawner",0,0,0,0)
+    TNT1 A 0 A_Explode(15, 40)
+    DFIR B 2 Bright A_Fire
+	TNT1 A 0 A_SpawnItem("DiabFireSpawner",0,0,0,0)
+    TNT1 A 0 A_Explode(15, 40)
+    DFIR C 2 Bright A_FireCrackle
+	TNT1 A 0 A_SpawnItem("DiabFireSpawner",0,0,0,0)
+    TNT1 A 0 A_Explode(15, 40)
+    DFIR B 2 Bright A_Fire
+	TNT1 A 0 A_SpawnItem("DiabFireSpawner",0,0,0,0)
+    TNT1 A 0 A_Explode(15, 40)
+    DFIR C 2 Bright A_Fire
+	TNT1 A 0 A_SpawnItem("DiabFireSpawner",0,0,0,0)
+    TNT1 A 0 A_Explode(15, 40)
+    DFIR B 2 Bright A_Fire
+	TNT1 A 0 A_SpawnItem("DiabFireSpawner",0,0,0,0)
+    TNT1 A 0 A_Explode(15, 40)
+    DFIR C 2 Bright A_Fire
+	TNT1 A 0 A_SpawnItem("DiabFireSpawner",0,0,0,0)
+    TNT1 A 0 A_Explode(15, 40)
+    DFIR D 2 Bright A_Fire 
+	TNT1 A 0 A_SpawnItem("DiabFireSpawner",0,0,0,0)
+    TNT1 A 0 A_Explode(15, 40)
+    DFIR C 2 Bright A_Fire
+	TNT1 A 0 A_SpawnItem("DiabFireSpawner",0,0,0,0)
+    TNT1 A 0 A_Explode(15, 40)
+    DFIR D 2 Bright A_Fire
+	TNT1 A 0 A_SpawnItem("DiabFireSpawner",0,0,0,0)
+    TNT1 A 0 A_Explode(15, 40)
+    DFIR C 2 Bright A_Fire
+	TNT1 A 0 A_SpawnItem("DiabFireSpawner",0,0,0,0)
+    TNT1 A 0 A_Explode(15, 40)
+    DFIR D 2 Bright A_Fire
+	TNT1 A 0 A_SpawnItem("DiabFireSpawner",0,0,0,0)
+    TNT1 A 0 A_Explode(15, 40)
+    DFIR E 2 Bright A_Fire
+	TNT1 A 0 A_SpawnItem("DiabFireSpawner",0,0,0,0)
+    TNT1 A 0 A_Explode(15, 40)
+    DFIR D 2 Bright A_Fire
+	TNT1 A 0 A_SpawnItem("DiabFireSpawner",0,0,0,0)
+    TNT1 A 0 A_Explode(15, 40)
+    DFIR E 2 Bright A_Fire
+	TNT1 A 0 A_SpawnItem("DiabFireSpawner",0,0,0,0)
+    TNT1 A 0 A_Explode(15, 40)
+    DFIR D 2 Bright A_Fire
+	TNT1 A 0 A_SpawnItem("DiabFireSpawner",0,0,0,0)
+    TNT1 A 0 A_Explode(15, 40)
+    DFIR E 2 Bright A_FireCrackle
+	TNT1 A 0 A_SpawnItem("DiabFireSpawner",0,0,0,0)
+    TNT1 A 0 A_Explode(15, 40)
+    DFIR F 2 Bright A_Fire
+	TNT1 A 0 A_SpawnItem("DiabFireSpawner",0,0,0,0)
+    TNT1 A 0 A_Explode(15, 40)
+    DFIR E 2 Bright A_Fire
+	TNT1 A 0 A_SpawnItem("DiabFireSpawner",0,0,0,0)
+    TNT1 A 0 A_Explode(15, 40)
+    DFIR F 2 Bright A_Fire
+	TNT1 A 0 A_SpawnItem("DiabFireSpawner",0,0,0,0)
+    TNT1 A 0 A_Explode(15, 40)
+    DFIR E 2 Bright A_Fire
+	TNT1 A 0 A_SpawnItem("DiabFireSpawner",0,0,0,0)
+    TNT1 A 0 A_Explode(15, 40)
+    DFIR F 2 Bright A_Fire
+	TNT1 A 0 A_SpawnItem("DiabFireSpawner",0,0,0,0)
+    TNT1 A 0 A_Explode(15, 40)
+    DFIR G 2 Bright A_Fire
+	TNT1 A 0 A_SpawnItem("DiabFireSpawner",0,0,0,0)
+    TNT1 A 0 A_Explode(15, 40)
+    DFIR H 2 Bright A_Fire
+	TNT1 A 0 A_SpawnItem("DiabFireSpawner",0,0,0,0)
+    TNT1 A 0 A_Explode(15, 40)
+    DFIR G 2 Bright A_Fire
+	TNT1 A 0 A_SpawnItem("DiabFireSpawner",0,0,0,0)
+    TNT1 A 0 A_Explode(15, 40)
+    DFIR H 2 Bright A_Fire
+	TNT1 A 0 A_SpawnItem("DiabFireSpawner",0,0,0,0)
+    TNT1 A 0 A_Explode(15, 40)
+    DFIR G 2 Bright A_Fire
+	TNT1 A 0 A_SpawnItem("DiabFireSpawner",0,0,0,0)
+    TNT1 A 0 A_Explode(15, 40)
+    DFIR H 2 Bright A_Fire
+	TNT1 A 0 A_SpawnItem("DiabFireSpawner",0,0,0,0)
+    Stop
+  }
+}
+
+Actor HFFireSpawned2 : HFFireSpawned
+{
+  States
+  {
+  Spawn:
+    TNT1 A 10
+	TNT1 A 0 A_SpawnItem("DiabFireSpawner",0,0,0,0)
+    DFIR A 2 A_StartFire
+    TNT1 A 0 A_Explode(15, 40)
+    DFIR B 2 Bright A_Fire
+	TNT1 A 0 A_SpawnItem("DiabFireSpawner",0,0,0,0)
+    TNT1 A 0 A_Explode(15, 40)
+    DFIR A 2 Bright A_Fire
+	TNT1 A 0 A_SpawnItem("DiabFireSpawner",0,0,0,0)
+    TNT1 A 0 A_Explode(15, 40)
+    DFIR B 2 Bright A_Fire
+	TNT1 A 0 A_SpawnItem("DiabFireSpawner",0,0,0,0)
+    TNT1 A 0 A_Explode(15, 40)
+    DFIR C 2 Bright A_FireCrackle
+    Stop
+  }
+}
+
+ACTOR HFLavaMist
+{
+   Speed 0
+   Damage 0
+   Radius 8
+   Height 5
+   RenderStyle Add
+   Alpha 0.3
+   Scale 0.6
+   DamageType "HFCyb3r"
+   SeeSound "HFCyber/Lava"
+   PROJECTILE
+   +DONTBLAST
+   -NOGRAVITY
+   States
+   {
+   Spawn:
+      HMST ABCDE 2 Bright
+	  Loop
+   Death:
+      TNT1 A 0 A_SpawnItemEx("HFLava")
+      Stop
+   } 
+}
+
+ACTOR HFLava
+{
+   Speed 0
+   Damage 10
+   Radius 14
+   Height 14
+   RenderStyle Add
+   Alpha 1.0
+   Scale 1.9
+   DamageType "HFCyb3r"
+   ReactionTime 450
+   PROJECTILE
+   +DROPOFF
+   -NOGRAVITY
+   +DONTBLAST
+   +NOEXPLODEFLOOR
+   DeathSound "HFCyber/Lava"
+   States
+   {
+   Spawn:
+      HFUD A 1
+	  TNT1 A 0 A_Explode(8,16)
+	  TNT1 A 0 A_CountDown
+	  Loop
+   Death:
+      TNT1 A 0 A_SpawnItemEx("OrangeParticleSpawner", 0, 0, 0, 0, 0, 0, 0, 0)
+      HFUD A 1 A_SetTranslucent(0.35)
+      HFUD A 1 A_SetTranslucent(0.3)
+	  HFUD A 1 A_SetTranslucent(0.25)
+	  HFUD A 1 A_SetTranslucent(0.2)
+	  HFUD A 1 A_SetTranslucent(0.15)
+	  HFUD A 1 A_SetTranslucent(0.1)
+      Stop
+   } 
+}
+
+ACTOR HFire : IFire
+{
+  Obituary "The HellFire Cyberdemon converted the Head of %o into another one of his trophies, now it is a decoration in his home."
+  DamageType "HFCyb3r"
+  var int user_delay;
+  Speed 8
+  +NOCLIP
+  +FORCERADIUSDMG
+  YScale 1.8
+  XScale 1.9
+  States
+  {
+  Spawn:
+    DFIR A 2 Bright
+	TNT1 A 0 A_JumpIf(user_delay >= 60,"Death")
+	TNT1 A 0 A_SetUserVar("user_delay",user_delay+1)
+	TNT1 A 0 A_SpawnItem("HFIRESpawner",0,0,0,0)
+	TNT1 A 0 A_Wander
+    DFIR B 2 Bright A_Explode(Random(8,24),192)
+	TNT1 A 0 A_SpawnItem("HFIRESpawner",0,0,0,0)
+	TNT1 A 0 A_Wander
+    DFIR C 2 Bright A_Explode(Random(8,24),192)
+	TNT1 A 0 A_SpawnItem("HFIRESpawner",0,0,0,0)
+	TNT1 A 0 A_Wander
+    DFIR D 2 Bright A_Explode(Random(8,24),192)
+	TNT1 A 0 A_SpawnItem("HFIRESpawner",0,0,0,0)
+	DFIR C 0 A_FireCrackle
+	TNT1 A 0 A_Wander
+    DFIR C 2 Bright A_Explode(Random(8,24),192)	
+	TNT1 A 0 A_SpawnItem("HFIRESpawner",0,0,0,0)
+	TNT1 A 0 A_Wander
+    DFIR B 2 Bright A_Explode(Random(8,24),192)	
+    Goto Spawn+1
+  Death:
+    TNT1 A 0 A_SpawnItem("HFIRESpawner",0,0,0,0)
+    DFIR E 2 Bright A_Explode(Random(8,24),128)	
+    TNT1 A 0 A_SpawnItem("HFIRESpawner",0,0,0,0)
+    DFIR F 2 Bright A_Explode(Random(8,24),128)	
+    TNT1 A 0 A_SpawnItem("HFIRESpawner",0,0,0,0)
+    DFIR G 2 Bright A_Explode(Random(8,24),128)	
+    TNT1 A 0 A_SpawnItem("HFIRESpawner",0,0,0,0)
+    DFIR H 2 Bright A_Explode(Random(8,24),128)		
+    Stop
+  }
+}
+
+
+ACTOR HFireSpawner : RedParticleSpawner
+{
+  States
+  {
+  Spawn:
+	TNT1 A 0
+	TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+	TNT1 A 0 A_SpawnItemEx("Kaboom3",random(48,-48),random(48,-48),random(6,48),0,0,random(2,4),0,128,0)
+    TNT1 A 0 A_SpawnItemEx("CardinalFire",random(48,-48),random(48,-48),random(6,48),0,0,random(4,6),0,128,0)
+    TNT1 A 1
+    Stop
+  }
+}
+
+actor StompTracersAttack : CustomInventory
+{  
+  +INVENTORY.QUIET
+  +INVENTORY.UNDROPPABLE
+  +INVENTORY.ALWAYSPICKUP
+  +INVENTORY.AUTOACTIVATE       
+  +COUNTITEM
+  inventory.amount 1
+  inventory.maxamount 0
+  states
+  {
+  pickup:
+	TNT1 A 0 A_CustomMissile("HFCyberTracer",0,0,0,0)
+	TNT1 A 0 A_CustomMissile("HFCyberTracer",0,0,15,0)
+	TNT1 A 0 A_CustomMissile("HFCyberTracer",0,0,-15,0)
+	TNT1 A 0 A_CustomMissile("HFCyberTracer",0,0,30,0)
+	TNT1 A 0 A_CustomMissile("HFCyberTracer",0,0,-30,0)
+	TNT1 A 0 A_CustomMissile("HFCyberTracer",0,0,45,0)
+	TNT1 A 0 A_CustomMissile("HFCyberTracer",0,0,-45,0)	
+	TNT1 A 0 A_CustomMissile("HFCyberTracer",0,0,60,0)
+	TNT1 A 0 A_CustomMissile("HFCyberTracer",0,0,-60,0)
+	TNT1 A 0 A_CustomMissile("HFCyberTracer",0,0,-80,0)
+	TNT1 A 0 A_CustomMissile("HFCyberTracer",0,0,80,0)
+	TNT1 A 0 A_CustomMissile("HFCyberTracer",0,0,100,0)
+	TNT1 A 0 A_CustomMissile("HFCyberTracer",0,0,-100,0)
+	TNT1 A 0 A_CustomMissile("HFCyberTracer",0,0,120,0)	
+	TNT1 A 0 A_CustomMissile("HFCyberTracer",0,0,-120,0)
+	TNT1 A 0 A_CustomMissile("HFCyberTracer",0,0,150,0)
+	TNT1 A 0 A_CustomMissile("HFCyberTracer",0,0,-150,0)
+	TNT1 A 0 A_CustomMissile("HFCyberTracer",0,0,170,0)
+	TNT1 A 0 A_CustomMissile("HFCyberTracer",0,0,-170,0)
+	TNT1 A 0 A_CustomMissile("HFCyberTracer",0,0,190,0)
+	TNT1 A 0 A_CustomMissile("HFCyberTracer",0,0,-190,0)
+	TNT1 A 0 A_CustomMissile("HFCyberTracer",0,0,220,0)
+	TNT1 A 0 A_CustomMissile("HFCyberTracer",0,0,-220,0)
+	TNT1 A 0 A_CustomMissile("HFCyberTracer",0,0,250,0)
+	TNT1 A 0 A_CustomMissile("HFCyberTracer",0,0,-250,0)
+	TNT1 A 0 A_CustomMissile("HFCyberTracer",0,0,280,0)
+	TNT1 A 0 A_CustomMissile("HFCyberTracer",0,0,-280,0)	
+	TNT1 A 0 A_CustomMissile("HFCyberTracer",0,0,300,0)
+	TNT1 A 0 A_CustomMissile("HFCyberTracer",0,0,-300,0)
+	TNT1 A 0 A_CustomMissile("HFCyberTracer",0,0,330,0)
+	TNT1 A 0 A_CustomMissile("HFCyberTracer",0,0,-330,0)
+	TNT1 A 0 A_CustomMissile("HFCyberTracer",0,0,360,0)
+	TNT1 A 0 A_CustomMissile("HFCyberTracer",0,0,-360,0)    
+	stop
+  }
+}
+
+
+Actor Pyrodemon2 : Pyrodemon{
+Species "Cybers"
+DamageFactor "HFCyb3r", 0.0
+DamageFactor "Cyber10K", 0.0
+DamageFactor "VileFires", 0.0
+DamageFactor "NobleComet", 0.0
+DamageFactor "CadaverRocket", 0.0
++THRUSPECIES
++DONTHARMSPECIES
+-COUNTKILL
++NOTELEFRAG
++NOTELESTOMP
+Tag "Pyrodemon"
+}
+
+Actor HellFireRevenant2 : HellFireRevenant{
+Species "Cybers"
+DamageFactor "HFCyb3r", 0.0
+DamageFactor "Cyber10K", 0.0
+DamageFactor "VileFires", 0.0
+DamageFactor "NobleComet", 0.0
+DamageFactor "CadaverRocket", 0.0
++THRUSPECIES
++NOTELEFRAG
+-COUNTKILL
++NOTELESTOMP
+Tag "Hellfire Revenant"
+}
+
+Actor BruiserDemon2 : BruiserDemon
+{
+Species "Cybers"
+DamageFactor "HFCyb3r", 0.0
+DamageFactor "Cyber10K", 0.0
+DamageFactor "VileFires", 0.0
+DamageFactor "NobleComet", 0.0
+DamageFactor "CadaverRocket", 0.0
++THRUSPECIES
++NOTELEFRAG
+-COUNTKILL
++NOTELESTOMP
+Tag "Bruiser Demon"
+States
+{
+Death: 
+    FRID A 7 Bright
+    FRID B 6 Bright A_Scream 
+    FRID D 5 Bright A_Fall 
+    TNT1 AAAA 0 A_CustomMissile("SmokeFX", Random(30,60), 0, random(0,360), 2, random(0,360))	
+    FRID EFGHIJKL 4 Bright A_SpawnItemEx("OrangeParticleSpawner", Random(10,-10), Random(10,-10), Random(30,60), 0, 0, 0, 0, 128)	
+    FRID MNOP 4
+	FRID QRST 3
+    FRID V 3 A_SpawnItem("BodyCrash",0,0,0,0)
+    FRID W -1 
+    Stop 
+}}
+
+Actor IFireHFCyberVersion : IFire
+{
++FORCERADIUSDMG
+DamageType "HFCyb3r"
+}
+
+Actor Infernodemon1Summoner 
+{
+ Height 8
+ Radius 25
+ Speed 30
+ Damage (0)
+ +RippeR
+ +BloodlessImpact
+ +NOTIMEFREEZE
+  States
+   {
+    Spawn:
+	 TNT1 A 5
+	Death:
+	 TNT1 A 0
+	 TNT1 AAAAA 0 A_SpawnItemEx("HFireSpawner",random(-64,128),random(-64,64),random(0,64),0,0,0,0,32)
+	 TNT1 A 2
+	 TNT1 A 0 A_SpawnItemEx("Infernodemon1",0,0,0,0,0,0,0,SXF_TRANSFERPOINTERS)
+	 Stop
+   }
+}
+
+Actor Infernodemon2Summoner : Infernodemon1Summoner
+{
+  States
+   {
+    Spawn:
+	 TNT1 A 5
+	Death:
+	 TNT1 A 0
+	 TNT1 AAAAAA 0 A_SpawnItemEx("HFireSpawner",random(-64,64),random(-64,64),random(0,64),0,0,0,0,32)
+	 TNT1 A 2
+	 TNT1 A 0 A_SpawnItemEx("Infernodemon2",0,0,0,0,0,0,0,SXF_TRANSFERPOINTERS)
+	 Stop
+   }
+}
+
+
+actor HFCyberUDHandsWall
+{
++SOLID
+Scale 3.0
+Health 60
+Damage 20
++NOBLOOD
++Ripper
++DontHarmSpecies
++THRUSPECIES
+radius 20
+Height 93
+mass 999999
+Species "Cybers"
+DamageType "Cyber10k"
+DamageFactor "DemolisherEx", 0.0
+DamageFactor "DarkDemoEx", 0.0
+DamageFactor "CerChainguns", 0.0
+DamageFactor "CerEnergyBall", 0.0
+DamageFactor "LegMind", 0.0
+DamageFactor "BeheComet", 0.0
+DamageFactor "NobleCOmet", 0.0
+DamageFactor "CacoComet", 0.0
+DamageFactor "CadaverRocket", 0.0
+DamageFactor "HellComet", 0.0
+DamageFactor "Legendary1", 0.0
+DamageFactor "Term", 0.0
+States
+{
+Spawn:
+TNT1 A 0
+HFHD G 6 ThrustThingZ(0, 9999, 1, 1)
+TNT1 A 0 A_PlaySound("icespike")
+HFHD G 0 A_ChangeFlag("SHOOTABLE", 1)
+HFHD G 200 
+Goto Death
+Death:
+HFHD G 0 A_ChangeFlag("SHOOTABLE", 0)
+HFHD G 2 A_ChangeFlag("SOLID", 0)
+HFHD GHJIKLM 4 A_SpawnItemEx("HFireSpawner",0,0,random(0,93),0,0,0,0,128,158)
+HFHD A 0 A_PlaySound("lrtrap/active")
+stop
+}
+}
+actor HFHandTrapInventory : CustomInventory
+{
+  inventory.pickupmessage ""
+  inventory.pickupsound ""
+  - COUNTITEM
+  Species "Cybers"
+  +INVENTORY.AUTOACTIVATE
+  States
+  {
+  Spawn:
+  TNT1 A 1
+  Loop
+  Pickup:
+  TNT1 A 1
+  TNT1 AAAAAAAAAAAAAAAAAAAA 2 A_SpawnItemEx("HFCyberUDHandsWall", random(-256,256), random(-256,256), 0, 0, 0, 0, 0, 34, 0)
+  TNT1 AAAAAAAAA 1 A_SpawnItemEx("HFCyberUDHandsWall", random(-256,256), random(-256,256), 0, 0, 0, 0, 0, 34, 0)
+  TNT1 AAAAAAAA 3 A_SpawnItemEx("HFCyberUDHandsWall", random(-256,256), random(-256,256), 0, 0, 0, 0, 0, 34, 0)
+  Stop
+  }
+}
+
+actor HFHandTrapInventory2 : CustomInventory
+{
+  inventory.pickupmessage ""
+  inventory.pickupsound ""
+  - COUNTITEM
+  Species "Cybers"
+  +INVENTORY.AUTOACTIVATE
+  States
+  {
+  Spawn:
+  TNT1 A 1
+  Loop
+  Pickup:
+  TNT1 A 1
+  TNT1 AAAAAAAAAAAAAAAAAAAAA 1 A_SpawnItemEx("HFCyberUDHandsWall", random(-60,60),random(-60,60), 0, 0, 0, 0, 0, 0, 0)
+  TNT1 AAAAAAAAA 1 A_SpawnItemEx("HFCyberUDHandsWall", random(-60,60),random(-60,60), 0, 0, 0, 0, 0, 0, 0)
+  Stop
+  }
+}
+
+Actor HFRail : CardinalRail {
+DamageType"HFCyb3r"
++NOTIMEFREEZE
+}
+
+ACTOR HFCyber10K : FastProjectile
+{
+  Obituary "The HellFire Cyberdemon converted the Head of %o into another one of his trophies, now it is a decoration in his home."
+  Radius 6
+  Height 9
+  Speed 269
+  +NOBLOCKMAP
+  +NOGRAVITY
+  +NOTELEPORT
+  +EXTREMEDEATH
+  +NOTIMEFREEZE
+  +DONTHARMSPECIES
+  +FORCERADIUSDMG
+  +BLOODLESSIMPACT
+  DamageType "HFCyb3r"
+  Renderstyle Add
+  deathsound "weapons/bfg95explode"
+  Alpha 0.75
+  Scale 0.6
+  States
+  {
+   Spawn:
+    TRA3 A 1 Bright
+    Loop
+  Death:
+    TNT1 A 0
+	TNT1 A 0 A_SpawnItemEx("BFGShockwaveRed", 0, 0, 0, 0, 0, 0, 0, 128)
+	TNT1 A 0 A_SpawnItemEx("RedParticleSpawner", 0, 0, 0, 0, 0, 0, 0, 128)
+	TNT1 AAA 0 A_CustomMissile("Kaboom14", 0, 0, random(0,360), 2, random(0,360))
+    CFE1 A 4 Bright A_Explode(220,169,0)
+    CFE1 BCDEF 4 Bright
+    Stop
+}}
+
+Actor HFGaussProjectile : FastProjectile
+{
+Radius 10
+Height 7
+MissileHeight 7
+Speed 300
+RenderStyle Add
+DamageType "HFCyb3r"
+MissileType "GaussTrail"
+Damage 43
+Scale 0.9
++NOTIMEFREEZE
++RIPPER
++EXTREMEDEATH
++NODAMAGETHRUST
++DONTBLAST
++MTHRUSPECIES
+SeeSound "Weapons/HFGaussFire"
+States
+	{
+Spawn:
+	TNT1 A 0
+	TNT1 A 0 A_PlaySound("Weapons/HFGaussLoop",6,1.0,true)
+Looplet:
+	HROD A 1 Bright A_ChangeVelocity(0,0,-0.1)
+	Loop
+Death:
+	TNT1 A 0
+	TNT1 A 0 A_SpawnItemEx("GaussWallRod",0,0,0,0,0,0,0,SXF_TRANSFERPOINTERS|SXF_NOCHECKPOSITION,0)
+Crash:
+XDeath:
+	TNT1 AAA 0 A_StopSound(6)
+	TNT1 AAA 0 A_SpawnItemEx("GaussHotSpark",12.0+frandom(2.0,-2.0),frandom(2.0,-2.0),frandom(2.0,-2.0),frandom(4.0,-4.0),frandom(2.0,-2.0),frandom(7.0,-1.0),frandom(0.0,360.0),SXF_CLIENTSIDE,0)
+	TNT1 A 2 A_PlaySound("weapons/HFGaussRod",7,1.0,false)
+	Stop
+	}
+}
+
+Actor GaussWallRod
+{
+Scale 0.9
+Radius 20
+Height 20
+DamageType "HFCyb3r"
+Alpha 0.99
+RenderStyle Add
+ReactionTime 80
++NOTIMEFREEZE
++DONTBLAST
++NOTELEPORT
++NONSHOOTABLE
++NOINTERACTION
++BLOODLESSIMPACT
+States
+	{
+Spawn:
+	TNT1 A 0
+	TNT1 A 0 A_PlaySound("Weapons/HFGaussLoop",6,1.0,true)
+	HROD A 6 Bright A_Explode(20,20,0,0)
+	TNT1 AA 0 A_SpawnItemEx("GaussHotSpark",frandom(-24,24),3+frandom(-1,1),frandom(-1,1),frandom(-1,1),frandom(-1,1),frandom(2,3),0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,128)
+	TNT1 A 0 A_Countdown
+	Loop
+Death:
+    TNT1 A 0 A_StopSound(6)
+	HROD A 20 Bright A_PlaySound("Weapons/HFGaussEnd",7,1.0,false)
+	HROD AAAABBBBB 1 A_FadeOut(0.1,1)
+	Stop
+	}
+}
+
+Actor GaussTrail
+{
+Height 1
+Radius 1
+Speed 0
+RenderStyle None
++NOTIMEFREEZE
++DONTBLAST
++NOTELEPORT
++NOINTERACTION
++CLIENTSIDEONLY
+States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_SpawnItemEx("GaussHotRod",0,0,0,0)
+		TNT1 A 1 A_SpawnItemEx("GaussHotSpark",0,0,0,frandom(-2.0,2.0),frandom(-2.0,2.0),frandom(1.0,3.0),frandom(360.0,0.0),SXF_CLIENTSIDE)
+		Stop
+	}
+}
+
+Actor GaussHotRod
+{
+Height 20
+Radius 20
+Scale 0.9
+RenderStyle Add
++NOTIMEFREEZE
++DONTBLAST
++NOTELEPORT
++NOINTERACTION
++CLIENTSIDEONLY
+States
+	{
+	Spawn:
+		HROD A 1 A_FadeOut(0.2,1)
+		Loop
+	}
+}
+
+Actor GaussHotSpark
+{
+Height 8
+Radius 4
+Gravity 0.15
+Scale 0.2
+RenderStyle Add
+Alpha 1
++NOTIMEFREEZE
+-NOGRAVITY
++DROPOFF
++DONTBLAST
++NOTELEPORT
++NOBLOCKMAP
++CLIENTSIDEONLY
+States
+	{
+	Spawn:
+	TNT1 A 0 A_ScaleVelocity(0.98)
+	HROD E 1 Bright A_FadeOut(0.05,1)
+	Loop
+  }
+}
+
+Actor HFCyberSeekerTracer : HFCyberTracer
+{
++SeekerMissile
+Damage 1
+  States
+  {
+  Spawn:
+    TNT1 A 0 A_PlaySound("monster/ambientfire2")
+    TNT1 A 0 A_SeekerMissile(0,2)
+    TNT1 A 1 A_SpawnItemEx("ATracerPuff", 0, 0, 0, 0, 0, 0, 0, 128)
+    TNT1 A 0 A_SeekerMissile(0,2)
+    TNT1 A 1 A_SpawnItemEx("ATracerPuff", 0, 0, 0, 0, 0, 0, 0, 128)
+    TNT1 A 0 A_SeekerMissile(0,2)
+    TNT1 A 1 A_SpawnItemEx("ATracerPuff", 0, 0, 0, 0, 0, 0, 0, 128)
+    TNT1 A 0 A_SeekerMissile(0,2)
+    TNT1 A 1 A_SpawnItemEx("ATracerPuff", 0, 0, 0, 0, 0, 0, 0, 128)	
+    Loop
+}}
+
+actor SeekerTracersAttack : CustomInventory
+{  
+  +INVENTORY.QUIET
+  +INVENTORY.UNDROPPABLE
+  +INVENTORY.ALWAYSPICKUP
+  +INVENTORY.AUTOACTIVATE       
+  +COUNTITEM
+  inventory.amount 1
+  inventory.maxamount 0
+  states
+  {
+  pickup:
+	TNT1 A 0 A_CustomMissile("HFCyberSeekerTracer",0,0,0,0)
+	TNT1 A 0 A_CustomMissile("HFCyberSeekerTracer",0,0,15,0)
+	TNT1 A 0 A_CustomMissile("HFCyberSeekerTracer",0,0,-15,0)
+	TNT1 A 0 A_CustomMissile("HFCyberSeekerTracer",0,0,30,0)
+	TNT1 A 0 A_CustomMissile("HFCyberSeekerTracer",0,0,-30,0)
+	TNT1 A 0 A_CustomMissile("HFCyberSeekerTracer",0,0,45,0)
+	TNT1 A 0 A_CustomMissile("HFCyberSeekerTracer",0,0,-45,0)	
+	TNT1 A 0 A_CustomMissile("HFCyberSeekerTracer",0,0,60,0)
+	TNT1 A 0 A_CustomMissile("HFCyberSeekerTracer",0,0,-60,0)
+	TNT1 A 0 A_CustomMissile("HFCyberSeekerTracer",0,0,-80,0)
+	TNT1 A 0 A_CustomMissile("HFCyberSeekerTracer",0,0,80,0)
+	TNT1 A 0 A_CustomMissile("HFCyberSeekerTracer",0,0,100,0)
+	TNT1 A 0 A_CustomMissile("HFCyberSeekerTracer",0,0,-100,0)
+	TNT1 A 0 A_CustomMissile("HFCyberSeekerTracer",0,0,120,0)	
+	TNT1 A 0 A_CustomMissile("HFCyberSeekerTracer",0,0,-120,0)
+	TNT1 A 0 A_CustomMissile("HFCyberSeekerTracer",0,0,150,0)
+	TNT1 A 0 A_CustomMissile("HFCyberSeekerTracer",0,0,-150,0)
+	TNT1 A 0 A_CustomMissile("HFCyberSeekerTracer",0,0,170,0)
+	TNT1 A 0 A_CustomMissile("HFCyberSeekerTracer",0,0,-170,0)
+	TNT1 A 0 A_CustomMissile("HFCyberSeekerTracer",0,0,190,0)
+	TNT1 A 0 A_CustomMissile("HFCyberSeekerTracer",0,0,-190,0)
+	TNT1 A 0 A_CustomMissile("HFCyberSeekerTracer",0,0,220,0)
+	TNT1 A 0 A_CustomMissile("HFCyberSeekerTracer",0,0,-220,0)
+	TNT1 A 0 A_CustomMissile("HFCyberSeekerTracer",0,0,250,0)
+	TNT1 A 0 A_CustomMissile("HFCyberSeekerTracer",0,0,-250,0)
+	TNT1 A 0 A_CustomMissile("HFCyberSeekerTracer",0,0,280,0)
+	TNT1 A 0 A_CustomMissile("HFCyberSeekerTracer",0,0,-280,0)	
+	TNT1 A 0 A_CustomMissile("HFCyberSeekerTracer",0,0,300,0)
+	TNT1 A 0 A_CustomMissile("HFCyberSeekerTracer",0,0,-300,0)
+	TNT1 A 0 A_CustomMissile("HFCyberSeekerTracer",0,0,330,0)
+	TNT1 A 0 A_CustomMissile("HFCyberSeekerTracer",0,0,-330,0)
+	TNT1 A 0 A_CustomMissile("HFCyberSeekerTracer",0,0,360,0)
+	TNT1 A 0 A_CustomMissile("HFCyberSeekerTracer",0,0,-360,0)    
+	stop
+  }
+}
+
+actor UndeadHandsWaveAttack : CustomInventory
+{  
+  +INVENTORY.QUIET
+  +INVENTORY.UNDROPPABLE
+  +INVENTORY.ALWAYSPICKUP
+  +INVENTORY.AUTOACTIVATE       
+  +COUNTITEM
+  inventory.amount 1
+  inventory.maxamount 0
+  states
+  {
+  pickup:
+	TNT1 A 0 A_CustomMissile("HellCyberHandsSpawner",0,0,0,0)
+	TNT1 A 0 A_CustomMissile("HellCyberHandsSpawner",0,0,15,0)
+	TNT1 A 0 A_CustomMissile("HellCyberHandsSpawner",0,0,-15,0)
+	TNT1 A 0 A_CustomMissile("HellCyberHandsSpawner",0,0,30,0)
+	TNT1 A 0 A_CustomMissile("HellCyberHandsSpawner",0,0,-30,0)
+	TNT1 A 0 A_CustomMissile("HellCyberHandsSpawner",0,0,45,0)
+	TNT1 A 0 A_CustomMissile("HellCyberHandsSpawner",0,0,-45,0)	
+	TNT1 A 0 A_CustomMissile("HellCyberHandsSpawner",0,0,60,0)
+	TNT1 A 0 A_CustomMissile("HellCyberHandsSpawner",0,0,-60,0)
+	TNT1 A 0 A_CustomMissile("HellCyberHandsSpawner",0,0,-80,0)
+	TNT1 A 0 A_CustomMissile("HellCyberHandsSpawner",0,0,80,0)
+	TNT1 A 0 A_CustomMissile("HellCyberHandsSpawner",0,0,100,0)
+	TNT1 A 0 A_CustomMissile("HellCyberHandsSpawner",0,0,-100,0)
+	TNT1 A 0 A_CustomMissile("HellCyberHandsSpawner",0,0,120,0)	
+	TNT1 A 0 A_CustomMissile("HellCyberHandsSpawner",0,0,-120,0)
+	TNT1 A 0 A_CustomMissile("HellCyberHandsSpawner",0,0,150,0)
+	TNT1 A 0 A_CustomMissile("HellCyberHandsSpawner",0,0,-150,0)
+	TNT1 A 0 A_CustomMissile("HellCyberHandsSpawner",0,0,170,0)
+	TNT1 A 0 A_CustomMissile("HellCyberHandsSpawner",0,0,-170,0)
+	TNT1 A 0 A_CustomMissile("HellCyberHandsSpawner",0,0,190,0)
+	TNT1 A 0 A_CustomMissile("HellCyberHandsSpawner",0,0,-190,0)
+	TNT1 A 0 A_CustomMissile("HellCyberHandsSpawner",0,0,220,0)
+	TNT1 A 0 A_CustomMissile("HellCyberHandsSpawner",0,0,-220,0)
+	TNT1 A 0 A_CustomMissile("HellCyberHandsSpawner",0,0,250,0)
+	TNT1 A 0 A_CustomMissile("HellCyberHandsSpawner",0,0,-250,0)
+	TNT1 A 0 A_CustomMissile("HellCyberHandsSpawner",0,0,280,0)
+	TNT1 A 0 A_CustomMissile("HellCyberHandsSpawner",0,0,-280,0)	
+	TNT1 A 0 A_CustomMissile("HellCyberHandsSpawner",0,0,300,0)
+	TNT1 A 0 A_CustomMissile("HellCyberHandsSpawner",0,0,-300,0)
+	TNT1 A 0 A_CustomMissile("HellCyberHandsSpawner",0,0,330,0)
+	TNT1 A 0 A_CustomMissile("HellCyberHandsSpawner",0,0,-330,0)
+	TNT1 A 0 A_CustomMissile("HellCyberHandsSpawner",0,0,360,0)
+	TNT1 A 0 A_CustomMissile("HellCyberHandsSpawner",0,0,-360,0)    
+	stop
+  }
+}
+Actor MiniHellFlame : RedParticleSpawner
+{
+Scale 0.2
+Renderstyle Add
+Alpha 1.0
++NOINTERACTION
++NONETID
+States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_PlaySound("monster/ambientfire")
+		TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+		TNT1 A 0 A_CheckSight("Toaster")
+		FIR1 ABCD 2 Bright A_FadeOut(0.1,0)
+		FIR1 EFGHIJKL 1 Bright A_FadeOut(0.1,1)
+		Stop
+	Toaster:
+		TNT1 A 1 Bright
+		Stop
+	}
+}
+
+Actor EternalFlame 
+{
+  Projectile
+  Alpha 1
+  Height 4
+  Radius 2
+  Gravity 0.52
+  Bouncetype Doom
+  BounceFactor 0.01
+  WallBounceFactor 0.01
+  Scale 1.5
+  Renderstyle Add
+  +DONTFALL
+  -Nogravity
+  +NODAMAGETHRUST
+  -EXTREMEDEATH
+  +THRUSPECIES
+  +DONTHARMSPECIES
+  +NOTIMEFREEZE
+  +FORCERADIUSDMG
+  Species "Cybers"
+  Damagetype "HFCyb3r"
+  var int user_fireloop;
+}
+
+Actor HellFlame : EternalFlame
+{
+  Species "Cybers"
+  Damagetype "HFCyb3r"
+  States
+  {
+  Spawn:
+  Death:
+	TNT1 A 0
+	TNT1 A 0 A_JumpIf(waterlevel > 1, "OhGodOhFuck")
+	TNT1 A 0 A_ChangeFlag(MOVEWITHSECTOR,1)
+	TNT1 A 0 A_SetUserVar("user_fireloop",random(0,8))
+	TNT1 A 0 A_PlaySound("monster/ambientfire",7,1.0,1)
+  DeathLoop:
+	TNT1 A 0 A_JumpIf(user_fireloop >= 50,"Death2")	 
+	TNT1 A 0 A_SetUserVar("user_fireloop",user_fireloop+1)
+	HFHF AABBCC 1 Bright A_spawnItemEx("MiniHellFlame",random(-6,6),random(-6,6),random(0,3),random(-2,2),random(-2,2),random(2,7),random(0,360))
+	TNT1 A 0 A_Explode(39,69)
+	TNT1 A 0 A_JumpIf(user_fireloop >= 50,"Death2")	 
+	TNT1 A 0 A_SetUserVar("user_fireloop",user_fireloop+1)
+	HFHF DDEEFF 1 Bright A_spawnItemEx("MiniHellFlame",random(-6,6),random(-6,6),random(0,3),random(-2,2),random(-2,2),random(2,7),random(0,360))
+	TNT1 A 0 A_Explode(39,69)
+	TNT1 A 0 A_JumpIf(user_fireloop >= 50,"Death2")	 
+	TNT1 A 0 A_SetUserVar("user_fireloop",user_fireloop+1)
+	HFHF GGHHII 1 Bright A_spawnItemEx("MiniHellFlame",random(-6,6),random(-6,6),random(0,3),random(-2,2),random(-2,2),random(2,7),random(0,360))
+	TNT1 A 0 A_Explode(39,69)
+	TNT1 A 0 A_JumpIf(user_fireloop >= 50,"Death2")	 
+	TNT1 A 0 A_SetUserVar("user_fireloop",user_fireloop+1)
+	HFHF KKLLMM 1 Bright A_spawnItemEx("MiniHellFlame",random(-6,6),random(-6,6),random(0,3),random(-2,2),random(-2,2),random(2,7),random(0,360))
+	TNT1 A 0 A_Explode(39,69)
+	Loop
+  Death2:
+	TNT1 A 0 A_StopSound(7)
+	HFHF MNOP 2 Bright
+	Stop
+  OhGodOhFuck:
+    TNT1 AAA 0 A_CustomMissile("SmokeFX4", 0, 0, random(0,360), 2, random(0,360))
+	TNT1 A 1 Bright A_ChangeFlag("MISSILE",0)
+	Stop
+	}
+}
+
+Actor HFCyberFlameRocket : CardinalRocket
+{
+   Speed 45
+   FastSpeed 55
+   Scale 0.9
+   Damage 23
+   SeeSound "HFCyb/rocket"
+   DeathSound "weapons/rocklx"
+   DamageType "HFCyb3r"
+   -ThruSpecies
+   +DONTREFLECT
+   +PIERCEARMOR
+   +FORCERADIUSDMG
+   +DONTHARMSPECIES
+   States
+   {
+   Spawn: 
+    TNT1 A 0 A_CustomMissile("MissileTrail",Random(4,6),Random(-2,2))
+	FFRC A 2 Bright A_CustomMissile("ProjectileTrailParticleOrange",Random(4,6),Random(-2,2))
+	TNT1 A 0 A_CustomMissile("MissileTrail",Random(4,6),Random(-2,2))	
+	FFRC A 2 A_CustomMissile("ProjectileTrailParticleOrange",Random(4,6),Random(-2,2))
+    loop
+   Death:
+	  TNT1 A 0
+	  TNT1 A 0 A_SpawnItemEx("OrangeParticleSpawner", 0, 0, 0, 0, 0, 0, 0, 128) 
+	  TNT1 AAA 0 A_CustomMissile("Kaboom3", 0, 0, random(0,360), 2, random(0,360))
+	  TNT1 AAA 0 A_CustomMissile("SmokeFX2", 0, 0, random(0,360), 2, random(0,360))
+	  TNT1 AAAA 0 A_SpawnItemEx("Debris",0,0,0,Random(4,-4),Random(4,-4),Random(4,8),0,128)
+	  FFRC B 6 Bright A_Explode
+	  TNT1 AAAAAAA 0 A_SpawnItemEx("HellFlame",0,0,0,random(0,30),0,random(0,10),random(0,360))
+	  CBEX B 0 Bright A_CustomMissile("FuelExplosion01",0,0,0,6)
+      CBEX B 0 Bright A_CustomMissile("FuelExplosion01",0,0,45,6)
+      CBEX B 0 Bright A_CustomMissile("FuelExplosion01",0,0,90,6)
+      CBEX B 0 Bright A_CustomMissile("FuelExplosion01",0,0,135,6)
+      CBEX B 0 Bright A_CustomMissile("FuelExplosion01",0,0,180,6)
+      CBEX B 0 Bright A_CustomMissile("FuelExplosion01",0,0,225,6)
+      CBEX B 0 Bright A_CustomMissile("FuelExplosion01",0,0,270,6)
+      CBEX B 0 Bright A_CustomMissile("FuelExplosion01",0,0,315,6)
+	  CROC CD 5 Bright A_SetTranslucent(0.75,1)
+      stop
+   }
+}
+
+Actor HFCyberMiniFireBall : RictusBall
+{
+Speed 60
+FastSpeed 90
+Damage 15
+XScale 0.92
+YScale 0.92
+Species "Cybers"
+Damagetype "HFCyb3r"
+States
+{
+Spawn:
+      RCST AB 1 Bright A_SpawnItemEx("RSoulBallTrail",0,0,0,0,0,0,0,128,0)
+      Loop
+	  }
+}
+
+ACTOR HFCybMiniFireBallTrail : RSoulBallTrail
+{
+XScale 0.62
+YScale 0.68
+
+}

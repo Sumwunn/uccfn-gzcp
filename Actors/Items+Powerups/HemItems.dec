@@ -1,0 +1,3575 @@
+//===========================================================
+Actor MarineKilled : Inventory { Inventory.MaxAmount 4 }
+Actor MarineGibbed : MarineKilled { }
+Actor KillCount : Inventory { Inventory.MaxAmount 64 }
+//===========================================================
+Actor TerminatorItem : CustomInventory replaces Terminator
+{
+Mass 1
+Gravity 1.0
++COUNTITEM
+-FLOAT
++FLOATBOB
+-NOGRAVITY
++NOTIMEFREEZE
++FORCEXYBILLBOARD
++INVENTORY.BIGPOWERUP
++INVENTORY.AUTOACTIVATE
+Inventory.MaxAmount 0
+Inventory.PickupSound "misc/p_pkup"
+Inventory.PickupMessage "Terminator!"
+Tag "Terminator Artifact"
+States
+  {
+  Spawn:
+    TNT1 A 0 A_CustomMissile ("OrangeSparkleSpawner", 0, 0, random(0,-360), 2, random(0,360)) 
+    ARNO AABB 1 Bright A_SpawnItem("RedSphereFlare",0,38)
+    TNT1 A 0 A_CustomMissile ("OrangeSparkleSpawner", 0, 0, random(0,-360), 2, random(0,360))
+    ARNO CCDD 1 Bright A_SpawnItem("RedSphereFlare",0,38)
+	Loop
+  Pickup:
+	TNT1 A 0
+	TNT1 A 0 A_JumpIfInventory("TerminatorDamage2",1,"FuckGoBack")
+	TNT1 A 0 A_JumpIfInventory("TerminatorDamage",1,"Upgrade")
+	TNT1 A 0 Healthing(666,666)
+	TNT1 A 0 A_Print("Pick up another Terminator Sphere to upgrade it!")
+	TNT1 A 0 A_GiveInventory("HellfireArmor",1)
+	TNT1 A 1 A_GiveInventory("TerminatorDamage",1)
+	Stop
+  Upgrade:
+	TNT1 A 0
+	TNT1 A 0 Healthing(666,666)
+	TNT1 A 0 A_Print("The Terminator Sphere has been upgraded!")
+	TNT1 A 0 A_GiveInventory("HellfireArmor",1)
+	TNT1 A 0 A_TakeInventory("TerminatorDamage",1)
+	TNT1 A 1 A_GiveInventory("TerminatorDamage2",1)
+	Stop
+  FuckGoBack:
+	TNT1 A 1
+	Fail
+  }
+}
+
+Actor TerminatorDamage : PowerDamage
+{
+  +INVENTORY.HUBPOWER
+  +INVENTORY.PERSISTENTPOWER
+  +NOTIMEFREEZE
+  DamageFactor "Normal", 1.5
+  DamageFactor "Legendary", 1.25
+  DamageFactor "LegendaryGuru", 1.02
+  DamageFactor "LegendaryGuruPlayer", 1.02
+  DamageFactor "PlayerNemesisPlasma", 1.15
+  DamageFactor "PlayerDevBall", 1.15
+  DamageFactor "PlayerDevBall2", 1.15
+  DamageFactor "PDTBFG", 1.15
+  DamageFactor "PlayerDevTracer", 1.15
+  DamageFactor "PlayerPyro", 1.1
+  DamageFactor "PlayerBHole", 1.1
+  DamageFactor "DiscoBFG", 1.25
+  Powerup.Duration 0x7FFFFFFD
+}
+Actor TerminatorDamage2 : PowerDamage
+{
+  +INVENTORY.HUBPOWER
+  +INVENTORY.PERSISTENTPOWER
+  +NOTIMEFREEZE
+  DamageFactor "Normal", 3
+  DamageFactor "Legendary", 2.5
+  DamageFactor "LegendaryGuru", 1.1
+  DamageFactor "LegendaryGuruPlayer", 1.1
+  DamageFactor "PlayerNemesisPlasma", 2.0
+  DamageFactor "PlayerDevBall", 1.0
+  DamageFactor "PlayerDevBall2", 1.0
+  DamageFactor "PDTBFG", 1.0
+  DamageFactor "PlayerDevTracer", 2.0
+  DamageFactor "PlayerPyro", 1.1
+  DamageFactor "PlayerBHole", 1.1
+  Powerup.Duration 0x7FFFFFFD
+}
+
+Actor HEMDroppedSoulSphere : RandomSpawner
+{
+DropItem "ModdedSoulSphere", 256, 90
+DropItem "LifeSphere", 256, 10
+}
+
+Actor LiteBeaconSupplyPickup : CustomInventory
+{
+Height 10
+Radius 10
++INVENTORY.INVBAR
+Inventory.Amount 1
+Inventory.MaxAmount 1
+Inventory.Icon "BELTB0"
+Inventory.PickupSound "misc/i_pkup"
+Inventory.PickupMessage "You picked up a lite supply beacon!"
+Tag "Lite beacon ammunition supply"
+States
+	{
+	Spawn:
+		BELT A -1
+		Loop
+	Use:
+		TNT1 A 0
+		TNT1 A 1 A_SpawnItemEx("LiteBeaconSupply",0,0,8,0,0,0,0,SXF_NOCHECKPOSITION,0)
+		Stop
+	}
+}
+Actor FullBeaconSupplyPickup : CustomInventory
+{
+Height 10
+Radius 10
++INVENTORY.INVBAR
+Inventory.Amount 1
+Inventory.MaxAmount 1
+Inventory.Icon "BEFLB0"
+Inventory.PickupSound "misc/i_pkup"
+Inventory.PickupMessage "You picked up a full supply beacon!"
+Tag "Full Beacon ammunition supply"
+States
+	{
+	Spawn:
+		BEFL A -1
+		Loop
+	Use:
+		TNT1 A 0
+		TNT1 A 1 A_SpawnItemEx("FullBeaconSupply",0,0,8,0,0,0,0,SXF_NOCHECKPOSITION,0)
+		Stop
+	}
+}
+Actor RandomBeaconSupplyPickup : CustomInventory
+{
+Height 10
+Radius 10
++INVENTORY.INVBAR
+Inventory.Amount 1
+Inventory.MaxAmount 1
+Inventory.Icon "BELTB0"
+Inventory.PickupSound "misc/i_pkup"
+Inventory.PickupMessage "You picked up a random supply beacon!"
+Tag "Random beacon ammunition supply"
+States
+	{
+	Spawn:
+		BELT A -1
+		Loop
+	Use:
+		TNT1 A 0
+		TNT1 A 1 A_SpawnItemEx("RandomBeaconSupply",0,0,8,0,0,0,0,SXF_NOCHECKPOSITION,0)
+		Stop
+	}
+}
+Actor BeaconSupplyCooldown : PowerDamage
+{
++INVENTORY.ADDITIVETIME
+DamageFactor "nothing", 1.0
+Powerup.duration -30
+}
+
+Actor BeaconArmorBonus : ArmorBonus
+{
+-COUNTITEM
++INVENTORY.QUIET
++INVENTORY.ALWAYSPICKUP
+Armor.SaveAmount 10
+Armor.SavePercent 40
+Armor.MaxSaveAmount 200
+Inventory.Icon "ARSDA0"
+States
+	{
+	Spawn:
+		ARSD A 6
+		ARSD B 12
+		Loop
+	}
+}
+ACTOR "NonBrokenAmmoPack" : "AmmoPack " Replaces "AmmoPack "
+{
+Scale 0.8
+Inventory.Amount 1
+Inventory.MaxAmount 5
+Inventory.InterHubAmount 5
+Inventory.PickupSound "pickups/iammosatchel"
+Inventory.UseSound "Null"
+Inventory.PickupMessage "Ammo Satchel"
+Inventory.Icon "INASA0"
++INVENTORY.INVBAR
++FLOORCLIP
+States
+  {
+  Spawn:
+      ASAT A -1
+      Stop
+  Use:
+      TNT1 A 0 A_JumpIf(ACS_NamedExecuteWithResult("AmmoFull", 0) == 2, "Full")
+	  TNT1 A 0 A_PlaySound("ammosatchel/use")
+	  TNT1 A 0 A_GiveInventory("BulletMag",20)
+	  TNT1 A 0 A_GiveInventory("NewShell",8)
+	  TNT1 A 0 A_GiveInventory("NewCell",20)
+	  TNT1 A 0 A_GiveInventory("Missile",4)
+	  TNT1 A 0 A_GiveInventory("DemonAmmo",20)
+	  TNT1 A 0 A_GiveInventory("LegendaryLMGBulletMag",10)
+	  TNT1 A 0 A_GiveInventory("LegendaryShell",4)
+	  TNT1 A 0 A_GiveInventory("Gas",20)
+	  TNT1 A 0 A_GiveInventory("EnragedLegendaryShell",10)
+	  TNT1 A 0 A_GiveInventory("ELegendaryLMGBulletMag",10)
+	  TNT1 A 0 A_GiveInventory("LDemonAmmo",10)
+	  TNT1 A 0 A_GiveInventory("ILDemonAmmo",10)
+	  TNT1 A 0 A_GiveInventory("LegendaryBulletMag",10)
+	  TNT1 A 0 A_GiveInventory("ProxMines",2)
+	  TNT1 A 0 A_GiveInventory("DustMana",10)
+	  TNT1 A 0 A_GiveInventory("HandGrenadeAmmo",1)
+	  TNT1 A 0 A_GiveInventory("MineAmmo",1)
+	  Stop
+  Full:
+      TNT1 A 0
+	  Fail
+  }
+}
+ACTOR ArkCombatpack: CustomInventory
+{
+  +INVENTORY.ALWAYSPICKUP
+  Height 36
+  Inventory.PickupSound "items/pack"
+  Inventory.PickupMessage "You picked up an ark combat pack!"
+  States
+  {
+  Spawn:
+	CBPK A -1
+    Loop
+  Pickup:
+	TNT1 A 0 A_GiveInventory("BulletMag",50)
+	TNT1 A 0 A_GiveInventory("NewShell",13)
+	TNT1 A 0 A_GiveInventory("Missile",13)
+	TNT1 A 0 A_GiveInventory("Gas",75)
+	TNT1 A 0 A_GiveInventory("NewCell",75)
+	TNT1 A 0 A_GiveInventory("DemonAmmo",75)
+	TNT1 A 0 A_GiveInventory("DustMana",32)
+	TNT1 A 0 A_GiveInventory("ProxMines",5)
+	TNT1 A 0 A_GiveInventory("HandGrenadeAmmo",2)
+	TNT1 A 0 A_GiveInventory("MineAmmo",2)
+    TNT1 A 0 A_GiveInventory("ArmorBonus", 1)
+    TNT1 A 0 A_GiveInventory("ArmorBonus", 1)
+    TNT1 A 0 A_GiveInventory("ArmorBonus", 1)
+    TNT1 A 0 A_GiveInventory("ArmorBonus", 1)
+    TNT1 A 0 A_GiveInventory("ArmorBonus", 1)
+    TNT1 A 0 HealThing(10,200)
+    Stop
+  }
+}
+Actor LiteCombatPack : CustomInventory
+{
+Height 36
++INVENTORY.ALWAYSPICKUP
+Inventory.PickupSound "items/pack"
+Inventory.PickupMessage "You got a lite combat pack."
+States
+	{
+	Spawn:
+		CLTP A -1
+		Loop
+	Pickup:
+		TNT1 A 0
+	    TNT1 A 0 A_GiveInventory("BulletMag",100)
+	    TNT1 A 0 A_GiveInventory("NewShell",25)
+	    TNT1 A 0 A_GiveInventory("Missile",25)
+		TNT1 A 0 A_GiveInventory("Gas",150)
+	    TNT1 A 0 A_GiveInventory("NewCell",150)
+	    TNT1 A 0 A_GiveInventory("DemonAmmo",150)
+		TNT1 A 0 A_GiveInventory("DustMana",63)
+		TNT1 A 0 A_GiveInventory("ProxMines",5)
+	    TNT1 A 0 A_GiveInventory("HandGrenadeAmmo",2)
+	    TNT1 A 0 A_GiveInventory("MineAmmo",2)
+		TNT1 A 0 A_GiveInventory("NLDemonAmmo",16)
+		TNT1 A 0 A_GiveInventory("NemesisShell",5)
+		TNT1 A 0 A_GiveInventory("DCell",10)
+		TNT1 A 0 A_GiveInventory("SpringMine",1)
+		TNT1 A 0 A_GiveInventory("BeaconArmorBonus")
+		TNT1 A 1 Healthing(10,200)
+		Stop
+	}
+}
+Actor FullCombatPack : CustomInventory
+{
+Height 36
++INVENTORY.ALWAYSPICKUP
+Inventory.PickupSound "items/pack"
+Inventory.PickupMessage "You got a full combat pack."
+States
+	{
+	Spawn:
+		CFLT A -1
+		Loop
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 ACS_NamedExecuteWithResult("MaxAmmoCapacity", 0)
+	    TNT1 A 0 A_GiveInventory("BulletMag",133)
+	    TNT1 A 0 A_GiveInventory("LegendaryLMGBulletMag",12)
+		TNT1 A 0 A_GiveInventory("LegendaryBulletMag",12)
+		TNT1 A 0 A_GiveInventory("ELegendaryLMGBulletMag",12)
+	    TNT1 A 0 A_GiveInventory("NewShell",33)
+	    TNT1 A 0 A_GiveInventory("LegendaryShell",3)
+	    TNT1 A 0 A_GiveInventory("EnragedLegendaryShell",3)
+	    TNT1 A 0 A_GiveInventory("Missile",33)
+	    TNT1 A 0 A_GiveInventory("Gas",200)
+	    TNT1 A 0 A_GiveInventory("NewCell",200)
+	    TNT1 A 0 A_GiveInventory("DemonAmmo",200)
+	    TNT1 A 0 A_GiveInventory("LDemonAmmo",16)
+	    TNT1 A 0 A_GiveInventory("ILDemonAmmo",16)
+		TNT1 A 0 A_GiveInventory("DustMana",100)
+		TNT1 A 0 A_GiveInventory("ProxMines",5)
+	    TNT1 A 0 A_GiveInventory("HandGrenadeAmmo",4)
+	    TNT1 A 0 A_GiveInventory("MineAmmo",4)
+		TNT1 A 0 A_GiveInventory("NLDemonAmmo",32)
+		TNT1 A 0 A_GiveInventory("NemesisShell",7)
+		TNT1 A 0 A_GiveInventory("DCell",10)
+		TNT1 A 0 A_GiveInventory("BeaconArmorBonus")
+		TNT1 A 0 A_GiveInventory("SpringMine",3)
+		TNT1 A 1 Healthing(10,200)
+		Stop
+	}
+}
+ACTOR ExplosiveCombatpack : CustomInventory
+{
++INVENTORY.ALWAYSPICKUP
+Height 36
+Inventory.PickupSound "items/pack"
+Inventory.PickupMessage "You got an explosive combat pack."
+States
+	{
+	Spawn:
+		CEXP A -1
+		Loop
+    Remove:
+		TNT1 A 0
+		Stop
+	Pickup:
+		TNT1 A 0 ACS_NamedExecuteWithResult("MaxAmmoCapacity", 0)
+    	TNT1 A 0 A_GiveInventory("BulletMag",50)
+    	TNT1 A 0 A_GiveInventory("NewShell",13)
+    	TNT1 A 0 A_GiveInventory("Missile",100)
+	    TNT1 A 0 A_GiveInventory("Gas",600)
+    	TNT1 A 0 A_GiveInventory("NewCell",75)
+    	TNT1 A 0 A_GiveInventory("DemonAmmo",75)
+    	TNT1 A 0 A_GiveInventory("LDemonAmmo",16)
+    	TNT1 A 0 A_GiveInventory("ILDemonAmmo",16)
+    	TNT1 A 0 A_GiveInventory("DustMana",32)
+		TNT1 A 0 A_GiveInventory("ProxMines",5)
+        TNT1 A 0 A_GiveInventory("HandGrenadeAmmo",8)
+	    TNT1 A 0 A_GiveInventory("MineAmmo",8)
+		TNT1 A 0 A_GiveInventory("NLDemonAmmo",10)
+		TNT1 A 0 A_GiveInventory("DCell",4)
+		TNT1 A 0 A_GiveInventory("SpringMine",6)
+		TNT1 A 0 A_GiveInventory("BeaconArmorBonus",1)
+		TNT1 A 0 ACS_NamedExecuteAlways("ExplosiveGiveAway", 0)		
+ 	    TNT1 A 1 Healthing(15,200)
+		Stop
+	}
+}
+Actor EnergyCombatPack : CustomInventory
+{
+Height 36
++INVENTORY.ALWAYSPICKUP
+Inventory.PickupSound "items/pack"
+Inventory.PickupMessage "You got an energy combat pack."
+States
+	{
+	Spawn:
+		CENG A -1
+		Loop
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 ACS_NamedExecuteWithResult("MaxAmmoCapacity", 0)
+    	TNT1 A 0 A_GiveInventory("BulletMag",50)
+    	TNT1 A 0 A_GiveInventory("NewShell",13)
+    	TNT1 A 0 A_GiveInventory("Missile",13)
+	    TNT1 A 0 A_GiveInventory("Gas",75)
+	    TNT1 A 0 A_GiveInventory("NewCell",75)
+    	TNT1 A 0 A_GiveInventory("DemonAmmo",600)
+    	TNT1 A 0 A_GiveInventory("LDemonAmmo",32)
+	    TNT1 A 0 A_GiveInventory("ILDemonAmmo",3) 
+    	TNT1 A 0 A_GiveInventory("DustMana",250)
+		TNT1 A 0 A_GiveInventory("ProxMines",5)
+	    TNT1 A 0 A_GiveInventory("HandGrenadeAmmo",2)
+	    TNT1 A 0 A_GiveInventory("MineAmmo",2)
+		TNT1 A 0 A_GiveInventory("NLDemonAmmo",16)
+		TNT1 A 0 A_GiveInventory("NemesisShell",5)
+		TNT1 A 0 A_GiveInventory("DCell",15)
+		TNT1 A 0 A_GiveInventory("SpringMine",1)
+		TNT1 A 0 A_GiveInventory("BeaconArmorBonus",1)
+		TNT1 A 0 ACS_NamedExecuteAlways("BigGunGiveAway", 0)
+ 	    TNT1 A 1 Healthing(15,200)
+		Stop
+	}
+}
+ACTOR CapacityCombatpack: CustomInventory
+{
+  -INVENTORY.ALWAYSPICKUP
+  Height 36
+  Inventory.PickupSound "items/pack"
+  Inventory.PickupMessage "You picked up a capacity combat pack"
+  States
+  {
+  Spawn:
+	CBPK A -1
+    Loop
+  Pickup:
+    TNT1 A 0 A_GiveInventory("MaxCapacitor", 1)
+	TNT1 A 0 ACS_NamedExecuteWithResult("MaxAmmoCapacity", 0)
+	TNT1 A 0 A_GiveInventory("BulletMag",50)
+	TNT1 A 0 A_GiveInventory("LegendaryLMGBulletMag",19)
+	TNT1 A 0 A_GiveInventory("LegendaryBulletMag",19)
+	TNT1 A 0 A_GiveInventory("ELegendaryLMGBulletMag",19)
+	TNT1 A 0 A_GiveInventory("NewShell",13)
+	TNT1 A 0 A_GiveInventory("LegendaryShell",6)
+	TNT1 A 0 A_GiveInventory("EnragedLegendaryShell",6)
+	TNT1 A 0 A_GiveInventory("Missile",13)
+	TNT1 A 0 A_GiveInventory("Gas",75)
+	TNT1 A 0 A_GiveInventory("NewCell",75)
+	TNT1 A 0 A_GiveInventory("DemonAmmo",75)
+	TNT1 A 0 A_GiveInventory("LDemonAmmo",32)
+	TNT1 A 0 A_GiveInventory("ILDemonAmmo",32)
+	TNT1 A 0 A_GiveInventory("DustMana",32)
+	TNT1 A 0 A_GiveInventory("ProxMines",5)
+	TNT1 A 0 A_GiveInventory("HandGrenadeAmmo",2)
+	TNT1 A 0 A_GiveInventory("MineAmmo",2)
+	TNT1 A 0 A_GiveInventory("NLDemonAmmo",16)
+	TNT1 A 0 A_GiveInventory("NemesisShell",4)
+	TNT1 A 0 A_GiveInventory("DCell",10)
+	TNT1 A 0 A_GiveInventory("SpringMine",1)
+	TNT1 A 0 A_GiveInventory("BeaconArmorBonus",1)
+    TNT1 A 0 HealThing(15,200)
+    Stop
+  }
+}
+Actor LegendaryCombatPack : CustomInventory
+{
+Height 36
++INVENTORY.ALWAYSPICKUP
+Inventory.PickupSound "items/pack"
+Inventory.PickupMessage "You got a legendary combat pack."
+States
+	{
+	Spawn:
+		CLGP A -1
+		Loop
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 ACS_NamedExecuteWithResult("MaxAmmoCapacity", 0)
+    	TNT1 A 0 A_GiveInventory("BulletMag",50)
+	    TNT1 A 0 A_GiveInventory("LegendaryLMGBulletMag",300)
+		TNT1 A 0 A_GiveInventory("LegendaryBulletMag",300)
+		TNT1 A 0 A_GiveInventory("ELegendaryLMGBulletMag",300)
+    	TNT1 A 0 A_GiveInventory("NewShell",13)
+	    TNT1 A 0 A_GiveInventory("LegendaryShell",95)
+	    TNT1 A 0 A_GiveInventory("EnragedLegendaryShell",95)
+    	TNT1 A 0 A_GiveInventory("Missile",13)
+	    TNT1 A 0 A_GiveInventory("Gas",75)
+    	TNT1 A 0 A_GiveInventory("NewCell",75)
+		TNT1 A 0 A_GiveInventory("DemonAmmo",75)
+	    TNT1 A 0 A_GiveInventory("LDemonAmmo",500)
+	    TNT1 A 0 A_GiveInventory("ILDemonAmmo",500)
+		TNT1 A 0 A_GiveInventory("DustMana",32)
+        TNT1 A 0 A_GiveInventory("ProxMines",5)
+	    TNT1 A 0 A_GiveInventory("HandGrenadeAmmo",2)
+	    TNT1 A 0 A_GiveInventory("MineAmmo",2)
+		TNT1 A 0 A_GiveInventory("NLDemonAmmo",16)
+		TNT1 A 0 A_GiveInventory("NemesisShell",5)
+		TNT1 A 0 A_GiveInventory("DCell",10)
+		TNT1 A 0 A_GiveInventory("SpringMine",1)
+		TNT1 A 1 Healthing(25,250)
+		TNT1 A 0 A_GiveInventory("BossArmorBonusMax")
+		TNT1 A 0 ACS_NamedExecuteAlways("LegendaryGiveAway", 0)
+		Stop
+	}
+}
+Actor NemesisCombatPack : CustomInventory
+{
+Height 36
++INVENTORY.ALWAYSPICKUP
+Inventory.PickupSound "items/pack"
+Inventory.PickupMessage "You got a nemesis combat pack."
+States
+	{
+	Spawn:
+		CNMP A -1
+		Loop
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 ACS_NamedExecuteWithResult("MaxAmmoCapacity", 0)
+    	TNT1 A 0 A_GiveInventory("BulletMag",50)
+    	TNT1 A 0 A_GiveInventory("LegendaryLMGBulletMag",19)
+    	TNT1 A 0 A_GiveInventory("LegendaryBulletMag",19)
+		TNT1 A 0 A_GiveInventory("ELegendaryLMGBulletMag",19)
+    	TNT1 A 0 A_GiveInventory("NewShell",13)
+    	TNT1 A 0 A_GiveInventory("LegendaryShell",6)
+    	TNT1 A 0 A_GiveInventory("EnragedLegendaryShell",6)
+    	TNT1 A 0 A_GiveInventory("Missile",13)
+	    TNT1 A 0 A_GiveInventory("Gas",75)
+    	TNT1 A 0 A_GiveInventory("NewCell",75)
+    	TNT1 A 0 A_GiveInventory("DemonAmmo",75)
+    	TNT1 A 0 A_GiveInventory("LDemonAmmo",32)
+    	TNT1 A 0 A_GiveInventory("ILDemonAmmo",32)
+    	TNT1 A 0 A_GiveInventory("DustMana",32)
+		TNT1 A 0 A_GiveInventory("ProxMines",5)
+	    TNT1 A 0 A_GiveInventory("HandGrenadeAmmo",4)
+	    TNT1 A 0 A_GiveInventory("MineAmmo",4)
+		TNT1 A 0 A_GiveInventory("NLDemonAmmo",100)
+		TNT1 A 0 A_GiveInventory("NemesisShell",20)
+		TNT1 A 0 A_GiveInventory("DCell",10)
+		TNT1 A 0 A_GiveInventory("SpringMine",1)
+		TNT1 A 1 Healthing(50,250)
+		TNT1 A 0 A_GiveInventory("BossArmorBonusMax")
+		TNT1 A 0 A_GiveInventory("BeaconArmorBonus",1)
+		TNT1 A 0 ACS_NamedExecuteAlways("NemesisGiveAway", 0)
+		Stop
+	}
+}
+Actor Nada : CustomInventory
+{
+Inventory.Amount 1
+Inventory.MaxAmount 1
+Inventory.InterHubAmount 1
+//Inventory.PickupSound "pickups/iammosatchel"
+//Inventory.UseSound "Null"
+Inventory.PickupMessage "Nada"
+Inventory.Icon "INASA0"
+-INVENTORY.INVBAR
+States
+    {
+      Pickup:
+	  	  TNT1 A 0 A_Print("Nothing, better luck next time")
+		  TNT1 A 0 A_PlaySound("weapon/warn")
+	  Stop
+	  Use:
+	      TNT1 A 0
+	  Stop
+	  Spawn:
+          TNT1 A 0
+      Stop
+    }
+}
+Actor MaxCapacitor : CustomInventory
+{
+Inventory.Amount 1
+Inventory.MaxAmount 5
+Inventory.InterHubAmount 5
+Inventory.PickupMessage "Max Capacitor"
+Inventory.Icon ""
+-INVENTORY.INVBAR
+-COUNTITEM
+States
+    {
+      Pickup:
+	  	  TNT1 A 0 A_JumpIfInventory("MaxCapacitor",5,"TooMany")
+		  TNT1 A 0 ACS_NamedExecuteAlways("MoreAmmo",0)
+	  Stop
+	  TooMany:
+	      TNT1 A 0
+	  Stop
+	  Use:
+	      TNT1 A 0
+	  Stop
+	  Spawn:
+          TNT1 A 0
+      Stop
+    }
+}
+Actor LiteBeaconSupply
+{
+-SOLID
+-SHOOTABLE
++FRIENDLY
+var int user_spawncount;
+var int user_spawntotal;
+Tag "Lite beacon ammunition supply"
+States
+	{
+	Spawn:
+		BELT A 35
+	Idle:
+		//TNT1 A 0 A_JumpIf(waterlevel > 2,"Death")
+		TNT1 A 0 A_ChangeFlag(FRIENDLY,0)
+		TNT1 A 0 A_ChangeFlag(NOBLOCKMAP,0)
+		TNT1 A 0 A_SetTranslucent(1,0)
+		TNT1 A 0 A_LookEx(LOF_NOSOUNDCHECK|LOF_NOSEESOUND,0,100,0,360,"Supply")
+		TNT1 A 0 A_ChangeFlag(FRIENDLY,1)
+		BELT A 10
+		Loop
+	Supply:
+        TNT1 A 0 A_SetUserVar("user_spawntotal",ACS_NamedExecuteWithResult("GetBeaconSpawnNumber"))
+		TNT1 A 0 A_ChangeFlag(FRIENDLY,1)
+		TNT1 A 0 A_CheckFlag(ISMONSTER,"Hide",AAPTR_TARGET)
+		TNT1 A 0 A_JumpIf(ACS_NamedExecuteWithResult("GetBeaconTimer") > 0, "Enough")
+        TNT1 A 0 ACS_NamedExecuteWithResult("BeaconDelay")
+		//NT1 A 0 A_JumpIfInTargetInventory("BeaconSupplyCooldown",1,"Enough")
+	    //TNT1 A 0 A_GiveToTarget("BeaconSupplyCooldown",1)
+		BELT A 10 Bright A_SpawnItemEx ("TeleportFog",0,0,8,0,0,0,0,SXF_NOCHECKPOSITION,0)
+		TNT1 A 0 A_SpawnItemEx("LiteCombatPack",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,0)
+		TNT1 A 0 A_SetUserVar("user_spawncount",user_spawncount + 1)
+		TNT1 A 0 A_JumpIf(user_spawncount >= user_spawntotal, "Death")
+		BELT A 25 Healthing(100)
+		BELT AAAA 35
+		Goto Idle
+	Enough:
+		BELT A 10 Bright A_PlaySound("weapon/warn")
+		BELT A 25
+		BELT AAAA 35
+		Goto Idle
+	Hide:
+		TNT1 A 0 A_ChangeFlag(NOBLOCKMAP,1)
+		TNT1 A 0 A_SetTranslucent(0.5,0)
+		BELT AAAAA 35
+		Goto Idle
+	Death:
+        BELT A 25
+		TNT1 A 1 A_CustomMissile ("TeleportFog", 0, 0, 0, 0, 0)
+        Stop
+	}
+}
+Actor FullBeaconSupply
+{
+-SOLID
+-SHOOTABLE
++FRIENDLY
+var int user_spawncount;
+var int user_spawntotal;
+Tag "Full Beacon ammunition supply"
+States
+	{
+	Spawn:
+		BEFL A 35
+	Idle:
+		//TNT1 A 0 A_JumpIf(waterlevel > 2,"Death")
+		TNT1 A 0 A_ChangeFlag(FRIENDLY,0)
+		TNT1 A 0 A_ChangeFlag(NOBLOCKMAP,0)
+		TNT1 A 0 A_SetTranslucent(1,0)
+		TNT1 A 0 A_LookEx(LOF_NOSOUNDCHECK|LOF_NOSEESOUND,0,100,0,360,"Supply")
+		TNT1 A 0 A_ChangeFlag(FRIENDLY,1)
+		BEFL A 10
+		Loop
+	Supply:
+        TNT1 A 0 A_SetUserVar("user_spawntotal",ACS_NamedExecuteWithResult("GetBeaconSpawnNumber"))
+		TNT1 A 0 A_ChangeFlag(FRIENDLY,1)
+		TNT1 A 0 A_CheckFlag(ISMONSTER,"Hide",AAPTR_TARGET)
+		TNT1 A 0 A_JumpIf(ACS_NamedExecuteWithResult("GetBeaconTimer") > 0, "Enough")
+        TNT1 A 0 ACS_NamedExecuteWithResult("BeaconDelay")
+		//TNT1 A 0 A_JumpIfInTargetInventory("BeaconSupplyCooldown",1,"Enough")
+		//TNT1 A 0 A_GiveToTarget("BeaconSupplyCooldown",1)
+		BEFL A 10 Bright A_SpawnItemEx ("TeleportFog",0,0,8,0,0,0,0,SXF_NOCHECKPOSITION,0)
+		TNT1 A 0 A_SpawnItemEx("FullCombatPack",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,0)
+		TNT1 A 0 A_SetUserVar("user_spawncount",user_spawncount + 1)
+		TNT1 A 0 A_JumpIf(user_spawncount >= user_spawntotal, "Death")
+		BEFL A 25 Healthing(100)
+		BEFL AAAA 35
+		Goto Idle
+	Enough:
+		BEFL A 10 Bright A_PlaySound("weapon/warn")
+		BEFL A 25
+		BEFL AAAA 35
+		Goto Idle
+	Hide:
+		TNT1 A 0 A_ChangeFlag(NOBLOCKMAP,1)
+		TNT1 A 0 A_SetTranslucent(0.5,0)
+		BEFL AAAAA 35
+		Goto Idle
+	Death:
+        BEFL A 25
+		TNT1 A 1 A_CustomMissile ("TeleportFog", 0, 0, 0, 0, 0)
+        Stop
+	}
+}
+Actor RandomBeaconSupply
+{
+-SOLID
+-SHOOTABLE
++FRIENDLY
+var int user_spawncount;
+var int user_spawntotal;
+Tag "Random beacon ammunition supply"
+States
+	{
+	Spawn:
+		BELT A 35
+	Idle:
+		//TNT1 A 0 A_JumpIf(waterlevel > 2,"Death")
+		TNT1 A 0 A_ChangeFlag(FRIENDLY,0)
+		TNT1 A 0 A_ChangeFlag(NOBLOCKMAP,0)
+		TNT1 A 0 A_SetTranslucent(1,0)
+		TNT1 A 0 A_LookEx(LOF_NOSOUNDCHECK|LOF_NOSEESOUND,0,100,0,360,"Supply")
+		TNT1 A 0 A_ChangeFlag(FRIENDLY,1)
+		BELT A 10
+		Loop
+	Supply:
+        TNT1 A 0 A_SetUserVar("user_spawntotal",ACS_NamedExecuteWithResult("GetBeaconSpawnNumber"))
+		TNT1 A 0 A_ChangeFlag(FRIENDLY,1)
+		TNT1 A 0 A_CheckFlag(ISMONSTER,"Hide",AAPTR_TARGET)
+	    TNT1 A 0 A_JumpIf(ACS_NamedExecuteWithResult("GetBeaconTimer") > 0, "Enough")
+        TNT1 A 0 ACS_NamedExecuteWithResult("BeaconDelay")
+		//TNT1 A 0 A_JumpIfInTargetInventory("BeaconSupplyCooldown",1,"Enough")
+		//TNT1 A 0 A_GiveToTarget("BeaconSupplyCooldown",1)
+		BELT A 10 Bright A_SpawnItemEx ("TeleportFog",0,0,8,0,0,0,0,SXF_NOCHECKPOSITION,0)
+		TNT1 A 0 ACS_NamedExecuteAlways("RandomBeacon")
+		TNT1 A 0 A_SetUserVar("user_spawncount",user_spawncount + 1)
+		TNT1 A 0 A_JumpIf(user_spawncount >= user_spawntotal, "Death")
+		BELT A 25 Healthing(100)
+		BELT AAAA 35
+		Goto Idle
+	Enough:
+		BELT A 10 Bright A_PlaySound("weapon/warn")
+		BELT A 25
+		BELT AAAA 35
+		Goto Idle
+	Hide:
+		TNT1 A 0 A_ChangeFlag(NOBLOCKMAP,1)
+		TNT1 A 0 A_SetTranslucent(0.5,0)
+		BELT AAAAA 35
+		Goto Idle
+	Death:
+        BELT A 25
+		TNT1 A 1 A_CustomMissile ("TeleportFog", 0, 0, 0, 0, 0)
+        Stop
+	}
+}
+
+//===========================================================
+Actor AmmoSphere : CustomInventory 30437
+{
+Scale 1.0
++FLOATBOB
++COUNTITEM
++NOTIMEFREEZE
++FORCEXYBILLBOARD
+//+INVENTORY.INVBAR
++INVENTORY.UNDROPPABLE
++INVENTORY.AUTOACTIVATE
++INVENTORY.FANCYPICKUPSOUND
+Inventory.Amount 1
+Inventory.MaxAmount 1
+Inventory.InterHubAmount 1
+//Inventory.Icon ""
+//inventory.usesound ""
+inventory.pickupsound "misc/p_pkup"
+Inventory.PickupMessage "Infinite Ammo!"
+Tag "Ammo Sphere"
+States
+	{
+	Spawn:
+		TNT1 A 0 A_CustomMissile ("RedSparkleSpawner", 0, 0, random(0,-360), 2, random(0,360))
+        AMS2 AAAAAABBBBBB 1 Bright A_SpawnItem("RedSphereFlare",0,38)
+	    TNT1 A 0 A_CustomMissile ("RedSparkleSpawner", 0, 0, random(0,-360), 2, random(0,360))
+        AMS2 CCCCCCDDDDDD 1 Bright A_SpawnItem("RedSphereFlare",0,38)
+		//AMS2 ABCD 6 Bright
+		Loop
+	//Use:
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("AmmoRegenerate",1,"Nop")
+		TNT1 A 1 A_GiveInventory("AmmoSphereGiver",1)
+		TNT1 A 1 A_GiveInventory("AmmoRegenerate",1)
+		Stop
+	Nop:
+		TNT1 A 1
+		Fail
+	}
+}
+
+Actor AmmoSphereGiver : PowerupGiver
+{
+-COUNTITEM
++INVENTORY.AUTOACTIVATE
+-INVENTORY.ALWAYSPICKUP
+Powerup.Type "PowerInfiniteAmmo"
+Powerup.Duration -30
+Powerup.Color "255 0 0" 0.4
+}
+
+/*Actor AmmoRegenerate : PowerTargeter
+{
+-COUNTITEM
++NOTIMEFREEZE
+Powerup.Duration -120
+States
+	{
+	Targeter:
+		TNT1 A 0
+		TNT1 A 35
+		TNT1 A 0 A_JumpIf(ACS_NamedExecuteWithResult("Hem_GetCurrentHealth") > 0,2)
+		TNT1 A 0 A_Jump(256,8)
+		TNT1 A 0 A_GiveInventory("BulletMag",1)
+		TNT1 A 0 A_GiveInventory("NewShell",1)
+		TNT1 A 0 A_GiveInventory("Missile",1)
+		TNT1 A 0 A_GiveInventory("NewCell",1)
+		TNT1 A 0 A_GiveInventory("Gas",1)
+		TNT1 A 0 A_GiveInventory("DemonAmmo",1)
+		TNT1 A 0 A_GiveInventory("DustMana",1)
+		Loop
+		TNT1 A 1
+		Stop
+	}
+}*/
+
+
+Actor LAmmoRegenerate : PowerTargeter
+{
++NOTIMEFREEZE
+Powerup.Duration -120 //why do I get 5 minutes of ammo regen for an easy item to get
+States
+	{
+	Targeter:
+		TNT1 A 0
+		TNT1 A 35
+		TNT1 A 0 A_JumpIf(ACS_NamedExecuteWithResult("Hem_GetCurrentHealth") > 0,2)
+		TNT1 A 0 A_Jump(256,5)
+		TNT1 A 0 A_GiveInventory("LDemonAmmo",5)
+		TNT1 A 0 A_GiveInventory("LegendaryShell",5)
+		TNT1 A 0 A_GiveInventory("LegendaryBulletMag",5)
+		TNT1 A 0 A_GiveInventory("EnragedLegendaryShell",5)
+		TNT1 A 0 A_GiveInventory("ILDemonAmmo",5)
+		Loop
+		TNT1 A 1
+		Stop
+	}
+}
+
+//===========================================================
+Actor SpringMine : CustomInventory
+{
++INVENTORY.INVBAR
++INVENTORY.KEEPDEPLETED
++INVENTORY.HUBPOWER
++INVENTORY.PERSISTENTPOWER
+Inventory.Amount 1
+Inventory.MaxAmount 8
+Inventory.InterHubAmount 8
+Inventory.Icon "SPMIA0"
+Inventory.PickupSound "SMINGET"
+Inventory.PickupMessage "Picked up a Spring Mine."
+Tag "Spring Mine"
+States
+	{
+	Spawn:
+		SPMN ABC 2
+		Loop
+    Pickup:
+		TNT1 A 0 A_JumpIfInventory("MaxCapacitor",3, "NoFail")
+		TNT1 A 0 A_JumpIfInventory("MaxCapacitor",4, "NoFail")
+		TNT1 A 0 A_JumpIfInventory("MaxCapacitor",5, "NoFail")
+		TNT1 A 0 A_JumpIfInventory("Springmine",6, "MaxMines")
+		TNT1 A 0 A_JumpIfInventory("Springmine",7, "MaxMines")
+		TNT1 A 0 A_JumpIfInventory("Springmine",0, "MaxMines")
+		TNT1 A 0 ACS_NamedExecuteAlways("SpringMineCheck",0)		
+		Stop
+	Use:
+		TNT1 A 0
+        TNT1 A 1 A_JumpIf(ACS_NamedExecuteWithResult("InfiniteInventoryCheck") == 2,"Cheater")
+		TNT1 A 1 A_JumpIfInventory("PowerInfiniteAmmo",1,2)
+		TNT1 A 0 A_FireCustomMissile("SpringMineSet",0,0,0,0,false,8)
+		Stop
+		TNT1 A 0 A_JumpIfInventory("SpringMineCooldown",1,3)
+		TNT1 A 0 A_GiveInventory("SpringMineCooldown",1)
+		TNT1 A 0 A_FireCustomMissile("SpringMineSet",0,0,0,0,false,8)
+		TNT1 A 1
+		Fail
+    Cheater:
+		TNT1 A 0 A_JumpIfInventory("CheaterSpringMineCooldown",1,3)
+		TNT1 A 0 A_GiveInventory("CheaterSpringMineCooldown",1)
+		TNT1 A 0 A_FireCustomMissile("SpringMineSet",0,0,0,0,false,8)
+		TNT1 A 1
+		Fail
+    MaxMines:
+	    TNT1 A 0
+		Fail
+    NoFail:
+		TNT1 A 0 A_JumpIfInventory("MaxCapacitor",5, "NoFail2")
+		TNT1 A 0 A_JumpIfInventory("Springmine",7, "MaxMines")
+		TNT1 A 0 A_JumpIfInventory("Springmine",0, "MaxMines")
+		TNT1 A 0 ACS_NamedExecuteAlways("SpringMineCheck",0)
+	    TNT1 A 0
+	Stop
+    NoFail2:
+		TNT1 A 0 A_JumpIfInventory("Springmine",0, "MaxMines")
+		TNT1 A 0 ACS_NamedExecuteAlways("SpringMineCheck",0)
+	    TNT1 A 0
+	Stop
+	}
+}
+
+Actor SpringMineCooldown : PowerDamage
+{
++INVENTORY.ADDITIVETIME
+DamageFactor "nothing", 1.0
+Powerup.duration 26
+}
+Actor CheaterSpringMineCooldown : PowerDamage
+{
++INVENTORY.ADDITIVETIME
+DamageFactor "nothing", 1.0
+Powerup.duration -5
+}
+Actor SpringMineSet
+{
+Radius 12 //10
+Height 9 //5
+Speed 7
++MOVEWITHSECTOR
+
++MISSILE
++DROPOFF
++NOBLOCKMAP
++NOTELEPORT
++THRUACTORS
++CANBOUNCEWATER
+BounceType "Grenade"
+BounceCount 3
+Reactiontime 525
+BounceSound "MINBNC"
+States
+	{
+	Spawn:
+		TNT1 A 0 A_CountDown
+		SPMN A 1 Bright
+		Loop
+	Death:
+		TNT1 A 0 Bright
+        TNT1 A 1 A_JumpIf(ACS_NamedExecuteWithResult("InfiniteInventoryCheck") == 2,"Cheater")
+		TNT1 A 1 Bright A_CustomMissile("SpringMineActive",0,0,0,CMF_AIMDIRECTION|CMF_TRACKOWNER)
+		Stop
+    Cheater:
+		TNT1 A 1 Bright A_CustomMissile("CheaterSpringMineActive",0,0,0,CMF_AIMDIRECTION|CMF_TRACKOWNER)
+        Stop
+	} 
+}
+
+Actor SpringMineActive
+{
+Projectile
+Radius 12 //10
+Height 9 //5
+Mass 1000000
+Speed 0
+//Gravity 1.0
+WallBounceFactor 0.16
+BounceFactor 0.36
+BounceType "Grenade"
++DROPOFF
++FLOORCLIP
++NOTELEPORT
+
++FRIENDLY
++NODAMAGE
++BRIGHT
++FORCEPAIN
+-NOGRAVITY
++MOVEWITHSECTOR
++FORCERADIUSDMG
++DONTHARMSPECIES
++THRUACTORS
++CANBOUNCEWATER
+Species "Player"
+DamageType "Explosion"
+Obituary "%o came too close to spring mine."
+Tag "Spring Mine Planted"
+var int user_counter;
+States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_RearrangePointers(AAPTR_NULL, AAPTR_TARGET, AAPTR_NULL)
+		TNT1 A 0 A_PlaySound("SMNSET1")
+		SPMN AAAAAAAAAA 2
+		TNT1 A 0 A_PlaySound("SMNSET2")
+		SPMN AD 1
+	SpawnLoop:
+		SPMN ADAD 1 A_LookEx(LOF_NOSOUNDCHECK|LOF_NOSEESOUND,0,100,0,360,"Attack")
+		TNT1 A 0 A_JumpIf(user_counter >= 15750,"Vanish")
+		TNT1 A 0 A_SetUserVar("user_counter",user_counter + 1)
+		Loop
+	Attack:
+		TNT1 A 0
+		SPMN ABC 2
+		TNT1 A 0 A_RearrangePointers(AAPTR_MASTER, AAPTR_DEFAULT, AAPTR_DEFAULT)
+		TNT1 A 0 ThrustThingZ(0,45,0,0)
+		TNT1 A 0 A_PlaySound("MINLNCH")
+		SPMN AAAAAAAAA 2
+		SPMN AAA 1
+		TNT1 A 0 A_PlaySound("SPRNMNXP")
+		TNT1 A 0 A_Explode(Random(350,400),200,0,1,100)
+		//TNT1 A 0 A_SpawnItemEx("SMineExplosion",0,0,5,0,0,0,0,SXF_NOCHECKPOSITION|SXF_SETMASTER,0)
+		TNT1 A 10 A_SpawnItemEx("WhiteProjExplodeLarge",0,0,0,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,0)
+		Stop
+	Vanish:
+		SPMN ADADADADADAD 1 A_FadeOut(0.1,1)
+		Stop
+	}
+}
+Actor CheaterSpringMineActive
+{
+Projectile
+Radius 12 //10
+Height 9 //5
+Mass 1000000
+Speed 0
+//Gravity 1.0
+WallBounceFactor 0.16
+BounceFactor 0.36
+BounceType "Grenade"
++DROPOFF
++FLOORCLIP
++NOTELEPORT
+
++FRIENDLY
++NODAMAGE
++BRIGHT
++FORCEPAIN
+-NOGRAVITY
++MOVEWITHSECTOR
++FORCERADIUSDMG
++DONTHARMSPECIES
++THRUACTORS
++CANBOUNCEWATER
+Species "Player"
+DamageType "Explosion"
+Obituary "%o came too close to spring mine."
+Tag "Spring Mine Planted"
+var int user_counter;
+States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_RearrangePointers(AAPTR_NULL, AAPTR_TARGET, AAPTR_NULL)
+		TNT1 A 0 A_PlaySound("SMNSET1")
+		SPMN AAAAAAAAAA 2
+		TNT1 A 0 A_PlaySound("SMNSET2")
+		SPMN AD 1
+	SpawnLoop:
+		SPMN ADAD 1 A_LookEx(LOF_NOSOUNDCHECK|LOF_NOSEESOUND,0,100,0,360,"Attack")
+		TNT1 A 0 A_JumpIf(user_counter >= 525,"Vanish")
+		TNT1 A 0 A_SetUserVar("user_counter",user_counter + 1)
+		Loop
+	Attack:
+		TNT1 A 0
+		SPMN ABC 2
+		TNT1 A 0 A_RearrangePointers(AAPTR_MASTER, AAPTR_DEFAULT, AAPTR_DEFAULT)
+		TNT1 A 0 ThrustThingZ(0,45,0,0)
+		TNT1 A 0 A_PlaySound("MINLNCH")
+		SPMN AAAAAAAAA 2
+		SPMN AAA 1
+		TNT1 A 0 A_PlaySound("SPRNMNXP")
+		TNT1 A 0 A_Explode(125,200,0,1,100)
+		//TNT1 A 0 A_SpawnItemEx("SMineExplosion",0,0,5,0,0,0,0,SXF_NOCHECKPOSITION|SXF_SETMASTER,0)
+		TNT1 A 10 A_SpawnItemEx("WhiteProjExplodeLarge",0,0,0,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,0)
+		Stop
+	Vanish:
+		SPMN ADADADADADAD 1 A_FadeOut(0.1,1)
+		Stop
+	}
+}
+//===========================================================
+Actor PowerUberAmmo : PowerupGiver
+{
++INVENTORY.AUTOACTIVATE
++INVENTORY.ALWAYSPICKUP
+Inventory.Amount 1
+powerup.duration -60
+Powerup.Type PowerInfiniteAmmo
+Powerup.Color White 0.0
+Inventory.PickupMessage "Don't you think that such amount of ammo could easily make a truck unable to move?"
+}
+
+Actor Megapack : CustomInventory 30436
+{
++COUNTITEM
++INVENTORY.AUTOACTIVATE
++INVENTORY.ALWAYSPICKUP
++INVENTORY.FANCYPICKUPSOUND
+Inventory.Amount 1
+Inventory.PickupSound "misc/megapack"
+Inventory.PickupMessage "Megapack!"
+Tag "Megapack"
+States
+	{
+	Spawn:
+		BPK2 A -1
+		Loop
+	Use:
+		TNT1 A 0
+		TNT1 A 0 A_GiveInventory("PowerUberAmmo")
+		TNT1 AAAAAAAAAAAAAAAAAAAA 0 A_GiveInventory("ModdedBackpack")
+		TNT1 A 0 A_GiveInventory("SpringMine",4)
+		TNT1 A 1
+		Stop
+	}
+}
+//===========================================================
+ACTOR ModdedAllmap2 : CustomInventory
+{
+  Scale 0.85
+  +COUNTITEM
+  +INVENTORY.FANCYPICKUPSOUND
+  +INVENTORY.ALWAYSPICKUP
+  Inventory.MaxAmount 0
+  Inventory.PickupMessage "Map Revealer"
+  Inventory.PickupSound "powerups/map"
+  States
+  {
+    Spawn:
+    PMAP ABCDCB 6 Bright
+    Loop
+	Pickup:
+	TNT1 A 1 A_GiveInventory("Allmap")
+	TNT1 A 0 A_GiveInventory("GotMap")
+	Stop
+  }
+}
+Actor GotMap : Inventory
+{
+  Inventory.Amount 1
+  Inventory.MaxAmount 1
+  Inventory.InterHubAmount 1
+  -INVENTORY.INVBAR
+  -COUNTITEM
+  States
+  {
+    Pickup:
+	  TNT1 A 0 
+	  TNT1 A 0 //A_Print("Yep, got item")
+	  Stop
+  }
+}
+
+Actor HEMMegaMap : CustomInventory 30435
+{
++COUNTITEM
++INVENTORY.FANCYPICKUPSOUND
++INVENTORY.ALWAYSPICKUP
+-INVENTORY.PERSISTENTPOWER
+-INVENTORY.INVBAR
+Inventory.Amount 1
+Inventory.MaxAmount 1
+Inventory.PickupSound "misc/p_pkup"
+Inventory.PickupMessage "HEM Mega Map!"
+Tag "Mega Map"
+States
+	{
+	Spawn:
+		MMAP ABCDCB 6 Bright
+		Loop
+	Pickup:
+		TNT1 A 1
+		TNT1 A 1 A_GiveInventory("Allmap")
+		TNT1 A 1 A_GiveInventory("HEMDoomScanner")
+		TNT1 A 0 A_GiveInventory("GotMap")
+		TNT1 A 0 A_GiveInventory("GotScanner")
+		Stop
+	}
+}
+
+Actor HEMDoomScanner : PowerupGiver
+{
+Powerup.type "Scanner"
++INVENTORY.AUTOACTIVATE
+Powerup.duration -80
+States
+	{
+	Spawn:
+		TNT1 A 1
+		Stop
+	}
+}
+Actor GotScanner : PowerDamage
+{
+  damagefactor "notarealdamagetype", 1.0
+  powerup.duration -80
+}
+//===========================================================
+Actor ArmorSphere : CustomInventory 30438
+{
+Height 16
+Radius 20
+Renderstyle Normal
+Alpha 1.0
++FLOATBOB
++COUNTITEM
++NOTIMEFREEZE
+-INVENTORY.ALWAYSPICKUP
++Inventory.FancyPickupSound
+Inventory.RespawnTics 10500
+Inventory.Amount 1
+Inventory.MaxAmount 1
+Inventory.PickupSound "misc/p_pkup"
+Inventory.PickupMessage "Armor Sphere!"
+Tag "Armor Sphere"
+States
+	{
+	Spawn:
+		TNT1 A 0 A_CustomMissile ("BlueSparkleSpawner", 0, 0, random(0,-360), 2, random(0,360))
+        ARS1 AAAAAAAABBBB 1 Bright A_SpawnItem("BlueSphereFlare",0,38)
+	    TNT1 A 0 A_CustomMissile ("BlueSparkleSpawner", 0, 0, random(0,-360), 2, random(0,360))
+        ARS1 BBBBCCCCCCCC 1 Bright A_SpawnItem("BlueSphereFlare",0,38)
+		//ARS1 ABCB 10 Bright
+		Loop
+	PickUp:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("ArmorSphereCheck1",1,"Nop")
+		TNT1 A 0 A_JumpIfInventory("ArmorSphereCheck2",1,"Nop")
+		TNT1 A 0 A_JumpIfInventory("ArmorSphereCheck3",1,"Nop")
+		TNT1 A 1 A_GiveInventory("ArmorSphereCheck1",1)
+		TNT1 A 1 A_GiveInventory("ArmorRegen250SphereGiver")
+		TNT1 A 1 ACS_NamedExecuteAlways("Hem_ArmorRegenerateSphere",0,250,35,1000)
+		Stop
+	Nop:
+		TNT1 A 1
+		Fail
+	}
+}
+
+Actor SuperArmorSphere : CustomInventory 30445
+{
+Height 16
+Radius 20
+Renderstyle Normal
+Alpha 1.0
++FLOATBOB
++COUNTITEM
++NOTIMEFREEZE
+-INVENTORY.ALWAYSPICKUP
++Inventory.FancyPickupSound
+Inventory.RespawnTics 10500
+Inventory.Amount 1
+Inventory.MaxAmount 1
+Inventory.PickupSound "misc/p_pkup"
+Inventory.PickupMessage "Super Armor Sphere!"
+Tag "Super Armor Sphere"
+States
+	{
+	Spawn:
+		TNT1 A 0 A_CustomMissile ("PurpleSparkleSpawner", 0, 0, random(0,-360), 2, random(0,360))
+        ARS2 AAAAAAAABBBB 1 Bright A_SpawnItem("PurpleSphereFlare",0,38)
+	    TNT1 A 0 A_CustomMissile ("PurpleSparkleSpawner", 0, 0, random(0,-360), 2, random(0,360))
+        ARS2 BBBBCCCCCCCC 1 Bright A_SpawnItem("PurpleSphereFlare",0,38)
+		//ARS2 ABCB 10 Bright
+		Loop
+	PickUp:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("ArmorSphereCheck2",1,"Nop")
+		TNT1 A 0 A_JumpIfInventory("ArmorSphereCheck3",1,"Nop")
+		TNT1 A 0 A_TakeInventory("ArmorSphereCheck1",1)
+		TNT1 A 1 A_GiveInventory("ArmorSphereCheck2",1)
+		TNT1 A 1 A_GiveInventory("ArmorRegen425SphereGiver")
+		TNT1 A 1 ACS_NamedExecuteAlways("Hem_ArmorRegenerateSphere",0,425,23,1700)
+		Stop
+	Nop:
+		TNT1 A 1
+		Fail
+	}
+}
+
+Actor NemesisArmorSphere : CustomInventory 30444
+{
+Height 16
+Radius 20
+Renderstyle Normal
+Alpha 1.0
++FLOATBOB
++COUNTITEM
++NOTIMEFREEZE
+-INVENTORY.ALWAYSPICKUP
++Inventory.FancyPickupSound
+Inventory.RespawnTics 10500
+Inventory.Amount 1
+Inventory.MaxAmount 1
+Inventory.PickupSound "misc/p_pkup"
+Inventory.PickupMessage "Nemesis Armor Sphere!"
+Tag "Nemesis Armor Sphere"
+States
+	{
+	Spawn:
+		TNT1 A 0 A_CustomMissile ("RedSparkleSpawner", 0, 0, random(0,-360), 2, random(0,360))
+        ARS3 AAAAAAAABBBB 1 Bright A_SpawnItem("RedSphereFlare",0,38)
+	    TNT1 A 0 A_CustomMissile ("RedSparkleSpawner", 0, 0, random(0,-360), 2, random(0,360))
+        ARS3 BBBBCCCCCCCC 1 Bright A_SpawnItem("RedSphereFlare",0,38)
+		//ARS3 ABCB 10 Bright
+		Loop
+	PickUp:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("ArmorSphereCheck3",1,"Nop")
+		TNT1 A 0 A_TakeInventory("ArmorSphereCheck1",1)
+		TNT1 A 0 A_TakeInventory("ArmorSphereCheck2",1)
+		TNT1 A 1 A_GiveInventory("ArmorSphereCheck3",1)
+		TNT1 A 1 A_GiveInventory("ArmorRegen600SphereGiver")
+		TNT1 A 1 ACS_NamedExecuteAlways("Hem_ArmorRegenerateSphere",0,600,18,2400)
+		Stop
+	Nop:
+		TNT1 A 1
+		Fail
+	}
+}
+
+Actor ArmorSphereCheck1 : Inventory { Inventory.MaxAmount 1 }
+Actor ArmorSphereCheck2 : Inventory { Inventory.MaxAmount 1 }
+Actor ArmorSphereCheck3 : Inventory { Inventory.MaxAmount 1 }
+
+Actor ArmorRegeneratorPickup : CustomInventory 30434
+{
+Height 16
+Radius 10
+Scale 1.2
++COUNTITEM
++NOTIMEFREEZE
+Inventory.RespawnTics 10500
+Inventory.MaxAmount 0
+Inventory.PickupSound "pickups/armorbonus"
+Inventory.PickupMessage "You got armor regenerator!"
+Tag "Armor regenerator"
+States
+	{
+	Spawn:
+		HARG D -1 Bright
+		Loop
+	PickUp:
+		TNT1 A 0
+		TNT1 A 1 A_JumpIfInventory("ArmorRegeneratorActive",1,"Nop")
+		TNT1 A 1 A_JumpIfInventory("ArmorRegenerator",1,"Nop")
+		TNT1 A 1 A_GiveInventory("ArmorRegenerator")
+		Stop
+	Nop:
+		TNT1 A 1
+		Fail
+	}
+}
+
+Actor ArmorRegenerator : CustomInventory
+{
+Height 16
+Radius 10
+Scale 1.2
+-COUNTITEM
++NOTIMEFREEZE
++INVENTORY.INVBAR
++INVENTORY.HUBPOWER
++INVENTORY.UNDROPPABLE
++INVENTORY.PERSISTENTPOWER
+Inventory.MaxAmount 1
+Inventory.InterHubAmount 1
+Inventory.Icon "HARGE0"
+Inventory.UseSound "pickups/armorbonus"
+Inventory.PickupSound "pickups/armorbonus"
+Tag "Armor regenerator"
+States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 1 A_SpawnItem("ArmorRegeneratorPickup")
+		Stop
+	/*Drop:
+		TNT1 A 0
+		TNT1 A 1 A_TakeInventory("ArmorRegenerate")
+		TNT1 A 1 A_DropInventory("ArmorRegenerator")
+		Stop*/
+	Use:
+		TNT1 A 0
+		TNT1 A 1 A_Print("Armor Regeneratot activate")
+		TNT1 A 1 A_JumpIf(ACS_NamedExecuteWithResult("Hem_CheckPlayerArmorPoints",250) == 1,"Nop")
+		TNT1 A 1 A_JumpIfInventory("ArmorRegeneratorActive",1,"Nop")
+		TNT1 A 1 A_GiveInventory("ArmorRegeneratorActive")
+		TNT1 A 1 A_GiveInventory("ArmorRegenerate")
+		Stop
+	Nop:
+		TNT1 A 1
+		Fail
+	}
+}
+
+Actor ArmorRegeneratorActive : ArmorRegenerator
+{
+Inventory.Icon "HARGF0"
+States
+	{
+	/*Drop:
+		TNT1 A 0
+		TNT1 A 1 A_TakeInventory("ArmorRegenerate")
+		TNT1 A 1 A_DropInventory("ArmorRegeneratorActive")
+		Stop*/
+	Use:
+		TNT1 A 0
+		TNT1 A 1 A_Print("Armor Regeneratot deactivate")
+		TNT1 A 1 A_TakeInventory("ArmorRegenerate")
+		TNT1 A 1 A_GiveInventory("ArmorRegenerator")
+		Stop
+	}
+}
+
+Actor ArmorRegeneratorGiver : ArmorBonus
+{
+-COUNTITEM
++NOTIMEFREEZE
++INVENTORY.QUIET
+DamageFactor "Normal", 0.1
+Armor.SavePercent 99.0
+Armor.SaveAmount 1
+Armor.MaxSaveAmount 250
+Inventory.Icon "HARGD0"
+States
+	{
+	Spawn:
+		HARG A -1 Bright
+		Loop
+	}
+}
+
+Actor ArmorRegenerate : PowerTargeter
+{
++NOTIMEFREEZE
+States
+	{
+	Targeter:
+		TNT1 A 0
+		TNT1 A 35
+		TNT1 A 0 A_JumpIf(ACS_NamedExecuteWithResult("Hem_GetCurrentHealth") > 0,2)
+		TNT1 A 0 A_Jump(256,11)
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("ArmorRegeneratorActive",1,2)
+		TNT1 A 0 A_Jump(256,8)
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("NewCell",1,2)
+		TNT1 A 0 A_Jump(256,4)
+		TNT1 A 0
+		TNT1 A 0 A_TakeInventory("NewCell",1,TIF_NOTAKEINFINITE)
+		TNT1 A 0 A_GiveInventory("ArmorRegeneratorGiver",5)
+		TNT1 A 0
+		Loop
+		TNT1 A 1
+		Stop
+	}
+}
+
+Actor ArmorRegen250SphereGiver : ArmorBonus
+{
+-COUNTITEM
++NOTIMEFREEZE
++INVENTORY.QUIET
+DamageFactor "Normal", 0.1
+Armor.SavePercent 99.0
+Armor.SaveAmount 1
+Armor.MaxSaveAmount 250
+Inventory.Icon "ARS1A0"
+States
+	{
+	Spawn:
+		ARS1 ABCB 10 Bright
+		Loop
+	}
+}
+
+Actor ArmorRegen425SphereGiver : ArmorBonus
+{
+-COUNTITEM
++NOTIMEFREEZE
++NORADIUSDMG
++INVENTORY.QUIET
+DamageFactor "Normal", 0.1
+Armor.SavePercent 99.0
+Armor.SaveAmount 1
+Armor.MaxSaveAmount 425
+Inventory.Icon "ARS2A0"
+States
+	{
+	Spawn:
+		ARS2 ABCB 10 Bright
+		Loop
+	}
+}
+
+Actor ArmorRegen600SphereGiver : ArmorBonus
+{
+-COUNTITEM
++NOTIMEFREEZE
++NORADIUSDMG
++INVENTORY.QUIET
+DamageFactor "Normal", 0.1
+Armor.SavePercent 99.0
+Armor.SaveAmount 1
+Armor.MaxSaveAmount 600
+Inventory.Icon "ARS3A0"
+States
+	{
+	Spawn:
+		ARS3 ABCB 10 Bright
+		Loop
+	}
+}
+//===========================================================
+Actor PortableMedCell : CustomInventory 30440
+{
+Scale 0.5
+Height 10
+Radius 10
++FLOORCLIP
++INVENTORY.INVBAR
++INVENTORY.HUBPOWER
++INVENTORY.PERSISTENTPOWER
+//+INVENTORY.ISHEALTH
+Inventory.Amount 1
+Inventory.MaxAmount 3
+Inventory.InterHubAmount 3
+Inventory.PickupMessage "Portable Medical Cell"
+Inventory.PickupSound "pickups/pmedkit"
+Inventory.UseSound "pmed/use"
+Inventory.Icon "PMDCB0"
+Tag "Portable Medical Cell"
+States
+	{
+	Spawn:
+		PMDC A -1
+		Loop
+	Use:
+		TNT1 A 1
+		TNT1 A 1 A_JumpIf(ACS_NamedExecuteWithResult("Hem_GetCurrentHealth") >= 300,"Full")
+		TNT1 A 1 HealThing(25,300)
+		Stop
+	Full:
+		TNT1 A 1
+		Fail
+	} 
+}
+
+Actor PortableMedCellPack : PortableMedCell 30441
+{
+Inventory.MaxAmount 1
+Inventory.InterHubAmount 1
+Inventory.PickupMessage "Portable Medical Cell Pack"
+Inventory.Icon "PMDCD0"
+Tag "Portable Medical Cell Pack"
+States
+	{
+	Spawn:
+		PMDC C -1
+		Loop
+	Use:
+		TNT1 A 1
+		TNT1 A 1 A_JumpIf(ACS_NamedExecuteWithResult("Hem_GetCurrentHealth") >= 300,"Full")
+		TNT1 A 1 HealThing(100,300)
+		Stop
+	} 
+}
+//===========================================================
+Actor LightNemesisArmor : CustomInventory 30423
+{
+Height 16
+Radius 10
+Scale 1.2
++COUNTITEM
++NOTIMEFREEZE
++INVENTORY.INVBAR
++INVENTORY.HUBPOWER
++INVENTORY.PERSISTENTPOWER
+//+INVENTORY.ISARMOR
+Inventory.RespawnTics 4230
+Inventory.MaxAmount 1
+Inventory.InterHubAmount 1
+Inventory.Icon "HARGC0"
+Inventory.UseSound "NemesisGet"
+Inventory.PickupSound "pickups/redarmor"
+Inventory.PickupMessage "You got Light Nemesis Armor!"
+Tag "Light Nemesis Armor"
+States
+	{
+	Spawn:
+		HARG A -1 Bright
+		Loop
+	Use:
+		TNT1 A 0
+		TNT1 A 1 A_GiveInventory("LightNemesisArmorItem")
+		TNT1 A 1 A_GiveInventory("LightNemesisArmorProtect",1)
+		TNT1 A 1 A_GiveInventory("HemLightArmorHealing",1)	
+		Stop
+	}
+}
+
+Actor HemLightArmorHealing : PowerTargeter
+{
++NOTIMEFREEZE
+Powerup.Duration -120
+States
+	{
+	Targeter:
+		TNT1 A 0 Bright
+		TNT1 A 0 Bright HealThing(1,300)
+		TNT1 A 0 Bright A_GiveInventory("LightNemesisArmorGiver",1)
+		TNT1 AA 3 Bright
+		TNT1 AA 0 Bright A_SpawnItemEx("LightNemesisArmorShieldFX",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,160)
+		Loop
+	}
+}
+
+Actor LightNemesisArmorItem : BasicArmorPickup
+{
+-COUNTITEM
++DONTRIP
++NORADIUSDMG
++NOTIMEFREEZE
++INVENTORY.QUIET
+DamageFactor "Normal", 0.1
+Armor.SavePercent 99.0
+Armor.SaveAmount 300
+Inventory.Icon "HARGA0"
+States
+	{
+	Spawn:
+		HARG A -1 Bright
+		Loop
+	}
+}
+
+Actor LightNemesisArmorGiver : ArmorBonus
+{
+-COUNTITEM
++NOTIMEFREEZE
++INVENTORY.QUIET
+DamageFactor "Normal", 0.1
+Armor.SavePercent 99.0
+Armor.SaveAmount 1
+Armor.MaxSaveAmount 300
+Inventory.Icon "HARGA0"
+States
+	{
+	Spawn:
+		HARG A -1 Bright
+		Loop
+	}
+}
+
+Actor LightNemesisArmorProtectEffect : PowerProtection
+{
+DamageFactor "Normal", 0.5
+DamageFactor "Explosion", 0.05
+DamageFactor "ZExplosiveBullets", 0.05
+}
+
+Actor LightNemesisArmorProtect : PowerupGiver
+{
+-COUNTITEM
++NOTIMEFREEZE
++INVENTORY.QUIET
++INVENTORY.UNDROPPABLE
++INVENTORY.AUTOACTIVATE
++INVENTORY.ALWAYSPICKUP
+Inventory.MaxAmount 0
+Powerup.Type LightNemesisArmorProtectEffect
+Powerup.Duration -120
+}
+//===========================================================
+Actor Annihilate : CustomInventory
+{
+-COUNTITEM
++INVENTORY.QUIET
++INVENTORY.UNDROPPABLE
++INVENTORY.ALWAYSPICKUP
++INVENTORY.AUTOACTIVATE
+Inventory.Amount 1
+Inventory.MaxAmount 0
+States
+	{
+	Pickup:
+		TNT1 A 1
+		TNT1 A 1 Thing_Damage(0,10000000)
+		Stop
+	}
+}
+
+Actor AnnihilateFog : CustomInventory
+{
+-COUNTITEM
++INVENTORY.QUIET
++INVENTORY.UNDROPPABLE
++INVENTORY.ALWAYSPICKUP
++INVENTORY.AUTOACTIVATE
+Inventory.Amount 1
+Inventory.MaxAmount 0
+States
+	{
+	Pickup:
+		TNT1 A 1
+		TNT1 A 1 A_SpawnDebris("ShadowSmokeGen4",false,1.0,1.0)
+		Stop
+	}
+}
+
+Actor AnnihilateFadeOut : CustomInventory
+{
+-COUNTITEM
++INVENTORY.QUIET
++INVENTORY.UNDROPPABLE
++INVENTORY.ALWAYSPICKUP
++INVENTORY.AUTOACTIVATE
+Inventory.Amount 1
+Inventory.MaxAmount 0
+States
+	{
+	Pickup:
+		TNT1 A 1
+		TNT1 A 1 A_JumpIf(ACS_NamedExecuteWithResult("Hem_CheckActorMonster") != 1,"Nop")
+		TNT1 A 1 A_FadeOut(0.1,0)
+		Stop
+	Nop:
+		TNT1 A 1
+		Fail
+	}
+}
+//===========================================================
+Actor InfightingCheck : CustomInventory
+{
+-COUNTITEM
++INVENTORY.QUIET
++INVENTORY.UNDROPPABLE
++INVENTORY.ALWAYSPICKUP
++INVENTORY.AUTOACTIVATE
+Inventory.Amount 1
+Inventory.MaxAmount 0
+States
+	{
+	Pickup:
+		TNT1 A 1
+		TNT1 A 1 A_CheckFlag(NOINFIGHTING,"CheckHealth")
+		Stop
+	CheckHealth:
+		TNT1 A 0
+		TNT1 A 1 A_JumpIfHealthLower((ACS_NamedExecuteWithResult("Hem_SpawnHealth")*0.8),"InfightingSet")
+		Stop
+	InfightingSet:
+		TNT1 A 0
+		TNT1 A 1 A_ChangeFlag(NOINFIGHTING,0)
+		Stop
+	}
+}
+//===========================================================
+Actor BerserkSphere : CustomInventory 30402
+{
++COUNTITEM
++INVENTORY.BIGPOWERUP
+-INVENTORY.ALWAYSPICKUP
++INVENTORY.AUTOACTIVATE
++INVENTORY.FANCYPICKUPSOUND
++FLOATBOB
+Inventory.PickupSound "misc/p_pkup"
+Inventory.PickupMessage "Berserk Supercharge!"
+States
+	{
+	Spawn:
+		TNT1 A 0 A_CustomMissile ("RedSparkleSpawner", 0, 0, random(0,-360), 2, random(0,360))
+        BERS AAAAAABBBBBB 1 Bright A_SpawnItem("RedSphereFlare",0,38)
+	    TNT1 A 0 A_CustomMissile ("RedSparkleSpawner", 0, 0, random(0,-360), 2, random(0,360))
+        BERS CCCCCCDDDDDD 1 Bright A_SpawnItem("RedSphereFlare",0,38)
+		//BERS ABCDCB 6 Bright
+		Loop
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIf(ACS_NamedExecuteWithResult("Hem_GetCurrentHealth") >= 600,"NoPickup")
+		TNT1 A 0 A_GiveInventory("PowerStrength")
+		TNT1 A 0 A_GiveInventory("BerserkSphereHealth")
+		TNT1 A 1 A_SelectWeapon("NewNewMelee")
+		Stop
+	NoPickup:
+		TNT1 A 0
+		Fail
+	}
+}
+
+Actor BerserkSphereHealth : Health
+{
+-COUNTITEM
++INVENTORY.AUTOACTIVATE
++INVENTORY.ALWAYSPICKUP
+Inventory.Amount 300
+Inventory.MaxAmount 600
+Inventory.PickupMessage ""
+Inventory.PickupSound ""
+States
+	{
+	Spawn:
+		TNT1 A -1
+		Loop
+	}
+}
+//=========================================================
+Actor HemZombieStrafing : CustomInventory
+{
+-COUNTITEM
++NOTIMEFREEZE
++INVENTORY.QUIET
++INVENTORY.UNDROPPABLE
++INVENTORY.ALWAYSPICKUP
++INVENTORY.AUTOACTIVATE
+Inventory.Amount 1
+Inventory.MaxAmount 0
+States
+	{
+	Pickup:
+		TNT1 A 1 
+		TNT1 A 1 A_Jump(188,2)
+		TNT1 A 1 A_GiveInventory("HemZombieJumping",1)
+		TNT1 A 1 A_JumpIf(velx != 0 || vely != 0,2)
+		TNT1 A 1 A_Jump(256,2)
+		TNT1 A 1 A_Jump(235,5)
+		TNT1 A 1 A_JumpIfInventory("HemZombieStrafeSens",1,3)
+		TNT1 A 1 A_GiveInventory("HemZombieStrafeSens",1)
+		TNT1 A 1 A_Jump(256,2)
+		TNT1 A 1 A_TakeInventory("HemZombieStrafeSens",1)
+		TNT1 A 1 A_JumpIfInventory("HemZombieStrafeSens",1,3)
+		TNT1 A 1 ThrustThing(angle*256/360+38.7,3,0,0)
+		TNT1 A 1 A_Jump(256,2)
+		TNT1 A 1 ThrustThing(angle*256/360+38.7,-3,0,0)
+		TNT1 A 1 A_FaceTarget
+		TNT1 A 1 A_Jump(24,2)
+		TNT1 A 1 A_JumpIfCloser(300,2)
+		TNT1 A 1 A_Recoil(-1)
+		Stop
+		TNT1 A 1 A_Recoil(1)
+		Stop
+	}
+}
+
+Actor HemZombieJumping : HemZombieStrafing
+{
++NOTIMEFREEZE
+States
+	{
+	Pickup:
+		TNT1 A 1 
+		TNT1 A 1 A_CheckFloor(1)
+		Stop
+		TNT1 A 1 A_Jump(242,2)
+		TNT1 A 1 ThrustThingZ(0,25,0,1)
+		Stop
+		TNT1 A 1
+		Stop
+	}
+}
+
+Actor HemZombieStrafeSens : Inventory { Inventory.MaxAmount 1 }
+//============================================================
+Actor HemMonsterShieldPemanent : PowerProtection
+{
++Inventory.AutoActivate
+Inventory.MaxAmount 1
+DamageFactor "Normal", 0.1
+Powerup.duration 0x7FFFFFFF
+}
+
+Actor HemMonsterShield : PowerProtection
+{
++DONTBLAST
++DONTMORPH
++DONTRIP
++NOPAIN
++NOTELEOTHER
+DamageFactor "Normal", 0.01
+}
+
+Actor ShieldSphereGiver : PowerupGiver
+{
++NOTIMEFREEZE
++INVENTORY.QUIET
++INVENTORY.UNDROPPABLE
++INVENTORY.ALWAYSPICKUP
++INVENTORY.AUTOACTIVATE
+Inventory.Amount 1
+Inventory.MaxAmount 0
+Powerup.Type "HemMonsterShield"
+Powerup.Mode Reflective
+Powerup.duration -5
+Powerup.Color "40 80 FF", 0.1
+}
+
+Actor ZombieShieldSphere : CustomInventory
+{
+-COUNTITEM
++NOTIMEFREEZE
++INVENTORY.QUIET
++INVENTORY.ALWAYSPICKUP
++INVENTORY.AUTOACTIVATE
+Inventory.Amount 1
+Inventory.MaxAmount 0
+Inventory.PickupSound "Gateway/Hell"
+States
+	{
+	Spawn:
+		TNT1 A -1
+		Loop
+	Pickup:
+		TNT1 A 1
+		TNT1 A 0 A_JumpIfInventory("ShieldSphereCooldown",1,"Nope")
+		TNT1 A 0 A_GiveInVentory("ShieldSphereCooldown")
+		TNT1 A 0 A_GiveInVentory("ZombieShieldSphereGiver")
+		TNT1 A 1 ACS_NamedExecuteAlways("Hem_ShieldSphereFX",0,1)
+		Stop
+	Nope:
+		TNT1 A 1
+		Fail
+	}
+}
+
+Actor ZombieHemMonsterShield : PowerProtection
+{
+DamageFactor "Normal", 0.5
+}
+
+ACTOR ZombieShieldSphereGiver : PowerupGiver
+{
++NOTIMEFREEZE
++INVENTORY.QUIET
++INVENTORY.UNDROPPABLE
++INVENTORY.ALWAYSPICKUP
++INVENTORY.AUTOACTIVATE
+Inventory.Amount 1
+Inventory.MaxAmount 0
+Powerup.Type "ZombieHemMonsterShield"
+Powerup.duration -5
+Powerup.Color "40 80 FF", 0.1
+}
+
+Actor ShieldSphere : CustomInventory 30405
+{
++FLOATBOB
++COUNTITEM
++NOTIMEFREEZE
++FORCEXYBILLBOARD
++INVENTORY.HUBPOWER
++INVENTORY.PERSISTENTPOWER
+-INVENTORY.ALWAYSPICKUP
++INVENTORY.BIGPOWERUP
++INVENTORY.INVBAR
+Inventory.Amount 1
+Inventory.MaxAmount 3
+Inventory.InterHubAmount 3
+Inventory.Icon "SPOTE0"
+Inventory.UseSound "Gateway/Hell"
+Inventory.PickupMessage "Shield Sphere!"
+Tag "Shield Sphere"
+States
+	{
+	Spawn:
+		TNT1 A 0 A_CustomMissile ("BlueSparkleSpawner", 0, 0, random(0,-360), 2, random(0,360))
+        SPOT AAAAAABBBBBB 1 Bright A_SpawnItem("BlueSphereFlare",0,38)
+	    TNT1 A 0 A_CustomMissile ("BlueSparkleSpawner", 0, 0, random(0,-360), 2, random(0,360))
+        SPOT CCCCCCDDDDDD 1 Bright A_SpawnItem("BlueSphereFlare",0,38)
+		//SPOT ABCDCB 3 Bright
+		Loop
+	Use:
+		TNT1 A 1
+		TNT1 A 0 A_JumpIfInventory("ShieldSphereCooldown",1,"Nope")
+		TNT1 A 0 A_GiveInVentory("ShieldSphereCooldown")
+		TNT1 A 0 A_GiveInVentory("ShieldSphereGiver")
+		TNT1 A 1 ACS_NamedExecuteAlways("Hem_ShieldSphereFX",0,1)
+		Stop
+	Nope:
+		TNT1 A 0
+		Fail
+	}
+}
+
+Actor ShieldSphereCooldown : PowerDamage
+{
+DamageFactor "nothing", 1.0
+Powerup.duration -5
+}
+
+Actor HemSuperMonsterShield : PowerProtection
+{
+DamageFactor "Normal", 0.5
+}
+
+ACTOR SuperShieldSphereGiver : PowerupGiver
+{
++NOTIMEFREEZE
++INVENTORY.QUIET
++INVENTORY.UNDROPPABLE
++INVENTORY.ALWAYSPICKUP
++INVENTORY.AUTOACTIVATE
+Inventory.Amount 1
+Inventory.MaxAmount 0
+Powerup.Type "HemSuperMonsterShield"
+Powerup.duration -15
+Powerup.Color "FF 80 40", 0.1
+}
+
+Actor SuperZombieShieldSphere : CustomInventory
+{
+-COUNTITEM
++NOTIMEFREEZE
++INVENTORY.QUIET
++INVENTORY.ALWAYSPICKUP
++INVENTORY.AUTOACTIVATE
+Inventory.Amount 1
+Inventory.MaxAmount 0
+Inventory.PickupSound "Gateway/Hell"
+States
+	{
+	Spawn:
+		TNT1 A -1
+		Loop
+	Pickup:
+		TNT1 A 1
+		TNT1 A 0 A_JumpIfInventory("SuperShieldSphereCooldown",1,"Nope")
+		TNT1 A 0 A_GiveInVentory("SuperShieldSphereCooldown")
+		TNT1 A 0 A_GiveInVentory("SuperShieldSphereGiver")
+		TNT1 A 1 ACS_NamedExecuteAlways("Hem_ShieldSphereFX",0,2)
+		Stop
+	Nope:
+		TNT1 A 1
+		Fail
+	}
+}
+
+Actor BigSuperZombieShieldSphere : CustomInventory
+{
+-COUNTITEM
++NOTIMEFREEZE
++INVENTORY.QUIET
++INVENTORY.ALWAYSPICKUP
++INVENTORY.AUTOACTIVATE
+Inventory.Amount 1
+Inventory.MaxAmount 0
+Inventory.PickupSound "Gateway/Hell"
+States
+	{
+	Spawn:
+		TNT1 A -1
+		Loop
+	Pickup:
+		TNT1 A 1
+		TNT1 A 0 A_JumpIfInventory("SuperShieldSphereCooldown",1,"Nope")
+		TNT1 A 0 A_GiveInventory("SuperShieldSphereCooldown")
+		TNT1 A 0 A_GiveInventory("SuperShieldSphereGiver")
+		TNT1 A 1 ACS_NamedExecuteAlways("Hem_ShieldSphereFX",0,3)
+		Stop
+	Nope:
+		TNT1 A 1
+		Fail
+	}
+}
+
+Actor SuperShieldSphereCooldown : PowerDamage
+{
+DamageFactor "nothing", 1.0
+Powerup.duration -15
+}
+
+Actor NOBLOODFLAGSET : Inventory { Inventory.MaxAmount 1 }
+
+Actor NOBLOODSET : CustomInventory
+{
+-COUNTITEM
++INVENTORY.QUIET
++INVENTORY.UNDROPPABLE
++INVENTORY.ALWAYSPICKUP
++INVENTORY.AUTOACTIVATE
+Inventory.Amount 1
+Inventory.MaxAmount 0
+States
+	{
+	Pickup:
+		TNT1 A 1
+		TNT1 A 0 A_CheckFlag(NOBLOOD,"Nope")
+		TNT1 A 0 A_GiveInventory("NOBLOODFLAGSET",1)
+		TNT1 A 1 A_ChangeFlag(NOBLOOD,true)
+		Stop
+	Nope:
+		TNT1 A 1
+		Fail
+	}
+}
+
+Actor NOBLOODRESTORE : CustomInventory
+{
+-COUNTITEM
++INVENTORY.QUIET
++INVENTORY.UNDROPPABLE
++INVENTORY.ALWAYSPICKUP
++INVENTORY.AUTOACTIVATE
+Inventory.Amount 1
+Inventory.MaxAmount 0
+States
+	{
+	Pickup:
+		TNT1 A 1
+		TNT1 A 0 A_JumpIfInventory("NOBLOODFLAGSET",1,2)
+		TNT1 A 0 A_Jump(256,"Nope")
+		TNT1 A 0 A_ChangeFlag(NOBLOOD,false)
+		TNT1 A 1 A_TakeInventory("NOBLOODFLAGSET",1)
+		Stop
+	Nope:
+		TNT1 A 1
+		Fail
+	}
+}
+
+Actor ShieldCANTSEEKSET : CustomInventory
+{
+-COUNTITEM
++INVENTORY.QUIET
++INVENTORY.UNDROPPABLE
++INVENTORY.ALWAYSPICKUP
++INVENTORY.AUTOACTIVATE
+Inventory.Amount 1
+Inventory.MaxAmount 0
+States
+	{
+	Pickup:
+		TNT1 A 1
+		TNT1 A 0 A_CheckFlag(CANTSEEK,"Nope")
+		TNT1 A 0 A_GiveInventory("CANTSEEKFLAGSET",1)
+		TNT1 A 1 A_ChangeFlag(CANTSEEK,1)
+		Stop
+	Nope:
+		TNT1 A 1
+		Fail
+	}
+}
+
+Actor ShieldCANTSEEKRESTORE : CustomInventory
+{
+-COUNTITEM
++INVENTORY.QUIET
++INVENTORY.UNDROPPABLE
++INVENTORY.ALWAYSPICKUP
++INVENTORY.AUTOACTIVATE
+Inventory.Amount 1
+Inventory.MaxAmount 0
+States
+	{
+	Pickup:
+		TNT1 A 1
+		TNT1 A 0 A_JumpIfInventory("CANTSEEKFLAGSET",1,2)
+		TNT1 A 0 A_Jump(256,"Nope")
+		TNT1 A 0 A_ChangeFlag(CANTSEEK,0)
+		TNT1 A 1 A_TakeInventory("CANTSEEKFLAGSET",1)
+		Stop
+	Nope:
+		TNT1 A 1
+		Fail
+	}
+}
+
+Actor REFLECTIVESET : Inventory { Inventory.MaxAmount 1 }
+
+Actor ShieldREFLECTIVESET : CustomInventory
+{
+-COUNTITEM
++INVENTORY.QUIET
++INVENTORY.UNDROPPABLE
++INVENTORY.ALWAYSPICKUP
++INVENTORY.AUTOACTIVATE
+Inventory.Amount 1
+Inventory.MaxAmount 0
+States
+	{
+	Pickup:
+		TNT1 A 1
+		TNT1 A 0 A_CheckFlag(REFLECTIVE,"Nope")
+		TNT1 A 0 A_GiveInventory("REFLECTIVESET",1)
+		TNT1 A 1 A_ChangeFlag(REFLECTIVE,1)
+		Stop
+	Nope:
+		TNT1 A 1
+		Fail
+	}
+}
+
+Actor ShieldREFLECTIVERESTORE : CustomInventory
+{
+-COUNTITEM
++INVENTORY.QUIET
++INVENTORY.UNDROPPABLE
++INVENTORY.ALWAYSPICKUP
++INVENTORY.AUTOACTIVATE
+Inventory.Amount 1
+Inventory.MaxAmount 0
+States
+	{
+	Pickup:
+		TNT1 A 1
+		TNT1 A 0 A_JumpIfInventory("REFLECTIVESET",1,2)
+		TNT1 A 0 A_Jump(256,"Nope")
+		TNT1 A 0 A_ChangeFlag(REFLECTIVE,0)
+		TNT1 A 1 A_TakeInventory("REFLECTIVESET",1)
+		Stop
+	Nope:
+		TNT1 A 1
+		Fail
+	}
+}
+//============================================================
+Actor MonsterInvulnerableGiver : PowerProtection
+{
++NOPAIN
++NOBLOOD
++NOTELEOTHER
+DamageFactor "Normal", 0.0
+DamageFactor "Legendary", 0.0
+}
+
+Actor MonsterInvulnerable : PowerupGiver
+{
++NOTIMEFREEZE
++INVENTORY.AUTOACTIVATE
++INVENTORY.ALWAYSPICKUP
+Inventory.MaxAmount 1
+Powerup.Duration -15
+Powerup.Type "MonsterInvulnerableGiver"
+}
+
+Actor LegMonsterInvulnerableGiver : PowerProtection
+{
++NOPAIN
++NOBLOOD
++NOTELEOTHER
+DamageFactor "Normal", 0.15
+}
+
+Actor LegMonsterInvulnerable : PowerupGiver
+{
++NOTIMEFREEZE
++INVENTORY.AUTOACTIVATE
++INVENTORY.ALWAYSPICKUP
+Inventory.MaxAmount 1
+Powerup.Duration -5
+Powerup.Type "LegMonsterInvulnerableGiver"
+}
+//============================================================
+Actor SlowDown : PowerSpeed
+{
++POWERSPEED.NOTRAIL
+Speed 0.5
+Powerup.Color "B3 5A 1B", 0.25
+}
+
+Actor SlowDownMode : PowerupGiver
+{
+-COUNTITEM
++Inventory.Quiet
++Inventory.AutoActivate
++INVENTORY.UNDROPPABLE
+inventory.amount 1
+inventory.maxamount 0
+powerup.type SlowDown
+powerup.duration -15
+}
+
+Actor Stun : PowerSpeed
+{
++POWERSPEED.NOTRAIL
+Speed 0.25
+Powerup.Color "B3 5A 1B", 0.5
+}
+
+Actor StunMode : PowerupGiver
+{
+-COUNTITEM
++Inventory.Quiet
++Inventory.AutoActivate
++INVENTORY.UNDROPPABLE
+inventory.amount 1
+inventory.maxamount 0
+powerup.type Stun
+powerup.duration -15
+}
+
+Actor Dizzy : PowerSpeed
+{
++POWERSPEED.NOTRAIL
+Speed 0.125
+Powerup.Color "B3 5A 1B", 0.75
+}
+
+Actor DizzyMode : PowerupGiver
+{
+-COUNTITEM
++Inventory.Quiet
++Inventory.AutoActivate
++INVENTORY.UNDROPPABLE
+inventory.amount 1
+inventory.maxamount 0
+powerup.type Dizzy
+powerup.duration -15
+}
+
+Actor SchabbsDizzyMode : CustomInventory
+{
+-COUNTITEM
++INVENTORY.QUIET
++INVENTORY.UNDROPPABLE
++INVENTORY.ALWAYSPICKUP
++INVENTORY.AUTOACTIVATE
+inventory.amount 1
+inventory.maxamount 0
+States
+	{
+	PickUp:
+		TNT1 A 1
+		TNT1 A 0 A_JumpIf(ACS_NamedExecuteWithResult("Hem_CheckPlayerArmorPoints",100) == 1,"Nop")
+		TNT1 A 0
+		TNT1 A 1 A_GiveInventory("DizzyMode",1)
+		Stop
+	Nop:
+		TNT1 A 1
+		Stop
+	}
+}
+
+Actor RemoveProtection : PowerProtection
+{
++INVENTORY.ALWAYSPICKUP
++INVENTORY.AUTOACTIVATE
+Inventory.Amount 1
+Inventory.MaxAmount 0
+DamageFactor "None", 2.0
+DamageFactor "Normal", 2.0
+DamageFactor "SatanGuard", 2.0
+DamageFactor "AbyssalSatyr", 2.0
+Powerup.Duration -15
+}
+//============================================================
+Actor HemTakeAmmo : CustomInventory
+{
+-COUNTITEM
++INVENTORY.QUIET
++INVENTORY.UNDROPPABLE
++INVENTORY.ALWAYSPICKUP
++INVENTORY.AUTOACTIVATE
+inventory.amount 1
+inventory.maxamount 0
+Inventory.PickupMessage "Ammo vanished! What a fuck!?"
+States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_TakeInventory("NewShell",25)
+		TNT1 A 0 A_TakeInventory("SSGShell",2)
+		TNT1 A 0 A_TakeInventory("QuadShell",4)
+		TNT1 A 0 A_TakeInventory("HexaShell",6)
+		TNT1 A 0 A_TakeInventory("PistolMagazine",16)
+		TNT1 A 0 A_TakeInventory("ShotgunMagazine",8)
+		TNT1 A 0 A_TakeInventory("ShotgunDrum",12)
+		TNT1 A 0 A_TakeInventory("ShotgunDrum2",12)
+		TNT1 A 1 A_TakeInventory("ARMagazine",40)
+		Stop
+	}
+}
+//============================================================
+Actor NemesisAttack : CustomInventory
+{
+-COUNTITEM
++INVENTORY.QUIET
++INVENTORY.UNDROPPABLE
++INVENTORY.ALWAYSPICKUP
++INVENTORY.AUTOACTIVATE
+Inventory.Amount 1
+Inventory.MaxAmount 0
+States
+	{
+	Pickup:
+		TNT1 A 1
+		Stop
+	Nop:
+		TNT1 A 1
+		Stop
+	}
+}
+
+Actor CANTSEEKFLAGSET : Inventory { Inventory.MaxAmount 1 }
+
+Actor CanSeekQuiet : CustomInventory
+{
+-COUNTITEM
++INVENTORY.QUIET
++INVENTORY.UNDROPPABLE
++INVENTORY.ALWAYSPICKUP
++INVENTORY.AUTOACTIVATE
+Inventory.Amount 1
+Inventory.MaxAmount 0
+States
+	{
+	Pickup:
+		TNT1 A 1
+		TNT1 A 0 A_CheckFlag(CANTSEEK,2)
+		TNT1 A 0 A_Jump(256,2)
+		TNT1 A 0 A_GiveInventory("CANTSEEKFLAGSET",1)
+		TNT1 A 1 A_ChangeFlag(CANTSEEK,false)
+		Stop
+	}
+}
+
+Actor CantSeekRestore : CustomInventory
+{
+-COUNTITEM
++INVENTORY.QUIET
++INVENTORY.UNDROPPABLE
++INVENTORY.ALWAYSPICKUP
++INVENTORY.AUTOACTIVATE
+Inventory.Amount 1
+Inventory.MaxAmount 0
+States
+	{
+	Pickup:
+		TNT1 A 1
+		TNT1 A 0 A_ChangeFlag(CANTSEEK,true)
+		TNT1 A 1 A_TakeInventory("CANTSEEKFLAGSET",1)
+		Stop
+	}
+}
+//============================================================
+Actor HemHideweapon : CustomInventory
+{
+-COUNTITEM
++INVENTORY.QUIET
++INVENTORY.UNDROPPABLE
++INVENTORY.ALWAYSPICKUP
++INVENTORY.AUTOACTIVATE
+inventory.amount 1
+inventory.maxamount 0
+Tag "To hide weapon"
+States
+	{
+	Pickup:
+		TNT1 A 1
+		TNT1 A 1 A_SelectWeapon("NewNewMelee")
+		Stop
+	}
+}
+
+Actor HemHideweapon2 : HemHideweapon
+{
+States
+	{
+	Pickup:
+		TNT1 A 1
+		TNT1 A 0 A_JumpIf(ACS_NamedExecuteWithResult("HEM_CheckInvulnerable",1) == true,"Nop")
+		TNT1 A 1 A_SelectWeapon("NewNewMelee")
+		Stop
+	Nop:
+		TNT1 A 1
+		Stop
+	}
+}
+//============================================================
+Actor InvulnerableCheckLabel : Inventory { Inventory.MaxAmount 1 }
+
+Actor InvulnerableCheck : HemHideweapon
+{
+Tag "Invulnerable Check"
+States
+	{
+	Pickup:
+		TNT1 A 1
+		TNT1 A 0 A_JumpIf(ACS_NamedExecuteWithResult("HEM_CheckInvulnerable",2) == true,"NoInvul")
+		TNT1 A 1 A_GiveInventory("InvulnerableCheckLabel",1)
+		Stop
+	NoInvul:
+		TNT1 A 1
+		TNT1 A 1 A_TakeInventory("InvulnerableCheckLabel",1)
+		Stop
+	}
+}
+//============================================================
+Actor RemoveProtectionGiver : PowerProtection
+{
+DamageFactor "Normal", 2.0
+DamageFactor "SatanGuard", 2.0
+DamageFactor "AbyssalSatyr", 2.0
+}
+
+Actor HemMonstersAlerter : CustomInventory
+{
+-COUNTITEM
++INVENTORY.QUIET
++INVENTORY.UNDROPPABLE
++INVENTORY.ALWAYSPICKUP
++INVENTORY.AUTOACTIVATE
+inventory.amount 1
+inventory.maxamount 0
+Tag "Ghost"
+States
+	{
+	Pickup:
+		TNT1 A 1
+		TNT1 A 1 A_ChangeFlag(AMBUSH,0)
+		TNT1 A 1 A_AlertMonsters
+		Stop
+	}
+}
+
+//============================================================
+Actor ProjHitCheck : Inventory { Inventory.MaxAmount 1 }
+Actor ProjMissCheck : Inventory { Inventory.MaxAmount 1 }
+Actor HemWasRaised : Inventory { Inventory.MaxAmount 1 }
+Actor Tic : Inventory { Inventory.MaxAmount 999999 }
+Actor VanishTimer : Inventory { Inventory.MaxAmount 999999 }
+Actor SnipeOn : Inventory { Inventory.MaxAmount 1 }
+Actor LowHealthCheck : Inventory { Inventory.MaxAmount 1 }
+Actor XDeathCheck : Inventory { Inventory.MaxAmount 1 }
+Actor death2: Inventory { Inventory.MaxAmount 1 }
+Actor HomingIn : Inventory { Inventory.MaxAmount 1 }
+Actor HomingShotCount : Inventory { Inventory.MaxAmount 3 }
+Actor AlreadyTargeted : Inventory { Inventory.MaxAmount 1 }
+//============================================================
+Actor MonsterAvoid : CustomInventory
+{
+-COUNTITEM
++NOTIMEFREEZE
++INVENTORY.QUIET
++INVENTORY.UNDROPPABLE
++INVENTORY.ALWAYSPICKUP
++INVENTORY.AUTOACTIVATE
+Inventory.Amount 1
+Inventory.MaxAmount 0
+States
+	{
+	Pickup:
+		TNT1 A 1
+		TNT1 A 1 A_Jump(128,"AvoidRight")
+	AvoidLeft:
+		TNT1 A 1
+		TNT1 A 1 ThrustThing(angle*256/360+192,15,0,0)
+	    Stop
+	AvoidRight:
+		TNT1 A 1
+		TNT1 A 1 ThrustThing(angle*256/360+64,15,0,0)
+		Stop
+	}
+}
+
+Actor MonsterStrafe : CustomInventory
+{
+-COUNTITEM
++NOTIMEFREEZE
++INVENTORY.QUIET
++INVENTORY.UNDROPPABLE
++INVENTORY.ALWAYSPICKUP
++INVENTORY.AUTOACTIVATE
+Inventory.Amount 1
+Inventory.MaxAmount 0
+States
+	{
+	Pickup:
+		TNT1 A 1
+		TNT1 A 1 A_Jump(128,"AvoidRight")
+	AvoidLeft:
+		TNT1 A 1
+		TNT1 A 1 ThrustThing(angle*256/360+192,3,0,0)
+	    Stop
+	AvoidRight:
+		TNT1 A 1
+		TNT1 A 1 ThrustThing(angle*256/360+64,3,0,0)
+		Stop
+	}
+}
+//============================================================
+Actor ResetMonsterInvul : CustomInventory
+{
+-COUNTITEM
++NOTIMEFREEZE
++INVENTORY.QUIET
++INVENTORY.UNDROPPABLE
++INVENTORY.ALWAYSPICKUP
++INVENTORY.AUTOACTIVATE
+Inventory.Amount 1
+Inventory.MaxAmount 0
+States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_SetSolid
+		TNT1 A 0 A_ChangeFlag(NOBLOCKMAP,0)
+		TNT1 A 0 A_SetShootable
+		TNT1 A 0 A_UnSetInvulnerable
+		TNT1 A 0 A_ChangeFlag(NODAMAGE,0)
+		TNT1 A 0 A_JumpIfInventory("IsAnHEMFake",1,2)
+		TNT1 A 1 A_SetTranslucent(1)
+		Stop
+		TNT1 A 1 A_SetTranslucent(0.8,0)
+		Stop
+	}
+}
+
+Actor ResetMonsterReflectInvul : CustomInventory
+{
+-COUNTITEM
++NOTIMEFREEZE
++INVENTORY.QUIET
++INVENTORY.UNDROPPABLE
++INVENTORY.ALWAYSPICKUP
++INVENTORY.AUTOACTIVATE
+Inventory.Amount 1
+Inventory.MaxAmount 0
+States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_SetSolid
+		TNT1 A 0 A_ChangeFlag(NOBLOCKMAP,0)
+		TNT1 A 0 A_SetShootable
+		TNT1 A 0 A_UnSetReflectiveInvulnerable
+		TNT1 A 0 A_ChangeFlag(NODAMAGE,0)
+		TNT1 A 1 A_SetTranslucent(1)
+		Stop
+	}
+}
+
+Actor SetMonsterInvul : CustomInventory
+{
+-COUNTITEM
++NOTIMEFREEZE
++INVENTORY.QUIET
++INVENTORY.UNDROPPABLE
++INVENTORY.ALWAYSPICKUP
++INVENTORY.AUTOACTIVATE
+Inventory.Amount 1
+Inventory.MaxAmount 0
+States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_SetInvulnerable
+		TNT1 A 1 A_ChangeFlag(NODAMAGE,1)
+		Stop
+	}
+}
+
+Actor SetMonsterReflectInvul : CustomInventory
+{
+-COUNTITEM
++NOTIMEFREEZE
++INVENTORY.QUIET
++INVENTORY.UNDROPPABLE
++INVENTORY.ALWAYSPICKUP
++INVENTORY.AUTOACTIVATE
+Inventory.Amount 1
+Inventory.MaxAmount 0
+States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_SetReflectiveInvulnerable
+		TNT1 A 1 A_ChangeFlag(NODAMAGE,1)
+		Stop
+	}
+}
+
+//============================================================
+Actor FearOrb : CustomInventory 30406
+{
+Renderstyle Translucent
+Alpha 0.8
++FORCEXYBILLBOARD
++Inventory.INVBAR
++INVENTORY.HUBPOWER
++INVENTORY.PERSISTENTPOWER
++Inventory.FancyPicKupSound
+Inventory.MaxAmount 1
+Inventory.InterHubAmount 1
+Inventory.UseSound ""
+Inventory.PickUpMessage "Orb of Deep Fears."
+Inventory.Icon "INAOA0"
+Tag "Orb of Deep Fears"
+States
+	{
+	Spawn:
+		PHOB ABCD 3 Bright
+		Loop
+	Use:
+		TNT1 A 0
+		TNT1 A 1 A_JumpIfInventory("PhobosCoolDown",1,"FailIt")
+		TNT1 A 0 A_PlaySound("Advisorb/Scream",0,1.0,0,0)
+		TNT1 A 0 A_GiveInventory("PhobosCooldown",1)
+		TNT1 A 0 A_GiveInventory("PhobosFear",1)
+		TNT1 A 0 A_GiveInventory("PhobosScan",1)
+		TNT1 A 1 A_GiveInventory("PhobosShadow",1)
+		Stop
+	FailIt:
+		TNT1 A 1
+		Fail
+	}
+}
+
+Actor PhobosFear : PowerUpGiver
+{
+Inventory.MaxAmount 1
++Inventory.AutoActivate
+Powerup.Color Purple 0.45
+PowerUp.Type Frightener
+PowerUp.Duration -40
+}
+
+Actor PhobosShadow : PowerUpGiver
+{
+Inventory.MaxAmount 1
++Inventory.AutoActivate
+PowerUp.Type Shadow
+PowerUp.Duration -40
+}
+
+Actor PhobosScan : PowerUpGiver
+{
+Inventory.MaxAmount 1
++Inventory.AutoActivate
+PowerUp.Type Scanner
+PowerUp.Duration -40
+}
+
+Actor PhobosCooldown : PowerDamage
+{
+DamageFactor "nothing", 1.0
+powerup.duration -40
+}
+//============================================================
+Actor PartialKakuhou : CustomInventory 30407
+{
++PierceArmor
++Inventory.INVBAR
++INVENTORY.HUBPOWER
++INVENTORY.PERSISTENTPOWER
++Inventory.FancyPicKupSound
+Inventory.MaxAmount 7
+Inventory.InterHubAmount 7
+Inventory.PickUpSound "Kakuhou/PickUp"
+Inventory.UseSound "Kakuhou/Use"
+Inventory.PickUpMessage "Picked up a Ghoul's Partial Kakuhou."
+Obituary "%o somehow activated the Kakuhou below 31 hp."
+Inventory.Icon "INKHA0"
+Tag "Ghoul's Partial Kakuhou"
+States
+	{
+	Spawn:
+		PKKH ABCB 2 Bright
+		Loop
+	Use:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfHealthLower(31,"FailIt")
+		TNT1 A 1 A_JumpIfInventory("KakuhouCooldown",1,"FailIt")
+		TNT1 A 0 A_Explode(30,15,1,0)
+		TNT1 A 0 A_GiveInventory("KakuhouCoolDown",1)
+		TNT1 A 0 A_FireCustomMissile("GhoulShot",0,0,15,0)
+		TNT1 A 0 //A_GiveInventory("GhoulSpeed",1)
+		TNT1 A 0 A_GiveInventory("GhoulDrain",1)
+		TNT1 A 0 A_GiveInventory("GhoulDamage",1)
+		TNT1 A 1 A_GiveInventory("GhoulRage",1)
+		Stop
+	FailIt:
+		TNT1 A 1
+		Fail
+	}
+}
+
+Actor GhoulSpeed : PowerUpGiver
+{
+Inventory.MaxAmount 1
++Inventory.AutoActivate
+PowerUp.Type PowerDoubleFiringSpeed
+PowerUp.Duration -10
+}
+
+Actor GhoulDrain : PowerUpGiver
+{
+Inventory.MaxAmount 1
++Inventory.AutoActivate
+Powerup.Color Red 0.25
+PowerUp.Type "Drain"
+PowerUp.Duration -10
+}
+
+Actor GhoulRage : PowerSpeed
+{
+Speed 2.5
+PowerUp.Duration -10
+}
+
+Actor GhoulDamage : PowerDamage
+{
+DamageFactor "Normal", 2.0
+PowerUp.Duration -10
+}
+
+Actor KakuhouCooldown : PowerDamage
+{
+DamageFactor "nothing", 1.0
+Powerup.duration -10
+}
+//============================================================
+Actor ShadowCastOrb : CustomInventory 30408
+{
+Scale 0.7
+Renderstyle Add
+Alpha 1.0
++FLOAT
++FLOATBOB
++COUNTITEM
++NOTIMEFREEZE
++FORCEXYBILLBOARD
++Inventory.INVBAR
++INVENTORY.HUBPOWER
++INVENTORY.PERSISTENTPOWER
++Inventory.FancyPickUpSound
+Inventory.Amount 1
+Inventory.MaxAmount 2
+Inventory.InterHubAmount 2
+Inventory.Icon "HSSPE0"
+Inventory.PickUpSound "Shadowslave/Death"
+Inventory.PickUpMessage "Picked up the Shadow slave Orb."
+Tag "Shadow slave Orb"
+States
+	{
+	Spawn:
+		HSSP ABCD 3 Bright
+		Loop
+	Use:
+		TNT1 A 1
+		TNT1 A 0 A_CustomMissile("ShadowslaveSpawner",28,0,45,CMF_AIMDIRECTION|CMF_TRACKOWNER)
+		TNT1 A 0 A_CustomMissile("ShadowslaveSpawner2",28,0,-45,CMF_AIMDIRECTION|CMF_TRACKOWNER)
+		TNT1 A 1 A_GiveInventory("ShadowCastOrbShield",1)
+		Stop
+	}
+}
+
+Actor ShadowCastOrbShield : PowerProtection
+{
++Inventory.AutoActivate
+Inventory.MaxAmount 1
+DamageFactor "PlayerPhase", 0.0
+Powerup.duration 0x7FFFFFFF
+}
+//============================================================
+Actor AbyssalCastOrb : CustomInventory 30409
+{
+Renderstyle Translucent
+Alpha 0.8
++FLOAT
++FLOATBOB
++NOTIMEFREEZE
++FORCEXYBILLBOARD
++Inventory.InvBar
++INVENTORY.HUBPOWER
++INVENTORY.PERSISTENTPOWER
++Inventory.FancyPickUpSound
+Inventory.Amount 1
+Inventory.MaxAmount 3
+Inventory.InterHubAmount 3
+Inventory.Icon INSOA0
+Inventory.PickUpSound "Shadowslave/Death"
+Inventory.PickUpMessage "Picked up the Abyssal slave Orb."
+Tag "Abyssal slave Orb"
+States
+	{
+	Spawn:
+		SORB EFGH 3 Bright
+		Loop
+	Use:
+		TNT1 A 1
+		TNT1 A 0 A_CustomMissile("AbyssalSlaveSpawner",28,0,45,CMF_AIMDIRECTION|CMF_TRACKOWNER,22)
+		TNT1 A 0 A_CustomMissile("AbyssalSlaveSpawner2",28,0,-45,CMF_AIMDIRECTION|CMF_TRACKOWNER,22)
+		TNT1 A 1 A_GiveInventory("ShadowCastOrbShield",1)
+		Stop
+	}
+}
+//============================================================
+
+Actor HemHealthBonus : NewHealthBonus
+{
++NOTIMEFREEZE
++INVENTORY.AUTOACTIVATE
++INVENTORY.ALWAYSPICKUP
+Inventory.Amount 1
+Inventory.MaxAmount 600
+}
+
+Actor HemMaxHealthBonus : NewHealthBonus
+{
++NOTIMEFREEZE
++INVENTORY.AUTOACTIVATE
++INVENTORY.ALWAYSPICKUP
+Inventory.Amount 5
+Inventory.MaxAmount 600
+Inventory.PickupMessage "Hem Max Health Bonus"
+States
+{
+Spawn:
+    NONH ABCDCB 5
+    Loop
+    }
+}
+
+//============================================================
+Actor ElusiveSphere : CustomInventory 30412
+{
++FLOATBOB
++COUNTITEM
++NOTIMEFREEZE
++FORCEXYBILLBOARD
++INVENTORY.INVBAR
+Inventory.MaxAmount 3
+Inventory.InterHubAmount 3
+Inventory.UseSound "pickups/invulnerable"
+Inventory.PickupAnnouncerEntry "invisibility"
+Inventory.Pickupmessage "Sphere of Elusive!"
+Inventory.Icon "VISNI0"
+Tag "Sphere of Elusive"
+States
+	{
+	Spawn:
+		TNT1 A 0 A_CustomMissile ("RedSparkleSpawner", 0, 0, random(0,-360), 2, random(0,360))
+        VISN AAAAAABBBBBB 1 Bright A_SpawnItem("RedSphereFlare",0,38)
+	    TNT1 A 0 A_CustomMissile ("BlueSparkleSpawner", 0, 0, random(0,-360), 2, random(0,360))
+        VISN CCCCCCDDDDDD 1 Bright A_SpawnItem("BlueSphereFlare",0,38)
+		//VISN ABCD 6 Bright
+		Loop
+	Use:
+		TNT1 A 0
+		TNT1 A 0 A_GiveInventory("PowerInvisibility", 1)
+		TNT1 A 0 A_ChangeFlag("Shadow",1)
+		TNT1 A 1 A_StopSound
+		TNT1 A 0 A_CustomMissile("FakeMarineSpawner",20,0,-90,CMF_AIMDIRECTION|CMF_TRACKOWNER)
+		TNT1 A 0 A_CustomMissile("FakeMarineSpawner2",20,0,-45,CMF_AIMDIRECTION|CMF_TRACKOWNER)
+		TNT1 A 0 A_CustomMissile("FakeMarineSpawner3",20,0,45,CMF_AIMDIRECTION|CMF_TRACKOWNER)
+		TNT1 A 1 A_CustomMissile("FakeMarineSpawner4",20,0,90,CMF_AIMDIRECTION|CMF_TRACKOWNER)
+		Stop
+	}
+}
+//===========================================================
+Actor NemesisArmor : RedArmor 30311
+{
+Scale 1
++DONTRIP
++NORADIUSDMG
++NOTIMEFREEZE
++Inventory.BigPowerup
+Mass 0x7FFFFFFF
+Armor.SavePercent 500.0
+Armor.SaveAmount 1200
+DamageFactor "None", 0.01
+DamageFactor "Normal", 0.01
+DamageFactor "Explosion", 0.01
+DamageFactor "ZExplosiveBullets", 0.01
+DamageFactor 0.01
+Inventory.Icon "UNNAB0"
+Inventory.PickupSound "NemesisGet"
+Inventory.PickupMessage "Nemesis Armor! It's almost as if you're inpenetrable."
+Tag "Nemesis Armor"
+States
+	{
+	Spawn:
+		TNT1 A 0 A_SpawnItemEx("NemesisArmorFX")
+		UNNA AAAAA 1 Bright A_SpawnItemEx("NemSphereSmoke",0,0,10,random(-2,2),random(-2,2),random(-2,2),random(0,360))
+		TNT1 A 0 A_SpawnItemEx("NemesisArmorFX")
+		UNNA AAAAA 1 Bright A_SpawnItemEx("NemSphereSmoke",0,0,10,random(-2,2),random(-2,2),random(-2,2),random(0,360))
+		TNT1 A 0 A_SpawnItemEx("NemesisArmorFX")
+		UNNA BBBBB 1 Bright A_SpawnItemEx("NemSphereSmoke",0,0,10,random(-2,2),random(-2,2),random(-2,2),random(0,360))
+		TNT1 A 0 A_SpawnItemEx("NemesisArmorFX")
+		UNNA BBBBB 1 Bright A_SpawnItemEx("NemSphereSmoke",0,0,10,random(-2,2),random(-2,2),random(-2,2),random(0,360))
+		Loop
+	}
+}
+
+Actor NemesisArmorQuiet : NemesisArmor
+{
+-COUNTITEM
++INVENTORY.QUIET
++INVENTORY.ALWAYSPICKUP
+}
+
+Actor NemesisArmorRegeneration : CustomInventory 30413
+{
+Scale 1.2
++COUNTITEM
++NOTIMEFREEZE
++Inventory.BigPowerup
+-INVENTORY.INVBAR
++INVENTORY.HUBPOWER
++INVENTORY.PERSISTENTPOWER
+Mass 0x7FFFFFFF
+Inventory.Amount 1
+Inventory.MaxAmount 1
+Inventory.InterHubAmount 1
+Inventory.Icon "UNNAB0"
+Inventory.PickupSound "NemesisGet"
+Inventory.PickupMessage "Nemesis Armor, you will live alot longer."
+Tag "Nemesis Armor"
+States
+	{
+	Spawn:
+		UNNA B 10 Bright
+		Loop
+	Pickup:
+		TNT1 A 1
+		TNT1 A 0 A_JumpIfInventory("NemesisArmorRegenerationCheck",1,"Nop")
+		TNT1 A 0 A_GiveInventory("NemesisArmorRegenerationCheck",1)
+		TNT1 A 0 A_GiveInventory("NemesisArmorQuiet",1)
+		TNT1 A 1 ACS_NamedExecuteAlways("Hem_NemesisArmorRegeneration",0)
+		Stop
+	Nop:
+		TNT1 A 1
+		Fail
+	}
+}
+
+Actor NemesisArmorRegenerationQuiet : NemesisArmorRegeneration
+{
+-COUNTITEM
++INVENTORY.QUIET
+}
+
+Actor NemesisArmorRegenerationCheck : Inventory
+{
++INVENTORY.HUBPOWER
++INVENTORY.PERSISTENTPOWER
+Inventory.MaxAmount 1
+Inventory.InterHubAmount 1
+}
+//===========================================================
+Actor RingOfRegeneration : CustomInventory 30414
+{
+//$Category Powerups/HEM
+//$Sprite RRG2A0
+//$Title "Ring Of Regeneration"
+Scale 0.5
++FloatBob
++Countitem
++NOTIMEFREEZE
++NODAMAGETHRUST
++FORCERADIUSDMG
++Inventory.InvBar
++INVENTORY.HUBPOWER
++INVENTORY.PERSISTENTPOWER
+Damagetype "SatanGuard"
+Inventory.PickupFlash "PickupFlash"
+Inventory.Amount 1
+Inventory.MaxAmount 1
+Inventory.InterHubAmount 1
+Inventory.Icon "RRG2A0"
+Inventory.PickupMessage "Ring Of Regeneration"
+Tag "Ring Of Regeneration"
+States
+	{
+	Spawn:
+		RRG2 BBBBCDDDDC 3 Bright
+		TNT1 A 0 A_SpawnItemEx("PurpleParticleSpawner",0,0,8,0,0,0,0,128)
+		Loop
+	Use:
+		TNT1 A 1
+		TNT1 A 0 A_JumpIfInventory("RingOfRegenerationCheck",1,"Nop")
+		TNT1 A 0 A_GiveInventory("RingOfRegenerationCheck",1)
+		TNT1 A 0 A_TakeInventory("RingOfRegeneration2Check",1)
+		TNT1 A 0 A_TakeInventory("RingOfRegeneration3Check",1)
+		TNT1 A 1 ACS_NamedExecuteAlways("Hem_RingsOfRegeneration",0)
+		Stop
+	Nop:
+		TNT1 A 1
+		Stop
+	}
+}
+
+Actor RingOfRegenerationQuiet : RingOfRegeneration
+{
+-COUNTITEM
++INVENTORY.QUIET
+-Inventory.InvBar
++INVENTORY.ALWAYSPICKUP
+States
+	{
+	PickUp:
+		TNT1 A 1
+		TNT1 A 0 A_JumpIfInventory("RingOfRegenerationCheck",1,"Nop")
+		TNT1 A 0 A_GiveInventory("RingOfRegenerationCheck",1)
+		TNT1 A 0 A_TakeInventory("RingOfRegeneration2Check",1)
+		TNT1 A 0 A_TakeInventory("RingOfRegeneration3Check",1)
+		TNT1 A 1 ACS_NamedExecuteAlways("Hem_RingsOfRegeneration",0)
+		Stop
+	}
+}
+
+Actor RingOfRegenerationCheck : Inventory
+{
++INVENTORY.HUBPOWER
++INVENTORY.PERSISTENTPOWER
+Inventory.MaxAmount 1
+Inventory.InterHubAmount 1
+}
+
+Actor RingOfRegeneration2Check : RingOfRegenerationCheck {}
+
+Actor RingOfRegenerationLow : RingOfRegeneration 30415
+{
+//$Category Powerups/HEM
+//$Sprite RRGNA0
+//$Title "Ring Of Regeneration"
+Inventory.Icon "RRGNA0"
+States
+	{
+	Spawn:
+		RRGN BBBBCDDDDC 3 Bright
+		Loop
+	Use:
+		TNT1 A 1
+		TNT1 A 0 A_JumpIfInventory("RingOfRegenerationCheck",1,"Nop")
+		TNT1 A 0 A_JumpIfInventory("RingOfRegeneration2Check",1,"Nop")
+		TNT1 A 0 A_JumpIfInventory("RingOfRegeneration3Check",1,"Nop")
+		TNT1 A 0 A_GiveInventory("RingOfRegeneration2Check",1)
+		TNT1 A 1 ACS_NamedExecuteAlways("Hem_RingsOfRegeneration",0)
+		Stop
+	Nop:
+		TNT1 A 1
+		Stop
+	}
+}
+
+Actor RingOfRegeneration3Check : RingOfRegenerationCheck {}
+
+Actor RingOfRegenerationHalf : RingOfRegeneration 30439
+{
+//$Category Powerups/HEM
+//$Sprite RRG3A0
+//$Title "Ring Of Regeneration"
+Inventory.Icon "RRG3A0"
+States
+	{
+	Spawn:
+		TNT1 A 0 Bright A_CustomMissile("YellowSparkleSpawner",0,0,random(0,-360),2,random(0,360))
+		RRG3 BBB 3 Bright
+		TNT1 A 0 Bright A_CustomMissile("LegendaryRuneFlameSpawner",-20,0,random(0,-360),2,random(0,360))
+		RRG3 BCD 3 Bright
+		TNT1 A 0 Bright A_CustomMissile("LegendaryRuneFlameSpawner",-20,0,random(0,-360),2,random(0,360))
+		RRG3 DDDC 3 Bright
+		TNT1 A 0 Bright A_CustomMissile("LegendaryRuneFlameSpawner",-20,0,random(0,-360),2,random(0,360))
+		Loop
+	Use:
+		TNT1 A 1
+		TNT1 A 0 A_JumpIfInventory("RingOfRegenerationCheck",1,"Nop")
+		TNT1 A 0 A_JumpIfInventory("RingOfRegeneration3Check",1,"Nop")
+		TNT1 A 0 A_GiveInventory("RingOfRegeneration3Check",1)
+		TNT1 A 0 A_TakeInventory("RingOfRegeneration2Check",1)
+		TNT1 A 1 ACS_NamedExecuteAlways("Hem_RingsOfRegeneration",0)
+		Stop
+	Nop:
+		TNT1 A 1
+		Stop
+	}
+}
+
+Actor RingOfRegenerationHalfQuiet : RingOfRegenerationHalf
+{
+-COUNTITEM
++INVENTORY.QUIET
++INVENTORY.AUTOACTIVATE
+}
+//=============================================================
+ACTOR NemSphereSmoke : ImpballTrail
+{
+  +NOBLOCKMAP
+  +NOGRAVITY
+  +CLIENTSIDEONLY
+  +NOTIMEFREEZE
+  RenderStyle Translucent
+  Alpha 0.6
+  Scale 0.4
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+    SMKE ABCDEFGHIJKL 2 Bright A_Fadeout(0.05)
+    Stop
+  }
+}
+
+Actor NemesisSphere : CustomInventory 30312
+{
++COUNTITEM
++FLOATBOB
++Inventory.BigPowerup
+Inventory.PickupMessage "Nemesis Sphere! Your vital signs are off the charts!"
+Inventory.PickupSound "VileGet"
+Tag "Nemesis Sphere"
+Scale 0.8
+States
+	{
+	Spawn:
+		UNSO AAAABBBBCCCCDDDDCCCCBBBB 1 Bright A_SpawnItemEx("NemSphereSmoke",0,0,38,random(-2,2),random(-2,2),random(-2,2),random(0,360))
+		Loop
+	Pickup:
+		TNT1 A 0
+		TNT1 A 1 A_GiveInventory("NemesisSphereHealth",1)
+		Stop
+	}
+}
+
+Actor NemesisSphereHealth : Health
+{
+Inventory.Amount 1200
+Inventory.MaxAmount 1200
+}
+
+Actor NemesisSuperSphere : CustomInventory 30443
+{
++COUNTITEM
++FLOATBOB
++Inventory.BigPowerup
+Inventory.PickupMessage "Nemesis Super Sphere! You won't be meeting death for quite some time."
+Inventory.PickupSound "VileGet"
+Tag "Nemesis Super Sphere"
+Scale 0.8
+States
+	{
+	Spawn:
+		NMS2 AAAABBBBCCCCDDDDCCCCBBBB 1 Bright A_SpawnItemEx("NemSphereSmoke",0,0,38,random(-2,2),random(-2,2),random(-2,2),random(0,360))
+		Loop
+	Spawn:
+		TNT1 A 0 A_CustomMissile("PurpleSparkleSpawner", 0, 0, random(0,-360), 2, random(0,360)) 
+		NMS2 AAAA 1 Bright A_SpawnItemEx("NemSphereSmoke",0,0,38,random(-2,2),random(-2,2),random(-2,2),random(0,360))
+		TNT1 A 0 A_CustomMissile("PurpleSparkleSpawner", 0, 0, random(0,-360), 2, random(0,360)) 
+		NMS2 BBBB 1 Bright A_SpawnItemEx("NemSphereSmoke",0,0,38,random(-2,2),random(-2,2),random(-2,2),random(0,360))
+		TNT1 A 0 A_CustomMissile("PurpleSparkleSpawner", 0, 0, random(0,-360), 2, random(0,360)) 
+		NMS2 CCCC 1 Bright A_SpawnItemEx("NemSphereSmoke",0,0,38,random(-2,2),random(-2,2),random(-2,2),random(0,360))
+		TNT1 A 0 A_CustomMissile("PurpleSparkleSpawner", 0, 0, random(0,-360), 2, random(0,360)) 
+		NMS2 DDDD 1 Bright A_SpawnItemEx("NemSphereSmoke",0,0,38,random(-2,2),random(-2,2),random(-2,2),random(0,360))
+		TNT1 A 0 A_CustomMissile("PurpleSparkleSpawner", 0, 0, random(0,-360), 2, random(0,360)) 
+		NMS2 CCCC 1 Bright A_SpawnItemEx("NemSphereSmoke",0,0,38,random(-2,2),random(-2,2),random(-2,2),random(0,360))
+		TNT1 A 0 A_CustomMissile("PurpleSparkleSpawner", 0, 0, random(0,-360), 2, random(0,360)) 
+		NMS2 BBBB 1 Bright A_SpawnItemEx("NemSphereSmoke",0,0,38,random(-2,2),random(-2,2),random(-2,2),random(0,360))
+		Loop
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_PlaySound("pickups/invulnerable",CHAN_AUTO)
+		TNT1 A 0 A_GiveInventory("NemesisArmor",1)
+		TNT1 A 1 A_GiveInventory("NemesisSphereHealth",1)
+		Stop
+	}
+}
+
+Actor NemesisMegaSphere : CustomInventory 30313
+{
++COUNTITEM
++FLOATBOB
++Inventory.BigPowerup
+Inventory.PickupMessage "Nemesis Mega Sphere! Embrace the sweet feeling of omnipotence!"
+Inventory.PickupSound "VileGet"
+Tag "Nemesis Mega Sphere"
+Scale 0.8
+States
+	{
+	Spawn:
+		TNT1 A 0 A_CustomMissile("PurpleSparkleSpawner", 0, 0, random(0,-360), 2, random(0,360)) 
+		TNT1 A 0 A_CustomMissile("RedSparkleSpawner", 0, 0, random(0,-360), 2, random(0,360)) 
+		UNIV AAAA 1 Bright A_SpawnItemEx("NemSphereSmoke",0,0,38,random(-2,2),random(-2,2),random(-2,2),random(0,360))
+		TNT1 A 0 A_CustomMissile("PurpleSparkleSpawner", 0, 0, random(0,-360), 2, random(0,360)) 
+		TNT1 A 0 A_CustomMissile("OrangeSparkleSpawner", 0, 0, random(0,-360), 2, random(0,360)) 
+		UNIV BBBB 1 Bright A_SpawnItemEx("NemSphereSmoke",0,0,38,random(-2,2),random(-2,2),random(-2,2),random(0,360))
+		TNT1 A 0 A_CustomMissile("PurpleSparkleSpawner", 0, 0, random(0,-360), 2, random(0,360)) 
+		TNT1 A 0 A_CustomMissile("YellowSparkleSpawner", 0, 0, random(0,-360), 2, random(0,360)) 
+		UNIV CCCC 1 Bright A_SpawnItemEx("NemSphereSmoke",0,0,38,random(-2,2),random(-2,2),random(-2,2),random(0,360))
+		TNT1 A 0 A_CustomMissile("PurpleSparkleSpawner", 0, 0, random(0,-360), 2, random(0,360)) 
+		TNT1 A 0 A_CustomMissile("WhiteSparkleSpawner", 0, 0, random(0,-360), 2, random(0,360)) 
+		UNIV DDDD 1 Bright A_SpawnItemEx("NemSphereSmoke",0,0,38,random(-2,2),random(-2,2),random(-2,2),random(0,360))
+		TNT1 A 0 A_CustomMissile("PurpleSparkleSpawner", 0, 0, random(0,-360), 2, random(0,360)) 
+		TNT1 A 0 A_CustomMissile("YellowSparkleSpawner", 0, 0, random(0,-360), 2, random(0,360)) 
+		UNIV CCCC 1 Bright A_SpawnItemEx("NemSphereSmoke",0,0,38,random(-2,2),random(-2,2),random(-2,2),random(0,360))
+		TNT1 A 0 A_CustomMissile("PurpleSparkleSpawner", 0, 0, random(0,-360), 2, random(0,360)) 
+		TNT1 A 0 A_CustomMissile("OrangeSparkleSpawner", 0, 0, random(0,-360), 2, random(0,360)) 
+		UNIV BBBB 1 Bright A_SpawnItemEx("NemSphereSmoke",0,0,38,random(-2,2),random(-2,2),random(-2,2),random(0,360))
+		Loop
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_PlaySound("pickups/invulnerable",CHAN_AUTO)
+		TNT1 A 0 A_GiveInventory("RingOfRegenerationQuiet",1)
+		TNT1 A 0 A_GiveInventory("NemesisArmorRegenerationQuiet",1)
+		TNT1 A 0 A_GiveInventory("NemesisArmor",1)
+		TNT1 A 1 A_GiveInventory("NemesisSphereHealth",1)
+		Stop
+	}
+}
+
+Actor HemDoubleFiringSpeed : PowerDoubleFiringSpeed
+{
++NOTIMEFREEZE
++INVENTORY.HUBPOWER
++INVENTORY.PERSISTENTPOWER
+Powerup.Duration 0x7FFFFFFF
+}
+
+Actor NemesisHealthBonusMax : BossLifeEssence
+{
+Inventory.Amount 5
+Inventory.MaxAmount 1200
+States
+	{
+	Spawn:
+		NLIF ABCD 3 Bright
+		Loop
+	}
+}
+
+//==========================================================
+Actor NemesisArmorBonus : ArmorBonusMax
+{
++FLOATBOB
++NORADIUSDMG
++NOTIMEFREEZE
+-INVENTORY.QUIET
++INVENTORY.BIGPOWERUP
+Armor.SavePercent 100.0
+Armor.SaveAmount 1
+Armor.MaxSaveAmount 1200
+Inventory.Icon "UNNAB0"
+States
+	{
+	Spawn:
+		NFSS ABCDEFGHIJKJIHGFEDCB 2 Bright
+		Loop
+	}
+}
+
+Actor NemesisArmorBonus2 : NemesisArmorBonus { Armor.SaveAmount 2 }
+Actor NemesisArmorBonus4 : NemesisArmorBonus { Armor.SaveAmount 4 }
+Actor NemesisArmorBonus8 : NemesisArmorBonus { Armor.SaveAmount 8 }
+Actor NemesisArmorBonus16 : NemesisArmorBonus { Armor.SaveAmount 16 }
+Actor NemesisArmorBonus32 : NemesisArmorBonus { Armor.SaveAmount 32 }
+Actor NemesisArmorBonus64 : NemesisArmorBonus { Armor.SaveAmount 64 }
+
+Actor NemesisArmorBonusMax : NewArmorBonus 30337
+{
++NORADIUSDMG
++NOTIMEFREEZE
+-INVENTORY.QUIET
++INVENTORY.BIGPOWERUP
+Armor.SavePercent 100.0
+Armor.SaveAmount 5
+Armor.MaxSaveAmount 1200
+Inventory.Icon "UNNAB0"
+States
+	{
+	Spawn:
+		NARB A 6 Bright
+		NARB B 12 Bright
+		Loop
+	}
+}
+
+Actor NemesisHealthBonusMaxQuiet : NemesisHealthBonusMax { +INVENTORY.QUIET }
+Actor NemesisArmorBonusMaxQuiet : NemesisArmorBonusMax { +INVENTORY.QUIET }
+//===============================================================================
+Actor HEMArmorBonusMax : NewMaxArmorBonus
+{
++INVENTORY.BIGPOWERUP
+Inventory.Icon "ARSDA0"
+Armor.SaveAmount 8
+Armor.SavePercent 85.0
+Armor.MaxSaveAmount 600
+States
+	{
+	Spawn:
+		HABO A 6
+		HABO B 12
+		Loop
+	}
+}
+
+Actor HEMArmorBonusMax1 : ArmorBonusMax
+{
+Inventory.Icon "ARSDA0"
+Armor.SaveAmount 1
+Armor.MaxSaveAmount 300
+Armor.SavePercent 85.0
+States
+	{
+	Spawn:
+		HLFS ABCDEFGHIJKJIHGFEDCB 2 Bright
+		Loop
+	}
+}
+Actor HEMArmorBonusMax5 : HEMArmorBonusMax1 { Armor.SaveAmount 5 }
+Actor HEMBossArmorBonusMax25 : BossArmorBonusMax
+{
+Armor.SaveAmount 25
+Armor.MaxSaveAmount 400
+Armor.SavePercent 85.0
+States
+	{
+	Spawn:
+		HBAM ABCB 5 Bright
+		Loop
+	}
+}
+Actor HEMBossArmorBonusMax50 : HEMBossArmorBonusMax25 { Armor.SaveAmount 50 }
+
+Actor "AnkhOfResurrection" : CustomInventory
+{
+  Inventory.Icon "ARTIALI1"
+  Inventory.PickupMessage "Ankh Of Resurrection"
+  +COUNTITEM
+  +FLOATBOB
+  +INVENTORY.PICKUPFLASH
+  +INVENTORY.INVBAR
+  Inventory.MaxAmount 1
+  Inventory.InterHubAmount 1
+  States
+  {
+  Spawn:
+        AKOL A 1
+		Loop
+    Loop
+  Use:
+    TNT1 A 0 ACS_NamedExecuteAlways("AnkhUse",0)
+	Fail
+  }
+}
+ACTOR DoomGuyDoll : CustomInventory
+{
+  Game Doom
+  Radius 28
+  Height 9
+  +SOLID
+  Inventory.PickupMessage "Extra Life"
+  Inventory.PickupSound "DoomGuyDoll/Pickup"
+  States
+  {
+  Spawn:
+    DDOL A -1
+    Stop
+  Pickup:
+	TNT1 A 0 ACS_NamedExecuteWithResult("DollPickup")
+    Stop
+  }
+}
+
+Actor PentagramofPower : CustomInventory
+{
+  Inventory.MaxAmount 1
+  -FLOATBOB
+  +INVBAR
+  +FANCYPICKUPSOUND
+  Inventory.Icon "PNTCI0"
+  Inventory.PickupSound "misc/p_pkup"
+  Inventory.PickupMessage "Picked up a Pentagram of Power."
+  Scale 0.65
+  States
+  {
+  Spawn:
+    PNTC AAAAAABCB 4 Bright
+    Loop
+  Use:
+	TNT1 A 0 A_GiveInventory("PentaPower",1)
+	TNT1 A 0 ACS_NamedExecuteAlways("PentaCheck",0)
+	Stop
+  }
+}
+
+Actor PentaPower : PowerDamage
+{
+  damagefactor "notarealdamagetype", 1.0
+  powerup.duration -30
+}
+
+Actor PentaUse : CustomInventory
+{
+  Inventory.MaxAmount 1
+  +INVENTORY.AUTOACTIVATE
+  States
+  {
+    Use:
+	TNT1 A 1 A_RadiusGive("PentaDamage",1024,RGF_MONSTERS,1)
+	TNT1 A 1 A_TakeInventory("PentaUse",999)
+	Stop
+  }
+}
+
+Actor PentaDamage : CustomInventory
+{
+  Inventory.MaxAmount 1
+  +INVENTORY.AUTOACTIVATE
+  States
+  {
+    Use:
+	
+	TNT1 A 0 ACS_NamedExecuteAlways("PentaDamage",0)
+	TNT1 A 0 A_TakeInventory("PentaDamage",999)
+	Stop
+  }
+}
+
+ACTOR MysteryItem : CustomInventory
+{
+  Inventory.PickupMessage ""
+  Inventory.PickupSound ""
+  Inventory.MaxAmount 1
+  Inventory.InterHubAmount 1
+  States
+  {
+  Spawn:
+    TNT1 A -1
+    Stop
+  Pickup:
+	TNT1 A 0 ACS_NamedExecuteWithResult("It'sASecret")
+    Stop
+  }
+}
+Actor FakeItem : Inventory  //FakeItem
+{
+Inventory.Amount 1
+Inventory.MaxAmount 1
+Inventory.InterHubAmount 1
+-INVENTORY.INVBAR
+-COUNTITEM
+States
+    {
+      Pickup:
+	  	  TNT1 A 0 
+		  TNT1 A 0 //A_Print("Yep, got item")
+	  Stop
+    }
+}
+ACTOR ItemSpawner : CustomInventory
+{
+  Inventory.Amount 1
+  Inventory.MaxAmount 1
+  Inventory.InterHubAmount 1
+  -INVENTORY.INVBAR
+  -COUNTITEM
+  var int user_item;
+  States
+  {
+  Spawn:
+    DDOL A 1
+	TNT1 A 0 
+	DDOL A -1
+	//Goto SpawnLoop
+	Stop
+	SpawnLoop:
+	DDOL A 1
+	Loop
+	Pickup:
+	TNT1 A 0
+	Goto Death
+	Death:
+    TNT1 A 0
+	Stop
+	Remove:
+	TNT1 A 0 A_FadeOut(1)
+	Stop
+  }
+}
+
+Actor FriendlyMonsterDF : PowerProtection
+{
+  +INVENTORY.PERSISTENTPOWER
+  +INVENTORY.HUBPOWER
+  +NORADIUSDMG
+  +NOTIMEFREEZE
+  Powerup.Duration 0x7FFFFFFD
+  DamageFactor "PlayerDTRG", 0.0
+  DamageFactor "RailG", 0.0
+  DamageFactor "DTRailgun", 0.0
+  DamageFactor "PDTPuff", 0.0
+  
+  DamageFactor "LegendaryGuruPlayer", 0.0
+  DamageFactor "PlayerDevBall", 0.0
+}

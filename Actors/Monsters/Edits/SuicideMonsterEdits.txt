@@ -1,0 +1,530 @@
+//Suicide Bombers with C4
+Actor LegendarySuicideBomberC4 : LegendarySuicideBomber replaces LegendarySuicideBomber
+{
+DropItem "LegAmmoSphere", 93
+DropItem "LegendarySphere", 64
+DropItem "Legendary C4" 70 1
+Tag "\c[z3]Legendary Suicide Bomber\c-"
+}
+
+Actor EnragedLegendarySuicideBomberC4 : EnragedLegendarySuicideBomber replaces EnragedLegendarySuicideBomber
+{
+DropItem "LegAmmoSphere", 93
+DropItem "LegendarySphere", 64
+DropItem "Legendary C4" 70 1
+Tag "\c[m6]Enraged\c- \c[z3]Legendary Suicide Bomber\c-"
+}
+
+Actor LegendaryBeheadedKamikazeC4 : LegendaryBeheadedKamikaze replaces LegendaryBeheadedKamikaze
+{
+DropItem "LegAmmoSphere", 93
+DropItem "LegendarySphere", 64
+DropItem "LegendaryRune" 64
+DropItem "Legendary C4" 70 1
+Tag "\c[z3]Legendary Beheaded Kamikaze\c-"
+}
+
+
+Actor NemesisSuicideBomberC4 : NemesisSuicideBomber replaces NemesisSuicideBomber //assraper
+{
+  Health 750
+  Speed 6
+  BloodColor "Black"
+  Species "LegendaryZombie"
+  DamageType "Legendary"
+  DamageFactor 0.6
+  DamageFactor "PlayerNemesisPlasma", 0.0
+  DamageFactor "Explosion", 0.2
+  DamageFactor "PlayerDTRG", 0.4
+  DamageFactor "DTRailgun", 0.4
+  DamageFactor "PDTPuff", 0.4
+  DamageFactor "RailG", 0.3
+  DamageFactor "T3rm", 0.0
+  DropItem "LegAmmoSphere", 93, 3
+  DropItem "EnragedLegendarySphere", 64
+  DropItem "SemiNemesisSphere", 64
+  DropItem "Legendary C4" 70 1
+  Deathsound "NemesisSuicide/Oof"
+  Obituary "%o got exploded by the Nemesis Suicide Bomber's long purple nuclear bomb."
+  Tag "\c[g3]Nemesis Suicide Bomber\c-"
+  States
+  {
+  Spawn:
+	TNT1 A 0
+	TNT1 A 0 A_JumpIf(ACS_NamedExecuteWithResult("RawAnger") == 0,"Remove")
+	TNT1 A 0 A_Jump(160,"Remove")
+  SpawnLoop:
+	NSBM A 10 Bright A_Look
+	TNT1 A 0 A_SpawnItemEx("NemesisHellionSmokeSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,64)
+	NSBI A 10 Bright A_Look
+	TNT1 A 0 A_SpawnItemEx("NemesisHellionSmokeSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,64)
+	Loop
+  Remove:
+	TNT1 A 1
+	TNT1 A 0 A_SpawnItemEx("Demon",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+	TNT1 A 0 A_ChangeFlag("COUNTKILL", FALSE)
+	TNT1 A 0
+	Stop
+  Idle:
+	NSBM AA 2 Bright A_Wander
+	TNT1 A 0 A_Look
+	TNT1 A 0 A_SpawnItemEx("NemesisHellionSmokeSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE,0)
+	NSBM AB 2 Bright A_Wander
+	TNT1 A 0 A_Look
+	TNT1 A 0 A_SpawnItemEx("NemesisHellionSmokeSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE,0)
+	NSBM BB 2 Bright A_Wander
+	TNT1 A 0 A_Look
+	TNT1 A 0 A_SpawnItemEx("NemesisHellionSmokeSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE,0)
+	NSBM CC 2 Bright A_Wander
+	TNT1 A 0 A_Look
+	TNT1 A 0 A_SpawnItemEx("NemesisHellionSmokeSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE,0)
+	NSBM CD 2 Bright A_Wander
+	TNT1 A 0 A_Look
+	TNT1 A 0 A_SpawnItemEx("NemesisHellionSmokeSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE,0)
+	NSBM DD 2 Bright A_Wander
+	TNT1 A 0 A_Look
+	TNT1 A 0 A_SpawnItemEx("NemesisHellionSmokeSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE,0)
+	Loop
+  See:
+	TNT1 A 0 A_JumpIf(user_music == 1,3)
+	TNT1 A 0 ACS_NamedExecuteAlways("StartMonsterMusic",0,74)
+	TNT1 A 0 A_SetUserVar("user_music",1)
+	NSBM AA 2 Bright A_Chase
+	TNT1 A 0 A_SpawnItemEx("NemesisHellionSmokeSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE,0)
+	NSBM AB 2 Bright A_Chase
+	TNT1 A 0 A_SpawnItemEx("NemesisHellionSmokeSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE,0)
+	NSBM BB 2 Bright A_Chase
+	TNT1 A 0 A_SpawnItemEx("NemesisHellionSmokeSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE,0)
+	TNT1 A 0 A_Jump(24,"Teleport")
+	NSBM CC 2 Bright A_Chase
+	TNT1 A 0 A_SpawnItemEx("NemesisHellionSmokeSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE,0)
+	NSBM CD 2 Bright A_Chase
+	TNT1 A 0 A_SpawnItemEx("NemesisHellionSmokeSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE,0)
+	NSBM DD 2 Bright A_Chase
+	TNT1 A 0 A_SpawnItemEx("NemesisHellionSmokeSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE,0)
+	TNT1 A 0 A_Jump(24,"Teleport")
+	Loop
+  Teleport:
+    NSBM A 1 Bright A_UnSetShootable
+	TNT1 AAAA 0 A_SpawnItem("NemesisHellionSmokeSpawner",0,0,0,0)
+	NSBM AAAAAAAAAA 1  A_FadeOut(0.1,0)
+	NSBM A 2 
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Wander
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Wander
+    NSBM A 1 A_PlayWeaponSound("boss/teleport")
+	TNT1 AAAA 0 A_SpawnItem("NemesisHellionSmokeSpawner",0,0,0,0)
+	NSBM AAAAAAAAAAA 1 A_FadeIn(0.1)
+    NSBM A 1 Bright A_SetShootable
+    Goto See
+  Missile:
+	NSBM A 1 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItemEx("NemesisHellionSmokeSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE,0)
+	NSBM A 1 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItemEx("NemesisHellionSmokeSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE,0)
+	NSBM A 1 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItemEx("NemesisHellionSmokeSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE,0)
+	NSBM A 1 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItemEx("NemesisHellionSmokeSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE,0)
+	NSBM A 1 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItemEx("NemesisHellionSmokeSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE,0)
+	NSBM A 1 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItemEx("NemesisHellionSmokeSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE,0)
+	NSBM A 1 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItemEx("NemesisHellionSmokeSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE,0)
+	NSBM A 1 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItemEx("NemesisHellionSmokeSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE,0)
+	NSBM A 1 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItemEx("NemesisHellionSmokeSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE,0)
+	NSBM A 1 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItemEx("NemesisHellionSmokeSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE,0)
+	Goto Missile3
+  Missile3:
+	TNT1 A 0 A_CposRefire
+	TNT1 A 0 A_PlaySound("NemesisSuicide/Blyat",CHAN_VOICE,1.0,0)
+	TNT1 A 0 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("LegSuicideJumping",1)
+	TNT1 A 0 A_Recoil(-30)
+	NSBM ABCD 1 Bright A_JumpIfTargetInLOS("Melee",90,JLOSF_DEADNOJUMP|JLOSF_TARGETLOS,90,0)
+	TNT1 A 0 A_FaceTarget
+	TNT1 A 0 A_Recoil(-30)
+	NSBM ABCD 1 Bright A_JumpIfTargetInLOS("Melee",90,JLOSF_DEADNOJUMP|JLOSF_TARGETLOS,90,0)
+	TNT1 A 0 A_FaceTarget
+	TNT1 A 0 A_Recoil(-30)
+	NSBM ABCD 1 Bright A_JumpIfTargetInLOS("Melee",90,JLOSF_DEADNOJUMP|JLOSF_TARGETLOS,90,0)
+	TNT1 A 0 A_FaceTarget
+	TNT1 A 0 A_Recoil(-30)
+	TNT1 A 0 A_JumpIf(z - floorz >= 64,"ChargeStop")
+	NSBM ABCD 1 Bright A_JumpIfTargetInLOS("Melee",90,JLOSF_DEADNOJUMP|JLOSF_TARGETLOS,90,0)
+	Goto Missile2
+  Missile2:
+	TNT1 A 0 A_JumpIf(velx != 0 || vely != 0,"Missile3")
+	Goto ChargeStop
+  ChargeStop:
+	NSBM A 1 Bright A_Stop
+	TNT1 A 0 A_JumpIfInTargetLOS("Melee",90,JLOSF_DEADNOJUMP,200)
+	Goto See
+  PainAttack:
+  Melee:
+	TNT1 A 0 A_StopSound(CHAN_VOICE)
+	TNT1 A 0 A_Facetarget
+	NSBM A 2 Bright A_SpawnItemEx("NemesisHellionSmokeSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE,0)		
+	TNT1 A 0 A_SpawnItem("SuperGayAttack")
+	Goto Kill
+  Pain:
+	NSBM A 3 Bright
+	TNT1 A 0 A_SpawnItemEx("NemesisHellionSmokeSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE,0)
+	NSBM A 3 Bright A_Pain
+	TNT1 A 0 A_JumpIf(user_pain == 5,"PainAttack")
+	TNT1 A 0 A_SetUserVar(user_pain,user_pain+1)
+	Goto See
+  Death:
+	TNT1 A 0 A_CustomMissile("SuicideBomb",24,0,0,CMF_AIMDIRECTION)
+	TNT1 A 0 A_SpawnItemEx("OrangeParticleSpawner",0,0,24,0,0,0,0,128) 
+	TNT1 AAA 0 A_CustomMissile("Kaboom3",24,0,random(0,360),2,random(0,360))
+	TNT1 AAA 0 A_CustomMissile("SmokeFX2",24,0,random(0,360),2,random(0,360))
+	TNT1 AAAA 0 A_SpawnItemEx("Debris",0,0,24,Random(4,-4),Random(4,-4),Random(4,8),0,128)
+	TNT1 A 0 A_SpawnItem("RocketEx",0,24)
+	TNT1 A 0 A_Stop
+	TNT1 A 0 A_PlaySound("weapons/rocklx",CHAN_BODY)
+	TNT1 A 0 A_Jump(36,"LegendarySoul")
+	TNT1 A 0 A_Jump(98,"BadIdea")
+	NSBM M 5 Bright
+	NSBM N 5 Bright A_Scream
+	NSBM O 5 A_NoBlocking
+	NSBM PQRST 5
+	TNT1 A 0 A_Jump(100,"MoreStuff")
+	NSBM U -1
+	Stop
+  Kill:
+	TNT1 A 0 A_Die("Extreme")
+	Goto XDeath
+  XDeath:
+	TNT1 A 0 A_Jump(36,"LegendarySoul")
+	//TNT1 A 0 A_Jump(48,"BadIdea")  //causes problems because of the black hole succ
+	NSBM M 5 Bright
+	NSBM N 5 Bright A_XScream
+	NSBM O 5 A_NoBlocking
+	NSBM PQRST 5
+	TNT1 A 0 A_Jump(100,"MoreStuff")
+	NSBM U -1
+	Stop
+  MoreStuff:
+	NSBM U 100
+	TNT1 A 0 A_SpawnItem("HellionSmokeAttack")
+	NSBM UUUUUUUUUUUUUUUUUUUUUUUUUUUUUU 1 A_SpawnItem("NemesisZombieItemRandomizer")
+	NSBM UUUUUUUUUUUUUUUUUUUUUUUUUUUUUU 1 A_SpawnItem("NemesisZombieItemRandomizer")
+	NSBM U 1 A_SpawnItem("NemesisZombieSuperItemRandomizer")
+	NSBM U -1
+	Stop
+  BadIdea:
+	TNT1 A 0 A_SpawnItem("TrueNemesisHellionSmokeSpawner",0,0,0,0)
+	NSBM M 5 Bright
+	TNT1 A 0 A_SpawnItem("TrueNemesisHellionSmokeSpawner",0,0,0,0)
+	NSBM N 5 Bright A_Scream
+	TNT1 A 0 A_SpawnItem("TrueNemesisHellionSmokeSpawner",0,0,0,0)
+	NSBM O 5 A_Fall
+	TNT1 A 0 A_SpawnItem("TrueNemesisHellionSmokeSpawner",0,0,0,0)
+	NSBM P 5 A_SpawnItem("BodyCrash",0,0,0,0)
+	TNT1 A 0 A_SpawnItem("TrueNemesisHellionSmokeSpawner",0,0,0,0)
+	NSBM QRST 5
+	NSBM U 175
+	TNT1 A 0 A_PlaySoundEx("brain/spit","Voice",0,2)
+	NSBM UUUUUUUUUUUUUUU 2 Bright A_GiveInventory("NemesisSoulEvent",1)
+	NSBM UUUUUUUUUUUUUUU 2 Bright A_GiveInventory("NemesisSoulEvent",1)
+	NSBM UUUUUUUUUUUUUUU 2 Bright A_GiveInventory("NemesisSoulEvent",1)
+	NSBM TTTTTTTTTTTTTTT 2 Bright A_GiveInventory("NemesisSoulEvent",1)
+	NSBM TTTTTTTTTTTTTTT 2 Bright A_GiveInventory("NemesisSoulEvent",1)
+	NSBM TTTTTTTTTTTTTTT 2 Bright A_GiveInventory("NemesisSoulEvent",1)
+	NSBM SSSSSSSSSSSSSSS 2 Bright A_GiveInventory("NemesisSoulEvent",1)
+	NSBM SSSSSSSSSSSSSSS 2 Bright A_GiveInventory("NemesisSoulEvent",1)
+	NSBM SSSSSSSSSSSSSSS 2 Bright A_GiveInventory("NemesisSoulEvent",1)
+	NSBM RRRRRRRRRRRRRRR 2 Bright A_GiveInventory("NemesisSoulEvent",1)
+	NSBM RRRRRRRRRRRRRRR 2 Bright A_GiveInventory("NemesisSoulEvent",1)
+	NSBM RRRRRRRRRRRRRRR 2 Bright A_GiveInventory("NemesisSoulEvent",1)
+	NSBM QQQQQQQQQQQQQQQ 2 Bright A_GiveInventory("NemesisSoulEvent",1)
+	NSBM QQQQQQQQQQQQQQQ 2 Bright A_GiveInventory("NemesisSoulEvent",1)
+	NSBM QQQQQQQQQQQQQQQ 2 Bright A_GiveInventory("NemesisSoulEvent",1)
+	NSBM PPPPPPPPPPPPPPP 2 Bright A_GiveInventory("NemesisSoulEvent",1)
+	NSBM PPPPPPPPPPPPPPP 2 Bright A_GiveInventory("NemesisSoulEvent",1)
+	NSBM PPPPPPPPPPPPPPP 2 Bright A_GiveInventory("NemesisSoulEvent",1)
+	NSBM OOOOOOOOOOOOOOO 2 Bright A_GiveInventory("NemesisSoulEvent",1)
+	NSBM OOOOOOOOOOOOOOO 2 Bright A_GiveInventory("NemesisSoulEvent",1)
+	NSBM OOOOOOOOOOOOOOO 2 Bright A_GiveInventory("NemesisSoulEvent",1)
+	NSBM NNNNNNNNNNNNNNN 2 Bright A_GiveInventory("NemesisSoulEvent",1)
+	NSBM NNNNNNNNNNNNNNN 2 Bright A_GiveInventory("NemesisSoulEvent",1)
+	NSBM NNNNNNNNNNNNNNN 2 Bright A_GiveInventory("NemesisSoulEvent",1)
+	NSBM MMMMMMMMMMMMMMM 2 Bright A_GiveInventory("NemesisSoulEvent",1)
+	NSBM MMMMMMMMMMMMMMM 2 Bright A_GiveInventory("NemesisSoulEvent",1)
+	NSBM MMMMMMMMMMMMMMM 2 Bright A_GiveInventory("NemesisSoulEvent",1)
+	//TNT1 A 0 A_Jump(92,"Death")
+	NSBM A 3 Bright
+	TNT1 A 0 A_SpawnItemEx("NemesisLightning")
+	NSBM AAAAAAAAAAAA 2 Bright A_SpawnItemEx("VexedNemesisFlameSpawner")
+	TNT1 A 0 A_SpawnItemEx("VexedNemesisSuicideBomber",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+	TNT1 A 0
+	Stop
+  LegendarySoul:
+	TNT1 A 0 A_SpawnItem("TrueNemesisHellionSmokeSpawner",0,0,0,0)
+	NSBM M 5 Bright
+	TNT1 A 0 A_SpawnItem("TrueNemesisHellionSmokeSpawner",0,0,0,0)
+	NSBM N 5 Bright A_Scream
+	TNT1 A 0 A_SpawnItem("TrueNemesisHellionSmokeSpawner",0,0,0,0)
+	NSBM O 5 A_Fall
+	TNT1 A 0 A_SpawnItem("TrueNemesisHellionSmokeSpawner",0,0,0,0)
+	NSBM P 5 A_SpawnItem("BodyCrash",0,0,0,0)
+	TNT1 A 0 A_SpawnItem("TrueNemesisHellionSmokeSpawner",0,0,0,0)
+	NSBM QRST 5
+	NSBM U 140
+	TNT1 A 0 A_PlaySoundEx("brain/spit","Voice",0,2)
+	NSBM UUUUUUUUUUUUUUUUU 2 Bright A_GiveInventory("NemesisSoulEvent",1)
+	NSBM UUUUUUUUUUUUUUUUU 2 Bright A_GiveInventory("NemesisSoulEvent",1)
+	NSBM UUUUUUUUUUUUUUUUU 2 Bright A_GiveInventory("NemesisSoulEvent",1)
+	TNT1 A 0 A_SpawnItemEx("NemesisSoul",0,0,16,0,0,0,0,32)
+	TNT1 A 0 A_SpawnItemEx("TeleportFog",0,0,16,0,0,0,0,32)
+	NSBM U -1
+	Stop
+  }
+}
+
+Actor VexedNemesisSuicideBomberC4 : VexedNemesisSuicideBomber Replaces VexedNemesisSuicideBomber
+{
+  Health 1100
+  Speed 6
+  DamageFactor 0.5
+  DamageFactor "Explosion", 0.0001
+  DamageFactor "PlayerDTRG", 0.0001
+  DamageFactor "DTRailgun", 0.0001
+  DamageFactor "PDTPuff", 0.0001
+  DamageFactor "RailG", 0.0001
+  DropItem "LegAmmoSphere", 93, 3
+  DropItem "SemiNemesisSphere", 64
+  DropItem "Legendary C4" 256 1
+  PainChance "Explosion", 128
+  PainChance "PlayerDTRG", 128
+  PainChance "DTRailgun", 128
+  PainChance "PDTPuff", 128
+  PainChance "RailG", 128
+  Obituary "%o was covered in a gigantic cloud of white from the Vexed Nemesis Suicide Bomber."
+  Tag "\c[w2]Vexed Nemesis Suicide Bomber\c-"
+  States
+  {
+  Spawn:
+	VSBM A 10 Bright A_Look
+	TNT1 A 0 A_SpawnItemEx("TrueNemesisHellionSmokeSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,64)
+	VSBI A 10 Bright A_Look
+	TNT1 A 0 A_SpawnItemEx("TrueNemesisHellionSmokeSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,64)
+	Loop
+  Idle:
+	VSBM AA 2 Bright A_Wander
+	TNT1 A 0 A_Look
+	TNT1 A 0 A_SpawnItemEx("TrueNemesisHellionSmokeSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE,0)
+	VSBM AB 2 Bright A_Wander
+	TNT1 A 0 A_Look
+	TNT1 A 0 A_SpawnItemEx("TrueNemesisHellionSmokeSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE,0)
+	VSBM BB 2 Bright A_Wander
+	TNT1 A 0 A_Look
+	TNT1 A 0 A_SpawnItemEx("TrueNemesisHellionSmokeSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE,0)
+	VSBM CC 2 Bright A_Wander
+	TNT1 A 0 A_Look
+	TNT1 A 0 A_SpawnItemEx("TrueNemesisHellionSmokeSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE,0)
+	VSBM CD 2 Bright A_Wander
+	TNT1 A 0 A_Look
+	TNT1 A 0 A_SpawnItemEx("TrueNemesisHellionSmokeSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE,0)
+	VSBM DD 2 Bright A_Wander
+	TNT1 A 0 A_Look
+	TNT1 A 0 A_SpawnItemEx("TrueNemesisHellionSmokeSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE,0)
+	Loop
+  See:
+	TNT1 A 0 A_JumpIf(user_music == 1,3)
+	TNT1 A 0 ACS_NamedExecuteAlways("StartMonsterMusic",0,2000)
+	TNT1 A 0 A_SetUserVar("user_music",1)
+	VSBM AA 2 Bright A_Chase
+	TNT1 A 0 A_SpawnItemEx("TrueNemesisHellionSmokeSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE,0)
+	VSBM AB 2 Bright A_Chase
+	TNT1 A 0 A_SpawnItemEx("TrueNemesisHellionSmokeSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE,0)
+	VSBM BB 2 Bright A_Chase
+	TNT1 A 0 A_SpawnItemEx("TrueNemesisHellionSmokeSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE,0)
+	TNT1 A 0 A_Jump(24,"Teleport")
+	VSBM CC 2 Bright A_Chase
+	TNT1 A 0 A_SpawnItemEx("TrueNemesisHellionSmokeSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE,0)
+	VSBM CD 2 Bright A_Chase
+	TNT1 A 0 A_SpawnItemEx("TrueNemesisHellionSmokeSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE,0)
+	VSBM DD 2 Bright A_Chase
+	TNT1 A 0 A_SpawnItemEx("TrueNemesisHellionSmokeSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE,0)
+	TNT1 A 0 A_Jump(24,"Teleport")
+	Loop
+  Teleport:
+    VSBM A 1 Bright A_UnSetShootable
+	TNT1 AAAA 0 A_SpawnItem("TrueNemesisHellionSmokeSpawner",0,0,0,0)
+	VSBM AAAAAAAAAA 1  A_FadeOut(0.1,0)
+	VSBM A 2 
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Wander
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Wander
+    VSBM A 1 A_PlayWeaponSound("boss/teleport")
+	TNT1 AAAA 0 A_SpawnItem("TrueNemesisHellionSmokeSpawner",0,0,0,0)
+	VSBM AAAAAAAAAAA 1 A_FadeIn(0.1)
+    VSBM A 1 Bright A_SetShootable
+    Goto See
+  Missile:
+	VSBM A 1 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItemEx("TrueNemesisHellionSmokeSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE,0)
+	VSBM A 1 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItemEx("TrueNemesisHellionSmokeSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE,0)
+	VSBM A 1 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItemEx("TrueNemesisHellionSmokeSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE,0)
+	VSBM A 1 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItemEx("TrueNemesisHellionSmokeSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE,0)
+	VSBM A 1 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItemEx("TrueNemesisHellionSmokeSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE,0)
+	VSBM A 1 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItemEx("TrueNemesisHellionSmokeSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE,0)
+	VSBM A 1 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItemEx("TrueNemesisHellionSmokeSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE,0)
+	VSBM A 1 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItemEx("TrueNemesisHellionSmokeSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE,0)
+	VSBM A 1 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItemEx("TrueNemesisHellionSmokeSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE,0)
+	VSBM A 1 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItemEx("TrueNemesisHellionSmokeSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE,0)
+	Goto Missile3
+  Missile3:
+	TNT1 A 0 A_CposRefire
+	TNT1 A 0 A_PlaySoundEx("Boomer","Voice",0,2)
+	TNT1 A 0 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("LegSuicideJumping",1)
+	TNT1 A 0 A_Recoil(-30)
+	VSBM ABCD 1 Bright A_JumpIfTargetInLOS("Melee",90,JLOSF_DEADNOJUMP|JLOSF_TARGETLOS,90,0)
+	TNT1 A 0 A_FaceTarget
+	TNT1 A 0 A_Recoil(-30)
+	VSBM ABCD 1 Bright A_JumpIfTargetInLOS("Melee",90,JLOSF_DEADNOJUMP|JLOSF_TARGETLOS,90,0)
+	TNT1 A 0 A_FaceTarget
+	TNT1 A 0 A_Recoil(-30)
+	VSBM ABCD 1 Bright A_JumpIfTargetInLOS("Melee",90,JLOSF_DEADNOJUMP|JLOSF_TARGETLOS,90,0)
+	TNT1 A 0 A_FaceTarget
+	TNT1 A 0 A_Recoil(-30)
+	TNT1 A 0 A_JumpIf(z - floorz >= 64,"ChargeStop")
+	VSBM ABCD 1 Bright A_JumpIfTargetInLOS("Melee",90,JLOSF_DEADNOJUMP|JLOSF_TARGETLOS,90,0)
+	Goto Missile2
+  Missile2:
+	TNT1 A 0 A_JumpIf(velx != 0 || vely != 0,"Missile3")
+	Goto ChargeStop
+  ChargeStop:
+	VSBM A 1 Bright A_Stop
+	TNT1 A 0 A_JumpIfInTargetLOS("Melee",90,JLOSF_DEADNOJUMP,200)
+	Goto See
+  PainAttack:
+  Melee:
+	TNT1 A 0 A_StopSound(CHAN_VOICE)
+	TNT1 A 0 A_Facetarget
+	VSBM A 2 Bright A_SpawnItemEx("TrueNemesisHellionSmokeSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE,0)
+	TNT1 A 0 A_CustomMissile("NemesisSuicideBomberBurst",32,0,0,2)
+	TNT1 A 0 A_SpawnItem("NemesisDeathBall")
+	TNT1 A 0 A_PlaySound("VexedExplosion",1,1.0,0,ATTN_NONE)
+	TNT1 A 0 A_Quake(4,156,0,4000,0)
+	TNT1 A 0 A_SpawnItemEx("VexedNemesisAltBallSmoke",frandom(-100,100),frandom(-100,100),frandom(-100,100),frandom(-40,40),frandom(-40,40),frandom(-40,40))
+	TNT1 A 0 A_ChangeFlag("NODAMAGE",1)
+	TNT1 A 0 A_Quake(7,64,0,4000,0)
+	TNT1 A 0 A_SpawnItemEx("VexedNemesisAbsolutelyFuckingGiantExplosion")
+	TNT1 A 0 A_SpawnItemEx("VexedNemesisHugeExplosion",0,0,0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_Quake(10,100,0,8000,0)
+	TNT1 A 1 A_Explode(1000,8000,XF_NOTMISSILE,0,6000)
+	Goto Kill
+  Pain:
+	VSBM A 3 Bright
+	TNT1 A 0 A_SpawnItemEx("TrueNemesisHellionSmokeSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE,0)
+	VSBM A 3 Bright A_Pain
+	TNT1 A 0 A_JumpIf(user_pain == 5,"PainAttack")
+	TNT1 A 0 A_SetUserVar(user_pain,user_pain+1)
+	Goto See
+  Death:
+	TNT1 A 0 A_CustomMissile("SuicideBomb",24,0,0,CMF_AIMDIRECTION)
+	TNT1 A 0 A_SpawnItemEx("OrangeParticleSpawner",0,0,24,0,0,0,0,128) 
+	TNT1 AAA 0 A_CustomMissile("Kaboom3",24,0,random(0,360),2,random(0,360))
+	TNT1 AAA 0 A_CustomMissile("SmokeFX2",24,0,random(0,360),2,random(0,360))
+	TNT1 AAAA 0 A_SpawnItemEx("Debris",0,0,24,Random(4,-4),Random(4,-4),Random(4,8),0,128)
+	TNT1 A 0 A_SpawnItem("RocketEx",0,24)
+	TNT1 A 0 A_Stop
+	TNT1 A 0 A_PlaySound("weapons/rocklx",CHAN_BODY)
+	TNT1 A 0 A_Jump(36,"LegendarySoul")
+	VSBM M 5 Bright
+	VSBM N 5 Bright A_Scream
+	VSBM O 5 A_NoBlocking
+	VSBM PQRST 5
+	TNT1 A 0 A_Jump(100,"MoreStuff")
+	VSBM U -1
+	Stop
+  Kill:
+	TNT1 A 0 A_Die("Extreme")
+	Goto XDeath
+  XDeath:
+	TNT1 A 0 A_Jump(36,"LegendarySoul")
+	VSBM M 5 Bright
+	VSBM N 5 Bright A_XScream
+	VSBM O 5 A_NoBlocking
+	VSBM PQRST 5
+	TNT1 A 0 A_Jump(100,"MoreStuff")
+	VSBM U -1
+	Stop
+  MoreStuff:
+	VSBM U 100
+	TNT1 A 0 A_SpawnItem("HellionSmokeAttack")
+	VSBM UUUUUUUUUUUUUUUUUUUUUUUUUUUUUU 1 A_SpawnItem("NemesisZombieItemRandomizer")
+	VSBM UUUUUUUUUUUUUUUUUUUUUUUUUUUUUU 1 A_SpawnItem("NemesisZombieItemRandomizer")
+	VSBM U 1 A_SpawnItem("NemesisZombieSuperItemRandomizer")
+	VSBM U -1
+	Stop
+  LegendarySoul:
+	TNT1 A 0 A_SpawnItem("TrueNemesisHellionSmokeSpawner",0,0,0,0)
+	VSBM M 5 Bright
+	TNT1 A 0 A_SpawnItem("TrueNemesisHellionSmokeSpawner",0,0,0,0)
+	VSBM N 5 Bright A_Scream
+	TNT1 A 0 A_SpawnItem("TrueNemesisHellionSmokeSpawner",0,0,0,0)
+	VSBM O 5 A_Fall
+	TNT1 A 0 A_SpawnItem("TrueNemesisHellionSmokeSpawner",0,0,0,0)
+	VSBM P 5 A_SpawnItem("BodyCrash",0,0,0,0)
+	TNT1 A 0 A_SpawnItem("TrueNemesisHellionSmokeSpawner",0,0,0,0)
+	VSBM QRST 5
+	TNT1 A 0 A_PlaySoundEx("Coomer","Voice",0,2)
+	VSBM U 140
+    TNT1 A 0 A_SpawnItem("NemesisDeathBall",0,0,0,0)
+	VSBM U 20
+	TNT1 A 0 A_SpawnItem("NemesisDeathBall",0,0,0,0)
+	VSBM UUUUUUUUUUUUUUUUU 2 Bright A_GiveInventory("NemesisSoulEvent",1)
+	VSBM UUUUUUUUUUUUUUUUU 2 Bright A_GiveInventory("NemesisSoulEvent",1)
+	VSBM UUUUUUUUUUUUUUUUU 2 Bright A_GiveInventory("NemesisSoulEvent",1)
+	TNT1 A 0 A_SpawnItemEx("VexedNemesisSoul",0,0,16,0,0,0,0,32)
+	TNT1 A 0 A_SpawnItemEx("TeleportFog",0,0,16,0,0,0,0,32)
+	VSBM U -1
+	Stop
+  }
+}
+
+Actor SuperGayAttack
+{
+Projectile
+Height 1
+Radius 1
+Speed 0
++NOCLIP
+-ForceRadiusDmg
++ForceYBillBoard
+DamageType "Fuck"
+States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_Die
+	Death:
+		TNT1 A 0
+		TNT1 A 1 A_StopSound
+    	TNT1 A 0 A_PlaySound("Nemesis/BallExplode",1,1.0,0,0.2)
+		TNT1 A 1 A_Explode(10000,5000,0,1)
+		TNT1 A 1 A_ChangeFlag(FORCERADIUSDMG,1)
+		TNT1 A 0 A_Explode(random(500,1000),5000,0,0,2500)
+		TNT1 A 0 Radius_Quake(7,105,0,140,0)
+		TNT1 A 0 A_SpawnItemEx("NemesisHugeExplosion",0,0,0,0,0,0,0,SXF_CLIENTSIDE,0)
+		TNT1 A 25 A_SpawnItemEx("NemesisAltBallEx",0,0,0,0,0,0,0,SXF_CLIENTSIDE,0)
+		TNT1 A 1 Bright
+		Stop
+	}
+}

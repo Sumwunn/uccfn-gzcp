@@ -1,0 +1,19 @@
+ACTOR Kazumi_NemesisCyberdemonInstaRage : NemesisCyberdemon
+{
+  States
+  {
+  Spawn:
+	TNT1 A 0 A_JumpIf(user_rage == 1,"SeeRage")
+	TNT1 A 0 A_SetInvulnerable
+	TNT1 A 0 A_ChangeFlag("NOPAIN",1)
+	NCYB G 10 Bright A_PlaySound("NemesisCyber/Enraged",2,1.0,0,ATTN_NONE)
+	NCYB GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG 2 Bright A_SpawnItemEx("NemesisCyberFlameSpawner3")
+	TNT1 A 0 ACS_NamedExecuteAlways("NemesisCyberRage",0,0)
+	TNT1 A 0 A_SpawnItemEx("NemesisCyberRageRing",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_Playsound("brain/spit",6,1.0,0,ATTN_NONE)
+	TNT1 A 0 A_SetUserVar("user_rage",1)
+	TNT1 A 0 A_ChangeFlag("NOPAIN",0)
+	NCYB GGGGGGGGGGGGGGGGGGGGGGG 2 Bright A_SpawnItemEx("NemesisCyberFlameSpawner3")
+	Goto Spawn
+  }
+}

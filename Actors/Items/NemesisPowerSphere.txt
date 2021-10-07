@@ -1,0 +1,154 @@
+Actor NemesisPowerSphere : CustomInventory
+{
+  Inventory.PickupMessage "Nemesis Power Sphere! A mysterious yet powerful sphere from the Mythology of Nightmares."
+  Inventory.PickupSound "legpowersphere/take"
+  Inventory.UseSound "legpowersphere/use"
+  Inventory.Icon "SENEL0"
+  Inventory.MaxAmount 1
+  +DONTGIB
+  +INVBAR
+  +COUNTITEM
+  +INVENTORY.BIGPOWERUP
+  +NOTIMEFREEZE
+  +FLOAT
+  +FLOATBOB
+  States
+  {
+  Use:
+    TNT1 A 0
+	TNT1 A 1 A_GiveInventory("NemesisPowerSpeed",1)
+	TNT1 A 1 A_GiveInventory("NemesisPowerFrightener",1)
+	TNT1 A 1 A_GiveInventory("NemesisPowerHealing",1)
+	TNT1 A 1 A_GiveInventory("NemesisPowerSphereEffect",1)	
+	TNT1 A 1 A_GiveInventory("NemesisPowerAmmoGiver",1)
+	TNT1 A 0 A_JumpIfInventory("AgilityRuneRage",1,"NoIncreasedFiringSpeed")
+	TNT1 A 1 A_GiveInventory("NemesisPowerDoubleFiringSpeed",1)
+	TNT1 A 0 A_JumpIfInventory("LegendaryRuneDrain",1,"NoExtraDrain")
+	TNT1 A 1 A_GiveInventory("NemesisPowerDrain",1)
+    Stop
+  NoIncreasedFiringSpeed:
+    TNT1 A 0 A_JumpIfInventory("LegendaryRuneDrain",1,"NoExtraDrain")
+    TNT1 A 0 A_GiveInventory("NemesisPowerDrain",1)
+	Stop
+  NoExtraDrain:
+    TNT1 A 0
+	Stop
+  Spawn:
+	SENE EFGHEFGHEFGHEFGH 6 Bright A_CustomMissile ("SNSphereFlameSpawner", -20, 0, random(0,-360), 2, random(0,360)) 
+	SENE EFGHEFGH 4 Bright  A_CustomMissile ("SNSphereFlameSpawner", -20, 0, random(0,-360), 2, random(0,360)) 
+	Loop
+  }
+}
+
+Actor NemesisPowerSpeed : PowerupGiver
+{
+  Inventory.MaxAmount 0
+  Powerup.Color Black 0.20
+  Powerup.Duration -60
+  Powerup.Type Speed
+  +INVENTORY.AUTOACTIVATE
+  +INVENTORY.ALWAYSPICKUP
+  States
+  {
+  Spawn:
+    ROWL A 1 Bright
+    Loop
+  }
+}
+
+Actor NemesisPowerFrightener : PowerupGiver
+{
+  Inventory.MaxAmount 0
+  Powerup.Duration -60
+  Powerup.Type Frightener
+  +INVENTORY.AUTOACTIVATE
+  +INVENTORY.ALWAYSPICKUP
+  States
+  {
+  Spawn:
+    ROWL A 1 Bright
+    Loop
+  }
+}
+
+Actor NemesisPowerDoubleFiringSpeed : PowerupGiver
+{
+  Inventory.MaxAmount 0
+  Powerup.Duration -60
+  Powerup.Type LegDoubleFiringSpeed
+  +INVENTORY.AUTOACTIVATE
+  +INVENTORY.ALWAYSPICKUP
+  +INVENTORY.ADDITIVETIME
+  States
+  {
+  Spawn:
+    ROWL A 1 Bright
+    Loop
+  }
+}
+
+Actor NemesisPowerDrain : PowerupGiver
+{
+  Inventory.MaxAmount 0
+  Powerup.Duration -60
+  Powerup.Type Drain
+  +INVENTORY.AUTOACTIVATE
+  +INVENTORY.ALWAYSPICKUP
+  States
+  {
+  Spawn:
+    ROWL A 1 Bright
+    Loop
+  }
+}
+
+ACTOR NNull : ArmorBonus
+{
+Armor.SavePercent 0
+Armor.SaveAmount 0
+Armor.MaxSaveAmount 0
+Inventory.Icon "ARM2B0"
+}
+
+Actor NemesisPowerReflection : PowerReflection
+{
+  Inventory.MaxAmount 0
+  Powerup.Duration -60
+  +INVENTORY.AUTOACTIVATE
+  +INVENTORY.ALWAYSPICKUP
+  States
+  {
+  Spawn:
+    ROWL A 1 Bright
+    Loop
+  }
+}
+
+ACTOR SemiNemDemonAmmo : NLDemonAmmo
+{
+Inventory.Amount 1
+Inventory.MaxAmount 250
+Ammo.BackpackMaxAmount 500
+}
+
+ACTOR SemiNemShell : NemesisShell
+{
+Inventory.Amount 1
+Inventory.MaxAmount 250
+Ammo.BackpackMaxAmount 500
+}
+
+ACTOR NemesisSparkleSpawner2 : BlueSparkleSpawner
+{
++NOTIMEFREEZE
+States
+{
+Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+		TNT1 AA 2 A_SpawnItemEx("BlackStar2", random(-15, 15), random(-15, 15), random(28, 44), 0, 0, 0, 0, 128)
+        Stop
+        }
+}
+
+ACTOR BlackStar2 : NBlackStar { +NOTIMEFREEZE }

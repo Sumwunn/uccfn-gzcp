@@ -1,0 +1,2 @@
+// Complex Doom
+user bool cd_cl_vanillamode = false;

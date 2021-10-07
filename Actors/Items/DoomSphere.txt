@@ -1,0 +1,36 @@
+Actor PowerQuadDamage : PowerDamage
+{
+Damagefactor "Normal", 4
+}
+Actor PowerQuadDamageST : PowerDamage
+{
+Damagefactor "Normal", 4
+}
+Actor DoomsphereDust : PowerupGiver 17752
+{
+//$Category Powerups/DUST
+//$Sprite DMS0A0
+//$Title "Doom Sphere"
+  +CountItem
+  +Inventory.AutoActivate
+  +Inventory.AlwaysPickup
+  +FLOATBOB
+  -FLOAT
+  +INVENTORY.BIGPOWERUP
+  Inventory.MaxAmount 0
+  Powerup.Type QuadDamageST
+  Powerup.Color RedMap
+  Inventory.PickupMessage "Doomsphere! Pure power surges through your weaponry!"
+  Inventory.PickupSound "powerup/quad"
+  States
+  {
+  Spawn:
+     TNT1 A 0 A_CustomMissile ("OrangeSparkleSpawner", 0, 0, random(0,-360), 2, random(0,360)) 
+     DMS0 AAAABBBB 1 Bright A_SpawnItem("RedSphereFlare",0,38)
+     TNT1 A 0 A_CustomMissile ("OrangeSparkleSpawner", 0, 0, random(0,-360), 2, random(0,360))
+     DMS0 CCCCDDDD 1 Bright A_SpawnItem("RedSphereFlare",0,38)
+     TNT1 A 0 A_CustomMissile ("OrangeSparkleSpawner", 0, 0, random(0,-360), 2, random(0,360))
+     DMS0 CCCCBBBB 1 Bright A_SpawnItem("RedSphereFlare",0,38)
+	 Loop
+  }
+}
