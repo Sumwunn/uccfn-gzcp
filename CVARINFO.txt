@@ -1,2 +1,3 @@
 // Complex Doom
-user bool cd_cl_vanillamode = false;
+server bool cd_cl_vanillamode = false;
+server int cd_cl_exists = 2402;

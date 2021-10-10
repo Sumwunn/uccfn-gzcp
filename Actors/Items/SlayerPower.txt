@@ -47,30 +47,30 @@ actor ClusterfuckSlayerPower : CustomInventory
   }
 }
 
-actor CFSPQuadDamage : PowerDamage 
-{ 
+actor CFSPQuadDamage : PowerDamage
+{
    DamageFactor "Normal", 4.00
    inventory.icon "TNT1A0"
    powerup.duration -60
   +INVENTORY.AUTOACTIVATE
   +INVENTORY.FANCYPICKUPSOUND
   +INVENTORY.ALWAYSPICKUP
-} 
+}
 
 actor CFSPCarnage : PowerupGiver
-{ 
+{
 powerup.color None 0.00
 powerup.type QuadDamage
 powerup.duration -60
 +INVENTORY.AUTOACTIVATE
 +INVENTORY.FANCYPICKUPSOUND
 +INVENTORY.ALWAYSPICKUP
-states 
- { 
- Spawn: 
-   TNT1 A 1 bright 
-   loop 
- } 
+states
+ {
+ Spawn:
+   TNT1 A 1 bright
+   loop
+ }
 }
 
 ACTOR CFSPInvulnerability : InvulnerabilitySphere
@@ -141,9 +141,9 @@ Spawn:
 	TNT1 A 0
 	TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
 	TNT1 AAA 0 A_CustomMissile("NemesisHellionSmokeSpawner",0,0,random(0,-360),2,random(0,360))
-	TNT1 AAAAAAA 0 A_SpawnItemEx("WhitePowerLine",random(32,-32),random(32,-32),random(8,48),0,0,random(1,4),0,128,0) 	
-	TNT1 A 1 A_SpawnItemEx("WhitePowerLine",random(32,-32),random(32,-32),random(8,48),0,0,random(1,4),0,128,0) 
-    Stop  
+	TNT1 AAAAAAA 0 A_SpawnItemEx("WhitePowerLine",random(32,-32),random(32,-32),random(8,48),0,0,random(1,4),0,128,0)
+	TNT1 A 1 A_SpawnItemEx("WhitePowerLine",random(32,-32),random(32,-32),random(8,48),0,0,random(1,4),0,128,0)
+    Stop
     }
 }
 
@@ -195,30 +195,30 @@ actor DoomSlayerPower : CustomInventory
   }
 }
 
-actor DoomSlayerQuadDamage : PowerDamage 
-{ 
+actor DoomSlayerQuadDamage : PowerDamage
+{
    DamageFactor "Normal", 4.00
    inventory.icon "TNT1A0"
    powerup.duration -30
   +INVENTORY.AUTOACTIVATE
   +INVENTORY.FANCYPICKUPSOUND
   +INVENTORY.ALWAYSPICKUP
-} 
+}
 
 actor DoomSlayerCarnage : PowerupGiver
-{ 
+{
 powerup.color None 0.00
 powerup.type QuadDamage
 powerup.duration -30
 +INVENTORY.AUTOACTIVATE
 +INVENTORY.FANCYPICKUPSOUND
 +INVENTORY.ALWAYSPICKUP
-states 
- { 
- Spawn: 
-   TNT1 A 1 bright 
-   loop 
- } 
+states
+ {
+ Spawn:
+   TNT1 A 1 bright
+   loop
+ }
 }
 
 ACTOR DoomSlayerInvulnerability : InvulnerabilitySphere

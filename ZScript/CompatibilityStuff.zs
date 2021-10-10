@@ -1,3 +1,20 @@
+// ----------------- //
+// ----- Misc ----- //
+// --------------- //
+
+// Needs implemented
+class powerSpread : Powerup
+{
+}
+
+class PowerQuadDamage : PowerDamage
+{
+    Default
+    {
+        DamageFactor "Normal", 4;
+    }
+}
+
 // ----------------------------------- //
 // ----- PowerTargeter Rewrites ----- //
 // --------------------------------- //
@@ -6,13 +23,11 @@
 // ----- LEGENDARY STUFF ----- //
 // -------------------------- //
 
-class LegendaryPowerSphereEffect : Powerup
+class PowerLegPowerEffect : Powerup
 {
     Default
     {
         Powerup.Duration -45;
-        +INVENTORY.AUTOACTIVATE;
-        +INVENTORY.ALWAYSPICKUP;
     }
 
     override void DoEffect()
@@ -23,13 +38,11 @@ class LegendaryPowerSphereEffect : Powerup
     }
 }
 
-class LegendaryCrystalHealing : Powerup
+class PowerLegCrystalHeal : Powerup
 {
     Default
     {
         Powerup.Duration -30;
-        +INVENTORY.AUTOACTIVATE;
-        +INVENTORY.ALWAYSPICKUP;
     }
 
     override void DoEffect()
@@ -52,13 +65,11 @@ class LegendaryCrystalHealing : Powerup
 // ------ NEMESIS STUFF ------ //
 // -------------------------- //
 
-class NemesisPowerSphereEffect : Powerup
+class PowerNemPowerEffect : Powerup
 {
     Default
     {
         Powerup.Duration -60;
-        +INVENTORY.AUTOACTIVATE;
-        +INVENTORY.ALWAYSPICKUP;
     }
 
     override void DoEffect()
@@ -68,13 +79,11 @@ class NemesisPowerSphereEffect : Powerup
     }
 }
 
-class NemesisPowerHealing : Powerup
+class PowerNemPowHeal : Powerup
 {
     Default
     {
         Powerup.Duration -60;
-        +INVENTORY.AUTOACTIVATE;
-        -INVENTORY.ALWAYSPICKUP;
         -COUNTITEM;
         +NOTIMEFREEZE;
     }
@@ -89,13 +98,11 @@ class NemesisPowerHealing : Powerup
     }
 }
 
-class NemesisPowerAmmoGiver : Powerup
+class PowerNemAmmoRegenerate : Powerup
 {
     Default
     {
         Powerup.Duration -60;
-        +INVENTORY.AUTOACTIVATE;
-        +INVENTORY.ALWAYSPICKUP;
         -COUNTITEM;
         +NOTIMEFREEZE;
     }
@@ -113,13 +120,11 @@ class NemesisPowerAmmoGiver : Powerup
     }
 }
 
-class NCrystalHealing : Powerup
+class PowerNLegCrystalHeal : Powerup
 {
     Default
     {
         Powerup.Duration -60;
-        +INVENTORY.AUTOACTIVATE;
-        +INVENTORY.ALWAYSPICKUP;
     }
 
     override void DoEffect()
@@ -140,19 +145,17 @@ class NCrystalHealing : Powerup
 // ------ ENRAGED STUFF ------ //
 // -------------------------- //
 
-class ELegendaryCrystalHealing : Powerup
+class PowerELegCrystalHeal : Powerup
 {
     Default
     {
         Powerup.Duration -30;
-        +INVENTORY.AUTOACTIVATE;
-        +INVENTORY.ALWAYSPICKUP;
     }
 
     override void DoEffect()
     {
         if ((level.totaltime % 4) == 0)
-            owner.A_CustomMissile("RedSparkleSpawner",0,0,random(0,-360),2,random(0,360));
+            owner.A_SpawnProjectile("RedSparkleSpawner",0,0,random(0,-360),2,random(0,360));
         if ((level.totaltime % 5) == 0)
             owner.A_SpawnItemEx("RedPowerLine",random(32,-32),random(32,-32),random(8,48),0,0,random(1,4),0,128,0);
 
@@ -173,11 +176,9 @@ class AmmoRegenerate : Powerup
 {
     Default
     {
-        Powerup.Duration -120;
-        Powerup.Color "255 0 0", 0.4;
-        +INVENTORY.AUTOACTIVATE;
-        -INVENTORY.ALWAYSPICKUP;
         -COUNTITEM;
+        +NOTIMEFREEZE;
+        Powerup.Duration -120;
     }
 
     override void DoEffect()
@@ -198,17 +199,62 @@ class AmmoRegenerate : Powerup
     }
 }
 
+class ArmorRegenerate : Powerup
+{
+    Default
+    {
+        +NOTIMEFREEZE;
+        Powerup.Duration -99999; // Hmm
+    }
+
+    override void DoEffect()
+    {
+        if ((level.totaltime % 35) == 0)
+        {
+            owner.TakeInventory("NewCell", 1, true, TIF_NOTAKEINFINITE);
+            owner.GiveInventory("ArmorRegeneratorGiver", 3);
+        }
+    }
+}
+
+class HemLightArmorHealing : Powerup
+{
+    Default
+    {
+        Powerup.Duration -120;
+        +NOTIMEFREEZE;
+    }
+
+    override void DoEffect()
+    {
+        if ((level.totaltime % 2) == 0)
+            owner.A_SpawnItemEx("LightNemesisArmorShieldFX",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,160);
+
+        // At 100/50 Health/Armour:
+        // Zandronum = 10.8-ish seconds till full capacity
+        // Here = 10.6-ish
+        if ((level.totaltime % 7) == 0)
+        {
+            owner.GiveBody(1,300);
+            owner.A_GiveInventory("LightNemesisArmorGiver", 1);
+        }
+        if ((level.totaltime % 5) == 0)
+        {
+            owner.GiveBody(2,300);
+            owner.A_GiveInventory("LightNemesisArmorGiver", 2);
+        }
+    }
+}
+
 // ------------------------- //
 // ------ MISC STUFF ------ //
 // ----------------------- //
 
-class AscensionHealing : Powerup
+class PowerAscensionHeal : Powerup
 {
     Default
     {
         Powerup.Duration -60;
-        +INVENTORY.AUTOACTIVATE;
-        +INVENTORY.ALWAYSPICKUP;
     }
 
     override void DoEffect()

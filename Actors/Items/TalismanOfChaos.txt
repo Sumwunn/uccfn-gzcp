@@ -33,7 +33,7 @@ ACTOR TalismanOfChaos : CustomInventory
   }
 }
 
-actor TalismanPower : Powerup
+actor TalismanPower : powerSpread
 {
 	+INVENTORY.HUBPOWER
 	+INVENTORY.PERSISTENTPOWER

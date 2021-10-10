@@ -1,0 +1,48 @@
+# Compatibilty Notes
+
+## Actors with duplicate variables:
+- complex-dust-clusterfuck-v4.1.pk3:actors/monsters/other/legterminator.txt
+- complex-dust-clusterfuck-v4.1.pk3:actors/monsters/other/newbluecardinal.txt
+- complex-dust-clusterfuck-v4.1.pk3:actors/monsters/other/sacrosanctBuffed.txt
+- complex-dust-clusterfuck-v4.1.pk3:actors/monsters/nemesis/nemesissentient.txt
+- complex-dust-clusterfuck-v4.1.pk3:actors/monsters/nemesis/vexednemesissoul.txt
+- complex-dust-clusterfuck-v4.1.pk3:actors/items/distortionrune.txt
+- complex-dust-clusterfuck-v4.1.pk3:actors/monsters/nemesis/nemesispatriarch/sandlord.txt
+- complex-dust-clusterfuck-v4.1.pk3:actors/monsters/nemesis/nemesispatriarch/vexednemesispatriarch.txt
+- complex-cf-nexus-alpha_v1.93.pk3:actors/shiroedits.txt
+- complex-cf-nexus-alpha_v1.93.pk3:actors/txsedits.txt
+- complex-cf-nexus-alpha_v1.93.pk3:actors/monsters/nemsaw.txt
+- complex-cf-nexus-alpha_v1.93.pk3:actors/monsters/nemesisssgzombie.txt
+- complex-cf-nexus-alpha_v1.93.pk3:actors/monsters/hellfrostcyberdemon.txt
+- complex-cf-nexus-alpha_v1.93.pk3:actors/monsters/vexednemesisredeemer.txt
+- complex-cf-nexus-alpha_v1.93.pk3:actors/monsters/vexednemesisarchon.txt
+- complex-cf-nexus-alpha_v1.93.pk3:actors/monsters/vexednemesisgoliath.txt
+- complex-cf-nexus-alpha_v1.93.pk3:actors/monsters/vexednemesisbabysentient.txt
+- complex-cf-nexus-alpha_v1.93.pk3:actors/monsters/vexednemesissentient.txt
+- complex-cf-nexus-alpha_v1.93.pk3:actors/monsters/edits/suicidemonsteredits.txt
+- complex-cf-nexus-alpha_v1.93.pk3:actors/monsters/edits/nemesisedits.txt
+- complex-cf-nexus-alpha_v1.93.pk3:actors/monsters/edits/vexmonsteredits.txt
+- hem-custom-cf-v4.1.pk3:actors/monsters/bosses/abyssalsatyr.dec
+- insanelca-custom-v1.3a.pk3:actors/monsters/enragedlegendarytormentor.txt
+- kazumiscomplexaddonpack-alpha-ver.0.6.pk3:actors/enemies/kaguya.txt
+- kazumiscomplexaddonpack-alpha-ver.0.6.pk3:actors/enemies/shinki.txt
+- kazumiscomplexaddonpack-alpha-ver.0.6.pk3:actors/enemies/non-touhou/nemesiscyberdemon.txt
+- kazumiscomplexaddonpack-alpha-ver.0.6.pk3:actors/weapons/redeemer.txt
+- nemesis_hellsmith002-cf-fix.pk3:actors/monsters/nemhellsmith.dec
+- reimagined-cf-sounds-v2.0.pk3:actors/monsters/other/empoweredproshotguncommando.txt
+- randomons-v1.2.5.1.pk3:actors/monsters/hellfirecyber.txt
+- randomons-v1.2.5.1.pk3:actors/weapons/bhgenerator.txt
+- txs-reborn-v1.1.pk3:actors/monsters/hackroids/hackroidzombie.txt
+- txs-reborn-v1.1.pk3:actors/monsters/hackroids/hackroidassaultcaptain.txt
+- txs-reborn-v1.1.pk3:actors/items/deathturret.txt
+
+## Actors with Skulltag/Zandronum PowerSpread types
+complex-cf-nexus-alpha_v1.93.pk3:actors/items/talismanofchaos.txt
+
+## Actors with post processing errors
+- complex-cf-nexus-alpha_v1.93.pk3:actors/txsedits.txt
+- hem-custom-cf-v4.1.pk3:actors/items+powerups/cannongunsphere.dec
+- txs-reborn-v1.1.pk3:actors/items/slayerpower.txt
+
+## Misc
+"Class PowerQuadDamage referenced but not defined"
